@@ -40,7 +40,7 @@ client.on(Events.MessageCreate, (msg) => {
     msg.reply(
       {
         content: "Sus",
-        files: ["Images/amongus.gif"]
+        files: ["Gifs/amongus.gif"]
       });
   }
   else if (msg.content === "!help")
@@ -78,6 +78,15 @@ client.on(Events.MessageCreate, (msg) => {
   else if (msg.content === "!senkobot")
   {
     msg.reply(`Hola ${get_mention(msg)}` + ", soy Senko Bot, un bot creado por SenkoSan12543. Soy argentino y me gustan los peces. Tengo una obsesión por el Terraria.")
+  }
+  else if (msg.content === "!comergalleta")
+  {
+    msg.reply(
+      {
+        content: ">Te comiste una galleta... Y es gratis, no como las de Nekotina",
+        files: ["Gifs/Galleta1.gif"]
+      }
+    );
   }
   
 });
