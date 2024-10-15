@@ -11,6 +11,10 @@ class Command
       this.execution(msg);
   }
 
+  get_mention(msg)
+  {
+    return `<@${msg.author.id}>`;
+  }
   execution(msg){}
 }
 
