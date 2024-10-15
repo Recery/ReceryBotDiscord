@@ -18,7 +18,7 @@ client.once(Events.ClientReady, (readyClient) => {
 client.on(Events.MessageCreate, (msg) => {
   for (command in available_commands)
   {
-    print(command)
+    console.log(command);
     if (command.check_activation(msg))
     {
       command.execution();
