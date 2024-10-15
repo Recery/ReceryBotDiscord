@@ -73,7 +73,7 @@ client.on(Events.MessageCreate, (msg) => {
   }
   else if (msg.content === "!ping")
   {
-    msg.reply("pong... Mi creador es un pelotudo y no sabe como mostrar mi ping, conformate con eso");
+    msg.reply("pong... Mi creador es un pelotudo y no sabe como mostrar mi ping, conformate con eso XD");
   }
   else if (msg.content === "!senkobot")
   {
