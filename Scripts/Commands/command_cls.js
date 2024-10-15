@@ -13,3 +13,5 @@ class Command
 
   execution(msg){}
 }
+
+module.exports = Command

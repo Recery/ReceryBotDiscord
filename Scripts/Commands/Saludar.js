@@ -1,4 +1,6 @@
-class Saludar extends Command
+const command = require("commands_cls.js")
+
+class Saludar extends command
 {
     execution(msg)
     {
