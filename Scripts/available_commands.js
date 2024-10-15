@@ -7,8 +7,11 @@ const command_files = fs.readdirSync(commands_path).filter(file => file.endsWith
 const availables_commands = [];
 
 for (const file of command_files) {
-    const command = require(`./Commands/${file}`); // Importa el archivo
-    availables_commands.push(command); // Añádelo al array
+    if (file != "command_cls.js")
+    {   
+        const command = require(`./Commands/${file}`);
+        availables_commands.push(command);
+    }
 }
 
 module.exports = availables_commands;
