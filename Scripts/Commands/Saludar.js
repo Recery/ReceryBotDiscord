@@ -6,3 +6,5 @@ class Saludar extends Command
     }
 }
 
+var command_instance = new Saludar("!saludar");
+module.exports = {command_instance};

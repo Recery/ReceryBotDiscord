@@ -1,5 +1,3 @@
 var availables_commands = [
-    new Saludar("!saludar")
+    require("../Commands/Saludar.js")
 ];
-
-module.exports = {availables_commands};
