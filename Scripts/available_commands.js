@@ -1,3 +1,3 @@
 var availables_commands = [
-    require("../Commands/Saludar.js")
+    require("Commands/Saludar.js")
 ];
