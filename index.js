@@ -1,6 +1,6 @@
 const { Client, Events, GatewayIntentBits, Message } = require("discord.js");
 const { get_mention } =  require("./Scripts/global_funcs.js")
-const { commands } = require("./Scripts/Commands/available_commands.js")
+const { available_commands } = require("./Scripts/Commands/available_commands.js")
 
 const client = new Client({
   intents: [
@@ -15,7 +15,7 @@ client.once(Events.ClientReady, (readyClient) => {
 });
 
 client.on(Events.MessageCreate, (msg) => {
-  for (command in commands)
+  for (command in available_commands)
   {
     if (command.check_activation(msg))
     {
