@@ -1,5 +1,6 @@
 const { Client, Events, GatewayIntentBits, Message } = require("discord.js");
 const { get_mention } =  require("./Scripts/global_funcs.js")
+const { commands } = require("./Scripts/Commands/available_commands.js")
 
 const client = new Client({
   intents: [
@@ -14,6 +15,15 @@ client.once(Events.ClientReady, (readyClient) => {
 });
 
 client.on(Events.MessageCreate, (msg) => {
+  for (command in commands)
+  {
+    if (command.check_activation(msg))
+    {
+      command.execution();
+      return;
+    }
+  }
+
   if (msg.content === "!invadirperu")
   {
     msg.reply("estamos invadiendo peru");
@@ -54,10 +64,6 @@ client.on(Events.MessageCreate, (msg) => {
         content: "Un pez",
         files: ["Images/goldfish.jpg"]
       });
-  }
-  else if (msg.content === "!saludar")
-  {
-    msg.reply(`Saludos ${get_mention(msg)} pedazo de pelotudo`);
   }
   else if (msg.content === "!fishfact")
   {
