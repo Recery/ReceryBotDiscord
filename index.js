@@ -1,6 +1,6 @@
 const { Client, Events, GatewayIntentBits, Message } = require("discord.js");
 const { get_mention } =  require("./Scripts/global_funcs.js")
-const { available_commands } = require("./Scripts/Commands/available_commands.js")
+const { available_commands } = require("./Scripts/available_commands.js")
 
 const client = new Client({
   intents: [
