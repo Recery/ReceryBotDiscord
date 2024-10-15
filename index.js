@@ -83,7 +83,7 @@ client.on(Events.MessageCreate, (msg) => {
   {
     msg.reply(
       {
-        content: ">Te comiste una galleta... Y es gratis, no como las de Nekotina",
+        content: "> Te comiste una galleta... Y es gratis, no como las de Nekotina",
         files: ["Gifs/Galleta1.gif"]
       }
     );
