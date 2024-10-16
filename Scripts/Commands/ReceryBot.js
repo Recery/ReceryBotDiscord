@@ -1,6 +1,6 @@
 const Command = require("./command_cls.js")
 
-class ReceryInfo extends Command
+class ReceryBot extends Command
 {
     execution(msg)
     {
@@ -8,4 +8,4 @@ class ReceryInfo extends Command
     }
 }
 
-module.exports = new ReceryInfo("!receryinfo");
+module.exports = new ReceryBot("!recerybot");
