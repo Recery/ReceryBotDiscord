@@ -8,10 +8,11 @@ const availables_commands = [];
 
 for (const file of command_files) {
     if (file != "command_cls.js")
-    {   
+    {
         const command = require(`./Commands/${file}`);
         availables_commands.push(command);
     }
+    availables_commands.push("!receryhelp");
 }
 
 module.exports = availables_commands;
