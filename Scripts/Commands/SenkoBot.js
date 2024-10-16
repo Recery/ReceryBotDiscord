@@ -1,6 +1,6 @@
 const Command = require("./command_cls.js")
 
-class SenkoBot extends Command
+class SenkoInfo extends Command
 {
     execution(msg)
     {
@@ -8,4 +8,4 @@ class SenkoBot extends Command
     }
 }
 
-module.exports = new SenkoBot("!senkobot");
+module.exports = new SenkoInfo("!senkoinfo");
