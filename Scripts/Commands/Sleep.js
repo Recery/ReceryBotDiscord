@@ -11,7 +11,7 @@ class Sleep extends Command
     execution(msg)
     {
         if (this.get_bot_state().get_asleep())
-            msg.reply("Zzz... (Ya estoy dormido pelotudo)");
+            msg.reply("Zzz... ||Ya estoy dormido pelotudo||");
         else
         {
             this.get_bot_state().set_asleep(true);

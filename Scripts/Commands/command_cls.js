@@ -12,7 +12,7 @@ class Command
   {
     if (msg.content.startsWith(this.activator))
     {
-      if (bot_state.get_asleep()) msg.reply("Zzz... (Estoy dormido boludo, no puedo usar comandos)");
+      if (bot_state.get_asleep()) msg.reply("Zzz... ||Estoy dormido boludo, no puedo usar comandos||");
       else this.execution(msg);
     }
   }
