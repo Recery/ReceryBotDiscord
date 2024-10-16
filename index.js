@@ -21,8 +21,9 @@ client.on(Events.MessageCreate, (msg) => {
     var message = "Comandos de Senko Bot: \n"
     for (const command of available_commands)
     {
-      message += command.get_activator() + " "
+      message += command.get_activator() + ", ";
     }
+    message = message.slice(0, -2);
     msg.reply(message);
   }
   else
