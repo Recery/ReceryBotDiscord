@@ -8,4 +8,4 @@ class Invadir_Peru extends Command
     }
 }
 
-module.exports = new Invadir_Peru("!ping");
+module.exports = new Invadir_Peru("!invadirperu");
