@@ -7,7 +7,7 @@ class Amongus extends Command
         msg.reply(
             {
                 content: "sus",
-                files: ["../../Gifs/amongus.gif"]
+                files: [this.get_gifs_directory() + "/amongus.gif"]
             }
         );
     }
