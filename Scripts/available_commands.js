@@ -12,7 +12,6 @@ for (const file of command_files) {
         const command = require(`./Commands/${file}`);
         availables_commands.push(command);
     }
-    availables_commands.push("!receryhelp");
 }
 
 module.exports = availables_commands;
