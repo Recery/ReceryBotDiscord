@@ -5,6 +5,7 @@ class Plata extends Command
     execution(msg)
     {
         msg.react("💸");
+        msg.react("🤑");
     }
 }
 
