@@ -1,5 +1,5 @@
 const Command = require("./command_cls.js")
-const available_commands = require(process.cwd() + "/Scripts/available_commands")
+const available_commands = require(process.cwd() + "/Scripts/available_commands.js")
 
 class ReceryHelp extends Command
 {
