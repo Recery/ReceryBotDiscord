@@ -7,7 +7,7 @@ class Pez extends Command
         msg.reply(
             {
                 content: "Un pez",
-                files: ["../../Images/goldfish.jpg"]
+                files: [this.get_image_directory() + "/goldfish.jpg"]
             }
         );
     }

@@ -1,3 +1,6 @@
+
+const path = require("path");
+
 class Command
 {
   constructor (init_activator)
@@ -14,6 +17,16 @@ class Command
   get_activator()
   {
     return this.activator;
+  }
+
+  get_image_directory()
+  {
+    return path.join(__dirname, '../../Images')
+  }
+
+  get_gifs_directory()
+  {
+    return path.join(__dirname, '../../Gifs')
   }
 
   get_mention(msg)
