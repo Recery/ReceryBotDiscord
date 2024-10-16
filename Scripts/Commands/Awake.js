@@ -20,4 +20,4 @@ class Awake extends Command
     }
 }
 
-module.exports = new Awake("!senkoawake");
+module.exports = new Awake("!receryawake");

@@ -1,11 +1,11 @@
 const Command = require("./command_cls.js")
 
-class SenkoInfo extends Command
+class ReceryInfo extends Command
 {
     execution(msg)
     {
-        msg.reply(`Hola ${this.get_mention(msg)}, soy Senko Bot, un bot creado por SenkoSan12543. Soy argentino y me gustan los peces. Tengo una obsesión por el Terraria.`)
+        msg.reply(`Hola ${this.get_mention(msg)}, soy Recery Bot, un bot creado por SenkoSan12543. Soy argentino y me gustan los peces. Tengo una obsesión por el Terraria.`)
     }
 }
 
-module.exports = new SenkoInfo("!senkoinfo");
+module.exports = new ReceryInfo("!receryinfo");

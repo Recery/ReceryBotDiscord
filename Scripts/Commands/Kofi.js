@@ -8,4 +8,4 @@ class Kofi extends Command
     }
 }
 
-module.exports = new Kofi("!senkofi");
+module.exports = new Kofi("!recerykofi");

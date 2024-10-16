@@ -20,4 +20,4 @@ class Sleep extends Command
     }
 }
 
-module.exports = new Sleep("!senkosleep");
+module.exports = new Sleep("!recerysleep");

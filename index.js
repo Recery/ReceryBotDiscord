@@ -16,9 +16,9 @@ client.once(Events.ClientReady, (readyClient) => {
 
 var sleep = false
 client.on(Events.MessageCreate, (msg) => {
-  if (msg.content === "!senkohelp")
+  if (msg.content === "!receryhelp")
   {
-    var message = "Comandos de Senko Bot: \n"
+    var message = "Comandos de Recery Bot: \n"
     for (const command of available_commands)
     {
       message += command.get_activator() + ", ";
