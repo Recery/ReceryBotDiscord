@@ -7,7 +7,7 @@ class Comer_Galleta extends Command
         msg.reply(
             {
                 content: "> Te comiste una galleta... Y es gratis, no como las de Nekotina",
-                files: ["../../../Gifs/Galleta1.gif"]
+                files: ["../../Gifs/Galleta1.gif"]
             }
         );
     }
