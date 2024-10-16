@@ -4,7 +4,7 @@ class Plata extends Command
 {
     execution(msg)
     {
-        msg.react(":money_with_wings:");
+        msg.react("💸");
     }
 }
 
