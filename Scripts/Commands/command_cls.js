@@ -10,7 +10,7 @@ class Command
 
   check_activation(msg)
   {
-    if (msg.content === this.activator)
+    if (msg.content.startsWith(this.activator))
       this.execution(msg);
   }
 
