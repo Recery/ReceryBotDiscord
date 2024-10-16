@@ -4,7 +4,7 @@ class Illuminati extends Command
 {
     execution(msg)
     {
-        msg.reply(":TheIlluminati: :TheIlluminati: :TheIlluminati: :TheIlluminati: :TheIlluminati:");
+        msg.reply("<:TheIlluminati:1295995086051606529><:TheIlluminati:1295995086051606529><:TheIlluminati:1295995086051606529><:TheIlluminati:1295995086051606529><:TheIlluminati:1295995086051606529>");
     }
 }
 
