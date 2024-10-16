@@ -15,12 +15,25 @@ client.once(Events.ClientReady, (readyClient) => {
 });
 
 client.on(Events.MessageCreate, (msg) => {
-  for (const command of available_commands)
+  if (msg.content === "!receryhelp")
   {
-    if (command.check_activation(msg))
+    var message = "Comandos de Recery Bot: \n"
+    for (const command of available_commands)
     {
-      command.execution();
-      return;
+      message += command.get_activator() + ", ";
+    }
+    message = message.slice(0, -2);
+    msg.reply(message);
+  }
+  else
+  {
+    for (const command of available_commands)
+    {
+      if (command.check_activation(msg))
+      {
+        command.execution();
+        return;
+      }
     }
   }
 });

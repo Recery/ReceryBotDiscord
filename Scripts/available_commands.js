@@ -8,10 +8,8 @@ const availables_commands = [];
 
 for (const file of command_files) {
     if (file != "command_cls.js")
-    {
-        let command
-        if (file === "ReceryHelp.js") command = "ReceryHelp.js"
-        else command = require(`./Commands/${file}`);
+    {   
+        const command = require(`./Commands/${file}`);
         availables_commands.push(command);
     }
 }
