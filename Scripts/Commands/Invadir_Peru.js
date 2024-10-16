@@ -4,7 +4,11 @@ class Invadir_Peru extends Command
 {
     execution(msg)
     {
-        msg.reply("Comenzó la operación invadir Perú, preparen sus armas")
+        msg.reply(
+        {
+            content: "Comenzó la operación invadir Perú, preparen sus armas",
+            files: [this.get_gifs_directory() + "/Armas.gif"]
+        });
     }
 }
 
