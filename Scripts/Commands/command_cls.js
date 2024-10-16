@@ -1,5 +1,5 @@
-
 const path = require("path");
+const bot_state = require(process.cwd() + "/Scripts/bot_state");
 
 class Command
 {
@@ -11,7 +11,10 @@ class Command
   check_activation(msg)
   {
     if (msg.content.startsWith(this.activator))
-      this.execution(msg);
+    {
+      if (bot_state.get_asleep()) msg.reply("Zzz... (Estoy dormido boludo, no puedo usar comandos)");
+      else this.execution(msg);
+    }
   }
 
   get_activator()
@@ -32,6 +35,11 @@ class Command
   get_mention(msg)
   {
     return `<@${msg.author.id}>`;
+  }
+
+  get_bot_state()
+  {
+    return bot_state;
   }
 
   execution(msg){}

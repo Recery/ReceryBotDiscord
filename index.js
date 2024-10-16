@@ -26,30 +26,6 @@ client.on(Events.MessageCreate, (msg) => {
     message = message.slice(0, -2);
     msg.reply(message);
   }
-  else if (msg.content === "!senkoawake")
-  {
-    if (sleep)
-    {
-      msg.reply("La puta madre para que me despertas... Terrible siesta me estaba haciendo");
-      sleep = false
-    }
-    else
-    {
-      msg.reply("Ya estoy despierto, no ves que tengo los ojos abiertos?")
-    }
-  }
-  else if (msg.content === "!senkosleep")
-  {
-    if (sleep)
-    {
-      msg.reply("Zzz... (Ya estoy dormido pelotudo)");
-    }
-    else
-    {
-      msg.reply("Vamos carajo, ya me estaba cansando de vos... A dormir... Zzz")
-      sleep = true
-    }
-  }
   else
   {
     for (const command of available_commands)
