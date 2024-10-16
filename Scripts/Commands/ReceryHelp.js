@@ -5,6 +5,7 @@ class ReceryHelp extends Command
 {
     execution(msg)
     {
+        console.log(available_commands);
         var message = "Comandos de Recery Bot: \n"
         for (const command of available_commands)
         {
