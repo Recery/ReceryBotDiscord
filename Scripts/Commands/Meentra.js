@@ -11,4 +11,4 @@ class Meentra extends Command
     }
 }
 
-module.exports = new Memide("!memide");
+module.exports = new Meentra("!meentra");
