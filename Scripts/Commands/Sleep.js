@@ -2,6 +2,12 @@ const Command = require("./command_cls.js")
 
 class Sleep extends Command
 {
+    check_activation(msg)
+    {
+      if (msg.content.startsWith(this.activator))
+        this.execution(msg);
+    }
+
     execution(msg)
     {
         if (this.get_bot_state().get_asleep())
