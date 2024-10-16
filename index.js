@@ -1,3 +1,5 @@
+const { KeepAlive } = require("./Scripts/keep_alive")
+
 const { Client, Events, GatewayIntentBits, Message } = require("discord.js");
 
 const client = new Client({
