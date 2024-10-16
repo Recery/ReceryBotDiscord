@@ -1,11 +1,11 @@
 const Command = require("./command_cls.js")
 
-class Plata extends Command
+class Feo extends Command
 {
     execution(msg)
     {
-        msg.react(":money_with_wings:");
+        msg.reply(`${this.get_mention(msg)}, sos un ${Math.floor(Math.random() * 100) + 1}% feo`)
     }
 }
 
-module.exports = new Plata("!plata");
+module.exports = new Feo("!feo");
