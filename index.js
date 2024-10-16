@@ -16,7 +16,7 @@ client.once(Events.ClientReady, (readyClient) => {
 });
 
 client.on(Events.MessageCreate, (msg) => {
-  if (msg.content === "!help")
+  if (msg.content === "!senkohelp")
   {
     var message = "Comandos de Senko Bot: \n "
     for (const command of available_commands)
