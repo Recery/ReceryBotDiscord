@@ -1,3 +1,10 @@
+let http = require("http")
+
+http.createServer((req, res) => {
+  res.write("Senko Bot funcionando");
+  res.end();
+}).listen(8080);
+
 const { Client, Events, GatewayIntentBits, Message } = require("discord.js");
 
 const client = new Client({
