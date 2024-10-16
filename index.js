@@ -18,6 +18,7 @@ client.on(Events.MessageCreate, (msg) => {
   if (msg.content === "!receryhelp")
   {
     var message = "Comandos de Recery Bot: \n"
+    message += "!receryhelp, ";
     for (const command of available_commands)
     {
       message += command.get_activator() + ", ";
