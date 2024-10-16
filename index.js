@@ -1,6 +1,6 @@
+const { KeepAlive } = require("./Scripts/keep_alive")
+
 const { Client, Events, GatewayIntentBits, Message } = require("discord.js");
-const { get_mention } =  require("./Scripts/global_funcs.js")
-const available_commands = require("./Scripts/available_commands.js")
 
 const client = new Client({
   intents: [
@@ -9,6 +9,8 @@ const client = new Client({
     GatewayIntentBits.GuildMessages
   ],
 });
+
+const available_commands = require("./Scripts/available_commands.js")
 
 client.once(Events.ClientReady, (readyClient) => {
   console.log(`Ready! Logged in as ${readyClient.user.tag}`);
