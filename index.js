@@ -26,7 +26,7 @@ client.on(Events.MessageCreate, (msg) => {
     message = message.slice(0, -2);
     msg.reply(message);
   }
-  else if (msg.content === !senkoawake)
+  else if (msg.content === "!senkoawake")
   {
     if (sleep)
     {
@@ -38,7 +38,7 @@ client.on(Events.MessageCreate, (msg) => {
       msg.reply("Ya estoy despierto, no ves que tengo los ojos abiertos?")
     }
   }
-  else if (msg.content === !senkosleep)
+  else if (msg.content === "!senkosleep")
   {
     if (sleep)
     {
