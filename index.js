@@ -18,10 +18,10 @@ client.once(Events.ClientReady, (readyClient) => {
 client.on(Events.MessageCreate, (msg) => {
   if (msg.content === "!senkohelp")
   {
-    var message = "Comandos de Senko Bot: \n "
+    var message = "Comandos de Senko Bot: \n"
     for (const command of available_commands)
     {
-      message += command.get_activator() + "\n"
+      message += command.get_activator() + " "
     }
     msg.reply(message);
   }
