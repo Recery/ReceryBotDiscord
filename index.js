@@ -67,22 +67,6 @@ client.on(Events.MessageCreate, (msg) => {
         files: ["Images/goldfish.jpg"]
       });
   }
-  else if (msg.content === "!fishfact")
-  {
-    switch(Math.floor(Math.random() * 3) + 1)
-      {
-          case 1: msg.reply("Las corydoras no tienen escamas, sino que tienen placas oseas que recubren su cuerpo");
-            break;
-          case 2: msg.reply("Los peces guppy son muy faciles de reproducir")
-            break;
-          case 3: msg.reply("Los peces cebrita comparten una gran parte de su ADN con el ser humano");
-            break;
-      }
-  }
-  else if (msg.content === "!ping")
-  {
-    msg.reply("pong... Mi creador es un pelotudo y no sabe como mostrar mi ping, conformate con eso XD");
-  }
   else if (msg.content === "!senkobot")
   {
     msg.reply(`Hola ${get_mention(msg)}` + ", soy Senko Bot, un bot creado por SenkoSan12543. Soy argentino y me gustan los peces. Tengo una obsesión por el Terraria.")
