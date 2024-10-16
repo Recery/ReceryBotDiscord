@@ -4,11 +4,11 @@ class Sleep extends Command
 {
     execution(msg)
     {
-        if (this.get_activator().get_asleep())
+        if (this.get_bot_state().get_asleep())
             msg.reply("Zzz... (Ya estoy dormido pelotudo)");
         else
         {
-            this.get_activator().set_asleep(true);
+            this.get_bot_state().set_asleep(true);
             msg.reply("Vamos carajo, ya me estaba cansando de vos... A dormir... Zzz");
         }
     }
