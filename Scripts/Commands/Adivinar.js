@@ -15,7 +15,7 @@ class Adivinar extends Stepped_Command
     }
     second_execution(msg)
     {
-        var typed_number = msg.content.replace("!elegir", "");
+        var typed_number = Number(msg.content.replace("!elegir", ""));
         var user_number;
         for (const user of this.users_numbers)
         {
@@ -30,7 +30,7 @@ class Adivinar extends Stepped_Command
             }
         }
 
-        if (!typeof number !== 'number')
+        if (isNaN(typed_number))
         {
             msg.reply(`Sos boludo? Eso ni siquiera es un número... Ya fue, el número era ${user_number}`);
         }
