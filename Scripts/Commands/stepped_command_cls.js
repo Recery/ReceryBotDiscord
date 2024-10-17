@@ -11,14 +11,14 @@ class Stepped_Command extends Command
 
         if (this.users_activated.includes(this.get_mention(msg)))
         {
-            this.second_execution();
+            this.second_execution(msg);
 
             const index = this.users_activated.indexOf(this.get_mention(msg));
             if (index !== -1) this.users_activated.splice(index, 1);
         }
         else
         {
-            this.execution();
+            this.execution(msg);
             this.users_activated.push(this.get_mention(msg));
         }
     }

@@ -7,6 +7,7 @@ class Adivinar extends Stepped_Command
     execution(msg)
     {
         msg.reply("Acabé de elegir un número del 1 al 6... Ahora adivinalo (!adivinar <tu numero acá>).");
+        
         this.users_numbers.push({
             mention: this.get_mention(msg),
             number: Math.floor(Math.random() * 6) + 1
