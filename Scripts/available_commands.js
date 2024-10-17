@@ -7,7 +7,7 @@ const command_files = fs.readdirSync(commands_path).filter(file => file.endsWith
 const availables_commands = [];
 
 for (const file of command_files) {
-    if (file != "command_cls.js")
+    if (file != "command_cls.js" && file != "stepped_command_cls.js")
     {
         const command = require(`./Commands/${file}`);
         availables_commands.push(command);
