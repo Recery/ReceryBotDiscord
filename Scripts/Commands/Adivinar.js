@@ -30,11 +30,13 @@ class Adivinar extends Stepped_Command
             }
         }
 
+        msg.reply(`${typed_number}`);
+
         if (isNaN(typed_number))
         {
-            msg.reply(`Sos boludo? Eso ni siquiera es un número... Ya fue, el número era ${user_number}`);
+            msg.reply(`Eso ni siquiera es un número... Ya fue, el número era ${user_number}`);
         }
-        else
+        else    
         {
             if (typed_number === user_number)
                 msg.reply(`... Si, ${user_number} era el número, como adivinaste?`);
