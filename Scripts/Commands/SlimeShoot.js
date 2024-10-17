@@ -4,7 +4,7 @@ class SlimeShoot extends Command
 {
     execution(msg)
     {
-        msg.reply("Mi creador, además de crearme a mí, también creó un juego muy interesante... Lo podés descargar gratis acá: https://recery.itch.io/slime-shoot")
+        msg.reply("> Mi creador, además de crearme a mí, también creó un juego muy interesante... \n Lo podés descargar gratis acá: https://recery.itch.io/slime-shoot")
     }
 }
 
