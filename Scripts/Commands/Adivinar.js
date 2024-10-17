@@ -15,7 +15,7 @@ class Adivinar extends Stepped_Command
     }
     second_execution(msg)
     {
-        var typed_number = Number(msg.content.replace("!elegir", "").trim());
+        var typed_number = Number(msg.content.replace("!adivinar", "").trim());
         var user_number;
         for (const user of this.users_numbers)
         {
