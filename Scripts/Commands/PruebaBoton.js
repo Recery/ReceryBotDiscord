@@ -4,11 +4,12 @@ class PruebaBoton extends Command
 {
     execution(msg)
     {
-        const button = new ButtonBuilder()
-            .setCustomId('boton_click')
-            .setLabel('Apretar boton')
-            .setStyle(ButtonStyle.Primary);
-
+        const button = new MessageButton()
+            .setCustomId('primary')
+            .setLabel('Primary')
+            .setStyle('PRIMARY')
+            .setEmoji('123456789012345678');
+    
         msg.reply(
         {
             content: "Este es un boton de prueba",
