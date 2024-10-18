@@ -8,7 +8,8 @@ class PruebaBoton extends Command
         const button = new ButtonBuilder()
             .setCustomId('boton_click')
             .setLabel('Apretar boton')
-            .setStyle(1);
+            .setStyle(1)
+            .setType(1);
 
         msg.reply(
         {
