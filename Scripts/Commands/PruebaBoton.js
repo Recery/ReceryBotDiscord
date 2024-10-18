@@ -1,4 +1,4 @@
-const Command = require("./command_cls.js")
+/*const Command = require("./command_cls.js")
 const { ButtonBuilder, ActionRowBuilder } = require('discord.js');
 
 class PruebaBoton extends Command
@@ -20,4 +20,4 @@ class PruebaBoton extends Command
     }
 }
 
-module.exports = new PruebaBoton("!pruebaboton");
+module.exports = new PruebaBoton("!pruebaboton");*/
