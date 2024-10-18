@@ -10,9 +10,9 @@ class ManzanaVerde extends Command
         var total_apples = 1;
         for (const user in users)
         {
-            if (user === this.users.user)
+            if (user.user === this.users.user)
             {
-                user_added = true
+                user_added = true;
                 user.green_apples += 1;
                 total_apples = user.green_apples;
                 break;
