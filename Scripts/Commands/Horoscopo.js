@@ -4,7 +4,7 @@ class Horoscopo extends Command
 {
     execution(msg)
     {
-        opciones = [
+        var opciones = [
             "Tendrás un gran día hoy, con muchas posibilidades de conseguir dinero :money_mouth:",
             "Creo que no será un gran día... Mejor cuidate.",
             "Mañana tendrás una gran sorpresa.",
