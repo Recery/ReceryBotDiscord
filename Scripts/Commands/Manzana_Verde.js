@@ -10,7 +10,7 @@ class ManzanaVerde extends Command
         var total_apples = 1;
         for (const user in this.users)
         {
-            if (user.user === this.users.user)
+            if (user.user === this.get_mention(msg))
             {
                 user_added = true;
                 user.green_apples += 1;
