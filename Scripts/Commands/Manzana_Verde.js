@@ -8,7 +8,7 @@ class ManzanaVerde extends Command
     {
         var user_added = false;
         var total_apples = 1;
-        for (const user in users)
+        for (const user in this.users)
         {
             if (user.user === this.users.user)
             {
