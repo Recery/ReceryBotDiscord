@@ -1,16 +1,14 @@
 const Command = require("./command_cls.js")
-const { MessageButton } = require('discord.js');
+const { ButtonBuilder, ButtonStyle } = require('discord.js');
 
 class PruebaBoton extends Command
 {
     execution(msg)
     {
-        const button = new MessageButton()
-            .setCustomId('primary')
-            .setLabel('Primary')
-            .setStyle('PRIMARY')
-            .setEmoji('123456789012345678');
-    
+        const button = new ButtonBuilder()
+            .setCustomId('boton_click')
+            .setLabel('Apretar boton')
+            .setStyle(ButtonStyle.Primary);
 
         msg.reply(
         {
