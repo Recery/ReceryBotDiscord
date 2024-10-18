@@ -5,7 +5,7 @@ class Femboy extends Command
     execution(msg)
     {
         var content = msg.content.replace("!femboy", "").trim();
-        if (msg.content !== "")
+        if (content !== "")
             msg.reply(`${content} es un ${Math.floor(Math.random() * 100) + 1}% femboy`);
         else 
             msg.reply(`${this.get_mention(msg)} es un ${Math.floor(Math.random() * 100) + 1}% femboy`);
