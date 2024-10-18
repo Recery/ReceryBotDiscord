@@ -8,7 +8,7 @@ class ManzanaVerde extends Command
     {
         var user_added = false;
         var total_apples = 1;
-        for (const user in this.users)
+        for (const user of this.users)
         {
             if (user.user === this.get_mention(msg))
             {
@@ -20,7 +20,7 @@ class ManzanaVerde extends Command
         }
 
         if (!user_added)
-            this.users.push({user: this.get_mention(msg), green_apples: Number(1)})
+            this.users.push({user: this.get_mention(msg), green_apples: 1})
 
         msg.reply(`${this.get_mention(msg)}, ahora tenes ${total_apples}<:ManzanaVerde:1296171434246410380>`)
     }
