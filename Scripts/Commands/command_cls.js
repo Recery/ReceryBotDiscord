@@ -44,7 +44,7 @@ class Command
 
   get_content(msg)
   {
-    msg.content.replace(this.get_activator(), "").trim();
+    return msg.content.replace(this.get_activator(), "").trim();
   }
 
   execution(msg){}
