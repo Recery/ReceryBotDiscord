@@ -4,7 +4,10 @@ class Memide extends Command
 {
     execution(msg)
     {
-        msg.reply(`${this.get_mention(msg)}, te mide ${Math.floor(Math.random() * 30) + 1}cm`)
+        if (this.get_content() !== "")
+            msg.reply(`A ${this.get_content()} le mide ${Math.floor(Math.random() * 30) + 1}cm`);
+        else
+            msg.reply(`${this.get_mention(msg)}, te mide ${Math.floor(Math.random() * 30) + 1}cm`)
     }
 }
 

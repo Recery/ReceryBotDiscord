@@ -42,6 +42,11 @@ class Command
     return bot_state;
   }
 
+  get_content(msg)
+  {
+    msg.content.replace(this.get_activator(), "").trim();
+  }
+
   execution(msg){}
 }
 

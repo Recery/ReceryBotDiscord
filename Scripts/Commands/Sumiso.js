@@ -4,7 +4,10 @@ class Sumiso extends Command
 {
     execution(msg)
     {
-        msg.reply(`${this.get_mention(msg)} es un ${Math.floor(Math.random() * 100) + 1}% sumis@`)
+        if (this.get_content() !== "")
+            msg.reply(`${this.get_content()} es un ${Math.floor(Math.random() * 100) + 1}% sumis@`);
+        else
+            msg.reply(`${this.get_mention(msg)} es un ${Math.floor(Math.random() * 100) + 1}% sumis@`)
     }
 }
 
