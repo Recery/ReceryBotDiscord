@@ -6,7 +6,7 @@ class BanAgua extends Command
 
     execution(msg)
     {
-        bans += 1;
+        this.bans += 1;
         msg.reply(`${this.get_mention(msg)} acabó de banear a Agua. Agua ya fue baneado ${this.bans} veces XD`);
     }
 }
