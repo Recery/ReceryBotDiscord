@@ -4,8 +4,8 @@ class Horny extends Command
 {
     execution(msg)
     {
-        if (this.get_content() !== "")
-            msg.reply(`${this.get_content()} está un ${Math.floor(Math.random() * 100) + 1}% horny :hot_face:`);
+        if (this.get_content(msg) !== "")
+            msg.reply(`${this.get_content(msg)} está un ${Math.floor(Math.random() * 100) + 1}% horny :hot_face:`);
         else
             msg.reply(`${this.get_mention(msg)} está un ${Math.floor(Math.random() * 100) + 1}% horny :hot_face:`);
     }
