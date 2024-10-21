@@ -32,7 +32,7 @@ class BanAgua extends Command
     async add_ban()
     {
         const conex = await this.connect_database();
-        console.log("sumado ban");
+        
         await conex.execute('UPDATE bansagua SET bans = bans + 1 WHERE id = 1');
 
         await conex.end();

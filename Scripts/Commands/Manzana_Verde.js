@@ -2,27 +2,56 @@ const Command = require("./command_cls.js")
 
 class ManzanaVerde extends Command
 {
-    users = [];
-
     execution(msg)
     {
-        var user_added = false;
-        var total_apples = 1;
-        for (const user of this.users)
+        let green_apples = this.add_green_apple();
+
+        msg.reply(`${this.get_mention(msg)}, ahora tenes ${green_apples}<:ManzanaVerde:1296171434246410380>`)
+    }
+
+    async connect_database()
+    {
+        const conex = await mysql.createConnection({
+            uri: process.env.db,
+            ssl: {rejectUnauthorized: false}
+        });
+
+        return conex;
+    }
+
+    async add_green_apple(mention)
+    {
+        const conex = await this.connect_database();
+
+        const [rows] = await conex.execute('SELECT * FROM users_green_apples');
+
+        let add_row = true;
+        let id = null;
+        let green_apples = 1;
+
+        for (const row of rows)
         {
-            if (user.user === this.get_mention(msg))
+            if (mention === row.mention)
             {
-                user_added = true;
-                user.green_apples += 1;
-                total_apples = user.green_apples;
+                id = row.id;
+                await conex.execute('UPDATE users_green_apples SET green_apples = green_apples + 1 WHERE id = ?', [id]);
+                
+                const [updated_row] = conex.execute('SELECT green_apples FROM users_green_apples WHERE id = ?', [id]);
+                green_apples = updated_row[0].green_apples;
+
+                add_row = false;
                 break;
             }
         }
 
-        if (!user_added)
-            this.users.push({user: this.get_mention(msg), green_apples: 1})
+        if (add_row)
+        {
+            await conex.execute('INSERT INTO users_green_apples (mention, green_apples) VALUES (?, ?)', [mention, green_apples]);
+        }
 
-        msg.reply(`${this.get_mention(msg)}, ahora tenes ${total_apples}<:ManzanaVerde:1296171434246410380>`)
+        await conex.end();
+
+        return green_apples;
     }
 }
 
