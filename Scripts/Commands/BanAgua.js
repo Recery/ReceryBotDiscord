@@ -8,10 +8,11 @@ class BanAgua extends Command
         super(init_activator);
     }
 
-    execution(msg)
+    async execution(msg)
     {
         this.add_ban();
-        msg.reply(`${this.get_mention(msg)} acabó de banear a Agua. Agua ya fue baneado ${this.get_bans()} veces XD`);
+        var bans = await this.get_bans();
+        msg.reply(`${this.get_mention(msg)} acabó de banear a Agua. Agua ya fue baneado ${bans} veces XD`);
     }
 
     async connect_database()
