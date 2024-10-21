@@ -37,7 +37,7 @@ class ManzanaVerde extends Command
                 id = row.id;
                 await conex.execute('UPDATE users_green_apples SET green_apples = green_apples + 1 WHERE id = ?', [id]);
                 
-                const [updated_row] = conex.execute('SELECT green_apples FROM users_green_apples WHERE id = ?', [id]);
+                const [updated_row] = await conex.execute('SELECT green_apples FROM users_green_apples WHERE id = ?', [id]);
                 green_apples = updated_row[0].green_apples;
 
                 add_row = false;
