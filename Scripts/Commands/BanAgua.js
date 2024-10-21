@@ -1,5 +1,5 @@
 const Command = require("./command_cls.js");
-const mysql = require('mysql12/promise');
+const mysql = require('mysql2/promise');
 
 class BanAgua extends Command
 {
