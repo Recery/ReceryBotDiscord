@@ -6,7 +6,7 @@ class Cosa extends Command
   {
     var item = this.get_item();
 
-    msg.reply(`${get_mention(msg)}, obtuviste ${item.nombre}${item.emote} de rareza ${item.rareza}`);
+    msg.reply(`${this.get_mention(msg)}, obtuviste ${item.nombre}${item.emote} de rareza ${item.rareza}`);
   }
 
   // Rarezas van del 1 al 10 (1: muy comun, 10: muy raro)
