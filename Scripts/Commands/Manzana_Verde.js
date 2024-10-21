@@ -1,10 +1,11 @@
 const Command = require("./command_cls.js")
+const mysql = require('mysql2/promise');
 
 class ManzanaVerde extends Command
 {
-    execution(msg)
+    async execution(msg)
     {
-        let green_apples = this.add_green_apple();
+        let green_apples = await this.add_green_apple();
 
         msg.reply(`${this.get_mention(msg)}, ahora tenes ${green_apples}<:ManzanaVerde:1296171434246410380>`)
     }
