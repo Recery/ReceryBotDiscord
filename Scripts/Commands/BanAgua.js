@@ -1,13 +1,11 @@
 const Command = require("./command_cls.js");
-const Database = require('better-sqlite3');
+const mysql = require('mysql12/promise');
 
 class BanAgua extends Command
 {
     constructor(init_activator)
     {
         super(init_activator);
-        this.db = new Database("bansagua.db");
-        this.create_database();
     }
 
     execution(msg)
@@ -16,33 +14,43 @@ class BanAgua extends Command
         msg.reply(`${this.get_mention(msg)} acabó de banear a Agua. Agua ya fue baneado ${this.get_bans()} veces XD`);
     }
 
-    create_database()
+    async connect_database()
     {
-        this.db.prepare(`
-            CREATE TABLE IF NOT EXISTS bans (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            bans INTEGER
-            )`
-        ).run();
+        const conex = await mysql.createConnection({
+            uri: process.env.db,
+            ssl: {rejectUnauthorized: false}
+        });
 
-        const row = this.db.prepare('SELECT bans FROM bans WHERE id = 1').get();
-        if (!row) 
+        const [rows] = await conex.execute('SELECT COUNT(*) AS count FROM bansagua');
+        if (rows[0].count === 0)
+            await conex.execute('INSERT INTO bansagua (bans) VALUES (?)', [0]);
+
+        return conex;
+    }
+
+    async add_ban()
+    {
+        const conex = await this.connect_database();
+
+        await conex.execute('UPDATE bansagua SET bans = bans + 1 WHERE id = 1');
+
+        await conex.end();
+    }
+
+    async get_bans()
+    {
+        const conex = await this.connect_database();
+        const [rows] = await conex.execute('SELECT bans FROM bansagua WHERE id = 1');
+
+        if (rows.length > 0)
         {
-            this.db.prepare('INSERT INTO bans (bans) VALUES (?)').run(0);
+            const bans = rows[0].bans;
+            await conex.end();
+            return bans;
         }
-    }
 
-    add_ban()
-    {
-        this.db.prepare('UPDATE bans SET bans = bans + 1 WHERE id = 1').run();
-    }
-
-    get_bans()
-    {
-        const row = this.db.prepare('SELECT bans FROM bans WHERE id = 1').get();
-
-        if (row) return row.bans;
-        else return 0;
+        await conex.end();
+        return 0;
     }
 }
 
