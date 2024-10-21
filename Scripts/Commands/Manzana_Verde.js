@@ -5,7 +5,7 @@ class ManzanaVerde extends Command
 {
     async execution(msg)
     {
-        let green_apples = await this.add_green_apple();
+        let green_apples = await this.add_green_apple(this.get_mention(msg));
 
         msg.reply(`${this.get_mention(msg)}, ahora tenes ${green_apples}<:ManzanaVerde:1296171434246410380>`)
     }
