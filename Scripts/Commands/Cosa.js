@@ -42,7 +42,7 @@ class Cosa extends Command
       if (rand < acumulado) return item;
     }
 
-    return null;
+    return this.item_list[0];
   }
 }
 
