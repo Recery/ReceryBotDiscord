@@ -7,7 +7,7 @@ class Cosa extends Command
     var item = this.get_item();
     var message = `${this.get_mention(msg)}, obtuviste ${item.nombre}${item.emote} de rareza ${item.rareza} \n`;
     var green_apples = await this.get_bot_state().modify_green_apples(this.get_mention(msg), item.rareza);
-    message += `Obtuviste ${item.rareza}<:ManzanaVerde:1296171434246410380>, y ahora tienes un total de ${green_apples}`;
+    message += `Obtuviste ${item.rareza}<:ManzanaVerde:1296171434246410380>, y ahora tienes un total de ${green_apples}<:ManzanaVerde:1296171434246410380>`;
 
     msg.reply(message);
   }
