@@ -80,7 +80,7 @@ class Command
 
     if (add_row)
     {
-      await conex.execute('INSERT INTO commands_used (mention, amount) VALUES (?, ?)', [mention, amount]);
+      await conex.execute('INSERT INTO commands_used (mention, amount) VALUES (?, ?)', [this.get_mention(msg), amount]);
     }
 
     return amount;
