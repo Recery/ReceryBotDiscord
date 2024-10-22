@@ -1,5 +1,6 @@
 const path = require("path");
 const bot_state = require(process.cwd() + "/Scripts/bot_state");
+const mysql = require('mysql2/promise')
 
 class Command
 {
@@ -13,13 +14,73 @@ class Command
     if (msg.content.startsWith(this.activator))
     {
       if (bot_state.get_asleep()) msg.reply("Zzz... ||Estoy dormido boludo, no puedo usar comandos||");
-      else this.execution(msg);
+      else 
+      {
+        this.execution(msg);
+        //this.add_command_used(msg);
+        msg.reply(`Comandos usados hasta ahora: ${this.add_command_used(msg)}`)
+      }
+      
     }
   }
 
   get_activator()
   {
     return this.activator;
+  }
+
+  async get_commands_used(msg)
+  {
+    const conex = await mysql.createConnection({
+      uri: process.env.db,
+      ssl: {rejectUnauthorized: false}
+    });
+
+    const [rows] = await conex.execute('SELECT * FROM commands_used');
+    for (const row of rows)
+    {
+      if (row.mention === this.get_mention(msg))
+      {
+        return row.commands_used;
+      }
+    }
+
+    return 0;
+  }
+
+  async add_command_used(msg)
+  {
+    const conex = await mysql.createConnection({
+      uri: process.env.db,
+      ssl: {rejectUnauthorized: false}
+    });
+
+    let id = 0;
+    let amount = 1;
+    let add_row = true;
+
+    const [rows] = await conex.execute('SELECT * FROM commands_used');
+    for (const row of rows)
+    {
+      if (row.mention === this.get_mention(msg))
+      {
+        id = row.id;
+        await conex.execute(`UPDATE commands_used SET amount = amount + 1 WHERE id = ?`, [id]);
+          
+        const [updated_row] = await conex.execute('SELECT amount FROM commands_used WHERE id = ?', [id]);
+        amount = updated_row[0].amount;
+
+        add_row = false;
+        break;
+      }
+    }
+
+    if (add_row)
+    {
+      await conex.execute('INSERT INTO commands_used (mention, amount) VALUES (?, ?)', [mention, amount]);
+    }
+
+    return amount;
   }
 
   get_image_directory()
