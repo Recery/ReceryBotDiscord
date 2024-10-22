@@ -19,7 +19,7 @@ class Command
         await this.add_command_used(msg);
         this.execution(msg);
 
-        if (this.get_commands_used % 125 === 0 || this.get_commands_used() === 1)
+        if (this.get_commands_used(msg) % 125 === 0 || this.get_commands_used(msg) === 1)
         {
           msg.reply("> Mi creador, además de crearme a mí, también creó un juego muy interesante... \n > Lo podés descargar gratis acá: https://recery.itch.io/slime-shoot")
         }
