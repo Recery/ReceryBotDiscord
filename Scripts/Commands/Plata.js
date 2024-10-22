@@ -6,6 +6,7 @@ class Plata extends Command
     {
         msg.react("💸");
         msg.react("🤑");
+        msg.react("<:ManzanaVerde:1296171434246410380>")
     }
 }
 
