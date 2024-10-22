@@ -30,11 +30,7 @@ client.on(Events.MessageCreate, (msg) => {
   {
     for (const command of available_commands)
     {
-      if (command.check_activation(msg))
-      {
-        command.execution();
-        return;
-      }
+      command.check_activation(msg)
     }
   }
 });
