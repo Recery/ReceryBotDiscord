@@ -9,7 +9,7 @@ class Command
     this.activator = init_activator;
   }
 
-  check_activation(msg)
+  async check_activation(msg)
   {
     if (msg.content.startsWith(this.activator))
     {
@@ -17,8 +17,8 @@ class Command
       else 
       {
         this.execution(msg);
-        //this.add_command_used(msg);
-        msg.reply(`Comandos usados hasta ahora: ${this.add_command_used(msg)}`)
+        let commands_used = await this.add_command_used(msg);
+        msg.reply(`Comandos usados hasta ahora: ${commands_used}`)
       }
       
     }
