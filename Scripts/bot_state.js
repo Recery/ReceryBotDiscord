@@ -60,7 +60,7 @@ async function get_green_apples(mention)
     let id = 0;
 
     const [rows] = await conex.execute('SELECT * FROM users_green_apples');
-    for (const row of fows)
+    for (const row of rows)
     {
         if (mention === row.mention)
         {
