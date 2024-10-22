@@ -44,7 +44,7 @@ class Command
     {
       if (row.mention === this.get_mention(msg))
       {
-        return row.commands_used;
+        return row.amount;
       }
     }
 
