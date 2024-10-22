@@ -21,7 +21,8 @@ class Cosa extends Command
     {emote: "<:Queso:1296180263402868766>", nombre: "Queso", rareza: 5},
     {emote: "<:SombreroBruja:1296182177523830864>", nombre: "Sombrero de bruja", rareza: 8},
     {emote: "<:CositoDeLaPizza:1296179027853447208>", nombre: "Cosito de la pizza", rareza: 10},
-    {emote: "<:Linterna:1296180239826944112>", nombre: "Linterna", rareza: 9}
+    {emote: "<:Linterna:1296180239826944112>", nombre: "Linterna", rareza: 9},
+    {emote: "<:Zanahoria:1298120716838895718>", nombre: "Zanahoria", rareza: 10}
   ];
 
   get_item()
