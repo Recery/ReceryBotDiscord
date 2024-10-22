@@ -22,7 +22,8 @@ class Cosa extends Command
     {emote: "<:SombreroBruja:1296182177523830864>", nombre: "Sombrero de bruja", rareza: 8},
     {emote: "<:CositoDeLaPizza:1296179027853447208>", nombre: "Cosito de la pizza", rareza: 10},
     {emote: "<:Linterna:1296180239826944112>", nombre: "Linterna", rareza: 9},
-    {emote: "<:Zanahoria:1298120716838895718>", nombre: "Zanahoria", rareza: 10}
+    {emote: "<:Zanahoria:1298120716838895718>", nombre: "Zanahoria", rareza: 10},
+    {emote: "<:EscamaDeRecery:1298377110712221696>", nombre: "Escama de Recery", rareza: 100}
   ];
 
   get_item()
@@ -38,7 +39,7 @@ class Cosa extends Command
 
     for (const item of this.item_list)
     {
-      acumulado += (11 - item.rareza);
+      acumulado += (101 - item.rareza);
       if (rand < acumulado) return item;
     }
 
