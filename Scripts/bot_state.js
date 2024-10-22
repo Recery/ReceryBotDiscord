@@ -42,6 +42,7 @@ async function modify_green_apples(mention, amount)
     if (add_row)
     {
         await conex.execute('INSERT INTO users_green_apples (mention, green_apples) VALUES (?, ?)', [mention, green_apples + amount]);
+        green_apples = amount;
     }
 
     await conex.end();
