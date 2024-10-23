@@ -15,7 +15,7 @@ class Mochila extends Command
             has_items = true;
         }
 
-        if (!has_items) reply += "¡No tenés nada! Alto indigente sos.";
+        if (!has_items) reply += "\n¡No tenés nada! Alto indigente sos.";
 
         msg.reply(reply);
     }
