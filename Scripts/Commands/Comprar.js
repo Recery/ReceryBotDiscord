@@ -12,7 +12,8 @@ class Comprar extends Command
             if (item.name === content || item.id === content)
             {
                 item_exists = true;
-                if (item.item.buy(this.get_mention(msg)))
+                let bought = await item.buy(this.get_mention(msg));
+                if (bought)
                 {
                     msg.reply(`Has comprado ${item.name}${item.emote} con éxito.`)
                 }
