@@ -6,7 +6,7 @@ let items = [
 
 function get_item(id, name, emote, description, buy = -1, sell = -1)
 {
-    item = new Item(id, name, emote);
+    let item = new Item(id, name, emote);
     item.set_description(description);
     item.set_shop_values(buy, sell);
     return item;
