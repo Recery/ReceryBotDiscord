@@ -1,9 +1,15 @@
 const Item = require(process.cwd() + "/Scripts/Items/Item");
 
 let items = [
-    new Item("1", "Huevo de slime", "<:Huevo1:1298713803214688375>")
-        .set_description("Un huevo para incubar un slime.")
-        .set_shop_values(5,3)
+    get_item("1", "Huevo de slime", "<:Huevo1:1298713803214688375>", "Un huevo para incubar un slime.", 5, 3)
 ]
+
+function get_item(id, name, emote, description, buy = -1, sell = -1)
+{
+    item = new Item(id, name, emote);
+    item.set_description(description);
+    item.set_shop_values(buy, sell);
+    return item;
+}
 
 module.exports = items;
