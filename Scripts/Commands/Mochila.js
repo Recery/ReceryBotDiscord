@@ -6,6 +6,7 @@ class Mochila extends Command
     async execution(msg)
     {
         let items = await economia.get_items_nice(this.get_mention(msg));
+        console.log(items);
 
         let has_items = false;
         let reply = `${this.get_mention(msg)}, estos son los items que tienes en tu mochila:`;
