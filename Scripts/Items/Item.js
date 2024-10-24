@@ -10,8 +10,8 @@ class Item
         this.emote = init_emote;
         this.description = "Esta es la descripcion del item.";
 
-        this.buy = -1;
-        this.sell = -1;
+        this.buy_price = -1;
+        this.sell_price = -1;
     }
 
     set_description(new_description){this.description = new_description;}
