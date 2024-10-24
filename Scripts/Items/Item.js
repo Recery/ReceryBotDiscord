@@ -76,7 +76,7 @@ class Item
 
         if (add_row)
         {
-            await conex.execute('INSERT INTO users_bags (mention, items) VALUES (?, ?)', [mention, new_bag.join(";")]);
+            await conex.execute('INSERT INTO users_bags (mention, items) VALUES (?, ?)', [mention, `${this.id}:1`]);
         }
 
         conex.end();
