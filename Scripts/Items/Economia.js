@@ -59,7 +59,7 @@ async function get_items_nice(mention)
     {
         for (const nice_item of ListaItems)
         {
-            if (item.id === nice_item.id)
+            if (item.id === Number(nice_item.id))
             {
                 nice_bag.push({item: nice_item, amount: item.amount});
             }
