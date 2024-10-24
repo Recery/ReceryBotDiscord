@@ -35,7 +35,7 @@ class Item
 
         // En este punto el item se puede comprar, así que proceder con eso
 
-        await this.get_bot_state().modify_green_apples(mention, this.buy_price);
+        await this.get_bot_state().modify_green_apples(mention, -this.buy_price);
 
         // Añadir el item a la mochila
         const conex = await mysql.createConnection({
@@ -46,6 +46,7 @@ class Item
         const [rows] = await conex.execute('SELECT * FROM users_bags');
 
         let add_row = true;
+        let has_item
         let new_bag = [];
 
         for (const row of rows)
@@ -59,7 +60,7 @@ class Item
                 {
                     let [id, amount] = item.split(":").map(Number);
 
-                    if (id === this.id)
+                    if (id === Number(this.id))
                     {
                         new_bag.push(`${id}:${amount+1}`);
                         has_item = true;
