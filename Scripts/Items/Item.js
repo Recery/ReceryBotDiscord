@@ -46,7 +46,6 @@ class Item
         const [rows] = await conex.execute('SELECT * FROM users_bags');
 
         let add_row = true;
-        let has_item
         let new_bag = [];
 
         for (const row of rows)
