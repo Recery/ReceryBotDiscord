@@ -8,7 +8,7 @@ class Comprar extends Command
         let content = msg.content.replace("!comprar", "").trim();
         let item_exists = false;
         console.log(ListaItems);
-        for (const item in ListaItems)
+        for (const item of ListaItems)
         {
             console.log(item);
             if (item.name === content || item.id === content)
