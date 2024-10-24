@@ -58,7 +58,7 @@ class Item
                 for (const item of items)
                 {
                     let [id, amount] = item.split(":").map(Number);
-
+                    console.log(id, this.id)
                     if (id === Number(this.id))
                     {
                         new_bag.push(`${id}:${amount+1}`);
