@@ -5,7 +5,7 @@ class Comprar extends Command
 {
     async execution(msg)
     {
-        let content = msg.content.replace("!comprar", "").trim();
+        let content = msg.content.replace("!recerybuy", "").trim();
         let item_exists = false;
         for (const item of ListaItems)
         {
@@ -25,4 +25,4 @@ class Comprar extends Command
     }
 }
 
-module.exports = new Comprar("!comprar");
+module.exports = new Comprar("!recerybuy");
