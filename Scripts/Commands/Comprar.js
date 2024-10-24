@@ -10,7 +10,7 @@ class Comprar extends Command
         console.log(ListaItems);
         for (const item in ListaItems)
         {
-            console.log(Item);
+            console.log(item);
             if (item.name === content || item.id === content)
             {
                 item_exists = true;
