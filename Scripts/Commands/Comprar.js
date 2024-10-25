@@ -9,7 +9,7 @@ class Comprar extends Command
         let item_exists = false;
         for (const item of ListaItems)
         {
-            if (item.name === content || item.id === content)
+            if (item.name === content || item.id === Number(content))
             {
                 item_exists = true;
                 let bought = await item.buy(this.get_mention(msg));
