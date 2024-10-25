@@ -1,6 +1,6 @@
 const Command = require("./command_cls.js")
 
-class Invadir_Peru extends Command
+class InvadirPeru extends Command
 {
     async execution(msg)
     {
@@ -15,4 +15,4 @@ class Invadir_Peru extends Command
     }
 }
 
-module.exports = new Invadir_Peru("!invadirperu");
+module.exports = new InvadirPeru("!invadirperu");
