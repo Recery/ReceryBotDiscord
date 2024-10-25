@@ -12,7 +12,7 @@ class Mochila extends Command
         let reply = `${this.get_mention(msg)}, estos son los items que tienes en tu mochila:`;
         for (const item of items)
         {
-            reply += `\n x${item.amount} ${item.item.name}${item.item.emote}`;
+            reply += `\n ${item.item.name}$ {item.item.emote} (x${item.amount})`;
             has_items = true;
         }
 
