@@ -39,7 +39,7 @@ class Cosa extends Command
 
     for (const item of this.item_list)
     {
-      acumulado += (101 - item.rareza);
+      acumulado += item.rareza;
       if (rand < acumulado) return item;
     }
 
