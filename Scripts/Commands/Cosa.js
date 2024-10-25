@@ -31,7 +31,7 @@ class Cosa extends Command
     let total_weight = 0;
     for (const item of this.item_list)
     {
-      total_weight += item.rareza;
+      total_weight += 1 / item.rareza;
     }
 
     const rand = Math.random() * total_weight;
@@ -39,7 +39,7 @@ class Cosa extends Command
 
     for (const item of this.item_list)
     {
-      acumulado += item.rareza;
+      acumulado += 1 / item.rareza;
       if (rand < acumulado) return item;
     }
 
