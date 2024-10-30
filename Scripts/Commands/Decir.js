@@ -2,10 +2,10 @@ const Command = require("./command_cls.js")
 
 class Decir extends Command
 {
-    execution(msg)
+    async execution(msg)
     {
-        msg.reply(this.get_content(msg));
-        msg.delete();
+        await msg.reply(this.get_content(msg));
+        await msg.delete();
     }
 }
 
