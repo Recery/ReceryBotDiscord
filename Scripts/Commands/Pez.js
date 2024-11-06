@@ -1,5 +1,6 @@
 const { EmbedBuilder, Attachment } = require("discord.js");
-const Command = require("./command_cls.js")
+const path = require("path");
+const Command = require("./command_cls.js");
 
 class Pez extends Command
 {
@@ -19,10 +20,11 @@ class Pez extends Command
         const embed = new EmbedBuilder()
             .setColor("#65a7fc")
             .setTitle(pez.nombre)
+            .setImage("attachment://" + path.basename(pez.image));
 
         msg.reply({
             embeds: [embed],
-            files: [{ attachment: pez.image, name: "image.jpg" }]
+            files: [{ attachment: pez.image, name: path.basename(pez.image) }]
         });
     }
 }
