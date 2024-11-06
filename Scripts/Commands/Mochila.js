@@ -1,3 +1,4 @@
+const { EmbedBuilder } = require("discord.js");
 const Command = require("./command_cls.js");
 const economia = require(process.cwd() + "/Scripts/Items/Economia");
 
@@ -17,7 +18,12 @@ class Mochila extends Command
 
         if (!has_items) reply += "\n¡No tenés nada! Alto indigente sos.";
 
-        msg.reply(reply);
+        const embed = new EmbedBuilder()
+            .setColor("#65a7fc")
+            .setTitle(`Mochila de ${this.get_mention(msg)}`)
+            .setDescription(reply);
+
+        msg.reply({ embeds: [embed]});
     }
 }
 
