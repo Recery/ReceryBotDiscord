@@ -11,7 +11,9 @@ class Command
 
   async check_activation(msg)
   {
-    if (msg.content.startsWith(this.activator))
+    const command_content = msg.content.trim().toLowerCase();
+
+    if (command_content.startsWith(this.activator.toLowerCase()))
     {
       if (bot_state.get_asleep()) msg.reply("Zzz... ||Estoy dormido boludo, no puedo usar comandos||");
       else 
