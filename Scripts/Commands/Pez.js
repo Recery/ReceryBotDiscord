@@ -1,4 +1,4 @@
-const { EmbedBuilder, Attachment } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const path = require("path");
 const Command = require("./command_cls.js");
 
