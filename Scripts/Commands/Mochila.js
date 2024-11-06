@@ -9,7 +9,7 @@ class Mochila extends Command
         let items = await economia.get_items_nice(this.get_mention(msg));
 
         let has_items = false;
-        let reply = `${this.get_mention(msg)}, estos son los items que tienes en tu mochila:`;
+        let reply = '';
         for (const item of items)
         {
             reply += `\n ${item.item.name} ${item.item.emote} (x${item.amount})`;
