@@ -11,7 +11,7 @@ class Command
 
   async check_activation(msg)
   {
-    const command_content = msg.content.trim().toLowerCase();
+    const command_content = msg.content.replace(/\s+/g, '').toLowerCase();
 
     if (command_content.startsWith(this.activator.toLowerCase()))
     {
