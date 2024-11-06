@@ -1,10 +1,21 @@
+const { EmbedBuilder } = require("discord.js");
 const Command = require("./command_cls.js")
 
 class Kofi extends Command
 {
     execution(msg)
     {
-        msg.reply(`¿Te interesa donar dinero a mi creador, ${this.get_mention(msg)}? Entra en este link: https://ko-fi.com/recery`)
+        const embed = new EmbedBuilder()
+            .setColor("#ffffff")
+            .setTitle("¡Click aquí para ir al Ko-fi de Recery!")
+            .setURL("https://ko-fi.com/recery")
+            .setDescription(`${this.get_mention(msg)}, ¿Querés donarle a mi creador? ¡Hace click en el link de arriba!`)
+            .setImage("attachment://Recery.png");
+
+        msg.reply({
+            embeds: [embed],
+            files: [{ attachment: this.get_image_directory() + "/Recery.png", name: "Recery.png" }]
+        });
     }
 }
 
