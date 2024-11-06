@@ -8,4 +8,4 @@ class ReceryInvite extends Command
     }
 }
 
-module.exports = new ReceryInvite("!receryinvite");￼Enter
+module.exports = new ReceryInvite("!receryinvite");
