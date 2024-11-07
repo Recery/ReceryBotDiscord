@@ -11,4 +11,4 @@ class Dominante extends Command
     }
 }
 
-module.exports = new Dominante("!dominante");
+module.exports = new Dominante("!dominante", "diversion");

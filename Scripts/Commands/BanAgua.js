@@ -55,4 +55,4 @@ class BanAgua extends Command
     }
 }
 
-module.exports = new BanAgua("!banagua");
+module.exports = new BanAgua("!banagua", "accion");

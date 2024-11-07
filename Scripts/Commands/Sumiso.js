@@ -11,4 +11,4 @@ class Sumiso extends Command
     }
 }
 
-module.exports = new Sumiso("!sumiso");
+module.exports = new Sumiso("!sumiso", "diversion");

@@ -15,4 +15,4 @@ class InvadirPeru extends Command
     }
 }
 
-module.exports = new InvadirPeru("!invadirperu");
+module.exports = new InvadirPeru("!invadirperu", "economia");

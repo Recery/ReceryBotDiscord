@@ -25,4 +25,4 @@ class Comprar extends Command
     }
 }
 
-module.exports = new Comprar("!recerybuy");
+module.exports = new Comprar("!recerybuy", "economia");

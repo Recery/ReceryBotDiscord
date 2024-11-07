@@ -10,4 +10,4 @@ class ManzanaVerde extends Command
     }
 }
 
-module.exports = new ManzanaVerde("!manzanaverde");
+module.exports = new ManzanaVerde("!manzanaverde", "economia");

@@ -12,4 +12,4 @@ class MicolaPesta extends Command
     }
 }
 
-module.exports = new MicolaPesta("!micolapesta");
+module.exports = new MicolaPesta("!micolapesta", "diversion");

@@ -29,4 +29,4 @@ class Pez extends Command
     }
 }
 
-module.exports = new Pez("!pez");
+module.exports = new Pez("!pez", "diversion");

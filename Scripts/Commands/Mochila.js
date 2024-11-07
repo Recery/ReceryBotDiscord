@@ -27,4 +27,4 @@ class Mochila extends Command
     }
 }
 
-module.exports = new Mochila("!recerybag");
+module.exports = new Mochila("!recerybag", "economia");

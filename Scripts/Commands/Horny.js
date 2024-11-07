@@ -11,4 +11,4 @@ class Horny extends Command
     }
 }
 
-module.exports = new Horny("!horny");
+module.exports = new Horny("!horny", "diversion");

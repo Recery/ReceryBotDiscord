@@ -11,4 +11,4 @@ class Racista extends Command
     }
 }
 
-module.exports = new Racista("!racista");
+module.exports = new Racista("!racista", "diversion");

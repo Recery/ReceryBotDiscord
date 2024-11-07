@@ -11,4 +11,4 @@ class Primos extends Command
     }
 }
 
-module.exports = new Primos("!primos");
+module.exports = new Primos("!primos", "diversion");

@@ -18,4 +18,4 @@ class Fishfact extends Command
   }
 }
 
-module.exports = new Fishfact("!fishfact");
+module.exports = new Fishfact("!fishfact", "diversion");

@@ -12,4 +12,4 @@ class Lindo extends Command
     }
 }
 
-module.exports = new Lindo("!lindo");
+module.exports = new Lindo("!lindo", "diversion");

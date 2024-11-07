@@ -11,4 +11,4 @@ class Feo extends Command
     }
 }
 
-module.exports = new Feo("!feo");
+module.exports = new Feo("!feo", "diversion");

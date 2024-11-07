@@ -13,4 +13,4 @@ class Comer_Galleta extends Command
     }
 }
 
-module.exports = new Comer_Galleta("!comergalleta");
+module.exports = new Comer_Galleta("!comergalleta", "accion");

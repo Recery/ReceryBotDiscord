@@ -47,4 +47,4 @@ class Cosa extends Command
   }
 }
 
-module.exports = new Cosa("!cosa");
+module.exports = new Cosa("!cosa", "economia");

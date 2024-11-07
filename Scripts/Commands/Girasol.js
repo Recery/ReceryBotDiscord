@@ -12,4 +12,4 @@ class Girasol extends Command
     }
 }
 
-module.exports = new Girasol("!girasol");
+module.exports = new Girasol("!girasol", "diversion");

@@ -11,4 +11,4 @@ class BanDanny extends Command
     }
 }
 
-module.exports = new BanDanny("!bandanny");
+module.exports = new BanDanny("!bandanny", "accion");

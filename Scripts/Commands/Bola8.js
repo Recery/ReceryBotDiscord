@@ -28,4 +28,4 @@ class Bola8 extends Command
     }
 }
 
-module.exports = new Bola8("!bola8");
+module.exports = new Bola8("!bola8", "diversion");

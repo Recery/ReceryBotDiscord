@@ -11,4 +11,4 @@ class BanKubo extends Command
     }
 }
 
-module.exports = new BanKubo("!bankubo");
+module.exports = new BanKubo("!bankubo", "accion");

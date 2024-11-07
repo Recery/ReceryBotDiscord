@@ -8,4 +8,4 @@ class Pelotudo extends Command
     }
 }
 
-module.exports = new Pelotudo("!pelotudo");
+module.exports = new Pelotudo("!pelotudo", "diversion");

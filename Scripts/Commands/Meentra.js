@@ -11,4 +11,4 @@ class Meentra extends Command
     }
 }
 
-module.exports = new Meentra("!meentra");
+module.exports = new Meentra("!meentra", "diversion");

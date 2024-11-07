@@ -11,4 +11,4 @@ class Fart extends Command
     }
 }
 
-module.exports = new Fart("!fart");
+module.exports = new Fart("!fart", "accion");

@@ -15,4 +15,4 @@ class InvadirBolivia extends Command
     }
 }
 
-module.exports = new InvadirBolivia("!invadirbolivia");
+module.exports = new InvadirBolivia("!invadirbolivia", "economia");

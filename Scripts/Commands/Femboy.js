@@ -11,4 +11,4 @@ class Femboy extends Command
     }
 }
 
-module.exports = new Femboy("!femboy");
+module.exports = new Femboy("!femboy", "diversion");

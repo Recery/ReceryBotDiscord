@@ -8,4 +8,4 @@ class Saludar extends Command
     }
 }
 
-module.exports = new Saludar("!saludar");
+module.exports = new Saludar("!saludar", "diversion");

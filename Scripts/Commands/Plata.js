@@ -10,4 +10,4 @@ class Plata extends Command
     }
 }
 
-module.exports = new Plata("!plata");
+module.exports = new Plata("!plata", "diversion");
