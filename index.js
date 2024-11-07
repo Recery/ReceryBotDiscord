@@ -45,19 +45,19 @@ client.on(Events.InteractionCreate, async (interaction) => {
 		switch (interaction.values[0])
 		{
 			case "ayuda":
-				embed_respuesta.setTitle("Categoria: Ayuda")
+				embed_respuesta.setTitle("Categoria: Ayuda");
 				break;
 			case "diversion":
-				embed_respuesta.setTitle("Categoria: Diversión")
+				embed_respuesta.setTitle("Categoria: Diversión");
 				break;
 			case "otros":
-				embed_respuesta.setTitle("Categoria: Otros")
+				embed_respuesta.setTitle("Categoria: Otros");
 				break;
 		}
-	}
 
-	await interaction.update({embeds:[embed_respuesta]});
-})
+		await interaction.update({embeds:[embed_respuesta]});
+	}
+});
 
 function get_help_message()
 {
