@@ -47,6 +47,7 @@ function get_help_message()
 		)
 	
 	const button = new ButtonBuilder()
+		.setCustomId("select_categoria")
 		.setLabel("Seleccionar categoría")
 		.setStyle(ButtonStyle.Primary);
 	
