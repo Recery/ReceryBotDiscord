@@ -3,9 +3,9 @@ const mysql = require('mysql2/promise');
 
 class BanAgua extends Command
 {
-    constructor(init_activator)
+    constructor(init_activator, init_categoria)
     {
-        super(init_activator);
+        super(init_activator, init_categoria);
     }
 
     async execution(msg)
