@@ -1,4 +1,4 @@
-const { Client, Events, GatewayIntentBits, Message, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
+const { Client, Events, GatewayIntentBits, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
 
 const client = new Client({
   intents: [
@@ -50,9 +50,27 @@ function get_help_message()
 		.setCustomId("select_categoria")
 		.setLabel("Seleccionar categoría")
 		.setStyle(ButtonStyle.Primary);
+
+	const selection = new StringSelectMenuBuilder()
+		.setCustomId("categories")
+		.setPlaceholder("Elige una categoría")
+		.addOptions(
+			new StringSelectMenuOptionBuilder()
+				.setLabel("Ayuda")
+				.setDescription("Comandos que te ayudarán.")
+				.setValue("ayuda"),
+			new StringSelectMenuOptionBuilder()
+				.setLabel("Diversión")
+				.setDescription("Comandos para divertirte.")
+				.setValue("diversion"),
+			new StringSelectMenuOptionBuilder()
+				.setLabel("Otros")
+				.setDescription("Comandos varios.")
+				.setValue("otros"),
+		);
 	
 	const row = new ActionRowBuilder()
-		.addComponents(button);
+		.addComponents(selection);
 
 	let message = {
 		embeds: [embed],
