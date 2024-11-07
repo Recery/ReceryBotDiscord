@@ -38,6 +38,11 @@ client.on(Events.MessageCreate, (msg) => {
 client.on(Events.InteractionCreate, async (interaction) => {
 	if (!interaction.isStringSelectMenu()) return;
 
+	if (interaction.customId === "categories_delete")
+	{
+		interaction.deleteReply();
+	}
+
 	if (interaction.customId === "categories") 
 	{
 		let embed_respuesta = new EmbedBuilder().setColor("#65a7fc");
@@ -111,7 +116,7 @@ function get_help_message()
 		)
 
 	const delete_button = new ButtonBuilder()
-		.setCustomId("cancel_button")
+		.setCustomId("categories_delete")
 		.setLabel("Cancelar")
 		.setStyle(ButtonStyle.Danger);
 
