@@ -24,7 +24,7 @@ client.on(Events.MessageCreate, (msg) => {
       message += command.get_activator() + ", ";
     }
     message = message.slice(0, -2);
-    msg.reply(get_help_message());
+    msg.reply(message);
   }
   else
   {
@@ -43,7 +43,7 @@ function get_help_message()
 		.addFields(
 			{name: "Ayuda", value: "Hola"},
 			{name: "Diversion", value: "Hola"},
-			{name: "Otros", value: ["Hola", "Chau", "XD"]}
+			{name: "Otros", value: "Hola"}
 		)
 	
 	let message = {embeds: [embed]};
