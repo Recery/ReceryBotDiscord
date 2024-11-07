@@ -57,7 +57,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
 		switch (interaction.values[0])
 		{
-			case "ayuda":
+			case "apoyo":
 				embed_respuesta
 					.setTitle("Categoria: Apoyo")
 					.addFields(
