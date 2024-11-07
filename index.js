@@ -36,7 +36,7 @@ client.on(Events.MessageCreate, (msg) => {
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
-	if (!interaction.isStringSelectMenu()) return;
+	if (!(interaction.isStringSelectMenu() || interaction.isButton)) return;
 
 	if (interaction.customId === "categories_delete")
 	{
