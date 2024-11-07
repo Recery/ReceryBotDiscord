@@ -1,4 +1,4 @@
-const { Client, Events, GatewayIntentBits, Message, EmbedBuilder } = require("discord.js");
+const { Client, Events, GatewayIntentBits, Message, EmbedBuilder, ButtonBuilder } = require("discord.js");
 
 const client = new Client({
   intents: [
@@ -46,7 +46,13 @@ function get_help_message()
 			{name: "Otros", value: "Hola"}
 		)
 	
-	let message = {embeds: [embed]};
+	let button = new ButtonBuilder()
+		.setLabel("Seleccionar categoría");
+
+	let message = {
+		embeds: [embed],
+		components: [button]
+	};
 	return message;
 }
 
