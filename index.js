@@ -40,7 +40,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
 	if (interaction.customId === "categories_delete")
 	{
-		interaction.deleteReply();
+		interaction.message.delete();
 	}
 
 	if (interaction.customId === "categories") 
