@@ -141,12 +141,14 @@ function get_help_message()
 				.setValue("otros"),
 		);
 	
-	const row = new ActionRowBuilder()
-		.addComponents(selection, delete_button);
+	const row1 = new ActionRowBuilder()
+		.addComponents(selection);
+	const row2 = new ActionRowBuilder()
+		.addComponents(delete_button);
 
 	let message = {
 		embeds: [embed],
-		components: [row]
+		components: [row1, row2]
 	};
 	return message;
 }
