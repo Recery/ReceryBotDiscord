@@ -19,4 +19,4 @@ class ReceryInvite extends Command
     }
 }
 
-module.exports = new ReceryInvite("!receryinvite");
+module.exports = new ReceryInvite("!receryinvite", "ayuda");

@@ -19,4 +19,4 @@ class Kofi extends Command
     }
 }
 
-module.exports = new Kofi("!recerykofi");
+module.exports = new Kofi("!recerykofi", "apoyo");

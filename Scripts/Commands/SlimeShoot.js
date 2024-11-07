@@ -19,4 +19,4 @@ class SlimeShoot extends Command
     }
 }
 
-module.exports = new SlimeShoot("!slimeshoot");
+module.exports = new SlimeShoot("!slimeshoot", "apoyo");

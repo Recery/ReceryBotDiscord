@@ -59,6 +59,14 @@ client.on(Events.InteractionCreate, async (interaction) => {
 		{
 			case "ayuda":
 				embed_respuesta
+					.setTitle("Categoria: Apoyo")
+					.addFields(
+						{name: "Estos son los comandos de esta categoría:", value: comandos}
+					);
+				break;
+
+			case "ayuda":
+				embed_respuesta
 					.setTitle("Categoria: Ayuda")
 					.addFields(
 						{name: "Estos son los comandos de esta categoría:", value: comandos}
@@ -73,14 +81,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
 					);
 				break;
 			
-			case "economia":
-				embed_respuesta
-					.setTitle("Categoria: Economía")
-					.addFields(
-						{name: "Estos son los comandos de esta categoría:", value: comandos}
-					);
-				break;
-
 			case "diversion":
 				embed_respuesta
 					.setTitle("Categoria: Diversión")
@@ -89,6 +89,14 @@ client.on(Events.InteractionCreate, async (interaction) => {
 					);
 				break;
 			
+			case "economia":
+				embed_respuesta
+					.setTitle("Categoria: Economía")
+					.addFields(
+						{name: "Estos son los comandos de esta categoría:", value: comandos}
+					);
+				break;
+
 			case "otros":
 				embed_respuesta
 					.setTitle("Categoria: Otros")
@@ -108,10 +116,11 @@ function get_help_message()
 		.setColor("#65a7fc")
 		.setTitle("Comandos de Recery Bot")
 		.addFields(
-			{name: "Ayuda", value: "Comandos que te ayudarán."},
 			{name: "Acción", value: "Comandos para realizar acciones hacia otros miembros o hacia ti mismo."},
-			{name: "Economía", value: "Comandos de la economía de Recery Bot."},
+			{name: "Apoyo", value: "Comandos para apoyar a Recery, mi creador."},
+			{name: "Ayuda", value: "Comandos que te ayudarán."},
 			{name: "Diversion", value: "Comandos para divertirte."},
+			{name: "Economía", value: "Comandos de la economía de Recery Bot."},
 			{name: "Otros", value: "Comandos varios."}
 		)
 
@@ -125,21 +134,25 @@ function get_help_message()
 		.setPlaceholder("Elige una categoría")
 		.addOptions(
 			new StringSelectMenuOptionBuilder()
-				.setLabel("Ayuda")
-				.setDescription("Comandos que te ayudarán.")
-				.setValue("ayuda"),
-			new StringSelectMenuOptionBuilder()
 				.setLabel("Acción")
 				.setDescription("Comandos para realizar acciones hacia otros miembros o hacia ti mismo.")
 				.setValue("accion"),
 			new StringSelectMenuOptionBuilder()
-				.setLabel("Economía")
-				.setDescription("Comandos de la economía de Recery Bot.")
-				.setValue("economia"),
+				.setLabel("Apoyo")
+				.setDescription("Comandos para apoyar a Recery, mi creador.")
+				.setValue("apoyo"),
+			new StringSelectMenuOptionBuilder()
+				.setLabel("Ayuda")
+				.setDescription("Comandos que te ayudarán.")
+				.setValue("ayuda"),
 			new StringSelectMenuOptionBuilder()
 				.setLabel("Diversión")
 				.setDescription("Comandos para divertirte.")
 				.setValue("diversion"),
+			new StringSelectMenuOptionBuilder()
+				.setLabel("Economía")
+				.setDescription("Comandos de la economía de Recery Bot.")
+				.setValue("economia"),
 			new StringSelectMenuOptionBuilder()
 				.setLabel("Otros")
 				.setDescription("Comandos varios.")
