@@ -1,4 +1,4 @@
-const { Client, Events, GatewayIntentBits, Message, EmbedBuilder, ButtonBuilder, ActionRowBuilder } = require("discord.js");
+const { Client, Events, GatewayIntentBits, Message, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle } = require("discord.js");
 
 const client = new Client({
   intents: [
@@ -48,6 +48,7 @@ function get_help_message()
 	
 	const button = new ButtonBuilder()
 		.setLabel("Seleccionar categoría")
+		.setStyle(ButtonStyle.Primary);
 	
 	const row = new ActionRowBuilder()
 		.addComponents(button);
