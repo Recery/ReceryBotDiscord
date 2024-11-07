@@ -24,7 +24,7 @@ client.on(Events.MessageCreate, (msg) => {
       message += command.get_activator() + ", ";
     }
     message = message.slice(0, -2);
-    msg.reply(message);
+    msg.reply(get_help_message());
   }
   else
   {
