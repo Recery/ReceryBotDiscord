@@ -35,6 +35,30 @@ client.on(Events.MessageCreate, (msg) => {
   }
 });
 
+client.on(Events.InteractionCreate, async (interaction) => {
+	if (!interaction.isStringSelectMenu()) return;
+
+	if (interaction.customId === "categories") 
+	{
+		let embed_respuesta = new EmbedBuilder().setColor("#65a7fc");
+
+		switch (interaction.values[0])
+		{
+			case "ayuda":
+				embed_respuesta.setTitle("Categoria: Ayuda")
+				break;
+			case "diversion":
+				embed_respuesta.setTitle("Categoria: Diversión")
+				break;
+			case "otros":
+				embed_respuesta.setTitle("Categoria: Otros")
+				break;
+		}
+	}
+
+	await interaction.update({embeds:[embed_respuesta]});
+})
+
 function get_help_message()
 {
 	let embed = new EmbedBuilder()
@@ -45,11 +69,6 @@ function get_help_message()
 			{name: "Diversion", value: "Hola"},
 			{name: "Otros", value: "Hola"}
 		)
-	
-	const button = new ButtonBuilder()
-		.setCustomId("select_categoria")
-		.setLabel("Seleccionar categoría")
-		.setStyle(ButtonStyle.Primary);
 
 	const selection = new StringSelectMenuBuilder()
 		.setCustomId("categories")
