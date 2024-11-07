@@ -110,6 +110,11 @@ function get_help_message()
 			{name: "Otros", value: "Comandos varios."}
 		)
 
+	const delete_button = new ButtonBuilder()
+		.setCustomId("cancel_button")
+		.setLabel("Cancelar")
+		.setStyle(ButtonStyle.Danger);
+
 	const selection = new StringSelectMenuBuilder()
 		.setCustomId("categories")
 		.setPlaceholder("Elige una categoría")
@@ -137,7 +142,7 @@ function get_help_message()
 		);
 	
 	const row = new ActionRowBuilder()
-		.addComponents(selection);
+		.addComponents(selection, delete_button);
 
 	let message = {
 		embeds: [embed],
