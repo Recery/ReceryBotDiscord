@@ -43,7 +43,7 @@ function get_help_message()
 		.addFields(
 			{name: "Ayuda", value: "Hola"},
 			{name: "Diversion", value: "Hola"},
-			{name: "Otros", value: "Hola"}
+			{name: "Otros", value: ["Hola", "Chau", "XD"]}
 		)
 	
 	let message = {embeds: [embed]};
