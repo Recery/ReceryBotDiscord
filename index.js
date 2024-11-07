@@ -42,16 +42,36 @@ client.on(Events.InteractionCreate, async (interaction) => {
 	{
 		let embed_respuesta = new EmbedBuilder().setColor("#65a7fc");
 
+		let comandos = "";
+		for (const command of available_commands)
+		{
+			comandos += command.get_activator() + "\n";
+		}
+
 		switch (interaction.values[0])
 		{
 			case "ayuda":
-				embed_respuesta.setTitle("Categoria: Ayuda");
+				embed_respuesta
+					.setTitle("Categoria: Ayuda")
+					.addFields(
+						{name: "Estos son los comandos de esta categoría:", value: comandos}
+					);
 				break;
+			
 			case "diversion":
-				embed_respuesta.setTitle("Categoria: Diversión");
+				embed_respuesta
+					.setTitle("Categoria: Diversión")
+					.addFields(
+						{name: "Estos son los comandos de esta categoría:", value: comandos}
+					);
 				break;
+			
 			case "otros":
-				embed_respuesta.setTitle("Categoria: Otros");
+				embed_respuesta
+					.setTitle("Categoria: Otros")
+					.addFields(
+						{name: "Estos son los comandos de esta categoría:", value: comandos}
+					)
 				break;
 		}
 
