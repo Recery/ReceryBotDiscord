@@ -9,4 +9,4 @@ class Decir extends Command
     }
 }
 
-module.exports = new Decir("!decir");
+module.exports = new Decir("!decir", "diversion");

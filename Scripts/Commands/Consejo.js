@@ -16,4 +16,4 @@ class Consejo extends Command
     }
 }
 
-module.exports = new Consejo("!consejo");
+module.exports = new Consejo("!consejo", "ayuda");

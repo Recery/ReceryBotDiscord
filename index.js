@@ -45,6 +45,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
 		let comandos = "";
 		for (const command of available_commands)
 		{
+			if (command.category !== interaction.values[0]) continue;
+			
 			comandos += command.get_activator() + "\n";
 		}
 

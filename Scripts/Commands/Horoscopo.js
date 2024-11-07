@@ -19,4 +19,4 @@ class Horoscopo extends Command
     }
 }
 
-module.exports = new Horoscopo("!horoscopo");
+module.exports = new Horoscopo("!horoscopo", "diversion");

@@ -8,4 +8,4 @@ class ReceryBot extends Command
     }
 }
 
-module.exports = new ReceryBot("!recerybot");
+module.exports = new ReceryBot("!recerybot", "ayuda");

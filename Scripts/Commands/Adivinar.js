@@ -50,4 +50,4 @@ class Adivinar extends Stepped_Command
     }
 }
 
-module.exports = new Adivinar("!adivinar");
+module.exports = new Adivinar("!adivinar", "diversion");

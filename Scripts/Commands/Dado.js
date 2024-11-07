@@ -10,4 +10,4 @@ class Dado extends Command
     }
 }
 
-module.exports = new Dado("!dado");
+module.exports = new Dado("!dado", "diversion");

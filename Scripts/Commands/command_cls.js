@@ -4,7 +4,7 @@ const mysql = require('mysql2/promise')
 
 class Command
 {
-  constructor (init_activator, init_category = "Otros")
+  constructor (init_activator, init_category = "otros")
   {
     this.activator = init_activator;
     this.category = init_category;

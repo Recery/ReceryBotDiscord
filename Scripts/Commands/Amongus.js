@@ -13,4 +13,4 @@ class Amongus extends Command
     }
 }
 
-module.exports = new Amongus("!amongus");
+module.exports = new Amongus("!amongus", "diversion");

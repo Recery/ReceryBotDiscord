@@ -8,4 +8,4 @@ class Illuminati extends Command
     }
 }
 
-module.exports = new Illuminati("!illuminati");
+module.exports = new Illuminati("!illuminati", "diversion");
