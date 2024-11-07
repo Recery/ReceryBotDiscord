@@ -1,4 +1,4 @@
-const { Client, Events, GatewayIntentBits, Message } = require("discord.js");
+const { Client, Events, GatewayIntentBits, Message, EmbedBuilder } = require("discord.js");
 
 const client = new Client({
   intents: [
@@ -24,7 +24,7 @@ client.on(Events.MessageCreate, (msg) => {
       message += command.get_activator() + ", ";
     }
     message = message.slice(0, -2);
-    msg.reply(message);
+    msg.reply(get_help_message());
   }
   else
   {
@@ -34,5 +34,20 @@ client.on(Events.MessageCreate, (msg) => {
     }
   }
 });
+
+function get_help_message()
+{
+	let embed = new EmbedBuilder()
+		.setColor("#65a7fc")
+		.setTitle("Comandos de Recery Bot")
+		.addFields(
+			{name: "Ayuda", value: "Hola"},
+			{name: "Diversion", value: "Hola"},
+			{name: "Otros", value: "Hola"}
+		)
+	
+	let message = {embeds: [embed]};
+	return message;
+}
 
 client.login(process.env.TOKEN);

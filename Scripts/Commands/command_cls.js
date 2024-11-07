@@ -4,9 +4,10 @@ const mysql = require('mysql2/promise')
 
 class Command
 {
-  constructor (init_activator)
+  constructor (init_activator, init_category = "Otros")
   {
     this.activator = init_activator;
+    this.category = init_category;
   }
 
   async check_activation(msg)
