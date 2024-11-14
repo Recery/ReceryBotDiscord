@@ -15,9 +15,9 @@ class Abrazar extends Command
         let embed = new EmbedBuilder()
             .setColor("#65a7fc")
             .setDescription(reply)
-            .setImage("attachment://abrazo1.gif");
+            .setImage("https://i.imgur.com/jJq4LEe.gif");
 
-        msg.reply({ embeds: [embed], files: [{ attachment: this.get_gifs_directory() + "/abrazo1.gif", name: "abrazo1.gif" }]})
+        msg.reply({ embeds: [embed]})
     }
 }
 
