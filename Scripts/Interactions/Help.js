@@ -1,6 +1,8 @@
 const InteractionContent = require("./interaction_content_cls.js")
 const { EmbedBuilder } = require("discord.js")
 
+const available_commands = require("../available_commands.js")
+
 class Help extends InteractionContent {
 
     async execution(interaction)
