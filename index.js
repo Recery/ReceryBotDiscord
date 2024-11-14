@@ -12,7 +12,10 @@ const available_commands = require("./Scripts/available_commands.js")
 const available_interactions = require("./Scripts/available_interactions.js")
 
 client.once(Events.ClientReady, (readyClient) => {
-  console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+	for (const command of available_commands)
+		command.set_client(client);
+
+	console.log(`El bot inició correctamente como ${readyClient.user.tag}.`);
 });
 
 client.on(Events.MessageCreate, (msg) => {

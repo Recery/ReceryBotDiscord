@@ -30,6 +30,25 @@ class Command
     }
   }
 
+  set_client(new_client)
+  {
+    this.client = new_client;
+  }
+
+  async get_username(id)
+  {
+    try
+    {
+      const user = await this.client.users.fetch(id);
+      return user.username;
+    }
+    catch (error)
+    {
+      console.error("No se pudo obtener el usuario.");
+      return "Usuario no válido.";
+    }
+  }
+
   get_activator()
   {
     return this.activator;
