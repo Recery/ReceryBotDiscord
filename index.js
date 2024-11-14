@@ -9,6 +9,7 @@ const client = new Client({
 });
 
 const available_commands = require("./Scripts/available_commands.js")
+const available_interactions = require("./Scripts/available_interactions.js")
 
 client.once(Events.ClientReady, (readyClient) => {
   console.log(`Ready! Logged in as ${readyClient.user.tag}`);
@@ -36,77 +37,10 @@ client.on(Events.MessageCreate, (msg) => {
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
-	if (!(interaction.isStringSelectMenu() || interaction.isButton)) return;
-
-	if (interaction.customId === "categories_delete")
+	for (const interaction_content of available_interactions)
 	{
-		interaction.message.delete();
-	}
-
-	if (interaction.customId === "categories") 
-	{
-		let embed_respuesta = new EmbedBuilder().setColor("#65a7fc");
-
-		let comandos = "";
-		for (const command of available_commands)
-		{
-			if (command.category !== interaction.values[0]) continue;
-
-			comandos += command.get_activator() + "\n";
-		}
-
-		switch (interaction.values[0])
-		{
-			case "apoyo":
-				embed_respuesta
-					.setTitle("Categoria: Apoyo")
-					.addFields(
-						{name: "Estos son los comandos de esta categoría:", value: comandos}
-					);
-				break;
-
-			case "ayuda":
-				embed_respuesta
-					.setTitle("Categoria: Ayuda")
-					.addFields(
-						{name: "Estos son los comandos de esta categoría:", value: comandos}
-					);
-				break;
-			
-			case "accion":
-				embed_respuesta
-					.setTitle("Categoria: Acción")
-					.addFields(
-						{name: "Estos son los comandos de esta categoría:", value: comandos}
-					);
-				break;
-			
-			case "diversion":
-				embed_respuesta
-					.setTitle("Categoria: Diversión")
-					.addFields(
-						{name: "Estos son los comandos de esta categoría:", value: comandos}
-					);
-				break;
-			
-			case "economia":
-				embed_respuesta
-					.setTitle("Categoria: Economía")
-					.addFields(
-						{name: "Estos son los comandos de esta categoría:", value: comandos}
-					);
-				break;
-
-			case "otros":
-				embed_respuesta
-					.setTitle("Categoria: Otros")
-					.addFields(
-						{name: "Estos son los comandos de esta categoría:", value: comandos}
-					)
-				break;
-		}
-
-		await interaction.update({embeds:[embed_respuesta]});
+		if (interaction_content.check_activation(interaction.customId))
+			interaction_content.execution(interaction);
 	}
 });
 
