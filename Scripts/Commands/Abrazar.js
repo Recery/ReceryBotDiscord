@@ -8,7 +8,7 @@ class Abrazar extends Command
         let reply = "";
 
         if (this.get_content(msg) !== "")
-            reply = `¡**${this.get_mention(msg)}** le dio un abrazo **${this.get_content(msg)}**!.`
+            reply = `¡**${this.get_mention(msg)}** le dio un abrazo **${this.get_content(msg)}**!`
         else
             reply = `**${this.get_mention(msg)}** se dio un abrazo a si mism@... ¿Cómo es eso posible?`
 
