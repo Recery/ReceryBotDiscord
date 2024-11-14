@@ -35,13 +35,15 @@ class Command
     this.client = new_client;
   }
 
-  async get_username(id)
+  async get_username(id, msg)
   {
     console.log(id)
+
     try
     {
-      const user = await this.client.users.fetch(id);
-      return user.username;
+      const user = await msg.guild.members.fetch(id);
+      const display_name = user.nickname || user.user.username;
+      return display_name;
     }
     catch (error)
     {

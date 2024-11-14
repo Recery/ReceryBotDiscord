@@ -5,9 +5,9 @@ class Rociar extends Command
     async execution(msg)
     {
         if (this.get_content(msg) !== "")
-            msg.reply(`${await this.get_username(msg.author.id)} roció a ${await this.get_username(msg.mentions.users.first().id)}... ¿Con qué sustancia? No lo sabemos.`);
+            msg.reply(`**${await this.get_username(msg.author.id)}** roció a **${await this.get_username(msg.mentions.users.first().id, msg)}**... ¿Con qué sustancia? No lo sabemos.`);
         else
-            msg.reply(`${await this.get_username(msg.author.id)} acabó de autorociarse... ¿Con agua? ¿Quizás tenía calor?`)
+            msg.reply(`**${await this.get_username(msg.author.id)}** acabó de autorociarse... ¿Con agua? ¿Quizás tenía calor?`)
     }
 }
 
