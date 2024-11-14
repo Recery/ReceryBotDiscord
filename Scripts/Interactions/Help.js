@@ -46,3 +46,5 @@ class Help extends InteractionContent {
 		await interaction.update({embeds:[embed_respuesta]});
     }
 }
+
+module.exports = new Help("categories")
