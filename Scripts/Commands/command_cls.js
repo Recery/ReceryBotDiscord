@@ -42,13 +42,13 @@ class Command
     try
     {
       const user = await msg.guild.members.fetch(id);
-      const display_name = user.nickname || user.user.username;
+      const display_name = user.nickname;
       return display_name;
     }
     catch (error)
     {
       console.error("No se pudo obtener el usuario.");
-      return "Usuario no válido.";
+      return "Usuario no válido";
     }
   }
 
