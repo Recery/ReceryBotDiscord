@@ -49,4 +49,4 @@ class Help extends InteractionContent {
     }
 }
 
-module.exports = new Help("categories")
+module.exports = new Help("help_categories_sel")

@@ -59,12 +59,12 @@ function get_help_message()
 		)
 
 	const delete_button = new ButtonBuilder()
-		.setCustomId("categories_delete")
+		.setCustomId("delete")
 		.setLabel("Cancelar")
 		.setStyle(ButtonStyle.Danger);
 
 	const selection = new StringSelectMenuBuilder()
-		.setCustomId("categories")
+		.setCustomId("help_categories_sel")
 		.setPlaceholder("Elige una categoría")
 		.addOptions(
 			new StringSelectMenuOptionBuilder()
