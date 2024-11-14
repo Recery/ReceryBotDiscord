@@ -6,7 +6,7 @@ const interactions_files = fs.readdirSync(interactions_path).filter(file => file
 
 const availables_interactions = [];
 
-for (const file of command_files) {
+for (const file of interactions_files) {
     if (file != "interaction_content_cls.js" && file != "stepped_command_cls.js")
     {
         const interaction = require(`./Interactions/${file}`);
