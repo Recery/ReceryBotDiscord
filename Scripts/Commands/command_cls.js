@@ -37,6 +37,7 @@ class Command
 
   async get_username(id)
   {
+    console.log(id)
     try
     {
       const user = await this.client.users.fetch(id);
