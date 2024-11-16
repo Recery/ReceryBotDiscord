@@ -83,7 +83,57 @@ class Item
         return true;
     }
 
-    use(){}
+    async use(msg)
+    {
+        const conex = await mysql.createConnection({
+            uri: process.env.db,
+            ssl: {rejectUnauthorized: false}
+        });
+
+        const [rows] = await conex.execute('SELECT * FROM users_bags');
+
+        let new_bag = [];
+
+        for (const row of rows)
+        {
+            if (row.mention === mention) // El usuario que uso el comando es este
+            {
+                let has_item = false;
+                let items = row.items.split(";");
+
+                for (const item of items)
+                {
+                    let [id, amount] = item.split(":").map(Number);
+
+                    if (amount <= 0) continue; // no hay de ese item, no hay que agregarlo a la mochila
+
+                    if (id === Number(this.id))
+                    {
+                        has_item = true;
+                        if (amount - 1 > 0)
+                            new_bag.push(`${id}:${amount-1}`);
+                    }
+                    else new_bag.push(item);
+                }
+
+                await conex.execute(`UPDATE users_bags SET items = ? WHERE id = ?`, [new_bag.join(";"), row.id]);
+                break;
+            }
+        }
+
+        conex.end();
+
+        if (has_item)
+            this.use_effects(msg);
+        else msg.reply("No tienes ese item.");
+
+        return true;
+    }
+
+    use_effects(msg)
+    {
+        msg.reply(`Usaste el item ${this.name} ${this.emote}`)
+    }
 }
 
 module.exports = Item;
