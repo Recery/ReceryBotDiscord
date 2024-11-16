@@ -9,7 +9,7 @@ class Kofi extends Command
             .setColor("#ffffff")
             .setTitle("¡Click aquí para ir al Ko-fi de Recery!")
             .setURL("https://ko-fi.com/recery")
-            .setDescription(`${this.get_mention(msg)}, ¿Querés donarle a mi creador? ¡Hace click en el link de arriba!`)
+            .setDescription(`${this.get_mention(msg)}, ¿Querés donarle a mi creador? ¡Hace click en el link de arriba! \n **(Por favor ayudame a seguir con vida, estoy por morirme :sob:)**`)
             .setImage("attachment://Recery.png");
 
         msg.reply({
