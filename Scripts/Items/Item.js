@@ -83,7 +83,7 @@ class Item
         return true;
     }
 
-    async use(msg)
+    async use(mention)
     {
         const conex = await mysql.createConnection({
             uri: process.env.db,
@@ -93,12 +93,12 @@ class Item
         const [rows] = await conex.execute('SELECT * FROM users_bags');
 
         let new_bag = [];
+        let has_item = false;
 
         for (const row of rows)
         {
             if (row.mention === mention) // El usuario que uso el comando es este
             {
-                let has_item = false;
                 let items = row.items.split(";");
 
                 for (const item of items)
@@ -122,12 +122,7 @@ class Item
         }
 
         conex.end();
-
-        if (has_item)
-            this.use_effects(msg);
-        else msg.reply("No tienes ese item.");
-
-        return true;
+        return has_item;
     }
 
     use_effects(msg)
