@@ -78,6 +78,7 @@ class Command
 
   async add_command_used(msg)
   {
+    return;
     const conex = await mysql.createConnection({
       uri: process.env.db,
       ssl: {rejectUnauthorized: false}
