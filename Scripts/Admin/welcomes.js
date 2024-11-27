@@ -8,7 +8,7 @@ function get_welcomes_settings()
     return db.prepare("SELECT * FROM welcomes").all();;
 }
 
-function check_welcomes(member)
+function check_welcomes(member, client)
 {
     for (const setting of get_welcomes_settings())
     {
@@ -43,7 +43,7 @@ async function execute_welcome(setting, member)
 
 	const attachment = new AttachmentBuilder(canvas.toBuffer(), "avatar.png")
 
-	client.channels.cache.get(setting.channelid).send({files:[attachment]})
+	member.guild.channels.cache.get(setting.channelid).send({files: [attachment]})
 }
 
 module.exports = 
