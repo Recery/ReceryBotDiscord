@@ -10,7 +10,7 @@ class Avatar extends Command
         const ctx = canvas.getContext("2d");
 
         const img = await Canvas.loadImage(
-            msg.author.displayAvatarURL({size: 1024, dynamic: true, format: "png"})
+            msg.author.displayAvatarURL({format: "png", size: 120})
         );
         ctx.drawImage(img, 50, 50, 160, 160);
 
