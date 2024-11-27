@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 const { Client, Events, GatewayIntentBits, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
 
 const client = new Client({
@@ -9,6 +8,8 @@ const client = new Client({
     GatewayIntentBits.GuildMessages
   ],
 });
+
+const Canvas = require("canvas")
 
 const available_commands = require("./Scripts/available_commands.js")
 const available_interactions = require("./Scripts/available_interactions.js")
@@ -48,6 +49,31 @@ client.on(Events.InteractionCreate, async (interaction) => {
 			interaction_content.execution(interaction);
 	}
 });
+
+client.on("guildMemberAdd", async (member) => {
+	const canvas = Canvas.createCanvas(800,240);
+	const ctx = canvas.getContext("2d");
+
+	const background = await Canvas.loadImage("https://i.imgur.com/R5z3Xn9.jpeg")
+	ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
+
+	const img = await Canvas.loadImage(
+		member.displayAvatarURL({extension: "png", size: 128})
+	);
+	ctx.drawImage(img, 40, 40, 160, 160);
+
+	ctx.font = '50px "Arial"'
+	ctx.fillStyle = "#ffffff"
+	ctx.fillText("¡Bienvenido al server!", 260, 90)
+
+	ctx.font = '60px "Arial"'
+	ctx.fillStyle = "#ff7700"
+	ctx.fillText(`${member.user.username}`, 300, 170)
+
+	const attachment = new AttachmentBuilder(canvas.toBuffer(), "avatar.png")
+
+	client.channels.cache.get("1311085473657127016").send({files:[attachment]})
+})
 
 function get_help_message()
 {
