@@ -13,7 +13,7 @@ class Bienvenida extends Command
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
 
         const img = await Canvas.loadImage(
-            msg.author.displayAvatarURL({extension: "png", size: 128})
+            msg.author.displayAvatarURL({extension: "png", size: 1024})
         );
         ctx.drawImage(img, 40, 40, 160, 160);
 
