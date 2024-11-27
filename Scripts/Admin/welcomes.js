@@ -39,7 +39,7 @@ async function execute_welcome(setting, member)
 
 	ctx.font = '60px "Arial"'
 	ctx.fillStyle = "#ff7700"
-	ctx.fillText(`${member.user.username}`, 300, 170)
+	ctx.fillText(`${member.user.username}`, 260, 170)
 
     const attachment = new AttachmentBuilder(canvas.toBuffer(), {name: "bienvenidarecery.png"})
 
