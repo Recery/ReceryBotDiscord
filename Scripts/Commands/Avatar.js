@@ -19,7 +19,7 @@ class Bienvenida extends Command
 
         ctx.font = "50px Arial"
         ctx.fillStyle = "#ffffff"
-        ctx.fillText("¡Bienvenido al server!", 280, 90)
+        ctx.fillText("¡Bienvenido al server!", 260, 90)
 
         ctx.font = "60px Arial"
         ctx.fillStyle = "#ff7700"
