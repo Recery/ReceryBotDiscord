@@ -21,6 +21,7 @@ client.once(Events.ClientReady, (readyClient) => {
 });
 
 client.on(Events.MessageCreate, (msg) => {
+	console.log(msg.author.avatar);
   if (msg.content === "!receryhelp")
   {
     var message = "Comandos de Recery Bot: \n"
