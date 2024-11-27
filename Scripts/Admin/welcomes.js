@@ -36,7 +36,7 @@ async function execute_welcome(setting, member)
 	ctx.font = '50px "Arial"'
 	ctx.fillStyle = "#ffffff"
 	ctx.fillText(setting.message, 260, 90)
-
+    <@716390085896962058>
 	ctx.font = '60px "Arial"'
 	ctx.fillStyle = "#ff7700"
 	ctx.fillText(`${member.user.username}`, 300, 170)
@@ -45,13 +45,13 @@ async function execute_welcome(setting, member)
 
     const embed = new EmbedBuilder()
         .setTitle(`¡Bienvenid@ ${member.user.username} al Estanque de Recery!`)
-        .setDescription(`:ReceryBot:¡Ha nacido un alevin! :ReceryBot:\n
+        .setDescription(`<:ReceryBot:1311098123191455784>¡Ha nacido un alevin!<:ReceryBot:1311098123191455784>\n
             Bienvenido al estanque, pequeño pez.\n
             Aquí puedes hacer muchas cosas acuáticas como:\n\n
-            - Hablar con otros peces del cardumen en:Flechita: <#1311068785737990307>\n
-            - Obtener tu rol de color en:Flechita: <#1311095086716682372>\n
-            - Mostrar tus dibujos y arte en:Flechita: <#1311075810953662474>\n
-            - Interactuar con nuestro asistente pez robótico en:Flechita: <#1311077612961140747>\n\n
+            - Hablar con otros peces del cardumen en<a:Flechita:1311181180653142129> <#1311068785737990307>\n
+            - Obtener tu rol de color en<a:Flechita:1311181180653142129> <#1311095086716682372>\n
+            - Mostrar tus dibujos y arte en<a:Flechita:1311181180653142129> <#1311075810953662474>\n
+            - Interactuar con nuestro asistente pez robótico en<a:Flechita:1311181180653142129> <#1311077612961140747>\n\n
             ¡Que nades bien!`)
         .setImage("attachment://bienvenidarecery.png")
 
