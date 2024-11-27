@@ -19,11 +19,11 @@ class Bienvenida extends Command
 
         ctx.font = "50px Arial"
         ctx.fillStyle = "#ffffff"
-        ctx.fillText("¡Bienvenido al server!", 400, 90)
+        ctx.fillText("¡Bienvenido al server!", 320, 90)
 
         ctx.font = "60px Arial"
         ctx.fillStyle = "#ff7700"
-        ctx.fillText(`${msg.author.username}`, 400, 170)
+        ctx.fillText(`${msg.author.username}`, 320, 170)
 
         const attachment = new AttachmentBuilder(canvas.toBuffer(), "avatar.png")
 
