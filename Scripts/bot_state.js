@@ -59,7 +59,7 @@ function get_green_apples(mention)
     let green_apples = 0;
     let id = 0;
 
-    const [rows] = db.prepare('SELECT * FROM green_apples').all();
+    const rows = db.prepare('SELECT * FROM green_apples').all() || [];
     for (const row of rows)
     {
         if (mention === row.username)
