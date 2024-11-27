@@ -14,8 +14,8 @@ class Avatar extends Command
         );
         ctx.drawImage(img, 50, 50, 160, 160);
 
-        ctx.font = "20px Impact"
-        ctx.fillStyle = "#f0f0f0"
+        ctx.font = "20px Arial"
+        ctx.fillStyle = "#ffffff"
         ctx.fillText = (`${msg.author.username}`, 400, 120)
 
         const attachment = new AttachmentBuilder(canvas.toBuffer(), "avatar.png")
