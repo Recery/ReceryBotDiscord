@@ -20,7 +20,8 @@ function modify_green_apples(mention, amount)
     let id = 0;
     let add_row = true;
 
-    const [rows] = db.prepare('SELECT * FROM green_apples').all();
+    const [rows] = db.prepare('SELECT * FROM green_apples').all() || [];
+
     for (const row of rows)
     {
         if (mention === row.user)
