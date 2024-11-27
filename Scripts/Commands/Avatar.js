@@ -2,7 +2,7 @@ const Command = require("./command_cls.js")
 const Canvas = require("canvas")
 const { AttachmentBuilder } = require("discord.js");
 
-class Avatar extends Command
+class Bienvenida extends Command
 {
     async execution(msg)
     {
@@ -19,7 +19,11 @@ class Avatar extends Command
 
         ctx.font = "30px Arial"
         ctx.fillStyle = "#ffffff"
-        ctx.fillText(`${msg.author.username}`, 400, 120)
+        ctx.fillText("¡Bienvenido al server!", 400, 75)
+
+        ctx.font = "40px Arial"
+        ctx.fillStyle = "#4a65ff"
+        ctx.fillText(`${msg.author.username}`, 400, 125)
 
         const attachment = new AttachmentBuilder(canvas.toBuffer(), "avatar.png")
 
@@ -31,4 +35,4 @@ class Avatar extends Command
     }
 }
 
-module.exports = new Avatar("!avatar", "diversion");
+module.exports = new Bienvenida("!bienvenida", "diversion");
