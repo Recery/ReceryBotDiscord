@@ -1,4 +1,4 @@
-const { AttachmentBuilder } = require("discord.js")
+const { AttachmentBuilder, EmbedBuilder } = require("discord.js")
 const DB = require("better-sqlite3");
 const Canvas = require("canvas");
 
@@ -41,12 +41,45 @@ async function execute_welcome(setting, member)
 	ctx.fillStyle = "#ff7700"
 	ctx.fillText(`${member.user.username}`, 300, 170)
 
-	const attachment = new AttachmentBuilder(canvas.toBuffer(), "avatar.png")
+    const embed = new EmbedBuilder()
+        .setTitle(`¡Bienvenid@ ${member.user.username} al Estanque de Recery!`)
+        .setDescription(`:ReceryBot:¡Ha nacido un alevin! :ReceryBot:\n
+            Bienvenido al estanque, pequeño pez.\n
+            Aquí puedes hacer muchas cosas acuáticas como:\n\n
+            - Hablar con otros peces del cardumen en:Flechita: <#1311068785737990307>\n
+            - Obtener tu rol de color en:Flechita: <#1311095086716682372>\n
+            - Mostrar tus dibujos y arte en:Flechita: <#1311075810953662474>\n
+            - Interactuar con nuestro asistente pez robótico en:Flechita: <#1311077612961140747>\n\n
+            ¡Que nades bien!`)
+        .setImage(canvas.toURL())
 
-	member.guild.channels.cache.get(setting.channelid).send({files: [attachment]})
+	member.guild.channels.cache.get(setting.channelid).send({
+        embeds: [embed]
+    })
 }
 
 module.exports = 
 {
     check_welcomes
 }
+
+/*
+¡ Bienvenid@ Pokétwo al Estanque de Recery !
+:ReceryBot:¡Ha nacido un alevin! :ReceryBot:
+Bienvenido al estanque, usuario.
+Aquí puedes hacer muchas cosas acuáticas como:
+
+Hablar con otros peces del cardumen en:Flechita:
+
+⁠╭₊˚✦‧˚꒰💬꒱⋆charla-general
+Obtener tu rol de color en:Flechita:
+⁠┊₊˚✦‧˚꒰📚꒱⋆roles
+Mostrar tus dibujos y arte en:Flechita: 
+⁠┊₊˚✦‧˚꒰🎨꒱⋆arte
+Interactuar con nuestro asistente pez robótico en:Flechita:
+
+    ⁠╭₊˚✦‧˚꒰🍏꒱⋆recery-bot
+
+
+¡Que nades bien!
+*/
