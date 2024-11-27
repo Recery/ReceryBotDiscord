@@ -45,7 +45,7 @@ function modify_green_apples(mention, amount)
         }
         catch(error)
         {
-            console.error("el error": error)
+            console.error("el error: ", error)
         }
     }
 
