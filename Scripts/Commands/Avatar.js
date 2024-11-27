@@ -1,6 +1,6 @@
 const Command = require("./command_cls.js")
 const Canvas = require("canvas")
-const { MessageAttachment } = require("discord.js");
+const { Attachment } = require("discord.js");
 
 class Avatar extends Command
 {
