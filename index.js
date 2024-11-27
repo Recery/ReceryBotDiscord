@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { Client, Events, GatewayIntentBits, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
+const { Client, Events, GatewayIntentBits, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, StringSelectMenuBuilder, AttachmentBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
 
 const client = new Client({
   intents: [
@@ -51,6 +51,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 });
 
 client.on("guildMemberAdd", async (member) => {
+	console.log("entro");
 	const canvas = Canvas.createCanvas(800,240);
 	const ctx = canvas.getContext("2d");
 
