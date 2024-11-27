@@ -17,13 +17,13 @@ class Bienvenida extends Command
         );
         ctx.drawImage(img, 50, 50, 160, 160);
 
-        ctx.font = "30px Arial"
+        ctx.font = "50px Arial"
         ctx.fillStyle = "#ffffff"
-        ctx.fillText("¡Bienvenido al server!", 400, 100)
+        ctx.fillText("¡Bienvenido al server!", 400, 90)
 
-        ctx.font = "40px Arial"
-        ctx.fillStyle = "#4a65ff"
-        ctx.fillText(`${msg.author.username}`, 400, 150)
+        ctx.font = "60px Arial"
+        ctx.fillStyle = "#ff7700"
+        ctx.fillText(`${msg.author.username}`, 400, 170)
 
         const attachment = new AttachmentBuilder(canvas.toBuffer(), "avatar.png")
 
