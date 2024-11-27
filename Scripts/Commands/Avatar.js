@@ -14,7 +14,7 @@ class Avatar extends Command
         );
         ctx.drawImage(img, 50, 50, 160, 160);
 
-        ctx.font = "20px impact"
+        ctx.font = "20px Impact"
         ctx.fillStyle = "#f0f0f0"
         ctx.fillText = (`${msg.author.username}`, 400, 120)
 
