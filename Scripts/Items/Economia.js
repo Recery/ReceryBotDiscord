@@ -1,18 +1,18 @@
 /// Metodos utiles de economia
 const DB = require("better-sqlite3");
-const ListaItems = require(process.cwd() + "/Scripts/Items/ListaItems");
+const ListaItems = require(process.cwd() + "/Scripts/Items/ListaItems.js");
 
 // Devuelve un array con todos los items de un usuario
 async function get_items(mention)
 {
     const db = new DB(process.env.ECONOMY_DB_PATH);
 
-    const [rows] = db.prepare('SELECT * FROM bags').all();
+    const rows = db.prepare('SELECT * FROM bags').all() || [];
 
     let bag = [];
     for (const row of rows)
     {
-        if (row.user === mention)
+        if (row.username === mention)
         {
             let items = row.items.split(";");
             for (const item in items) bag.push(item);
@@ -27,12 +27,12 @@ async function get_items_nice(mention)
 {
     const db = new DB(process.env.ECONOMY_DB_PATH);
 
-    const [rows] = db.prepare('SELECT * FROM bags').all();
+    const rows = db.prepare('SELECT * FROM bags').all() || [];
 
     let bag = [];
     for (const row of rows)
     {
-        if (row.user === mention)
+        if (row.username === mention)
         {
             let items = row.items.split(";");
             for (const item of items)

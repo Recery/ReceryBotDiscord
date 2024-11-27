@@ -40,7 +40,7 @@ class Item
         // Añadir el item a la mochila
         const db = new DB(process.env.ECONOMY_DB_PATH)
 
-        const [rows] = db.prepare('SELECT * FROM users_bags').all();
+        const rows = db.prepare('SELECT * FROM users_bags').all() || [];
 
         let add_row = true;
         let new_bag = [];
@@ -63,7 +63,7 @@ class Item
                     else new_bag.push(item);
                 }
                 if (!has_item) new_bag.push(`${this.id}:1`)
-                db.prepare(`UPDATE bags SET items = ? WHERE id = ?`, [new_bag.join(";"), row.id]).run();
+                db.prepare(`UPDATE bags SET items = ? WHERE id = ?`).run(new_bag.join(";"), row.id);
 
                 add_row = false;
                 break;
@@ -72,7 +72,7 @@ class Item
 
         if (add_row)
         {
-            db.prepare('INSERT INTO bags (username, items) VALUES (?, ?)', [mention, `${this.id}:1`]).run();
+            db.prepare('INSERT INTO bags (username, items) VALUES (?, ?)').run(mention, `${this.id}:1`);
         }
 
         return true;
@@ -82,7 +82,7 @@ class Item
     {
         const db = new DB(process.env.ECONOMY_DB_PATH)
 
-        const [rows] = db.prepare('SELECT * FROM bags').all();
+        const rows = db.prepare('SELECT * FROM bags').all() || [];
 
         let new_bag = [];
         let has_item = false;
@@ -108,7 +108,7 @@ class Item
                     else new_bag.push(item);
                 }
 
-                db.prepare(`UPDATE bags SET items = ? WHERE id = ?`, [new_bag.join(";"), row.id]).run();
+                db.prepare(`UPDATE bags SET items = ? WHERE id = ?`).run(new_bag.join(";"), row.id);
                 break;
             }
         }
