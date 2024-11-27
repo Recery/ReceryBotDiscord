@@ -28,9 +28,9 @@ class prueba extends Command
             .setDescription(`<:ReceryBot:1311098123191455784>¡Ha nacido un alevin!<:ReceryBot:1311098123191455784>
                 Bienvenido al estanque, pequeño pez.
                 Aquí puedes hacer muchas cosas acuáticas como:
-                - Hablar con otros peces del cardumen en<a:Flechita:1311181180653142129> <#1311068785737990307> 
-                - Obtener tu rol de color en<a:Flechita:1311181180653142129> <#1311095086716682372> 
-                - Mostrar tus dibujos y arte en<a:Flechita:1311181180653142129> <#1311075810953662474> 
+                - Hablar con otros peces del cardumen en<a:Flechita:1311181180653142129> <#1311068785737990307>        
+                - Obtener tu rol de color en<a:Flechita:1311181180653142129> <#1311095086716682372>         
+                - Mostrar tus dibujos y arte en<a:Flechita:1311181180653142129> <#1311075810953662474>       
                 - Interactuar con nuestro asistente pez robótico en<a:Flechita:1311181180653142129> <#1311077612961140747>\n
                 ¡Que nades bien!`)
             .setImage("attachment://bienvenidarecery.png")
