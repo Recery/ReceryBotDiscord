@@ -41,7 +41,7 @@ async function execute_welcome(setting, member)
 	ctx.fillStyle = "#ff7700"
 	ctx.fillText(`${member.user.username}`, 300, 170)
 
-    const attachment = new AttachmentBuilder(canvas.toBuffer(), "bienvenidarecery.png")
+    const attachment = new AttachmentBuilder(canvas.toBuffer(), {name: "bienvenidarecery.png"})
 
     const embed = new EmbedBuilder()
         .setTitle(`¡Bienvenid@ ${member.user.username} al Estanque de Recery!`)
