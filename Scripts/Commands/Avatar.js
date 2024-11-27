@@ -9,7 +9,7 @@ class Avatar extends Command
         const canvas = Canvas.createCanvas(800,240);
         const ctx = canvas.getContext("2d");
 
-        const background = await Canvas.loadImage("https://imgur.com/R5z3Xn9")
+        const background = await Canvas.loadImage("https://i.imgur.com/R5z3Xn9.jpeg")
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
 
         const img = await Canvas.loadImage(
