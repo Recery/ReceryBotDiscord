@@ -39,6 +39,8 @@ function modify_green_apples(mention, amount)
 
     if (add_row)
     {
+        console.log(mention)
+        console.log(amount)
         db.prepare('INSERT INTO green_apples (username, apples) VALUES (?, ?)', [mention, amount]).run();
         green_apples = amount;
     }
