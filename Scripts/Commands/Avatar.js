@@ -1,5 +1,6 @@
 const Command = require("./command_cls.js")
 const Canvas = require("canvas")
+const { MessageAttachment } = require("discord.js");
 
 class Avatar extends Command
 {
@@ -10,6 +11,8 @@ class Avatar extends Command
 
         const img = await Canvas.loadImage(msg.author.avatarURL());
         ctx.drawImage(img, 50, 50, 160, 160);
+
+        const attachment = new MessageAttachment(canvas.toBuffer(), "avatar.png")
 
         msg.reply(
         {
