@@ -45,6 +45,7 @@ async function execute_welcome(setting, member)
 
     console.log(setting.embedmsg)
     const embed = new EmbedBuilder()
+        .setColor("#65a7fc")
         .setTitle(`¡Bienvenid@ ${member.user.username} al Estanque de Recery!`)
         .setDescription(setting.embedmsg)
         .setImage("attachment://bienvenidarecery.png")
