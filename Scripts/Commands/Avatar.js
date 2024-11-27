@@ -14,7 +14,7 @@ class Avatar extends Command
         );
         ctx.drawImage(img, 50, 50, 160, 160);
 
-        const attachment = new MessageAttachment(canvas.toBuffer(), "avatar.png")
+        const attachment = new Attachment(canvas.toBuffer(), "avatar.png")
 
         msg.reply(
         {
