@@ -39,10 +39,14 @@ function modify_green_apples(mention, amount)
 
     if (add_row)
     {
-        console.log(mention)
-        console.log(amount)
-        db.prepare('INSERT INTO green_apples (username, apples) VALUES (?, ?)', [mention, amount]).run();
-        green_apples = amount;
+        try {
+            db.prepare('INSERT INTO green_apples (username, apples) VALUES (?, ?)', [mention, amount]).run();
+            green_apples = amount;
+        }
+        catch(error)
+        {
+            console.error("el error": error)
+        }
     }
 
     return green_apples;
