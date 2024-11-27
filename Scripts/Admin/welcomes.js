@@ -52,6 +52,7 @@ async function execute_welcome(setting, member)
         .setImage("attachment://bienvenidarecery.png")
 
 	member.guild.channels.cache.get(setting.channelid).send({
+        content: "¡Un nuevo usuario!",
         embeds: [embed],
         files: [attachment]
     })
