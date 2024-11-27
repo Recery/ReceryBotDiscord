@@ -17,11 +17,11 @@ class Bienvenida extends Command
         );
         ctx.drawImage(img, 40, 40, 160, 160);
 
-        ctx.font = "50px DejaVu Sans"
+        ctx.font = "50px Impact"
         ctx.fillStyle = "#ffffff"
         ctx.fillText("¡Bienvenido al server!", 260, 90)
 
-        ctx.font = "60px DejaVu Sans"
+        ctx.font = "60px Impact"
         ctx.fillStyle = "#ff7700"
         ctx.fillText(`${msg.author.username}`, 300, 170)
 
