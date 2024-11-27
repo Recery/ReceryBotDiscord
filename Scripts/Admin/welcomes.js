@@ -36,7 +36,7 @@ async function execute_welcome(setting, member)
 	ctx.font = '50px "Arial"'
 	ctx.fillStyle = "#ffffff"
 	ctx.fillText(setting.message, 260, 90)
-    <@716390085896962058>
+    
 	ctx.font = '60px "Arial"'
 	ctx.fillStyle = "#ff7700"
 	ctx.fillText(`${member.user.username}`, 300, 170)
