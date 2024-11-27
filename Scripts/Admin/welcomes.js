@@ -35,7 +35,7 @@ async function execute_welcome(setting, member)
 
 	ctx.font = '50px "Arial"'
 	ctx.fillStyle = "#ffffff"
-	ctx.fillText(setting.message, 260, 90)
+	ctx.fillText(setting.imgmsg, 260, 90)
 
 	ctx.font = '60px "Arial"'
 	ctx.fillStyle = "#ff7700"
@@ -43,6 +43,7 @@ async function execute_welcome(setting, member)
 
     const attachment = new AttachmentBuilder(canvas.toBuffer(), {name: "bienvenidarecery.png"})
 
+    console.log(setting.embedmsg)
     const embed = new EmbedBuilder()
         .setTitle(`¡Bienvenid@ ${member.user.username} al Estanque de Recery!`)
         .setDescription(setting.embedmsg)
