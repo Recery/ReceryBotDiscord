@@ -25,7 +25,7 @@ async function execute_welcome(setting, member)
 	const canvas = Canvas.createCanvas(800,240);
 	const ctx = canvas.getContext("2d");
 
-	const background = await Canvas.loadImage("https://i.imgur.com/R5z3Xn9.jpeg")
+	const background = await Canvas.loadImage(setting.imgsrc)
 	ctx.drawImage(background, 0, 0, canvas.width, canvas.height)
 
 	const img = await Canvas.loadImage(
@@ -35,7 +35,7 @@ async function execute_welcome(setting, member)
 
 	ctx.font = '50px "Arial"'
 	ctx.fillStyle = "#ffffff"
-	ctx.fillText("¡Bienvenido al server!", 260, 90)
+	ctx.fillText(setting.message, 260, 90)
 
 	ctx.font = '60px "Arial"'
 	ctx.fillStyle = "#ff7700"
