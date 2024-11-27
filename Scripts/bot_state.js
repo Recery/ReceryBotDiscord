@@ -1,4 +1,4 @@
-const mysql = require('mysql2/promise')
+const DB = require("better-sqlite3")
 
 // Todo lo de si el bot está dormido
 let asleep = false 
@@ -12,27 +12,24 @@ function get_asleep()
 }
 // ------- //
 
-async function modify_green_apples(mention, amount)
+function modify_green_apples(mention, amount)
 {
-    const conex = await mysql.createConnection({
-        uri: process.env.db,
-        ssl: {rejectUnauthorized: false}
-    });
+    const db = new DB(process.env.ECONOMY_DB_PATH);
 
     let green_apples = 0;
     let id = 0;
     let add_row = true;
 
-    const [rows] = await conex.execute('SELECT * FROM users_green_apples');
+    const [rows] = db.prepare('SELECT * FROM green_apples').all();
     for (const row of rows)
     {
-        if (mention === row.mention)
+        if (mention === row.user)
         {
             id = row.id;
-            await conex.execute(`UPDATE users_green_apples SET green_apples = green_apples + ${amount} WHERE id = ?`, [id]);
+            db.prepare(`UPDATE green_apples SET apples = apples + ${amount} WHERE id = ?`, [id]).run();
             
-            const [updated_row] = await conex.execute('SELECT green_apples FROM users_green_apples WHERE id = ?', [id]);
-            green_apples = updated_row[0].green_apples;
+            const [updated_row] = db.prepare('SELECT apples FROM green_apples WHERE id = ?', [id]).all();
+            green_apples = updated_row[0].apples;
 
             add_row = false;
             break;
@@ -41,35 +38,28 @@ async function modify_green_apples(mention, amount)
 
     if (add_row)
     {
-        await conex.execute('INSERT INTO users_green_apples (mention, green_apples) VALUES (?, ?)', [mention, green_apples + amount]);
+        db.prepare('INSERT INTO green_apples (user, apples) VALUES (?, ?)', [mention, green_apples + amount]).run();
         green_apples = amount;
     }
-
-    await conex.end();
 
     return green_apples;
 }
 
-async function get_green_apples(mention)
+function get_green_apples(mention)
 {
-    const conex = await mysql.createConnection({
-        uri: process.env.db,
-        ssl: {rejectUnauthorized: false}
-    });
+    const db = new DB(process.env.ECONOMY_DB_PATH);
 
     let green_apples = 0;
     let id = 0;
 
-    const [rows] = await conex.execute('SELECT * FROM users_green_apples');
+    const [rows] = db.prepare('SELECT * FROM green_apples').all();
     for (const row of rows)
     {
-        if (mention === row.mention)
+        if (mention === row.user)
         {
-            green_apples = row.green_apples;
+            green_apples = row.apples;
         }
     }
-
-    conex.end();
 
     return green_apples;
 }

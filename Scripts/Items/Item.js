@@ -1,4 +1,4 @@
-const mysql = require('mysql2/promise')
+const DB = require("better-sqlite3")
 const bot_state = require(process.cwd() + "/Scripts/bot_state");
 
 class Item
@@ -26,31 +26,28 @@ class Item
     get_sell_value(){return this.sell_price;}
     get_bot_state(){return bot_state;}
 
-    async buy(mention)
+    buy(mention)
     {
         if (this.buy_price < 0) return false; // Item no comprable
 
-        let user_green_apples = await this.get_bot_state().get_green_apples(mention);
+        let user_green_apples = this.get_bot_state().get_green_apples(mention);
         if (this.buy_price > user_green_apples) return false;
 
         // En este punto el item se puede comprar, así que proceder con eso
 
-        await this.get_bot_state().modify_green_apples(mention, -this.buy_price);
+        this.get_bot_state().modify_green_apples(mention, -this.buy_price);
 
         // Añadir el item a la mochila
-        const conex = await mysql.createConnection({
-            uri: process.env.db,
-            ssl: {rejectUnauthorized: false}
-        });
+        const db = new DB(process.env.ECONOMY_DB_PATH)
 
-        const [rows] = await conex.execute('SELECT * FROM users_bags');
+        const [rows] = db.prepare('SELECT * FROM users_bags').all();
 
         let add_row = true;
         let new_bag = [];
 
         for (const row of rows)
         {
-            if (row.mention === mention)
+            if (row.user === mention)
             {
                 let has_item = false;
                 let items = row.items.split(";");
@@ -66,7 +63,7 @@ class Item
                     else new_bag.push(item);
                 }
                 if (!has_item) new_bag.push(`${this.id}:1`)
-                await conex.execute(`UPDATE users_bags SET items = ? WHERE id = ?`, [new_bag.join(";"), row.id]);
+                db.prepare(`UPDATE bags SET items = ? WHERE id = ?`, [new_bag.join(";"), row.id]).run();
 
                 add_row = false;
                 break;
@@ -75,29 +72,24 @@ class Item
 
         if (add_row)
         {
-            await conex.execute('INSERT INTO users_bags (mention, items) VALUES (?, ?)', [mention, `${this.id}:1`]);
+            db.prepare('INSERT INTO bags (user, items) VALUES (?, ?)', [mention, `${this.id}:1`]).run();
         }
-
-        conex.end();
 
         return true;
     }
 
-    async use(mention)
+    use(mention)
     {
-        const conex = await mysql.createConnection({
-            uri: process.env.db,
-            ssl: {rejectUnauthorized: false}
-        });
+        const db = new DB(process.env.ECONOMY_DB_PATH)
 
-        const [rows] = await conex.execute('SELECT * FROM users_bags');
+        const [rows] = db.prepare('SELECT * FROM bags').all();
 
         let new_bag = [];
         let has_item = false;
 
         for (const row of rows)
         {
-            if (row.mention === mention) // El usuario que uso el comando es este
+            if (row.user === mention) // El usuario que uso el comando es este
             {
                 let items = row.items.split(";");
 
@@ -116,12 +108,11 @@ class Item
                     else new_bag.push(item);
                 }
 
-                await conex.execute(`UPDATE users_bags SET items = ? WHERE id = ?`, [new_bag.join(";"), row.id]);
+                db.prepare(`UPDATE bags SET items = ? WHERE id = ?`, [new_bag.join(";"), row.id]).run();
                 break;
             }
         }
 
-        conex.end();
         return has_item;
     }
 
