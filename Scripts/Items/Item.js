@@ -1,5 +1,5 @@
 const DB = require("better-sqlite3")
-const bot_state = require(process.cwd() + "/Scripts/bot_state");
+const bot_state = require(process.cwd() + "/Scripts/bot_state.js");
 
 class Item
 {
@@ -47,7 +47,7 @@ class Item
 
         for (const row of rows)
         {
-            if (row.user === mention)
+            if (row.username === mention)
             {
                 let has_item = false;
                 let items = row.items.split(";");
@@ -72,7 +72,7 @@ class Item
 
         if (add_row)
         {
-            db.prepare('INSERT INTO bags (user, items) VALUES (?, ?)', [mention, `${this.id}:1`]).run();
+            db.prepare('INSERT INTO bags (username, items) VALUES (?, ?)', [mention, `${this.id}:1`]).run();
         }
 
         return true;
@@ -89,7 +89,7 @@ class Item
 
         for (const row of rows)
         {
-            if (row.user === mention) // El usuario que uso el comando es este
+            if (row.username === mention) // El usuario que uso el comando es este
             {
                 let items = row.items.split(";");
 
