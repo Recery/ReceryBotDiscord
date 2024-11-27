@@ -15,11 +15,11 @@ class Bienvenida extends Command
         const img = await Canvas.loadImage(
             msg.author.displayAvatarURL({extension: "png", size: 128})
         );
-        ctx.drawImage(img, 50, 50, 160, 160);
+        ctx.drawImage(img, 40, 40, 160, 160);
 
         ctx.font = "50px Arial"
         ctx.fillStyle = "#ffffff"
-        ctx.fillText("¡Bienvenido al server!", 300, 90)
+        ctx.fillText("¡Bienvenido al server!", 280, 90)
 
         ctx.font = "60px Arial"
         ctx.fillStyle = "#ff7700"
