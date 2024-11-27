@@ -4,7 +4,7 @@ class Decir extends Command
 {
     async execution(msg)
     {
-        await msg.reply(this.get_content(msg));
+        await msg.channel.send(this.get_content(msg))
         await msg.delete();
     }
 }

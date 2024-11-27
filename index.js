@@ -53,6 +53,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
 });
 
 client.on("guildMemberAdd", async (member) => {
+	
 	console.log("entro");
 	const canvas = Canvas.createCanvas(800,240);
 	const ctx = canvas.getContext("2d");
