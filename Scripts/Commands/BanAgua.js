@@ -9,11 +9,11 @@ class BanAgua extends Command
 
     async execution(msg)
     {
-        await this.add_ban();
-        var bans = await this.get_bans();
-        msg.reply(`${this.get_mention(msg)} acabó de banear a Agua. Agua ya fue baneado ${bans} veces XD`);
+       // await this.add_ban();
+        //var bans = await this.get_bans();
+        msg.reply(`${this.get_mention(msg)} acabó de banear a Agua. Agua ya fue baneado 1 veces XD`);
     }
-
+/*
     async connect_database()
     {
         const conex = await mysql.createConnection({
@@ -52,6 +52,7 @@ class BanAgua extends Command
         await conex.end();
         return 0;
     }
+        */
 }
 
 module.exports = new BanAgua("!banagua", "accion");
