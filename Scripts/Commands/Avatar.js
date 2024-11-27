@@ -14,10 +14,7 @@ class Avatar extends Command
         msg.reply(
         {
             content: `${this.get_mention(msg)}, tu foto de perfil: `,
-            files: [{
-                attachment: canvas.toBuffer(), 
-                name: "avatar.png"
-            }]
+            files: [canvas.toBuffer()]
         });
     }
 }
