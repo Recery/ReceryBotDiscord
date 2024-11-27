@@ -1,6 +1,6 @@
 const Command = require("./command_cls.js")
 const Canvas = require("canvas")
-const { Attachment } = require("discord.js");
+const { AttachmentBuilder } = require("discord.js");
 
 class Avatar extends Command
 {
@@ -14,7 +14,7 @@ class Avatar extends Command
         );
         ctx.drawImage(img, 50, 50, 160, 160);
 
-        const attachment = new Attachment(canvas.toBuffer(), "avatar.png")
+        const attachment = new AttachmentBuilder(canvas.toBuffer(), "avatar.png")
 
         msg.reply(
         {
