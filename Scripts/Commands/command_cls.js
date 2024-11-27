@@ -1,5 +1,5 @@
 const path = require("path");
-const bot_state = require(process.cwd() + "/Scripts/bot_state");
+const bot_state = require(process.cwd() + "/Scripts/bot_state.js");
 const mysql = require('mysql2/promise')
 
 class Command
