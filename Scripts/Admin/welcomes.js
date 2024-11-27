@@ -1,27 +1,11 @@
+const { AttachmentBuilder } = require("discord.js")
 const DB = require("better-sqlite3");
 const Canvas = require("canvas");
 
 function get_welcomes_settings()
 {
     const db = new DB(process.env.ADMIN_DB_PATH)
-
-    let rows = db.prepare("SELECT * FROM welcomes").all();
-
-    const welcomes_settings = [];
-
-    for (const row of rows)
-    {
-        console.log(row)
-        welcomes_settings.push({
-            id: row.id, 
-            serverid: row.serverid, 
-            channelid: row.channelid,
-            imgsrc: row.imgsrc,
-            message: row.message
-        })
-    }
-
-    return welcomes_settings;
+    return db.prepare("SELECT * FROM welcomes").all();;
 }
 
 function check_welcomes(member)
