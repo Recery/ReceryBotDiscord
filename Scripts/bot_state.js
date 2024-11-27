@@ -29,7 +29,7 @@ function modify_green_apples(mention, amount)
             id = row.id;
             db.prepare(`UPDATE green_apples SET apples = apples + ${amount} WHERE id = ?`).run(id);
             
-            const [updated_row] = db.prepare('SELECT apples FROM green_apples WHERE id = ?').all(id);
+            const updated_row = db.prepare('SELECT apples FROM green_apples WHERE id = ?').all(id);
             green_apples = updated_row[0].apples;
 
             add_row = false;
