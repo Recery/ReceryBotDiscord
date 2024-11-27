@@ -39,7 +39,7 @@ function modify_green_apples(mention, amount)
 
     if (add_row)
     {
-        db.prepare('INSERT INTO green_apples (user, apples) VALUES (?, ?)', [mention, green_apples + amount]).run();
+        db.prepare('INSERT INTO green_apples (user, apples) VALUES (?, ?)', [mention, amount]).run();
         green_apples = amount;
     }
 
