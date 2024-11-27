@@ -41,6 +41,8 @@ async function execute_welcome(setting, member)
 	ctx.fillStyle = "#ff7700"
 	ctx.fillText(`${member.user.username}`, 300, 170)
 
+    const attachment = new AttachmentBuilder(canvas.toBuffer(), "bienvenidarecery.png")
+
     const embed = new EmbedBuilder()
         .setTitle(`¡Bienvenid@ ${member.user.username} al Estanque de Recery!`)
         .setDescription(`:ReceryBot:¡Ha nacido un alevin! :ReceryBot:\n
@@ -51,10 +53,11 @@ async function execute_welcome(setting, member)
             - Mostrar tus dibujos y arte en:Flechita: <#1311075810953662474>\n
             - Interactuar con nuestro asistente pez robótico en:Flechita: <#1311077612961140747>\n\n
             ¡Que nades bien!`)
-        .setImage(canvas.toBuffer())
+        .setImage("attachment://bienvenidarecery.png")
 
 	member.guild.channels.cache.get(setting.channelid).send({
-        embeds: [embed]
+        embeds: [embed],
+        files: [attachment]
     })
 }
 
