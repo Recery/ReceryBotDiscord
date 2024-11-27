@@ -51,7 +51,7 @@ async function execute_welcome(setting, member)
             - Mostrar tus dibujos y arte en:Flechita: <#1311075810953662474>\n
             - Interactuar con nuestro asistente pez robótico en:Flechita: <#1311077612961140747>\n\n
             ¡Que nades bien!`)
-        .setImage(canvas.toURL())
+        .setImage(canvas.toBuffer())
 
 	member.guild.channels.cache.get(setting.channelid).send({
         embeds: [embed]
