@@ -7,7 +7,10 @@ class Avatar extends Command
         msg.reply(
         {
             content: `${this.get_mention(msg)}, tu foto de perfil: `,
-            files: [{attachment: msg.author.avatarUrl, name: "avatar.png"}]
+            files: [{
+                attachment: msg.author.avatarUrl(), 
+                name: "avatar.png"
+            }]
         });
     }
 }
