@@ -40,7 +40,7 @@ class Item
         // Añadir el item a la mochila
         const db = new DB(process.env.ECONOMY_DB_PATH)
 
-        const rows = db.prepare('SELECT * FROM users_bags').all() || [];
+        const rows = db.prepare('SELECT * FROM bags').all() || [];
 
         let add_row = true;
         let new_bag = [];
