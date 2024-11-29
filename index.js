@@ -9,6 +9,7 @@ const client = new Client({
 	GatewayIntentBits.GuildMembers,
 	GatewayIntentBits.GuildPresences
   ],
+  http: {timeout:60000}
 });
 
 const available_commands = require("./Scripts/available_commands.js")
