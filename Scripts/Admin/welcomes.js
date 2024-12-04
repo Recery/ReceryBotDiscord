@@ -20,7 +20,7 @@ function check_welcomes(member, client)
     }
 }
 
-Canvas.registerFont("../Fonts/LibertyCity.ttf", {family: "liberty_city"});
+Canvas.registerFont("Fonts/LibertyCity.ttf", {family: "liberty_city"});
 
 async function execute_welcome(setting, member)
 {
