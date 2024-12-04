@@ -24,24 +24,24 @@ client.once(Events.ClientReady, (readyClient) => {
 });
 
 client.on(Events.MessageCreate, (msg) => {
-  if (msg.content === "!receryhelp")
-  {
-    var message = "Comandos de Recery Bot: \n"
-    message += "!receryhelp, ";
-    for (const command of available_commands)
-    {
-      message += command.get_activator() + ", ";
-    }
-    message = message.slice(0, -2);
-    msg.reply(get_help_message());
-  }
-  else
-  {
-    for (const command of available_commands)
-    {
-      command.check_activation(msg)
-    }
-  }
+	if (msg.content === "!receryhelp")
+  	{
+    	var message = "Comandos de Recery Bot: \n"
+    	message += "!receryhelp, ";
+    	for (const command of available_commands)
+    	{
+    		message += command.get_activator() + ", ";
+    	}
+    	message = message.slice(0, -2);
+    	msg.reply(get_help_message());
+  	}
+else
+	{
+		for (const command of available_commands)
+		{
+			command.check_activation(msg)
+		}
+	}
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
