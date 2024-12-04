@@ -22,6 +22,8 @@ function check_welcomes(member, client)
 
 async function execute_welcome(setting, member)
 {
+    var liberty_city = new Canvas.font("liberty_city", "../../Fonts/LibertyCity.ttf");
+
 	const canvas = Canvas.createCanvas(800,240);
 	const ctx = canvas.getContext("2d");
 
@@ -33,17 +35,16 @@ async function execute_welcome(setting, member)
 	);
 	ctx.drawImage(img, 40, 40, 160, 160);
 
-	ctx.font = '50px "Arial"'
+	ctx.font = '50px liberty_city'
 	ctx.fillStyle = "#ffffff"
 	ctx.fillText(setting.imgmsg, 260, 90)
 
-	ctx.font = '60px "Arial"'
+	ctx.font = '60px liberty_city'
 	ctx.fillStyle = "#ff7700"
 	ctx.fillText(`${member.user.username}`, 260, 170)
 
     const attachment = new AttachmentBuilder(canvas.toBuffer(), {name: "bienvenidarecery.png"})
 
-    console.log(setting.embedmsg)
     const embed = new EmbedBuilder()
         .setColor("#65a7fc")
         .setThumbnail(member.displayAvatarURL({extension: "png", size: 1024}))
