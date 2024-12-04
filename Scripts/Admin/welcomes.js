@@ -22,7 +22,7 @@ function check_welcomes(member, client)
 
 async function execute_welcome(setting, member)
 {
-    var liberty_city = new Canvas.font("liberty_city", "../../Fonts/LibertyCity.ttf");
+    var liberty_city = new Canvas.Font("liberty_city", "../../Fonts/LibertyCity.ttf");
 
 	const canvas = Canvas.createCanvas(800,240);
 	const ctx = canvas.getContext("2d");
