@@ -20,9 +20,10 @@ function check_welcomes(member, client)
     }
 }
 
+Canvas.registerFont("../../Fonts/LibertyCity.ttf", {family: "liberty_city"});
+
 async function execute_welcome(setting, member)
 {
-    var liberty_city = new Canvas.Font("liberty_city", "../../Fonts/LibertyCity.ttf");
 
 	const canvas = Canvas.createCanvas(800,240);
 	const ctx = canvas.getContext("2d");
