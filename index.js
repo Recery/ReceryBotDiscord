@@ -53,7 +53,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
 });
 
 client.on("guildMemberAdd", async (member) => {
-	console.log("entro");
 	welcomes.check_welcomes(member);
 })
 
