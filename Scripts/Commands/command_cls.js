@@ -1,5 +1,4 @@
 const path = require("path");
-const bot_state = require(process.cwd() + "/Scripts/bot_state.js");
 
 class Command
 {
@@ -55,11 +54,6 @@ class Command
     get_mention(msg)
     {
         return `<@${msg.author.id}>`;
-    }
-
-    get_bot_state()
-    {
-        return bot_state;
     }
 
     get_content(msg)
