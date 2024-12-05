@@ -12,27 +12,21 @@ const client = new Client({
   http: {timeout:60000}
 });
 
-const available_commands = require("./Scripts/available_commands.js");
 const available_interactions = require("./Scripts/available_interactions.js");
 const Prefix = require("./prefix.js");
 
 client.once(Events.ClientReady, (readyClient) => {
-	for (const command of available_commands)
-		command.set_client(client);
-
 	console.log(`El bot inició correctamente como ${readyClient.user.tag}.`);
 });
 
 client.on(Events.MessageCreate, (msg) => {
 	const prefix = Prefix.get_prefix(msg.guildId);
-	if (!msg.content.startsWith(prefix)) return;
+	if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
 	const content = msg.content.slice(msg.content.indexOf(prefix) + 1).trim().split(' ');
-	console.log(content[0]);
 
 	if (msg.author.id !== "1069155273182285834")
 	{
-		msg.reply("Perdón pero estoy en mantenimiento... Mi papa está arreglando algunas cosas.");
 		return;
 	}
 
@@ -49,10 +43,7 @@ client.on(Events.MessageCreate, (msg) => {
   	}
 	else
 	{
-		for (const command of available_commands)
-		{
-			command.check_activation(content[0]);
-		}
+
 	}
 });
 
