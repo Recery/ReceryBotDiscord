@@ -4,6 +4,7 @@ module.exports = {
     name: "setprefix",
     execute(msg, args)
     {
+        console.log(args, " desde el comando")
         if (!args) 
         {
             msg.reply("Debes ingresar un prefijo válido.");
