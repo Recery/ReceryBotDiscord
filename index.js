@@ -23,7 +23,6 @@ for (const file of command_files)
 const Prefix = require("./prefix.js");
 client.on(Discord.Events.MessageCreate, (msg) => {
 	const prefix = Prefix.get_prefix(msg.guildId);
-	const text = ["hola", "chau"]
 	
 	if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
@@ -36,7 +35,7 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 	if (!command) return;
 
 	try {
-		command.execute(msg, args);
+		command.execute(client, msg, args);
 	}
 	catch (error) {
 		console.log(error);
