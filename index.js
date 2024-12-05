@@ -26,7 +26,7 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 	console.log(prefix);
 	if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
-	const args = msg.content.slice(msg.content.indexOf(prefix) + 1).trim().split(' ');
+	const args = msg.content.slice(prefix.length).trim().split(' ');
 	console.log(args);
 	const command_name = args.shift().toLowerCase();
 
