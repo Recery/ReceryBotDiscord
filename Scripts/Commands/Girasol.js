@@ -6,7 +6,7 @@ class Girasol extends Command
     {
         msg.reply(
         {
-            content: "Plantaste un productor solar... Imagino que al frente, como corresponde",
+            content: "¡Plantaste un productor solar!",
             files: [this.get_gifs_directory() + "/Girasol.gif"]
         });
     }

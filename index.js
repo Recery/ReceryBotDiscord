@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { Client, Events, GatewayIntentBits, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, StringSelectMenuBuilder, AttachmentBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
+const { Client, Events, GatewayIntentBits, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
 
 const client = new Client({
   intents: [
@@ -14,7 +14,6 @@ const client = new Client({
 
 const available_commands = require("./Scripts/available_commands.js")
 const available_interactions = require("./Scripts/available_interactions.js")
-const welcomes = require("./Scripts/Admin/welcomes.js")
 
 client.once(Events.ClientReady, (readyClient) => {
 	for (const command of available_commands)
@@ -35,7 +34,7 @@ client.on(Events.MessageCreate, (msg) => {
     	message = message.slice(0, -2);
     	msg.reply(get_help_message());
   	}
-else
+	else
 	{
 		for (const command of available_commands)
 		{
@@ -52,10 +51,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
 	}
 });
 
-client.on("guildMemberAdd", async (member) => {
-	welcomes.check_welcomes(member);
-})
-
 function get_help_message()
 {
 	let embed = new EmbedBuilder()
@@ -66,7 +61,6 @@ function get_help_message()
 			{name: "Apoyo", value: "Comandos para apoyar a Recery, mi creador."},
 			{name: "Ayuda", value: "Comandos que te ayudarán."},
 			{name: "Diversion", value: "Comandos para divertirte."},
-			{name: "Economía", value: "Comandos de la economía de Recery Bot."},
 			{name: "Otros", value: "Comandos varios."}
 		)
 
@@ -95,10 +89,6 @@ function get_help_message()
 				.setLabel("Diversión")
 				.setDescription("Comandos para divertirte.")
 				.setValue("diversion"),
-			new StringSelectMenuOptionBuilder()
-				.setLabel("Economía")
-				.setDescription("Comandos de la economía de Recery Bot.")
-				.setValue("economia"),
 			new StringSelectMenuOptionBuilder()
 				.setLabel("Otros")
 				.setDescription("Comandos varios.")
