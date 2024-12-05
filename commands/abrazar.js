@@ -10,6 +10,6 @@ module.exports = {
 
         const hug_target = args.join(" ");
 
-        msg.reply(`<@${msg.author.id}> abrazó a ${hug_target}!`)
+        msg.reply(`<@${msg.author.id}> abrazó a ${hug_target}!`);
     }
 }
