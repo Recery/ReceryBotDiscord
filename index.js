@@ -28,7 +28,7 @@ client.on(Events.MessageCreate, (msg) => {
 	if (!msg.content.startsWith(prefix)) return;
 
 	const content = msg.content.slice(msg.content.indexOf(prefix) + 1).trim().split(' ');
-	console.log(content);
+	console.log(content[0]);
 
 	if (msg.author.id !== "1069155273182285834")
 	{
