@@ -12,6 +12,14 @@ const client = new Client({
   http: {timeout:60000}
 });
 
+const command_files = require('fs').readdirSync("./commands").filter(file => file.endsWith(".js"));
+for (const file of command_files)
+{
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.name, command);
+}
+
+
 const available_interactions = require("./Scripts/available_interactions.js");
 const Prefix = require("./prefix.js");
 
@@ -24,27 +32,20 @@ client.on(Events.MessageCreate, (msg) => {
 	if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
 	const args = msg.content.slice(msg.content.indexOf(prefix) + 1).trim().split(' ');
+	const command_name = args.shift().toLowerCase();
 
-	if (msg.author.id !== "1069155273182285834")
-	{
-		return;
+	if (msg.author.id !== "1069155273182285834") return;
+
+	const command = client.commands.get(command_name);
+	if (!command) return;
+
+	try {
+		command.execute(msg, args);
+	}
+	catch (error) {
+		console.log(error);
 	}
 
-	if (content === "receryhelp")
-  	{
-    	let message = "Comandos de Recery Bot: \n"
-    	message += "!receryhelp, ";
-    	for (const command of available_commands)
-    	{
-    		message += command.get_activator() + ", ";
-    	}
-    	message = message.slice(0, -2);
-    	msg.reply(get_help_message());
-  	}
-	else
-	{
-
-	}
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
