@@ -14,7 +14,7 @@ const client = new Client({
 
 const available_commands = require("./Scripts/available_commands.js");
 const available_interactions = require("./Scripts/available_interactions.js");
-const prefix = require("./prefix.js");
+const Prefix = require("./prefix.js");
 
 client.once(Events.ClientReady, (readyClient) => {
 	for (const command of available_commands)
@@ -24,7 +24,7 @@ client.once(Events.ClientReady, (readyClient) => {
 });
 
 client.on(Events.MessageCreate, (msg) => {
-	const prefix = prefix.get_prefix(msg.guildId);
+	const prefix = Prefix.get_prefix(msg.guildId);
 	if (!msg.content.startsWith(prefix)) return;
 
 	const content = msg.content.slice(msg.content.indexOf(prefix))
