@@ -10,19 +10,17 @@ class SetPrefix extends Command
         
         const db = new DB(process.env.ADMIN_DB_PATH);
 
-        const rows = db.prepare("SELECT * FROM prefixes").all();
-        let add_row = true;
+        // Si no existe un registro, esto no devuelve nada
+        const row = db.prepare("SELECT id FROM prefixes WHERE serverid = ?").get(serverid);
 
-        for (const row of rows)
-            if (row.serverid === serverid)
-            {
-                add_row = false;
-                db.prepare("UPDATE prefixes SET prefix = ? WHERE id = ?").run(new_prefix, row.id);
-            }
-
-        if (add_row) db.prepare("INSERT INTO prefixes (serverid, prefix) VALUES (?, ?)").run(serverid, new_prefix);
+        if (row)
+            db.prepare("UPDATE prefixes SET prefix = ? WHERE id = ?").run(new_prefix, row.id);
+        else
+            db.prepare("INSERT INTO prefixes (serverid, prefix) VALUES (?, ?)").run(serverid, new_prefix);
 
         msg.reply(`El prefijo fue establecido a '${new_prefix}' exitosamente.`);
+
+        db.close();
     }
 }
 
