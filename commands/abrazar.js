@@ -1,6 +1,6 @@
 module.exports = {
     name: "abrazar",
-    execute(msg, args)
+    execute(client, msg, args)
     {
         if (!args.length > 0)
         {

@@ -2,7 +2,7 @@ const DB = require("better-sqlite3");
 
 module.exports = {
     name: "setprefix",
-    execute(msg, args)
+    execute(client, msg, args)
     {
         if (!args.length > 0) 
         {
