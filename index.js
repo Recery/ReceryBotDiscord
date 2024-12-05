@@ -21,7 +21,7 @@ for (const file of command_files)
 }
 
 const Prefix = require("./prefix.js");
-client.on(Events.MessageCreate, (msg) => {
+client.on(Discord.Events.MessageCreate, (msg) => {
 	const prefix = Prefix.get_prefix(msg.guildId);
 	if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
@@ -44,6 +44,6 @@ client.on(Events.MessageCreate, (msg) => {
 
 client.login(process.env.TOKEN);
 
-client.once(Events.ClientReady, (readyClient) => {
+client.once(Discord.Events.ClientReady, (readyClient) => {
 	console.log(`El bot inició correctamente como ${readyClient.user.tag}.`);
 });
