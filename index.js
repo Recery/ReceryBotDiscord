@@ -27,7 +27,7 @@ client.on(Events.MessageCreate, (msg) => {
 	const prefix = Prefix.get_prefix(msg.guildId);
 	if (!msg.content.startsWith(prefix)) return;
 
-	const content = msg.content.slice(msg.content.indexOf(prefix))
+	const content = msg.content.slice(msg.content.indexOf(prefix) + 1)
 	console.log(content);
 
 	if (msg.content === "!receryhelp")
