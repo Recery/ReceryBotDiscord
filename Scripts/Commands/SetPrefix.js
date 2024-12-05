@@ -8,7 +8,7 @@ class SetPrefix extends Command
         const serverid = msg.guildId;
         const new_prefix = this.get_content(msg);
         
-        const db = new DB(process.env.PREFIX_DB_PATH);
+        const db = new DB(process.env.ADMIN_DB_PATH);
 
         const rows = db.prepare("SELECT * FROM prefixes").all();
         let add_row = true;
