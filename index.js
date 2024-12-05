@@ -23,9 +23,11 @@ for (const file of command_files)
 const Prefix = require("./prefix.js");
 client.on(Discord.Events.MessageCreate, (msg) => {
 	const prefix = Prefix.get_prefix(msg.guildId);
+	console.log(prefix);
 	if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
 	const args = msg.content.slice(msg.content.indexOf(prefix) + 1).trim().split(' ');
+	console.log(args);
 	const command_name = args.shift().toLowerCase();
 
 	if (msg.author.id !== "1069155273182285834") return;
