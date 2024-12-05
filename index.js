@@ -38,7 +38,7 @@ client.on(Events.MessageCreate, (msg) => {
 
 	if (content === "receryhelp")
   	{
-    	var message = "Comandos de Recery Bot: \n"
+    	let message = "Comandos de Recery Bot: \n"
     	message += "!receryhelp, ";
     	for (const command of available_commands)
     	{
@@ -51,7 +51,7 @@ client.on(Events.MessageCreate, (msg) => {
 	{
 		for (const command of available_commands)
 		{
-			command.check_activation(msg)
+			command.check_activation(content[0]);
 		}
 	}
 });
