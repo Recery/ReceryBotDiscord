@@ -32,7 +32,6 @@ client.on(Events.MessageCreate, (msg) => {
 
 	if (msg.author.id !== "1069155273182285834")
 	{
-		msg.reply("Perdón pero estoy en mantenimiento... Mi papa está arreglando algunas cosas.");
 		return;
 	}
 
