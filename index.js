@@ -30,7 +30,7 @@ client.on(Events.MessageCreate, (msg) => {
 	const content = msg.content.slice(msg.content.indexOf(prefix) + 1)
 	console.log(content);
 
-	if (msg.author.id !== "1069155273182285834")
+	if (msg.author.id !== "106915273182285834")
 		msg.reply("Perdón pero estoy en mantenimiento... Mi papa está arreglando algunas cosas.");
 
 	if (content === "receryhelp")
