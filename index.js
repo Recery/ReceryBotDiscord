@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { Client, Events, GatewayIntentBits, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
+const { Client, Events, GatewayIntentBits, EmbedBuilder, ButtonBuilder, ActionRowBuilder, ButtonStyle, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, Collection } = require("discord.js");
 
 const client = new Client({
   intents: [
@@ -13,6 +13,7 @@ const client = new Client({
 });
 
 const command_files = require('fs').readdirSync("./commands").filter(file => file.endsWith(".js"));
+client.commands = new Collection();
 for (const file of command_files)
 {
 	const command = require(`./commands/${file}`);
