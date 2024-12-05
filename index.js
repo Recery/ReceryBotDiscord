@@ -23,7 +23,7 @@ client.on(Events.MessageCreate, (msg) => {
 	const prefix = Prefix.get_prefix(msg.guildId);
 	if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
-	const content = msg.content.slice(msg.content.indexOf(prefix) + 1).trim().split(' ');
+	const args = msg.content.slice(msg.content.indexOf(prefix) + 1).trim().split(' ');
 
 	if (msg.author.id !== "1069155273182285834")
 	{
