@@ -8,10 +8,8 @@ class Command
         this.category = init_category;
     }
 
-    async check_activation(msg)
+    async check_activation(content)
     {
-        const command_content = msg.content.replace(/\s+/g, '').toLowerCase();
-
         if (command_content.startsWith(this.activator.toLowerCase()))
         this.execution(msg);
     }
