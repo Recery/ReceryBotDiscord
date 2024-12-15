@@ -11,7 +11,7 @@ function load_langs(client)
     client.langs = new Collection();
 
     const db = new DB(process.env.ADMIN_DB_PATH);
-    const rows = db.prepare("SELECT serverid, lang FROM langs");
+    const rows = db.prepare("SELECT serverid, lang FROM langs").all();
 
     for (const row of rows)
         langs_settings.push({server_id: row.serverid, lang: row.lang});
