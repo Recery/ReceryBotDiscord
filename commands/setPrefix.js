@@ -5,18 +5,20 @@ module.exports = {
     category: "Administración",
     execute(client, msg, args)
     {
+        const serverid = msg.guildId;
+        const lang = client.langs.get(serverid) || "es";
+
         if (!args.length > 0) 
         {
-            msg.reply("Debes ingresar un prefijo válido.");
+            msg.reply(messages[lang].no_prefix);
             return;
         }
         else if (args[0].length > 5)
         {
-            msg.reply("El prefijo no puede tener mas de 5 caracteres.");
+            msg.reply(messages[lang].long_prefix);
             return;
         }
 
-        const serverid = msg.guildId;
         const new_prefix = args[0];
 
         const db = new DB(process.env.ADMIN_DB_PATH);
@@ -27,6 +29,19 @@ module.exports = {
         else
             db.prepare("INSERT INTO prefixes (serverid, prefix) VALUES (?, ?)").run(serverid, new_prefix);
 
-        msg.reply("El prefijo fue cambiado a `" + new_prefix + "` con éxito.");
+        msg.reply(messages[lang].prefix_updated);
+    }
+}
+
+const messages = {
+    es: {
+        no_prefix: "Debes ingresar un prefijo válido.",
+        long_prefix: "El prefijo no puede tener mas de 5 caracteres.",
+        prefix_updated: "El prefijo fue cambiado con éxito."
+    },
+    en: {
+        no_prefix: "You must enter a valid prefix.",
+        long_prefix: "Prefix cannot have more than 5 characters.",
+        prefix_updated: "Prefix was succesfully changed."
     }
 }
