@@ -29,7 +29,7 @@ module.exports = {
         else
             db.prepare("INSERT INTO prefixes (serverid, prefix) VALUES (?, ?)").run(serverid, new_prefix);
 
-        msg.reply(messages[lang].prefix_updated);
+        msg.reply(messages[lang].prefix_updated.replace("{{prefix}}", new_prefix));
     }
 }
 
@@ -37,11 +37,11 @@ const messages = {
     es: {
         no_prefix: "Debes ingresar un prefijo válido.",
         long_prefix: "El prefijo no puede tener mas de 5 caracteres.",
-        prefix_updated: "El prefijo fue cambiado con éxito."
+        prefix_updated: "El prefijo fue cambiado a `{{prefix}}` con éxito."
     },
     en: {
         no_prefix: "You must enter a valid prefix.",
         long_prefix: "Prefix cannot have more than 5 characters.",
-        prefix_updated: "Prefix was succesfully changed."
+        prefix_updated: "Prefix was succesfully changed to `{{prefix}}`."
     }
 }
