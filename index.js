@@ -21,6 +21,7 @@ for (const file of command_files)
 }
 
 const Prefix = require("./prefix.js");
+const Langs = require("./langsLoader.js");
 client.on(Discord.Events.MessageCreate, (msg) => {
 	const prefix = Prefix.get_prefix(msg.guildId);
 
@@ -41,8 +42,15 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 
 });
 
-client.login(process.env.TOKEN);
+
+let token = process.env.TOKEN;
+const args = process.argv.slice(2)
+for (const arg of args)
+	if (arg === "experimental") token = process.env.EXPERIMENTAL_TOKEN;
+
+client.login(token);
 
 client.once(Discord.Events.ClientReady, (readyClient) => {
 	console.log(`El bot inició correctamente como ${readyClient.user.tag}.`);
+	Langs.load_langs(client);
 });
