@@ -5,14 +5,16 @@ module.exports = {
     category: "Administración",
     execute(client, msg, args)
     {
+        const lang = client.langs.get(msg.guildId) || "es";
+
         if (!args.length > 0) 
         {
-            msg.reply("Debes ingresar un idioma válido.");
+            msg.reply(messages[lang].invalid_lang);
             return;
         }
         else if (args[0] !== "es" && args[0] !== "en")
         {
-            msg.reply("Debes ingresar un idioma válido.");
+            msg.reply(messages[lang].invalid_lang);
             return;
         }
 
@@ -21,6 +23,17 @@ module.exports = {
 
         Langs.set_lang(client, serverid, new_lang);
 
-        msg.reply("El idioma fue cambiado a `" + new_lang + "` con éxito.");
+        msg.reply(messages[new_lang].success.replace("{{lang}}", new_lang));
+    }
+}
+
+const messages = {
+    es: {
+        invalid_lang: "Debes ingresar un idioma válido.",
+        success: "El idioma fue cambiado a `{{lang}}` con éxito."
+    },
+    en: {
+        invalid_lang: "You must enter a valid language.",
+        success: "Language has been changed to `{{lang}}` succesfully."
     }
 }
