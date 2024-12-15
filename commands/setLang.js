@@ -10,7 +10,7 @@ module.exports = {
             msg.reply("Debes ingresar un idioma válido.");
             return;
         }
-        else if (args[0].length !== "es" && args[0].length !== "en")
+        else if (args[0] !== "es" && args[0] !== "en")
         {
             msg.reply("Debes ingresar un idioma válido.");
             return;
