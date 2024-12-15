@@ -2,6 +2,12 @@ module.exports = {
     name: "saludar",
     execute (client, msg, args) 
     {
-        msg.reply(`Saludos <@${msg.author.id}> pedazo de pelotudo`);
+        const lang = client.langs.get(msg.guildId) || "es";
+        msg.reply(messages[lang].replace("{{id}}", msg.author.id));
     },
 };
+
+const messages = {
+    es: "Saludos <@{{id}}> pedazo de pelotudo",
+    en: "Hi <@{{id}}> piece of dumbass"
+}
