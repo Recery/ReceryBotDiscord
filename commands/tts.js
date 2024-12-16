@@ -43,7 +43,7 @@ module.exports = {
             const file_path = "tts_output.mp3";
             fs.writeFileSync(file_path, buffer);
     
-            const attachment = new Discord.AttachmentBuilder(file_path, {name: "MensajeReceryBot.mp3"});
+            const attachment = new Discord.AttachmentBuilder(file_path, {name: "AudioReceryBot.mp3"});
             await msg.reply({files: [attachment]});
     
             fs.unlinkSync(file_path);
