@@ -11,7 +11,17 @@ module.exports = {
         try {
             const ttsURL = `https://api.freetts.com/generate?lang=es-ES&voice=es-MX-Standard-A&text=${encodeURIComponent("hola mundo")}`;
             const response = await fetch(ttsURL);
+            if (!response.ok)
+            {
+                console.log("Mala respuesta");
+                return;
+            }
             const buffer = await response.buffer();
+
+            if (buffer.length === 0){
+                console.log("Archivo vacio");
+                return;
+            }
     
             const file_path = "tts_output.mp3";
             fs.writeFileSync(file_path, buffer);
