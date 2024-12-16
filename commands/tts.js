@@ -4,10 +4,17 @@ const fs = require("fs");
 
 module.exports = {
     name: "tts",
+    category: "Diversión",
     async execute (client, msg, args) 
     {
         const lang = client.langs.get(msg.guildId) || "es";
-        const text = args.join(" ") || "Hola mundo";
+
+        if (args.length < 1) {
+            msg.reply(messages[lang])
+            return;
+        }
+
+        const text = args.join(" ");
 
         try {
             const ttsURL = `https://ttsmp3.com/makemp3_new.php`;
@@ -37,8 +44,6 @@ module.exports = {
             fs.writeFileSync(file_path, buffer);
     
             const attachment = new Discord.AttachmentBuilder(file_path, {name: "tts_output.mp3"});
-    
-    
             await msg.reply({files: [attachment]});
     
             fs.unlinkSync(file_path);
@@ -50,6 +55,6 @@ module.exports = {
 };
 
 const messages = {
-    es: "Saludos usuario pedazo de pelotudo",
-    en: "Hi user piece of dumbass"
+    es: "Debes ingresar un texto para decir.",
+    en: "You must enter a text to say."
 }
