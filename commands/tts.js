@@ -31,6 +31,7 @@ module.exports = {
             })
 
             const json = await response.json();
+            console.log(json);
 
             const audioResponse = await fetch(json.URL);
             const buffer = await audioResponse.buffer();
