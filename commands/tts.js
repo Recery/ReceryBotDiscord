@@ -13,7 +13,8 @@ module.exports = {
             const response = await fetch(ttsURL);
             if (!response.ok)
             {
-                console.log("Mala respuesta");
+                console.log("Mala respuesta: ", response);
+                console.log("URL generada: ", ttsURL);
                 return;
             }
             const buffer = await response.buffer();
