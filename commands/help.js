@@ -23,8 +23,10 @@ module.exports = {
                     .setValue("help_action_option")
             )
 
+        const row1 = new Discord.ActionRowBuilder()
+            .addComponents(selection);
 
-        msg.reply({embeds: [embed]});
+        msg.reply({embeds: [embed], components: [row1]});
     }
 }
 
