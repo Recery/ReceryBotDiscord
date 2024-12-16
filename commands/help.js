@@ -13,7 +13,7 @@ module.exports = {
             .addFields(
             )
 
-        msg.reply({embeds: embed});
+        msg.reply({embeds: [embed]});
     }
 }
 
