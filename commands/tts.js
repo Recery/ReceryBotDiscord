@@ -8,7 +8,7 @@ module.exports = {
     {
         const lang = client.langs.get(msg.guildId) || "es";
 
-        const ttsURL = `https://api.freetts.com/generate?lang=es-ES&voice=es-MX-Standard-A&text=${encodeURIComponent(messages[lang])}`;
+        const ttsURL = `https://api.freetts.com/generate?lang=es-ES&voice=es-MX-Standard-A&text=${encodeURIComponent("hola mundo")}`;
         const response = await fetch(ttsURL);
         const buffer = await response.buffer();
 
