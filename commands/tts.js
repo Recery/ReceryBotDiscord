@@ -9,17 +9,33 @@ module.exports = {
         const lang = client.langs.get(msg.guildId) || "es";
 
         try {
-            const ttsURL = `https://api.freetts.com/generate?lang=es-ES&voice=es-MX-Standard-A&text=${encodeURIComponent("hola mundo")}`;
-            const response = await fetch(ttsURL);
-            if (!response.ok)
+            const ttsURL = `https://ttsmp3.com/makemp3_new.php`;
+            const body = new URLSearchParams({
+                msg: "Hola mundo",
+                lang: "Joanna",
+                source:"ttsmp3"
+            });
+
+
+            /*if (!response.ok)
             {
                 console.log("Mala respuesta: ", response);
                 console.log("URL generada: ", ttsURL);
                 return;
-            }
-            const buffer = await response.buffer();
+            }*/
+            
+            const response = await fetch(ttsURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded"},
+                body: body
+            })
 
-            if (buffer.length === 0){
+            const json = await response.json();
+
+            const audioResponse = await fetch(json.URL);
+            const buffer = await audioResponse.buffer();
+
+            if (buffer.length === 0) {
                 console.log("Archivo vacio");
                 return;
             }
