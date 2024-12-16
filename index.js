@@ -42,6 +42,10 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 
 });
 
+client.on(Discord.Events.InteractionCreate, async (interaction) => {
+	console.log(interaction.customId);
+});
+
 
 let token = process.env.TOKEN;
 const args = process.argv.slice(2)

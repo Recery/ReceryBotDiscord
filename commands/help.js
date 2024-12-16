@@ -39,7 +39,7 @@ const messages = {
     },
     en: {
         title: "Recery Bot commands",
-        selection_placeholder: "Select a category",
+        selection_placeholder: "Choose a category",
         action_selection_label: "Action",
         action_selection_desc: "Commands to perform actions on other members or yourself."
     }
