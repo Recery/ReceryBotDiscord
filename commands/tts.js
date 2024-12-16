@@ -7,22 +7,15 @@ module.exports = {
     async execute (client, msg, args) 
     {
         const lang = client.langs.get(msg.guildId) || "es";
+        const text = args.join(" ") || "Hola mundo";
 
         try {
             const ttsURL = `https://ttsmp3.com/makemp3_new.php`;
             const body = new URLSearchParams({
-                msg: "Hola mundo",
-                lang: "Joanna",
+                msg: text,
+                lang: "Conchita",
                 source:"ttsmp3"
             });
-
-
-            /*if (!response.ok)
-            {
-                console.log("Mala respuesta: ", response);
-                console.log("URL generada: ", ttsURL);
-                return;
-            }*/
             
             const response = await fetch(ttsURL, {
                 method: "POST",
@@ -31,7 +24,6 @@ module.exports = {
             })
 
             const json = await response.json();
-            console.log(json);
 
             const audioResponse = await fetch(json.URL);
             const buffer = await audioResponse.buffer();
