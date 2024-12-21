@@ -5,7 +5,7 @@ class Regalito extends Command
 {
     execution(msg)
     {
-        if (msg.author.id !== "1296846133489963049" && msg.author.id !== "1069155273182285834") 
+        if (/*msg.author.id !== "1296846133489963049" && */msg.author.id !== "1069155273182285834") 
         {
             msg.reply("Usuario no autorizado.");
             return;
@@ -16,8 +16,17 @@ class Regalito extends Command
             .setTitle("Regalo")
             .setDescription("Este es un regalo");
 
-        msg.reply({embeds:[embed]});
+        const hit_button = new Discord.ButtonBuilder()
+            .setLabel("Golpes restantes: 1")
+            .setCustomId("golpearregalo")
+            .setStyle(Discord.ButtonStyle.Primary);
+
+        const row = new Discord.ActionRowBuilder()
+            .addComponents(hit_button)
+
+
+        msg.reply({embeds:[embed], components: [row]});
     }
 }
 
-module.exports = new Regalito("!regalito", "diversion");
+module.exports = new Regalito("!secreto", "diversion");
