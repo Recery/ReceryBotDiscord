@@ -29,4 +29,6 @@ class Regalito extends Command
     }
 }
 
+
+
 module.exports = new Regalito("!secreto", "diversion");
