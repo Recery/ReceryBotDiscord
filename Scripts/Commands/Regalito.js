@@ -1,4 +1,5 @@
-const Command = require("./command_cls.js")
+const Command = require("./command_cls.js");
+const Discord = require("discord.js");
 
 class Regalito extends Command
 {
@@ -10,7 +11,10 @@ class Regalito extends Command
             return;
         }
 
-        msg.reply(`Saludos ${this.get_mention(msg)} pedazo de pelotudo`)
+        const embed = new Discord.EmbedBuilder()
+            .setTitle("Regalo");
+
+        msg.reply({embeds:[embed]});
     }
 }
 
