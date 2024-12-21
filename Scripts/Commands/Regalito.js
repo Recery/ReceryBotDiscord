@@ -12,8 +12,9 @@ class Regalito extends Command
         }
 
         const embed = new Discord.EmbedBuilder()
+            .setColor("#0099ff")
             .setTitle("Regalo")
-            .setColor("#0099ff");
+            .setDescription("Este es un regalo");
 
         msg.reply({embeds:[embed]});
     }
