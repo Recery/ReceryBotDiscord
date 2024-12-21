@@ -4,7 +4,7 @@ class Regalito extends Command
 {
     execution(msg)
     {
-        if (msg.author.id !== "1296846133489963049") 
+        if (msg.author.id !== "1296846133489963049" && msg.author.id !== "1069155273182285834") 
         {
             msg.reply("Usuario no autorizado.");
             return;
