@@ -17,8 +17,8 @@ class Regalito extends Command
             .setDescription("Este es un regalo");
 
         const hit_button = new Discord.ButtonBuilder()
-            .setLabel("🎁 Golpes restantes: 1")
-            .setCustomId("golpearregalo")
+            .setLabel("Presiona para abrir 🎁")
+            .setCustomId("abrirregalo")
             .setStyle(Discord.ButtonStyle.Primary);
 
         const row = new Discord.ActionRowBuilder()
