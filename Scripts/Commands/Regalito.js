@@ -16,13 +16,13 @@ class Regalito extends Command
             .setTitle("Regalo")
             .setDescription("Este es un regalo");
 
-        const hit_button = new Discord.ButtonBuilder()
+        const open_button = new Discord.ButtonBuilder()
             .setLabel("Presiona para abrir 🎁")
             .setCustomId("abrirregalo")
             .setStyle(Discord.ButtonStyle.Primary);
 
         const row = new Discord.ActionRowBuilder()
-            .addComponents(hit_button)
+            .addComponents(open_button)
 
 
         msg.reply({embeds:[embed], components: [row]});

@@ -24,7 +24,8 @@ class Pez extends Command
 
         msg.reply({
             embeds: [embed],
-            files: [{ attachment: pez.image, name: path.basename(pez.image) }]
+            files: [{ attachment: pez.image, name: path.basename(pez.image) }],
+            content: peces[1].image
         });
     }
 }
