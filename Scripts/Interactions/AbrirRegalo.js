@@ -22,4 +22,4 @@ class Delete extends InteractionContent {
     }
 }
 
-module.exports = new Delete("abrirregalo")
+module.exports = new AbrirRegalo("abrirregalo")
