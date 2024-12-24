@@ -8,16 +8,15 @@ class AbrirRegalo extends InteractionContent {
     {
         let embed_respuesta = new EmbedBuilder()
             .setColor("#0099ff")
-            .setTitle("xd")
-            .setDescription("xd")
-            .setImage("attachment://Dibujo.png");
-            //Feliz navidad Zahira
-//Te hice un dibujo, espero que te guste"
+            .setTitle("eliz navidad Zahira")
+            .setDescription("Te hice un dibujo, espero que te guste")
+            .setImage("attachment://DibujoZahira.png");
+        
         const dibujo_path = path.join(__dirname, "../../Images/Dibujo.png");
         
         interaction.update({
             embeds:[embed_respuesta],
-            files: [{ attachment: dibujo_path, name: "Dibujo.png" }]
+            files: [{ attachment: dibujo_path, name: "DibujoZahira.png" }]
         })
     }
 }
