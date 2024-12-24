@@ -10,14 +10,14 @@ class AbrirRegalo extends InteractionContent {
             .setColor("#0099ff")
             .setTitle("xd")
             .setDescription("xd")
-            .setImage("attachment://DibujoDeZahira.png");
+            .setImage("attachment://Dibujo.png");
             //Feliz navidad Zahira
 //Te hice un dibujo, espero que te guste"
         const dibujo_path = path.join(__dirname, "../../Images/ManzanaVerde.png");
         
         interaction.update({
             embeds:[embed_respuesta],
-            files: [{ attachment: dibujo_path, name: "DibujoDeZahira.png" }]
+            files: [{ attachment: dibujo_path, name: "Dibujo.png" }]
         })
     }
 }
