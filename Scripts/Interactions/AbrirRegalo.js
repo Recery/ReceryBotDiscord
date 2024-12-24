@@ -1,5 +1,6 @@
-const { EmbedBuilder } = require("discord.js")
-const InteractionContent = require("./interaction_content_cls.js")
+const path = require("path");
+const { EmbedBuilder } = require("discord.js");
+const InteractionContent = require("./interaction_content_cls.js");
 
 class AbrirRegalo extends InteractionContent {
 
@@ -12,13 +13,12 @@ class AbrirRegalo extends InteractionContent {
             .setImage("attachment://DibujoDeZahira.png");
             //Feliz navidad Zahira
 //Te hice un dibujo, espero que te guste"
+        const dibujo_path = path.join(__dirname, "../../Images/ManzanaVerde.png");
         
         interaction.update({
             embeds:[embed_respuesta],
-            files: [{ attachment: a, name: path.basename(pez.image) }]
+            files: [{ attachment: dibujo_path, name: "DibujoDeZahira.png" }]
         })
-        
-        
     }
 }
 
