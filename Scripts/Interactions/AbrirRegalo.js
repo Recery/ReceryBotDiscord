@@ -16,8 +16,9 @@ class AbrirRegalo extends InteractionContent {
         
         interaction.update({
             embeds:[embed_respuesta],
-            files: [{ attachment: dibujo_path, name: "DibujoZahira.png" }]
-        })
+            files: [{ attachment: dibujo_path, name: "DibujoZahira.png" }],
+            components: []
+        });
     }
 }
 
