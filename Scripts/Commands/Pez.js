@@ -16,7 +16,7 @@ class Pez extends Command
     execution(msg)
     {
         let pez = this.peces[Math.floor(Math.random() * this.peces.length)];
-
+        console.log(__dirname);
         const embed = new EmbedBuilder()
             .setColor("#65a7fc")
             .setTitle(pez.nombre)
@@ -24,8 +24,8 @@ class Pez extends Command
 
         msg.reply({
             embeds: [embed],
-            files: [{ attachment: pez.image, name: path.basename(pez.image) }],
-            content: this.peces[1].image
+            files: [{ attachment: pez.image, name: path.basename(pez.image) }]
+            
         });
     }
 }
