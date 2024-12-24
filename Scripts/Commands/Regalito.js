@@ -1,3 +1,4 @@
+const path = require("path");
 const Command = require("./command_cls.js");
 const Discord = require("discord.js");
 
@@ -14,7 +15,10 @@ class Regalito extends Command
         const embed = new Discord.EmbedBuilder()
             .setColor("#0099ff")
             .setTitle("Regalo")
-            .setDescription("Este es un regalo");
+            .setDescription("Un regalo de Senko... ¿Qué habrá dentro?")
+            .setImage("attachment://Regalo.png");
+        
+        const regalo_path = path.join(__dirname, "../../Images/Regalo.png");
 
         const open_button = new Discord.ButtonBuilder()
             .setLabel("Presiona para abrir 🎁")
@@ -25,7 +29,11 @@ class Regalito extends Command
             .addComponents(open_button)
 
 
-        msg.reply({embeds:[embed], components: [row]});
+        msg.reply({
+            embeds:[embed],
+            files: [{ attachment: regalo_path, name: "Regalo.png" }],
+            components: [row]
+        });
     }
 }
 

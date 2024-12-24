@@ -9,7 +9,7 @@ class AbrirRegalo extends InteractionContent {
         let embed_respuesta = new EmbedBuilder()
             .setColor("#0099ff")
             .setTitle("Feliz navidad Zahira")
-            .setDescription("Te hice un dibujo, espero que te guste \n ||Yo no quise hacer esta mierda, mi papá me obligó, decile algo||")
+            .setDescription("Te hice un dibujo, espero que te guste")
             .setImage("attachment://DibujoZahira.png");
         
         const dibujo_path = path.join(__dirname, "../../Images/Dibujo.png");
