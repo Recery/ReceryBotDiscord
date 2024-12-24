@@ -8,7 +8,7 @@ class AbrirRegalo extends InteractionContent {
     {
         let embed_respuesta = new EmbedBuilder()
             .setColor("#0099ff")
-            .setTitle("eliz navidad Zahira")
+            .setTitle("Feliz navidad Zahira")
             .setDescription("Te hice un dibujo, espero que te guste")
             .setImage("attachment://DibujoZahira.png");
         
