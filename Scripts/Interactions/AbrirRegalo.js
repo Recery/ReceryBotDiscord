@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js")
 const InteractionContent = require("./interaction_content_cls.js")
 
-class Delete extends InteractionContent {
+class AbrirRegalo extends InteractionContent {
 
     async execution(interaction)
     {
