@@ -39,4 +39,4 @@ class Regalito extends Command
 
 
 
-module.exports = new Regalito("!secreto", "diversion");
+module.exports = new Regalito("!regalito", "diversion");
