@@ -13,7 +13,7 @@ class AbrirRegalo extends InteractionContent {
             .setImage("attachment://Dibujo.png");
             //Feliz navidad Zahira
 //Te hice un dibujo, espero que te guste"
-        const dibujo_path = path.join(__dirname, "../../Images/ManzanaVerde.png");
+        const dibujo_path = path.join(__dirname, "../../Images/Dibujo.png");
         
         interaction.update({
             embeds:[embed_respuesta],
