@@ -5,13 +5,13 @@ class Delete extends InteractionContent {
 
     async execution(interaction)
     {
-        return
         let embed_respuesta = new EmbedBuilder()
             .setColor("#0099ff")
-            .setTitle("Feliz navidad Zahira")
-            .setDescription("Te hice un dibujo, espero que te guste")
+            .setTitle("xd")
+            .setDescription("xd")
             .setImage("attachment://DibujoDeZahira.png");
-
+            //Feliz navidad Zahira
+//Te hice un dibujo, espero que te guste"
         
         interaction.update({
             embeds:[embed_respuesta],
