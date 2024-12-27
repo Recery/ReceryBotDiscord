@@ -26,6 +26,8 @@ function getCommands(category, client) {
             commands.push(command.name);
     }
 
+    if (!commands.length > 0) commands.push("...");
+
     return commands;
 }
 
