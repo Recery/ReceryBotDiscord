@@ -23,9 +23,8 @@ function getCommands(category, client) {
     const commands = [];
 
     for (const command of client.commands) {
-        console.log(command.name);
         if (command.category === category) {
-            commands.push(command.name);
+            commands.push(command['name']);
         }
     }
 
