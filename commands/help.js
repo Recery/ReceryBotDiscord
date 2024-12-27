@@ -5,7 +5,7 @@ module.exports = {
     category: "Info",
     execute(client, msg, args) 
     {
-        const lang = client.langs.get(msg.guildId);
+        const lang = client.langs.get(msg.guildId) || "es";
 
         let embed = new Discord.EmbedBuilder()
             .setColor("#65a7fc")
@@ -19,8 +19,8 @@ module.exports = {
             .addOptions(
                 new Discord.StringSelectMenuOptionBuilder()
                     .setLabel(messages[lang].action_selection_label)
-                    .setDescription(messages[lang].action_selection_label)
-                    .setValue("help_action_option")
+                    .setDescription(messages[lang].action_selection_desc)
+                    .setValue("action")
             )
 
         const row1 = new Discord.ActionRowBuilder()

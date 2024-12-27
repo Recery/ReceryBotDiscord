@@ -12,13 +12,26 @@ const client = new Discord.Client({
   http: {timeout:60000}
 });
 
-const command_files = require('fs').readdirSync("./commands").filter(file => file.endsWith(".js"));
+
+// CARGAR COMANDOS E INTERACCIONES DESDE EL SISTEMA DE ARCHIVOS
+
+const fs = require("fs");
+
+const command_files = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 client.commands = new Discord.Collection();
-for (const file of command_files)
-{
+for (const file of command_files) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
 }
+
+const interaction_files = fs.readdirSync("./interactions").filter(file => file.endsWith(".js"));
+client.interactions = new Discord.Collection();
+for (const file of interaction_files) {
+	const interaction = require(`./interactions/${file}`);
+	client.interactions.set(interaction.name, interaction);
+}
+
+// -------------------------------------------------------------
 
 const Prefix = require("./prefix.js");
 const Langs = require("./langsLoader.js");
@@ -44,6 +57,16 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 
 client.on(Discord.Events.InteractionCreate, async (interaction) => {
 	console.log(interaction.customId);
+
+	const interaction = client.interactions.get(interaction.customId);
+	if (!interaction) return;
+
+	try {
+		(interaction.execute(client, interaction));
+	}
+	catch (error) {
+		console.log(error);
+	}
 });
 
 
