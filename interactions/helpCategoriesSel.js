@@ -6,7 +6,6 @@ module.exports = {
         const lang = client.langs.get(interaction.guildId) || "es";
 
         const category = interaction.values[0] || "misc";
-        console.log(category);
 
         const newEmbed = new Discord.EmbedBuilder()
             .setColor("#65a7fc")
@@ -36,10 +35,14 @@ function getCommands(category, client) {
 const messages = {
     es: {
         title: "Categoría: ",
-        action: "Acción"
+        action: "Acción",
+        administration: "Administración",
+        fun: "Diversión"
     },
     en: {
         title: "Category: ",
-        action: "Action"
+        action: "Action",
+        administration: "Administration",
+        fun: "Fun"
     }
 }
