@@ -10,7 +10,7 @@ module.exports = {
         const newEmbed = new Discord.EmbedBuilder()
             .setColor("#65a7fc")
             .setTitle(messages[lang].title + messages[lang][category])
-            .setDescription(getCommands(category).join(" "));
+            .setDescription(getCommands(category, client).join(" "));
 
         interaction.update({
             embeds: [newEmbed]
@@ -18,7 +18,7 @@ module.exports = {
     }
 }
 
-function getCommands(category) {
+function getCommands(category, client) {
     const commands = [];
 
     for (const command of client.commands) {
