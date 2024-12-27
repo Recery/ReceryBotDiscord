@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "helpCategoriesSel",
+    id: "helpCategoriesSel",
     execute(client, interaction) {
         const lang = client.langs.get(interaction.guildId) || "es";
 

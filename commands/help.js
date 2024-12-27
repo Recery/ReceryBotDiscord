@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 module.exports = {
     name: "help",
-    category: "Info",
+    category: "info",
     execute(client, msg, args) 
     {
         const lang = client.langs.get(msg.guildId) || "es";

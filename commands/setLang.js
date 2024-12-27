@@ -2,7 +2,7 @@ const Langs = require("./../langsLoader.js");
 
 module.exports = {
     name: "setlang",
-    category: "Administración",
+    category: "administration",
     execute(client, msg, args)
     {
         const lang = client.langs.get(msg.guildId) || "es";

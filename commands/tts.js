@@ -4,7 +4,7 @@ const fs = require("fs");
 
 module.exports = {
     name: "tts",
-    category: "Diversión",
+    category: "fun",
     async execute (client, msg, args) 
     {
         const lang = client.langs.get(msg.guildId) || "es";

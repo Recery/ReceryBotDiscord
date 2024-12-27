@@ -28,7 +28,7 @@ const interaction_files = fs.readdirSync("./interactions").filter(file => file.e
 client.interactions = new Discord.Collection();
 for (const file of interaction_files) {
 	const interaction = require(`./interactions/${file}`);
-	client.interactions.set(interaction.name, interaction);
+	client.interactions.set(interaction.id, interaction);
 }
 
 // -------------------------------------------------------------

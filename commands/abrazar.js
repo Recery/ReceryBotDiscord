@@ -1,5 +1,6 @@
 module.exports = {
     name: "abrazar",
+    category: "action",
     execute(client, msg, args)
     {
         const lang = client.langs.get(msg.guildId) || "es";

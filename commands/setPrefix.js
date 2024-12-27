@@ -2,7 +2,7 @@ const DB = require("better-sqlite3");
 
 module.exports = {
     name: "setprefix",
-    category: "Administración",
+    category: "administration",
     execute(client, msg, args)
     {
         const serverid = msg.guildId;
