@@ -28,7 +28,11 @@ module.exports = {
                 new Discord.StringSelectMenuOptionBuilder()
                     .setLabel(messages[lang].fun_selection_label)
                     .setDescription(messages[lang].fun_selection_desc)
-                    .setValue("fun")
+                    .setValue("fun"),
+                new Discord.StringSelectMenuOptionBuilder()
+                    .setLabel(messages[lang].info_selection_label)
+                    .setDescription(messages[lang].info_selection_desc)
+                    .setValue("info")
             );
 
         const row1 = new Discord.ActionRowBuilder()
@@ -50,7 +54,10 @@ const messages = {
         action_selection_desc: "Comandos para realizar acciones hacia otros miembros o hacia ti mismo.",
 
         fun_selection_label: "Diversión",
-        fun_selection_desc: "Comandos para divertirte."
+        fun_selection_desc: "Comandos para divertirte.",
+
+        info_selection_label: "Información",
+        info_selection_desc: "Comandos de información sobre mí."
     },
     en: {
         title: "Recery Bot commands",
@@ -63,6 +70,9 @@ const messages = {
         action_selection_desc: "Commands to perform actions on other members or yourself.",
 
         fun_selection_label: "Fun",
-        fun_selection_desc: "Commands to have fun."
+        fun_selection_desc: "Commands to have fun.",
+
+        info_selection_label: "Info",
+        info_selection_desc: "Commands about information of myself."
     }
 }

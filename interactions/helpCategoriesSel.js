@@ -37,12 +37,14 @@ const messages = {
         title: "Categoría: ",
         action: "Acción",
         administration: "Administración",
-        fun: "Diversión"
+        fun: "Diversión",
+        info: "Información"
     },
     en: {
         title: "Category: ",
         action: "Action",
         administration: "Administration",
-        fun: "Fun"
+        fun: "Fun",
+        info: "Info"
     }
 }
