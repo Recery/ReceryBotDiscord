@@ -24,7 +24,7 @@ function getCommands(category, client) {
 
     for (const command of client.commands) {
         if (command[1].category === category) {
-            commands.push(command[1].name);
+            commands.push("`" + command[1].name + "`");
         }
     }
 
