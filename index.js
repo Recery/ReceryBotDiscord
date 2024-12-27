@@ -58,11 +58,11 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 client.on(Discord.Events.InteractionCreate, async (interaction) => {
 	console.log(interaction.customId);
 
-	const interaction = client.interactions.get(interaction.customId);
-	if (!interaction) return;
+	const interactionData = client.interactions.get(interaction.customId);
+	if (!interactionData) return;
 
 	try {
-		(interaction.execute(client, interaction));
+		(interactionData.execute(client, interaction));
 	}
 	catch (error) {
 		console.log(error);
