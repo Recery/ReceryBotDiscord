@@ -22,6 +22,6 @@ function getJSFiles(directory) {
     return files;
 }
 
-module.exports({
+module.exports = {
     getJSFiles
-});
+};
