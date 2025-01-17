@@ -9,6 +9,6 @@ module.exports = {
 };
 
 const messages = {
-    es: "Saludos <@{{id}}> pedazo de pelotudo",
-    en: "Hi <@{{id}}> piece of dumbass"
+    es: "¡Saludos, <@{{id}}>! ¿Cómo estás?",
+    en: "Hi, <@{{id}}>! How are you doing?"
 }

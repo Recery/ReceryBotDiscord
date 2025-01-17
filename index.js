@@ -15,18 +15,16 @@ const client = new Discord.Client({
 
 // CARGAR COMANDOS E INTERACCIONES DESDE EL SISTEMA DE ARCHIVOS
 
-const fs = require("fs");
+const GetJSFiles = require("./getJSFiles.js");
 
-const command_files = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
 client.commands = new Discord.Collection();
-for (const file of command_files) {
+for (const file of GetJSFiles.getJSFiles("./commands")) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
 }
 
-const interaction_files = fs.readdirSync("./interactions").filter(file => file.endsWith(".js"));
 client.interactions = new Discord.Collection();
-for (const file of interaction_files) {
+for (const file of GetJSFiles.getJSFiles("./interactions")) {
 	const interaction = require(`./interactions/${file}`);
 	client.interactions.set(interaction.id, interaction);
 }
