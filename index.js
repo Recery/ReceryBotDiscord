@@ -18,13 +18,13 @@ const client = new Discord.Client({
 const GetJSFiles = require("./getJSFiles.js");
 
 client.commands = new Discord.Collection();
-for (const file of GetJSFiles.getJSFiles("./commands")) {
+for (const file of GetJSFiles.getJSFiles("commands")) {
 	const command = require(`./commands/${file}`);
 	client.commands.set(command.name, command);
 }
 
 client.interactions = new Discord.Collection();
-for (const file of GetJSFiles.getJSFiles("./interactions")) {
+for (const file of GetJSFiles.getJSFiles("interactions")) {
 	const interaction = require(`./interactions/${file}`);
 	client.interactions.set(interaction.id, interaction);
 }
