@@ -9,11 +9,9 @@ const path = require("path");
 
 function getJSFiles(directory) {
     let files = [];
-    console.log(`Leyendo directorio: ${directory}`)
 
     for (const file of fs.readdirSync(directory)) {
         const fullPath = path.join(directory, file);
-        console.log(`fullpath: ${fullPath}`)
 
         if (fs.statSync(fullPath).isDirectory())
             files.push(...getJSFiles(fullPath));
