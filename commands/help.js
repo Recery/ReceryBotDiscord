@@ -11,7 +11,7 @@ module.exports = {
             .setColor("#65a7fc")
             .setTitle(messages[lang].title)
             .addFields(
-                
+                {name: "", }
             )
         
         const selection = new Discord.StringSelectMenuBuilder()

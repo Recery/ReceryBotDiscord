@@ -21,9 +21,19 @@ module.exports = {
 function getCommands(category, client) {
     const commands = [];
 
+    let charsSum = 0;
+
     for (const command of client.commands) {
         if (command[1].category === category) {
-            commands.push("`" + command[1].name + "`");
+            const commandStr = "`" + command[1].name + "`";
+
+            // Si todos los comandos agregados hasta ahora en esta linea suman 50 caracteres, hace un salto de linea
+            charsSum += commandStr.length;
+            if (charsSum > 50) {
+                charsSum = 0;
+                commands.push("\n");
+            }
+            commands.push(commandStr);
         }
     }
 
