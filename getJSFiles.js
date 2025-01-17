@@ -14,7 +14,7 @@ function getJSFiles(directory) {
         const fullPath = path.join(directory, file);
 
         if (fs.statSync(fullPath).isDirectory())
-            files.push(...getCommands(fullPath));
+            files.push(...getJSFiles(fullPath));
         else if (file.endsWith(".js"))
             files.push(fullPath);
     }
