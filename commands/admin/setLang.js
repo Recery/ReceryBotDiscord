@@ -1,4 +1,4 @@
-const Langs = require("./../langsLoader.js");
+const Langs = require("../../langsLoader.js");
 
 module.exports = {
     name: "setlang",
