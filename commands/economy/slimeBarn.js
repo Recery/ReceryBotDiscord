@@ -7,6 +7,6 @@ module.exports = {
     execute(client, msg, args) {
         const userID = msg.author.id;
 
-        msg.reply(`<@${userID}>, en total tienes ${eco.getBarnSlimesAmount(userID)}`);
+        msg.reply(`<@${userID}>, en total tienes ${eco.getBarnSlimesAmount(userID)} slimes en tu granero.`);
     }
 }
