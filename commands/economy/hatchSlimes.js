@@ -98,14 +98,13 @@ async function getImageAttachment(slimes, lang) {
 
             if (slime) {
                 const textX = x + 200;
-                const textY = y + 380;
+                const textY = y + 390;
 
                 ctx.strokeText(slime.displayName[lang], textX, textY); // Dibujar borde del texto
                 ctx.fillText(slime.displayName[lang], textX, textY);
             }
         }
     }
-    
 
     return new Discord.AttachmentBuilder(canvas.toBuffer(), {name: "hatching.png"});
 }

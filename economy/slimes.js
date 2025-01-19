@@ -58,5 +58,15 @@ module.exports = [
         rarity: 3,
         appleGeneration: 9,
         image: "https://i.imgur.com/FpJ089n.png"
+    },
+    {
+        name: "goldfishslime",
+        displayName: {
+            es: "Slime Goldfish",
+            en: "Goldfish Slime"
+        },
+        rarity: 4,
+        appleGeneration: 15,
+        image: "https://i.imgur.com/kJqeeNq.png"
     }
 ]
