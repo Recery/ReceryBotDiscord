@@ -1,7 +1,6 @@
 const DB = require("better-sqlite3");
 
 const db =  new DB(process.env.ECONOMY_DB_PATH);
-db.pragma("journal_mode = WAL");
 
 // Se manda un valor nuevo para las manzanas y lo reemplaza completamente al valor anterior
 function modifyApples(userID, apples) {
