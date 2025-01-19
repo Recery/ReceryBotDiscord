@@ -73,6 +73,7 @@ async function getImageAttachment(slimes, lang) {
 
     ctx.font = "80px arial";
     ctx.fillStyle = "#ffffff";
+    ctx.textAlign = "center";
 
     const background = await Canvas.loadImage("https://i.imgur.com/elinwYQ.png");
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -84,11 +85,20 @@ async function getImageAttachment(slimes, lang) {
             let link = ""; 
             if (slime) link = slime.image;
             else link = "https://i.imgur.com/kbetYsZ.png";
+            
 
             const slimeImg = await Canvas.loadImage(link);
-            ctx.drawImage(slimeImg, 150 + (j * 450) , 150 + (i * 450), 400, 400);
+            const x = 150 + j * 450;
+            const y = 150 + i * 450;
 
-            if (slime) ctx.fillText(slime.displayName[lang], 150 + (j * 450), 550 + (i * 450));
+            ctx.drawImage(slimeImg, x , y, 400, 400);
+
+            if (slime) {
+                const textX = x + 200;
+                const textY = y + 400 + 20;
+
+                ctx.fillText(slime.displayName[lang], textX, textY);
+            }
         }
     }
     
