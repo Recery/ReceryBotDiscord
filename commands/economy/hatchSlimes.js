@@ -32,7 +32,7 @@ module.exports = {
             msg.reply({
                 content: "**¡Obtuviste estos slimes!**",
                 embeds: [embed],
-                files: [await getImageAttachment(slimes)]
+                files: [await getImageAttachment(hatchedSlimes)]
             });
         }
     }
