@@ -33,7 +33,7 @@ module.exports = {
             .setImage("attachment://hatching.png");
 
         const loadingReaction = await msg.react("<a:loading:1330598692008493076>");
-        const imageAttachment = await getImageAttachment(hatchedSlimes);
+        const imageAttachment = await getImageAttachment(hatchedSlimes, lang);
 
         msg.reply({
             embeds: [embed],
@@ -67,9 +67,12 @@ function chooseSlime() {
     return weightedList[Math.floor(Math.random() * weightedList.length)];
 }
 
-async function getImageAttachment(slimes) {
+async function getImageAttachment(slimes, lang) {
     const canvas = Canvas.createCanvas(1600, 1600);
     const ctx = canvas.getContext("2d");
+
+    ctx.font = "10px arial";
+    ctx.fillStyle = "#ffffff";
 
     const background = await Canvas.loadImage("https://i.imgur.com/elinwYQ.png");
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -78,12 +81,12 @@ async function getImageAttachment(slimes) {
         for (let j = 0; j < 3; j++) {
             const slime = slimes.shift();
 
-            let link = "";
-            if (slime) link = slime.image;
-            else link = "https://i.imgur.com/kbetYsZ.png";
+            const link = slime.image || "https://i.imgur.com/kbetYsZ.png";
 
             const slimeImg = await Canvas.loadImage(link);
             ctx.drawImage(slimeImg, 150 + (j * 450) , 150 + (i * 450), 400, 400);
+
+            if (slime) ctx.fillText(slime.displayName[lang], 150 + (j * 450), 550 + (i * 450));
         }
     }
     
