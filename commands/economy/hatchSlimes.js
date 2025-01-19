@@ -25,9 +25,14 @@ module.exports = {
                 hatchedSlimes += " - " + slimes[Math.floor(Math.random() * slimes.length)];
                 if (i < slimesToHatch - 1) hatchedSlimes += "\n";
             }
-            
+
+            const embed = new Discord.EmbedBuilder()
+                .setTitle("Prueba")
+                .setImage("attachment://hatching.png");
+
             msg.reply({
                 content: hatchedSlimes,
+                embeds: [embed],
                 files: [getImageAttachment()]
             });
         }
