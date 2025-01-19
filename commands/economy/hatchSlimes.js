@@ -40,7 +40,7 @@ module.exports = {
 }
 
 async function getImageAttachment() {
-    const canvas = Canvas.createCanvas(800, 800);
+    const canvas = Canvas.createCanvas(1600, 1600);
     const ctx = canvas.getContext("2d");
 
     const background = await Canvas.loadImage("https://i.imgur.com/elinwYQ.png");
@@ -48,7 +48,7 @@ async function getImageAttachment() {
 
     for (let i = 0; i < 3; i++) {
         const slime = await Canvas.loadImage("https://i.imgur.com/t46q0yd.png");
-        ctx.drawImage(slime, 100 * i + 1, 100, 200, 200);
+        ctx.drawImage(slime, 200 + (i * 250) , 200, 400, 400);
     }
     
 
