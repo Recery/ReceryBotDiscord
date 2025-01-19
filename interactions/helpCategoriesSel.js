@@ -47,6 +47,7 @@ const messages = {
         title: "Categoría: ",
         action: "Acción",
         administration: "Administración",
+        economy: "Economía",
         fun: "Diversión",
         info: "Información"
     },
@@ -54,6 +55,7 @@ const messages = {
         title: "Category: ",
         action: "Action",
         administration: "Administration",
+        economy: "Economy",
         fun: "Fun",
         info: "Info"
     }

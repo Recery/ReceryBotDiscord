@@ -18,13 +18,17 @@ module.exports = {
             .setPlaceholder(messages[lang].selection_placeholder)
             .addOptions(
                 new Discord.StringSelectMenuOptionBuilder()
+                    .setLabel(messages[lang].action_selection_label)
+                    .setDescription(messages[lang].action_selection_desc)
+                    .setValue("action"),
+                new Discord.StringSelectMenuOptionBuilder()
                     .setLabel(messages[lang].administration_selection_label)
                     .setDescription(messages[lang].administration_selection_desc)
                     .setValue("administration"),
                 new Discord.StringSelectMenuOptionBuilder()
-                    .setLabel(messages[lang].action_selection_label)
-                    .setDescription(messages[lang].action_selection_desc)
-                    .setValue("action"),
+                    .setLabel(messages[lang].economy_selection_label)
+                    .setDescription(messages[lang].aeconomy_selection_desc)
+                    .setValue("economy"),
                 new Discord.StringSelectMenuOptionBuilder()
                     .setLabel(messages[lang].fun_selection_label)
                     .setDescription(messages[lang].fun_selection_desc)
@@ -47,11 +51,14 @@ const messages = {
         title: "Comandos de Recery Bot",
         selection_placeholder: "Elige una categoría",
 
+        action_selection_label: "Acción",
+        action_selection_desc: "Comandos para realizar acciones hacia otros miembros o hacia ti mismo.",
+
         administration_selection_label: "Administración",
         administration_selection_desc: "Comandos de administración del servidor y configurarme.",
 
-        action_selection_label: "Acción",
-        action_selection_desc: "Comandos para realizar acciones hacia otros miembros o hacia ti mismo.",
+        economy_selection_label: "Economía",
+        economy_selection_desc: "Comandos para interactuar con mi sistema de economía.",
 
         fun_selection_label: "Diversión",
         fun_selection_desc: "Comandos para divertirte.",
@@ -68,6 +75,9 @@ const messages = {
 
         action_selection_label: "Action",
         action_selection_desc: "Commands to perform actions on other members or yourself.",
+
+        economy_selection_label: "Economy",
+        economy_selection_desc: "Commands to interact with my economy system.",
 
         fun_selection_label: "Fun",
         fun_selection_desc: "Commands to have fun.",
