@@ -37,7 +37,7 @@ module.exports = {
 const messages = {
     es: {
         claimable: "¡Felicidades! Reclamaste tu premio de 100:green_apple:. \n Ahora tienes {{apples}}:green_apple: en total.",
-        notClaimable: "Todavía no puedes reclamar tu premio. Faltan {{minutes}} minutos."
+        notClaimable: "Todavía no puedes reclamar tu premio. Faltan `{{minutes}} minutos`."
     },
     en: {
         claimable: "Congratulations! You claimed your 100:green_apple: prize. \n You now have {{apples}}:green_apple:.",
