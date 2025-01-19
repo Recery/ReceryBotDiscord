@@ -26,7 +26,7 @@ module.exports = {
             users.set(userID, now);
             saveDate(userID, now);
 
-            const newApples = eco.getApples(userID) + 100;
+            const newApples = eco.getApples(userID) + 50;
             eco.modifyApples(userID, newApples);
 
             msg.reply(messages[lang].claimable.replace("{{apples}}", newApples.toString()));
@@ -36,11 +36,11 @@ module.exports = {
 
 const messages = {
     es: {
-        claimable: "¡Felicidades! Reclamaste tu premio de 100:green_apple:. \nAhora tienes {{apples}}:green_apple: en total.",
+        claimable: "¡Felicidades! Reclamaste tu premio de 50:green_apple:.\nAhora tienes {{apples}}:green_apple: en total.",
         notClaimable: "Todavía no puedes reclamar tu premio. Faltan `{{minutes}} minutos`."
     },
     en: {
-        claimable: "Congratulations! You claimed your 100:green_apple: prize. \nYou now have {{apples}}:green_apple:.",
+        claimable: "Congratulations! You claimed your 50:green_apple: prize.\nYou now have {{apples}}:green_apple:.",
         notClaimable: "You can't claim your prize yet. {{minutes}} minutes left."
     }
 }
