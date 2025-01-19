@@ -27,7 +27,7 @@ module.exports = {
             saveDate(userID, now);
 
             const newApples = eco.getApples(userID) + 50;
-            eco.modifyApples(userID, newApples);
+            eco.setApples(userID, newApples);
 
             msg.reply(messages[lang].claimable.replace("{{apples}}", newApples.toString()));
         }

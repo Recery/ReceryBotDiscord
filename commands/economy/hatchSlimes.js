@@ -20,7 +20,7 @@ module.exports = {
             return;
         }
             
-        eco.modifyApples(userID, userApples - applesToSpend);
+        eco.setApples(userID, userApples - applesToSpend);
 
         let hatchedSlimes = [];
         for (let i = 0; i < slimesToHatch; i++)
