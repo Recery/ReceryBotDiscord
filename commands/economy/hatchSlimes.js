@@ -18,7 +18,7 @@ module.exports = {
         else {
             eco.modifyApples(userID, userApples - applesToSpend);
 
-            let hatchedSlimes = "**" + messages[lang].slimeObtention + "**";
+            let hatchedSlimes = "**" + messages[lang].slimeObtention + "**\n";
             for (let i = 0; i < slimesToHatch; i++) {
                 hatchedSlimes += " - " + slimes[Math.floor(Math.random() * slimes.length)];
                 if (i < slimesToHatch - 1) hatchedSlimes += "\n";
