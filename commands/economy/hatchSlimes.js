@@ -48,7 +48,7 @@ async function getImageAttachment() {
 
     for (let i = 0; i < 3; i++) {
         const slime = await Canvas.loadImage("https://i.imgur.com/t46q0yd.png");
-        ctx.drawImage(slime, 200 + (i * 250) , 200, 400, 400);
+        ctx.drawImage(slime, 200 + (i * 450) , 200, 400, 400);
     }
     
 
