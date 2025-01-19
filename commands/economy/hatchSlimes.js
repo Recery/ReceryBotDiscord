@@ -1,6 +1,7 @@
 const Discord = require("discord.js");
 const Canvas = require("canvas"); 
-const eco = require("../../economyModule.js");
+const eco = require("../../economy/economyModule.js");
+const slimes = require("../../economy/slimes.js");
 
 module.exports = {
     name: "hatchslimes",
@@ -20,24 +21,24 @@ module.exports = {
         else {
             eco.modifyApples(userID, userApples - applesToSpend);
 
-            let hatchedSlimes = "**" + messages[lang].slimeObtention + "**\n";
-            for (let i = 0; i < slimesToHatch; i++) {
-                hatchedSlimes += " - " + slimes[Math.floor(Math.random() * slimes.length)];
-                if (i < slimesToHatch - 1) hatchedSlimes += "\n";
-            }
+            let hatchedSlimes = [];
+            for (let i = 0; i < slimesToHatch; i++)
+                hatchedSlimes.push(slimes[Math.floor(Math.random() * slimes.length)]);
 
             const embed = new Discord.EmbedBuilder()
                 .setTitle("Prueba")
                 .setImage("attachment://hatching.png");
 
             msg.reply({
-                content: hatchedSlimes
+                content: "**¡Obtuviste estos slimes!**",
+                embeds: [embed],
+                files: [getImageAttachment(slimes)]
             });
         }
     }
 }
 
-async function getImageAttachment() {
+async function getImageAttachment(slimes) {
     const canvas = Canvas.createCanvas(1600, 1600);
     const ctx = canvas.getContext("2d");
 
@@ -47,11 +48,13 @@ async function getImageAttachment() {
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
-            let link = ";"
-            if (i == 2) link = "https://i.imgur.com/kbetYsZ.png";
-            else link = "https://i.imgur.com/t46q0yd.png";
+            const slime = slimes.shift();
 
-            const slime = await Canvas.loadImage(link);
+            let link = ";"
+            if (!slime) link = slime.image;
+            else link = "https://i.imgur.com/kbetYsZ.png";
+
+            const slimeImg = await Canvas.loadImage(link);
             ctx.drawImage(slime, 150 + (j * 450) , 150 + (i * 450), 400, 400);
         }
     }
@@ -59,19 +62,6 @@ async function getImageAttachment() {
 
     return new Discord.AttachmentBuilder(canvas.toBuffer(), {name: "hatching.png"});
 }
-
-const slimes = [
-    "green slime",
-    "yellow slime",
-    "white slime",
-    "cosmic slime",
-    "creamy slime",
-    "poo slime",
-    "goldfish slime",
-    "mummified slime",
-    "red slime",
-    "blue slime"
-]
 
 const messages = {
     es: {

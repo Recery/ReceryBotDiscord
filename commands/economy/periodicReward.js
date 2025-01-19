@@ -1,5 +1,5 @@
 const DB = require("better-sqlite3");
-const eco = require("../../economyModule.js");
+const eco = require("../../economy/economyModule.js");
 
 const users = new Map();    
 

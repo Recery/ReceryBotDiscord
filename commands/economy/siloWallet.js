@@ -1,4 +1,4 @@
-const eco = require("../../economyModule.js");
+const eco = require("../../economy/economyModule.js");
 
 module.exports = {
     name: "silowallet",
