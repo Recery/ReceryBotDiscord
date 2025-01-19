@@ -14,7 +14,7 @@ module.exports = {
 
         if (now - lastClaim < twoHours) {
             const timeLeft = twoHours - (now - lastClaim); // Tiempo restante en milisegundos
-            const minutes = Math.floor((timeLeft / 1000) / 60);
+            const minutes = Math.floor(1 + (timeLeft / 1000) / 60);
             msg.reply("Cant claim. Time left: " + minutes.toString());
         }
         else {
