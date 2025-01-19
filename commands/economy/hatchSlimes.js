@@ -55,7 +55,7 @@ async function getImageAttachment(slimes) {
             else link = "https://i.imgur.com/kbetYsZ.png";
 
             const slimeImg = await Canvas.loadImage(link);
-            ctx.drawImage(slime, 150 + (j * 450) , 150 + (i * 450), 400, 400);
+            ctx.drawImage(slimeImg, 150 + (j * 450) , 150 + (i * 450), 400, 400);
         }
     }
     
