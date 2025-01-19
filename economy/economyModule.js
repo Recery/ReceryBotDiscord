@@ -27,11 +27,42 @@ function getBarnSize(userID) {
     return 3;
 }
 
-//function setBarnContent(userID, slimes)
+// Mandarle un objeto de slime para agregar
+function addSlimeToBarn(userID, slime) {
+
+    db.prepare("UPDATE OR REPLACE INTO barnContent (userID, ) ")
+}
+
+function getBarnSlimes(userID) {
+    const row = db.prepare("SELECT slimes FROM barnContent WHERE userId = ?").get(userID);
+
+    if (row) return row.slimes;
+
+    return "0:0";
+}
+
+function getBarnSlimesAmount(userID) {
+    const row = db.prepare("SELECT slimes FROM barnContent WHERE userId = ?").get(userID);
+
+    let slimesAmount = 0;
+
+    if (!row) return slimesAmount;
+
+    const objectStrings = row.slimes.split(";");
+
+    for (const str of objectStrings) {
+        const data = str.split(":");
+        slimesAmount += Number(data[1]);
+    }
+
+    return slimesAmount;
+}
 
 module.exports = {
     setApples,
     getApples,
     setBarnSize,
-    getBarnSize
+    getBarnSize,
+    addSlimeToBarn,
+    getBarnSlimesAmount
 };
