@@ -31,9 +31,7 @@ module.exports = {
                 .setImage("attachment://hatching.png");
 
             msg.reply({
-                content: hatchedSlimes,
-                embeds: [embed],
-                files: [await getImageAttachment()]
+                content: hatchedSlimes
             });
         }
     }
@@ -52,7 +50,7 @@ async function getImageAttachment() {
             let link = ";"
             if (i == 2) link = "https://i.imgur.com/kbetYsZ.png";
             else link = "https://i.imgur.com/t46q0yd.png";
-            
+
             const slime = await Canvas.loadImage(link);
             ctx.drawImage(slime, 150 + (j * 450) , 150 + (i * 450), 400, 400);
         }
