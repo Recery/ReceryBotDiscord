@@ -72,7 +72,7 @@ async function getImageAttachment(slimes, lang) {
     const canvas = Canvas.createCanvas(1600, 1600);
     const ctx = canvas.getContext("2d");
 
-    ctx.font = "80px silkscreen";
+    ctx.font = "40px silkscreen";
     ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
 

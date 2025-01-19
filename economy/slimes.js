@@ -52,7 +52,7 @@ module.exports = [
     {
         name: "cosmicslime",
         displayName: {
-            es: "Slime Cósmico",
+            es: "Slime Cosmico",
             en: "Cosmic Slime"
         },
         rarity: 3,
