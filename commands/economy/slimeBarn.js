@@ -14,7 +14,7 @@ module.exports = {
         if (!slimes.length > 0) content += "¡Ninguno!"
 
         for (const slime of eco.getBarnSlimes(userID))
-            content += slime.slime.displayName[lang] + " x" + slime.amount.toString();
+            content += slime.slime.displayName[lang] + " x" + slime.amount.toString() + "\n";
 
         msg.reply(`<@${userID}>, en tienes estos slimes en tu granero: ${content}`);
     }
