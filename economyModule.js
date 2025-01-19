@@ -3,14 +3,12 @@ const DB = require("better-sqlite3");
 const db =  new DB(process.env.ECONOMY_DB_PATH);
 
 // Se manda un valor nuevo para las manzanas y lo reemplaza completamente al valor anterior
-function modifyApples(userID, apples) {
-    const mdb =  new DB(process.env.ECONOMY_DB_PATH);
-    mdb.prepare("INSERT OR REPLACE INTO greenApples (userId, apples) VALUES (?, ?)").run(userID, apples);
-    mdb.close();
+async function modifyApples(userID, apples) {
+    await db.prepare("INSERT OR REPLACE INTO greenApples (userId, apples) VALUES (?, ?)").run(userID, apples);
 }
 
-function getApples(userID) {
-    const row = db.prepare("SELECT apples FROM greenApples WHERE userId = ?").get(userID);
+async function getApples(userID) {
+    const row = await db.prepare("SELECT apples FROM greenApples WHERE userId = ?").get(userID);
 
     if (row)
         return row.apples;
