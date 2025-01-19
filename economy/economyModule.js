@@ -27,6 +27,8 @@ function getBarnSize(userID) {
     return 3;
 }
 
+//function setBarnContent(userID, slimes)
+
 module.exports = {
     setApples,
     getApples,
