@@ -23,7 +23,7 @@ module.exports = {
 
             let hatchedSlimes = [];
             for (let i = 0; i < slimesToHatch; i++)
-                hatchedSlimes.push(slimes[Math.floor(Math.random() * slimes.length)]);
+                hatchedSlimes.push(chooseSlime());
 
             const embed = new Discord.EmbedBuilder()
                 .setTitle("Prueba")
@@ -36,6 +36,29 @@ module.exports = {
             });
         }
     }
+}
+
+function chooseSlime() {
+    const weightedList = [];
+
+    for (const slime of slimes) {
+        switch (slime.rarity) {
+            case 1:
+                for (let i = 0; i < 12; i++) weightedList.push(slime);
+                break;
+            case 2:
+                for (let i = 0; i < 8; i++) weightedList.push(slime);
+                break;
+            case 3:
+                for (let i = 0; i < 4; i++) weightedList.push(slime);
+                break;
+            case 4:
+                for (let i = 0; i < 1; i++) weightedList.push(slime);
+                break;
+        }
+    }
+
+    return weightedList[Math.floor(Math.random() * weightedList.length)];
 }
 
 async function getImageAttachment(slimes) {

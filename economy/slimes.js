@@ -28,5 +28,35 @@ module.exports = [
         rarity: 1,
         appleGeneration: 2,
         image: "https://i.imgur.com/PMLd3Bn.png"
+    },
+    {
+        name: "creamyslime",
+        displayName: {
+            es: "Slime Cremoso",
+            en: "Creamy Slime"
+        },
+        rarity: 2,
+        appleGeneration: 4,
+        image: "https://i.imgur.com/XTYTUfW.png"
+    },
+    {
+        name: "pooslime",
+        displayName: {
+            es: "Slime De Caca",
+            en: "Poo Slime"
+        },
+        rarity: 2,
+        appleGeneration: 6,
+        image: "https://i.imgur.com/hpnrHFS.png"
+    },
+    {
+        name: "cosmicslime",
+        displayName: {
+            es: "Slime Cósmico",
+            en: "Cosmic Slime"
+        },
+        rarity: 3,
+        appleGeneration: 9,
+        image: "https://i.imgur.com/8HpI972.png"
     }
 ]
