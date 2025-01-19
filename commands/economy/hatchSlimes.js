@@ -29,6 +29,7 @@ module.exports = {
 
         const embed = new Discord.EmbedBuilder()
             .setTitle(`**${messages[lang].slimeObtention}**`)
+            .setColor("#12bcff")
             .setImage("attachment://hatching.png");
 
         const loadingReaction = await msg.react("<a:loading:1330598692008493076>");
