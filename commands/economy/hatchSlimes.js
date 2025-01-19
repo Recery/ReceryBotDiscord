@@ -29,6 +29,7 @@ module.exports = {
                 .setTitle("Prueba")
                 .setImage("attachment://hatching.png");
 
+            msg.react("<a:loading:1330598692008493076>");
             msg.reply({
                 content: "**¡Obtuviste estos slimes!**",
                 embeds: [embed],
