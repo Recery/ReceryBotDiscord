@@ -27,7 +27,7 @@ module.exports = {
                     .setValue("administration"),
                 new Discord.StringSelectMenuOptionBuilder()
                     .setLabel(messages[lang].economy_selection_label)
-                    .setDescription(messages[lang].aeconomy_selection_desc)
+                    .setDescription(messages[lang].economy_selection_desc)
                     .setValue("economy"),
                 new Discord.StringSelectMenuOptionBuilder()
                     .setLabel(messages[lang].fun_selection_label)
