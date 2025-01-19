@@ -67,7 +67,7 @@ function chooseSlime() {
     return weightedList[Math.floor(Math.random() * weightedList.length)];
 }
 
-Canvas.registerFont("../../fonts/slkscr.ttf", {family: "silkscreen"});
+Canvas.registerFont("fonts/slkscr.ttf", {family: "silkscreen"});
 async function getImageAttachment(slimes, lang) {
     const canvas = Canvas.createCanvas(1600, 1600);
     const ctx = canvas.getContext("2d");
