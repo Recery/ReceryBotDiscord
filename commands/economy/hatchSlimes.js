@@ -71,7 +71,7 @@ async function getImageAttachment(slimes, lang) {
     const canvas = Canvas.createCanvas(1600, 1600);
     const ctx = canvas.getContext("2d");
 
-    ctx.font = "10px arial";
+    ctx.font = "120px arial";
     ctx.fillStyle = "#ffffff";
 
     const background = await Canvas.loadImage("https://i.imgur.com/elinwYQ.png");
