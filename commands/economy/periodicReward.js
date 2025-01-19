@@ -12,14 +12,15 @@ module.exports = {
         const userID = msg.author.id;
         
         const now = Date.now();
-        const twoHours = /*2 * 60 * 60 * */ 60000; // Así se obtiene 2 horas en milisegundos
+        const timeToClaim = /*2 * 60 * 60 * */ 60000; // El tiempo que tarda en recargarse este comando tras ser usado
 
         const lastClaim = users.get(userID) || 0;
 
-        if (now - lastClaim < twoHours) {
-            const timeLeft = twoHours - (now - lastClaim); // Tiempo restante en milisegundos
+        if (now - lastClaim < timeToClaim) {
+            const timeLeft = timeToClaim - (now - lastClaim); // Tiempo restante en milisegundos
             const minutes = Math.floor(1 + (timeLeft / 1000) / 60);
-            msg.reply("Can't claim. Time left: `" + minutes.toString() + " minutes`");
+            
+            msg.reply(messages[lang].notClaimable.replace("{{minutes}}", minutes.toString()));
         }
         else {
             users.set(userID, now);
@@ -28,8 +29,19 @@ module.exports = {
             const newApples = eco.getApples(userID) + 100;
             eco.modifyApples(userID, newApples);
 
-            msg.reply("Claimed! You now have " + newApples.toString() + " green apples.");
+            msg.reply(messages[lang].claimable.replace("{{apples}}", newApples.toString()));
         }
+    }
+}
+
+const messages = {
+    es: {
+        claimable: "¡Felicidades! Reclamaste tu premio de 100:green_apple:. \n Ahora tienes {{apples}}:green_apple: en total.",
+        notClaimable: "Todavía no puedes reclamar tu premio. Faltan {{minutes}} minutos."
+    },
+    en: {
+        claimable: "Congratulations! You claimed your 100:green_apple: prize. \n You now have {{apples}}:green_apple:.",
+        notClaimable: "You can't claim your prize yet. {{minutes}} minutes left."
     }
 }
 
