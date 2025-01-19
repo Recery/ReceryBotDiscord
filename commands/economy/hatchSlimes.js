@@ -44,7 +44,7 @@ async function getImageAttachment() {
     const ctx = canvas.getContext("2d");
 
     const backgroung = await Canvas.loadImage("https://i.imgur.com/t46q0yd.png");
-    ctx.drawImage(backgroung, 400, 400, 400, 400);
+    ctx.drawImage(backgroung, 200, 100, 200, 200);
 
     return new Discord.AttachmentBuilder(canvas.toBuffer(), {name: "hatching.png"});
 }
