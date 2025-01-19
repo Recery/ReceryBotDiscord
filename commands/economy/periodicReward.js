@@ -1,3 +1,5 @@
+const DB = require("better-sqlite3");
+
 const users = new Map();    
 
 module.exports = {
@@ -19,11 +21,27 @@ module.exports = {
         }
         else {
             users.set(msg.author.id, now);
+            saveDate(msg.author.id, now);
             msg.reply("Claimed")
         }
-
-
-
-
     }
 }
+
+
+// BASE DE DATOS
+
+const db = new DB(process.env.COOLDOWNS_DB_PATH);
+
+function saveDate(userID, date) {
+    db.prepare("INSERT OR REPLACE INTO periodicReward (userId, date) VALUES (?, ?)").run(userID, date);
+}
+
+loadDates(); // SOLO SE CARGA AL INICIAR EL BOT
+function loadDates() {
+    const rows = db.prepare("SELECT * FROM periodicReward").all();
+
+    for (const row of rows)
+        users.set(row.userId, row.date);
+}
+
+// --------------------------
