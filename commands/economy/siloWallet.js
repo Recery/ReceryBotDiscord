@@ -10,7 +10,7 @@ module.exports = {
 
         const userApples = eco.getApples(userID);
 
-        msg.reply(messages[lang]);
+        msg.reply(messages[lang].replace("{{user}}", `<@${userID}>`).replace("{{apples}}", userApples.toString()));
     }
 }
 
