@@ -6,7 +6,7 @@ module.exports = {
     name: "hatchslimes",
     alias: ["hs", "getslimes"],
     category: "economy",
-    execute(client, msg, args) {
+    async execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
 
@@ -33,7 +33,7 @@ module.exports = {
             msg.reply({
                 content: hatchedSlimes,
                 embeds: [embed],
-                files: [getImageAttachment()]
+                files: [await getImageAttachment()]
             });
         }
     }
