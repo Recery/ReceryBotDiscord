@@ -39,9 +39,9 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 	if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
 	const args = msg.content.slice(prefix.length).trim().split(' ');
-	const command_name = args.shift().toLowerCase();
+	const commandName = args.shift().toLowerCase();
 	
-	const command = client.commands.get(command_name);
+	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.alias && cmd.alias.includes(commandName));
 	if (!command) return;
 
 	try {
