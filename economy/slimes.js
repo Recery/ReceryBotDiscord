@@ -57,6 +57,6 @@ module.exports = [
         },
         rarity: 3,
         appleGeneration: 9,
-        image: "https://i.imgur.com/8HpI972.png"
+        image: "https://i.imgur.com/FpJ089n.png"
     }
 ]
