@@ -81,7 +81,9 @@ async function getImageAttachment(slimes, lang) {
         for (let j = 0; j < 3; j++) {
             const slime = slimes.shift();
 
-            const link = slime.image || "https://i.imgur.com/kbetYsZ.png";
+            let link = ""; 
+            if (slime) link = slime.image;
+            else link = "https://i.imgur.com/kbetYsZ.png";
 
             const slimeImg = await Canvas.loadImage(link);
             ctx.drawImage(slimeImg, 150 + (j * 450) , 150 + (i * 450), 400, 400);
