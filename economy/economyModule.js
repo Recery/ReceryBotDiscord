@@ -1,3 +1,4 @@
+const slimes = require("./slimes.js");
 const DB = require("better-sqlite3");
 
 const db =  new DB(process.env.ECONOMY_DB_PATH);
@@ -36,9 +37,23 @@ function addSlimeToBarn(userID, slime) {
 function getBarnSlimes(userID) {
     const row = db.prepare("SELECT slimes FROM barnContent WHERE userId = ?").get(userID);
 
-    if (row) return row.slimes;
+    const slimesList = [];
+    
+    if (!row) return slimesList;
 
-    return "0:0";
+    const objectStrings = row.slimes.split(";");
+    for (const str of objectStrings) {
+        const [id, amount] = str.split(":");
+
+        for (const slime of slimes.slimes) {
+            if (slime.id === Number(id)) {
+                slimesList.push({slime: slime, amount: amount});
+                break;
+            }
+        }
+    }
+
+    return slimesList;
 }
 
 function getBarnSlimesAmount(userID) {
@@ -64,5 +79,6 @@ module.exports = {
     setBarnSize,
     getBarnSize,
     addSlimeToBarn,
+    getBarnSlimes,
     getBarnSlimesAmount
 };

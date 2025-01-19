@@ -1,4 +1,8 @@
-module.exports = [
+module.exports = {
+    slimes
+}
+
+const slimes = [
     {
         name: "greenslime",
         displayName: {
@@ -76,4 +80,4 @@ module.exports = [
         appleGeneration: 15,
         image: "https://i.imgur.com/kJqeeNq.png"
     }
-]
+];

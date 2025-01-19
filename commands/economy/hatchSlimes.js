@@ -47,7 +47,7 @@ module.exports = {
 function chooseSlime() {
     const weightedList = [];
 
-    for (const slime of slimes) {
+    for (const slime of slimes.slimes) {
         switch (slime.rarity) {
             case 1:
                 for (let i = 0; i < 12; i++) weightedList.push(slime);
