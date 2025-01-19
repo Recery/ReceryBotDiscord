@@ -1,7 +1,3 @@
-module.exports = {
-    slimes
-}
-
 const slimes = [
     {
         name: "greenslime",
@@ -81,3 +77,7 @@ const slimes = [
         image: "https://i.imgur.com/kJqeeNq.png"
     }
 ];
+
+module.exports = {
+    slimes
+}
