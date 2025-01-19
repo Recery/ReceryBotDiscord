@@ -43,8 +43,11 @@ async function getImageAttachment() {
     const canvas = Canvas.createCanvas(800, 800);
     const ctx = canvas.getContext("2d");
 
-    const backgroung = await Canvas.loadImage("https://i.imgur.com/t46q0yd.png");
-    ctx.drawImage(backgroung, 200, 100, 200, 200);
+    const background = await Canvas.loadImage("https://i.imgur.com/elinwYQ.png");
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+    const slime = await Canvas.loadImage("https://i.imgur.com/t46q0yd.png");
+    ctx.drawImage(slime, 200, 100, 200, 200);
 
     return new Discord.AttachmentBuilder(canvas.toBuffer(), {name: "hatching.png"});
 }
