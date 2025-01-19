@@ -10,7 +10,7 @@ module.exports = {
         const lang = client.langs.get(msg.guildId) || "es";
         
         const now = Date.now();
-        const twoHours = /*2 * 60 * 60 * */ 120000; // Así se obtiene 2 horas en milisegundos
+        const twoHours = /*2 * 60 * 60 * */ 300000; // Así se obtiene 2 horas en milisegundos
 
         const lastClaim = users.get(msg.author.id) || 0;
 
