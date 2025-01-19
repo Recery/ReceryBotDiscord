@@ -41,6 +41,7 @@ module.exports = {
         });
 
         loadingReaction.remove();
+        console.log(hatchedSlimes);
     }
 }
 
@@ -73,7 +74,6 @@ async function getImageAttachment(slimes) {
 
     const background = await Canvas.loadImage("https://i.imgur.com/elinwYQ.png");
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
