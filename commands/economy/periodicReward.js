@@ -12,7 +12,7 @@ module.exports = {
         const userID = msg.author.id;
         
         const now = Date.now();
-        const timeToClaim = /*2 * 60 * 60 * */ 60000; // El tiempo que tarda en recargarse este comando tras ser usado
+        const timeToClaim = 1 * 60 * 60 * 1000; // El tiempo que tarda en recargarse este comando tras ser usado
 
         const lastClaim = users.get(userID) || 0;
 
