@@ -72,9 +72,11 @@ async function getImageAttachment(slimes, lang) {
     const canvas = Canvas.createCanvas(1600, 1600);
     const ctx = canvas.getContext("2d");
 
-    ctx.font = "50px silkscreen";
+    ctx.font = "55px silkscreen";
     ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
+    ctx.strokeStyle = "#000000"; // Color borde
+    ctx.lineWidth = 6; // Grosor borde
 
     const background = await Canvas.loadImage("https://i.imgur.com/elinwYQ.png");
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -98,6 +100,7 @@ async function getImageAttachment(slimes, lang) {
                 const textX = x + 200;
                 const textY = y + 380;
 
+                ctx.strokeText(slime.displayName[lang], textX, textY); // Dibujar borde del texto
                 ctx.fillText(slime.displayName[lang], textX, textY);
             }
         }
