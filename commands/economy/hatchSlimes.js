@@ -28,20 +28,18 @@ module.exports = {
 
 
         const embed = new Discord.EmbedBuilder()
-            .setTitle("Prueba")
+            .setTitle(`**${messages[lang].slimeObtention}**`)
             .setImage("attachment://hatching.png");
 
         const loadingReaction = await msg.react("<a:loading:1330598692008493076>");
         const imageAttachment = await getImageAttachment(hatchedSlimes);
 
         msg.reply({
-            content: `**${messages[lang].slimeObtention}**`,
             embeds: [embed],
             files: [imageAttachment]
         });
 
         loadingReaction.remove();
-        console.log(hatchedSlimes);
     }
 }
 
