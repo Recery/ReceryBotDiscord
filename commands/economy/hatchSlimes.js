@@ -67,11 +67,12 @@ function chooseSlime() {
     return weightedList[Math.floor(Math.random() * weightedList.length)];
 }
 
+Canvas.registerFont("../../Fonts/slkscr.ttf", {family: "silkscreen"});
 async function getImageAttachment(slimes, lang) {
     const canvas = Canvas.createCanvas(1600, 1600);
     const ctx = canvas.getContext("2d");
 
-    ctx.font = "80px arial";
+    ctx.font = "80px silkscreen";
     ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
 
@@ -95,7 +96,7 @@ async function getImageAttachment(slimes, lang) {
 
             if (slime) {
                 const textX = x + 200;
-                const textY = y + 400 + 20;
+                const textY = y + 380;
 
                 ctx.fillText(slime.displayName[lang], textX, textY);
             }
