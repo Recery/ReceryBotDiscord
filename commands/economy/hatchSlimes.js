@@ -1,3 +1,5 @@
+const Discord = require("discord.js");
+const Canvas = require("canvas"); 
 const eco = require("../../economyModule.js");
 
 module.exports = {
@@ -23,9 +25,23 @@ module.exports = {
                 hatchedSlimes += " - " + slimes[Math.floor(Math.random() * slimes.length)];
                 if (i < slimesToHatch - 1) hatchedSlimes += "\n";
             }
-            msg.reply(hatchedSlimes);
+            
+            msg.reply({
+                content: hatchedSlimes,
+                files: [getImageAttachment()]
+            });
         }
     }
+}
+
+async function getImageAttachment() {
+    const canvas = Canvas.createCanvas(800, 800);
+    const ctx = canvas.getContext("2d");
+
+    const backgroung = await Canvas.loadImage("https://i.imgur.com/t46q0yd.png");
+    ctx.drawImage(backgroung, 400, 400, 400, 400);
+
+    return new Discord.AttachmentBuilder(canvas.toBuffer(), {name: "hatching.png"});
 }
 
 const slimes = [
