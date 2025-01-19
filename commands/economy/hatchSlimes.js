@@ -17,25 +17,30 @@ module.exports = {
         
         if (userApples < applesToSpend) {
             msg.reply(messages[lang].needMoreApples.replace("{{apples}}", applesToSpend.toString()));
+            return;
         }
-        else {
-            eco.modifyApples(userID, userApples - applesToSpend);
+            
+        eco.modifyApples(userID, userApples - applesToSpend);
 
-            let hatchedSlimes = [];
-            for (let i = 0; i < slimesToHatch; i++)
-                hatchedSlimes.push(chooseSlime());
+        let hatchedSlimes = [];
+        for (let i = 0; i < slimesToHatch; i++)
+            hatchedSlimes.push(chooseSlime());
 
-            const embed = new Discord.EmbedBuilder()
-                .setTitle("Prueba")
-                .setImage("attachment://hatching.png");
 
-            msg.react("<a:loading:1330598692008493076>");
-            msg.reply({
-                content: "**¡Obtuviste estos slimes!**",
-                embeds: [embed],
-                files: [await getImageAttachment(hatchedSlimes)]
-            });
-        }
+        const embed = new Discord.EmbedBuilder()
+            .setTitle("Prueba")
+            .setImage("attachment://hatching.png");
+
+        const loadingReaction = await msg.react("<a:loading:1330598692008493076>");
+        const imageAttachment = await getImageAttachment(hatchedSlimes);
+
+        msg.reply({
+            content: "**¡Obtuviste estos slimes!**",
+            embeds: [embed],
+            files: [imageAttachment]
+        });
+
+        loadingReaction.remove();
     }
 }
 
