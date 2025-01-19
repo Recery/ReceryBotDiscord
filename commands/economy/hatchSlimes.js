@@ -49,6 +49,7 @@ async function getImageAttachment(slimes) {
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             const slime = slimes.shift();
+            console.log(slime);
 
             let link = "";
             if (slime) link = slime.image;
