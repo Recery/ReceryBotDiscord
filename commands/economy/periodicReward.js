@@ -22,8 +22,8 @@ module.exports = {
             msg.reply("Can't claim. Time left: `" + minutes.toString() + " minutes`");
         }
         else {
-            users.set(userID);
-            saveDate(userID);
+            users.set(userID, now);
+            saveDate(userID, now);
 
             const newApples = eco.getApples(userID) + 100;
             eco.modifyApples(userID, newApples);
