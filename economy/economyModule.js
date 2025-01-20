@@ -32,12 +32,10 @@ function getBarnSize(userID) {
 function addSlimeToBarn(userID, slimeID) {
     let quantity = 0;
 
-    for (const slime of getBarnSlimes(userID)) {
-        if (slime.slime.id === slimeID) quantity += slime.quantity;
-        break;
-    }
+    const row = db.prepare("SELECT quantity FROM barnContent WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
+    if (row) quantity = row.quantity;
 
-    db.prepare("UPDATE OR REPLACE INTO barnContent (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity + 1);
+    db.prepare("INSERT OR REPLACE INTO barnContent (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity + 1);
 }
 
 function getBarnSlimes(userID) {
@@ -66,12 +64,10 @@ function getBarnSlimesAmount(userID) {
 function addSlimeToCorral(userID, slimeID) {
     let quantity = 0;
 
-    for (const slime of getCorralSlimes(userID)) {
-        if (slime.slime.id === slimeID) quantity += slime.quantity;
-        break;
-    }
+    const row = db.prepare("SELECT quantity FROM corral WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
+    if (row) quantity = row.quantity;
 
-    db.prepare("UPDATE OR REPLACE INTO corral (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity + 1);
+    db.prepare("INSERT OR REPLACE INTO corral (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity + 1);
 }
 
 function getCorralSlimes(userID) {
