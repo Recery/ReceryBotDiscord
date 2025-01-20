@@ -87,7 +87,7 @@ function getSlime(id) {
 
 function getSlimeByName(refName) {
     for (const slime of slimes) {
-        for (const name of slime.displayName)
+        for (const name of Object.values(slime.displayName))
             if (name.toLowerCase() === refName.toLowerCase()) return slime;
         
         if (slime.name.toLowerCase() === refName.toLowerCase()) return slime;
