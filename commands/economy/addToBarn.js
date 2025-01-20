@@ -15,7 +15,9 @@ module.exports = {
             return;
         }
 
-        const slime = slimes.getSlime(slimeRef) || slimes.getSlimeByName(slimeRef);
+        let slime;
+        if (isNaN(slimeRef)) slime = slimes.getSlimeByName(slimeRef);
+        else slime = slimes.getSlime(slimeRef)
 
         if (!slime) {
             msg.reply("No se ha encontrado un slime con ese nombre/ID.");
