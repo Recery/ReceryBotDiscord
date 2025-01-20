@@ -85,7 +85,19 @@ function getSlime(id) {
     return slimes[0];
 }
 
+function getSlimeByName(refName) {
+    for (const slime of slimes) {
+        for (const name of slime.displayName)
+            if (name.toLowerCase() === refName.toLowerCase()) return slime;
+        
+        if (slime.name.toLowerCase() === refName.toLowerCase()) return slime;
+    }
+
+    return null;
+}
+
 module.exports = {
     slimes,
-    getSlime
+    getSlime,
+    getSlimeByName
 }
