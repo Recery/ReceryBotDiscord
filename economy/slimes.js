@@ -80,7 +80,7 @@ const slimes = [
 
 function getSlime(id) {
     for (const slime of slimes)
-        if (slime.id === id) return slime;
+        if (slime.id === Number(id)) return slime;
 
     return slimes[0];
 }
