@@ -28,47 +28,70 @@ function getBarnSize(userID) {
     return 3;
 }
 
-// Mandarle un objeto de slime para agregar
-function addSlimeToBarn(userID, slime) {
+// Mandarle un id de slime para agregar
+function addSlimeToBarn(userID, slimeID) {
+    let quantity = 0;
 
-    db.prepare("UPDATE OR REPLACE INTO barnContent (userID, ) ")
+    for (const slime of getBarnSlimes(userID)) {
+        if (slime.slime.id === slimeID) quantity += slime.quantity;
+        break;
+    }
+
+    db.prepare("UPDATE OR REPLACE INTO barnContent (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity + 1);
 }
 
 function getBarnSlimes(userID) {
-    const row = db.prepare("SELECT slimes FROM barnContent WHERE userId = ?").get(userID);
+    const rows = db.prepare("SELECT * FROM barnContent WHERE userId = ?").all(userID);
 
     const slimesList = [];
-    
-    if (!row) return slimesList;
 
-    const objectStrings = row.slimes.split(";");
-    for (const str of objectStrings) {
-        const [id, amount] = str.split(":");
-
-        for (const slime of slimes.slimes) {
-            if (slime.id === Number(id)) {
-                slimesList.push({slime: slime, amount: amount});
-                break;
-            }
-        }
-    }
+    for (const row of rows)
+        slimesList.push({slime: slimes.getSlime(row.slimeId), quantity: row.quantity});
 
     return slimesList;
 }
 
 function getBarnSlimesAmount(userID) {
-    const row = db.prepare("SELECT slimes FROM barnContent WHERE userId = ?").get(userID);
+    const rows = db.prepare("SELECT quantity FROM barnContent WHERE userId = ?").get(userID);
 
     let slimesAmount = 0;
 
-    if (!row) return slimesAmount;
+    for (const row of rows)
+        slimesAmount += row.quantity;
 
-    const objectStrings = row.slimes.split(";");
+    return slimesAmount;
+}
 
-    for (const str of objectStrings) {
-        const data = str.split(":");
-        slimesAmount += Number(data[1]);
+// Mandarle un id de slime para agregar
+function addSlimeToCorral(userID, slimeID) {
+    let quantity = 0;
+
+    for (const slime of getCorralSlimes(userID)) {
+        if (slime.slime.id === slimeID) quantity += slime.quantity;
+        break;
     }
+
+    db.prepare("UPDATE OR REPLACE INTO corral (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity + 1);
+}
+
+function getCorralSlimes(userID) {
+    const rows = db.prepare("SELECT * FROM corral WHERE userId = ?").all(userID);
+
+    const slimesList = [];
+
+    for (const row of rows)
+        slimesList.push({slime: slimes.getSlime(row.slimeId), quantity: row.quantity});
+
+    return slimesList;
+}
+
+function getCorralSlimesAmount(userID) {
+    const rows = db.prepare("SELECT quantity FROM corral WHERE userId = ?").all(userID);
+
+    let slimesAmount = 0;
+
+    for (const row of rows)
+        slimesAmount += row.quantity;
 
     return slimesAmount;
 }
@@ -80,5 +103,8 @@ module.exports = {
     getBarnSize,
     addSlimeToBarn,
     getBarnSlimes,
-    getBarnSlimesAmount
+    getBarnSlimesAmount,
+    addSlimeToCorral,
+    getCorralSlimes,
+    getCorralSlimesAmount
 };

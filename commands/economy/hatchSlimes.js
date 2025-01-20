@@ -23,8 +23,12 @@ module.exports = {
         eco.setApples(userID, userApples - applesToSpend);
 
         let hatchedSlimes = [];
-        for (let i = 0; i < slimesToHatch; i++)
-            hatchedSlimes.push(chooseSlime());
+        for (let i = 0; i < slimesToHatch; i++) {
+            const slime = chooseSlime();
+
+            hatchedSlimes.push(slime);
+            eco.addSlimeToCorral(userID, slime.id);
+        }
 
 
         const embed = new Discord.EmbedBuilder()
@@ -41,6 +45,8 @@ module.exports = {
         });
 
         loadingReaction.remove();
+
+
     }
 }
 

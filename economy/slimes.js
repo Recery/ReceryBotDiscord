@@ -78,6 +78,14 @@ const slimes = [
     }
 ];
 
+function getSlime(id) {
+    for (const slime of slimes)
+        if (slime.id === id) return slime;
+
+    return slimes[0];
+}
+
 module.exports = {
-    slimes
+    slimes,
+    getSlime
 }
