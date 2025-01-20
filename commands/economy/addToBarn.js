@@ -10,6 +10,7 @@ module.exports = {
         const userID = msg.author.id;
 
         const slimeRef = args[0];
+        console.log(slimeRef);
         if (!slimeRef) {
             msg.reply("Debes ingresar el nombre/ID del slime que deseas agregar al granero.");
             return;
