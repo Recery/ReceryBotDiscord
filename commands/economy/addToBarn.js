@@ -42,8 +42,10 @@ module.exports = {
             return;
         }
 
-        eco.addSlimeToBarn(userID, slimeObj.id);
-        msg.reply(`El ${slimeObj.displayName[lang]} ha sido añadido a tu granero.`);
+        for (let i = 0; i < quantity; i++) 
+            eco.addSlimeToBarn(userID, slimeObj.id);
+
+        msg.reply(`Has añadido x${quantity} ${slimeObj.displayName[lang]} a tu granero.`);
     }
 }
 
