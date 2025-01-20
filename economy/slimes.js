@@ -82,7 +82,7 @@ function getSlime(id) {
     for (const slime of slimes)
         if (slime.id === Number(id)) return slime;
 
-    return slimes[0];
+    return null;
 }
 
 function getSlimeByName(refName) {
