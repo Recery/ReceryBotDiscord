@@ -1,4 +1,3 @@
-const corralTimeleft = require("../commands/economy/corralTimeleft.js");
 const slimes = require("./slimes.js");
 const DB = require("better-sqlite3");
 

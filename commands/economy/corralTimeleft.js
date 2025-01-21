@@ -5,8 +5,6 @@ module.exports = {
     alias: ["ctimeleft", "ctl"],
     category: "economy",
     execute(client, msg, args) {
-        console.log(eco);
-
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
 
