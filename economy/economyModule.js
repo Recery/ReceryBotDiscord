@@ -1,3 +1,4 @@
+const corralTimeleft = require("../commands/economy/corralTimeleft.js");
 const slimes = require("./slimes.js");
 const DB = require("better-sqlite3");
 
@@ -89,8 +90,20 @@ function verifyCorralReset(userID) {
     return true;
 }
 
+function getCorralResetTimeLeft(userID) {
+    verifyCorralReset(userID);
+
+    const row = db.prepare("SELECT time FROM corralReset WHERE userId = ?").get(userID);
+
+    if (row) return Date.now() - row.time;
+
+    return 0;
+}
+
 // Mandarle un id de slime para agregar
 function addSlimeToCorral(userID, slimeID) {
+    verifyCorralReset(userID);
+
     let quantity = 0;
 
     const row = db.prepare("SELECT quantity FROM corral WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
@@ -100,6 +113,8 @@ function addSlimeToCorral(userID, slimeID) {
 }
 
 function getCorralSlimes(userID) {
+    verifyCorralReset(userID);
+
     const rows = db.prepare("SELECT * FROM corral WHERE userId = ?").all(userID);
 
     const slimesList = [];
@@ -111,6 +126,8 @@ function getCorralSlimes(userID) {
 }
 
 function getCorralSlimesAmount(userID) {
+    verifyCorralReset(userID);
+
     const rows = db.prepare("SELECT quantity FROM corral WHERE userId = ?").all(userID);
 
     let slimesAmount = 0;
@@ -129,6 +146,8 @@ module.exports = {
     addSlimeToBarn,
     getBarnSlimes,
     getBarnSlimesAmount,
+    //verifyCorralReset,
+    getCorralResetTimeLeft,
     addSlimeToCorral,
     getCorralSlimes,
     getCorralSlimesAmount
