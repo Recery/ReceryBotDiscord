@@ -50,7 +50,7 @@ function getBarnSlimes(userID) {
 }
 
 function getBarnSlimesAmount(userID) {
-    const rows = db.prepare("SELECT quantity FROM barnContent WHERE userId = ?").get(userID);
+    const rows = db.prepare("SELECT quantity FROM barnContent WHERE userId = ?").all(userID);
 
     let slimesAmount = 0;
 
