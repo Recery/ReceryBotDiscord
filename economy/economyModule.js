@@ -146,7 +146,7 @@ module.exports = {
     addSlimeToBarn,
     getBarnSlimes,
     getBarnSlimesAmount,
-    //verifyCorralReset,
+    verifyCorralReset,
     getCorralResetTimeLeft,
     addSlimeToCorral,
     getCorralSlimes,

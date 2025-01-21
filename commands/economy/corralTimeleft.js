@@ -18,5 +18,5 @@ module.exports = {
 
 const messages = {
     es: "Tu corral se reiniciará en {{minutes}} minutos.",
-    en: "Your corral will be reinitiated in {{minutes}} minutes."
+    en: "Your corral will reset in {{minutes}} minutes."
 }
