@@ -29,8 +29,12 @@ module.exports = {
 
             inputName += arg + " ";
         }
-        
         inputName = inputName.trim();
+
+        if (quantity + eco.getBarnSlimesAmount(userID) > eco.getBarnSize(userID)) {
+            msg.reply(messages[lang].notEnoughSize);
+            return;
+        }
 
         let slimeObj;
 
@@ -49,3 +53,11 @@ module.exports = {
     }
 }
 
+const messages = {
+    es: {
+        notEnoughSize: "No tienes suficiente espacio en tu granero para guardar esa cantidad de slimes.",
+    },
+    en: {
+        notEnoughSize: "You don't have enough space to add this amount of slimes in your barn."
+    }
+}
