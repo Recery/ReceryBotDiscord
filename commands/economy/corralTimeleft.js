@@ -10,9 +10,9 @@ module.exports = {
 
         const timeleft = eco.getCorralResetTimeLeft(userID);
 
-        const minutes = 1 + (timeleft / 1000) / 60;
+        const minutes = Math.floor(1 + (timeleft / 1000) / 60);
 
-        msg.reply(messages[lang].replace("{{minutes}", minutes.toString()));
+        msg.reply(messages[lang].replace("{{minutes}}", minutes.toString()));
     }
 }
 
