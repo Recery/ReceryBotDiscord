@@ -31,7 +31,7 @@ module.exports = {
         }
         inputName = inputName.trim();
 
-        if (quantity + eco.getBarnSlimesAmount(userID) > eco.getBarnSize(userID)) {
+        if (quantityToAdd + eco.getBarnSlimesAmount(userID) > eco.getBarnSize(userID)) {
             msg.reply(messages[lang].notEnoughSize);
             return;
         }
