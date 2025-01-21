@@ -36,28 +36,54 @@ module.exports = {
             return;
         }
 
+        // Buscar si el nomnbre/ID del slime ingresado existe en los slimes existentes
         let slimeObj;
 
         if (isNaN(Number(inputName))) slimeObj = slimes.getSlimeByName(inputName);
         else slimeObj = slimes.getSlime(Number(inputName))
 
         if (!slimeObj) {
-            msg.reply("No se ha encontrado un slime con ese nombre/ID.");
+            msg.reply();
             return;
         }
+
+        // Para guardar slimes tiene que tener la cantidad necesaria en el corral, vamos a verificar eso
+        let hasSlime = false;
+        const slimesInCorral = eco.getCorralSlimes(userID);
+
+        for (const slime of slimesInCorral) {
+            if (slimes.getSlime(slime.obj.id) === slimeObj && !slime.quantity < quantity) {
+                hasSlime = true
+                break;
+            }
+        }
+
+        if (!hasSlime) {
+            msg.reply(messages[lang].notFound);
+            return;
+        }
+
 
         for (let i = 0; i < quantity; i++) 
             eco.addSlimeToBarn(userID, slimeObj.id);
 
-        msg.reply(`Has añadido x${quantity} ${slimeObj.displayName[lang]} a tu granero.`);
+        msg.reply(messages[lang].added.replace("{{quantity}}", quantity.toString()).replace("{{slimes}}", slimeObj.displayName[lang]));
     }
 }
 
 const messages = {
     es: {
+        notInput: "Debes ingresar el nombre/ID de un slime para añadir a tu granero.",
         notEnoughSize: "No tienes suficiente espacio en tu granero para guardar esa cantidad de slimes.",
+        notFound: "No se ha encontrado un slime con ese nombre/ID.",
+        notEnoughSlimes: "No tienes esa cantidad de {{slime}} en tu corral.\nConsigue más slimes con `hatchslimes`.",
+        added: "¡Has añadido x{{quantity}} {{slime}} a tu granero!"
     },
     en: {
-        notEnoughSize: "You don't have enough space to add this amount of slimes in your barn."
+        notInput: "You must enter the name/ID of a slime to add to your barn.",
+        notEnoughSize: "You don't have enough space to add this amount of slimes in your barn.",
+        notFound: "Couldn't find an slime with that name/ID",
+        notEnoughSlimes: "You don't have enough {{slime}} in your corral.\nGet more slimes with `hatchslimes`.",
+        added: "You have added x{{quantity}} {{slime}} to your barn!"
     }
 }

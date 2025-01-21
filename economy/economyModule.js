@@ -44,7 +44,7 @@ function getBarnSlimes(userID) {
     const slimesList = [];
 
     for (const row of rows)
-        slimesList.push({slime: slimes.getSlime(row.slimeId), quantity: row.quantity});
+        slimesList.push({obj: slimes.getSlime(row.slimeId), quantity: row.quantity});
 
     return slimesList;
 }
@@ -76,7 +76,7 @@ function getCorralSlimes(userID) {
     const slimesList = [];
 
     for (const row of rows)
-        slimesList.push({slime: slimes.getSlime(row.slimeId), quantity: row.quantity});
+        slimesList.push({obj: slimes.getSlime(row.slimeId), quantity: row.quantity});
 
     return slimesList;
 }
