@@ -67,7 +67,7 @@ module.exports = {
         for (let i = 0; i < quantity; i++) 
             eco.addSlimeToBarn(userID, slimeObj.id);
 
-        msg.reply(messages[lang].added.replace("{{quantity}}", quantity.toString()).replace("{{slimes}}", slimeObj.displayName[lang]));
+        msg.reply(messages[lang].added.replace("{{quantity}}", quantity.toString()).replace("{{slime}}", slimeObj.displayName[lang]));
     }
 }
 
