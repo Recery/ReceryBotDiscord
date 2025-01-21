@@ -60,6 +60,35 @@ function getBarnSlimesAmount(userID) {
     return slimesAmount;
 }
 
+// Cada vez que se desee acceder al contenido del corral de alguna manera, hay que verificar si el corral ya se reinició
+// Asegura que siempre el contenido del corral esté actualizado, y también da luz verde o roja para hacer ciertas acciones
+// Normalmente se reinicia cada 1 hora
+function verifyCorralReset(userID) {
+    const row = db.prepare("SELECT time FROM corralReset WHERE userId = ?").get(userID);
+
+    const now = Date.now();
+    const hour = 1 * 60 * 60 * 1000; // 1 hora en milisegundos
+
+    // No hay registro de cooldown de corral para este usuario, insertarlo
+    if (!row) {
+        db.prepare("INSERT INTO corralReset (userId, time) VALUES (?, ?)").run(userID, now);
+        return false;
+    }
+
+    // Cooldown no completado
+    if (now - row.time < hour) {
+        return false;
+    }
+    
+    // Llegado a este punto, significa que el cooldown ya se completó
+    // Eliminar slimes del corral y reiniciar el cooldown
+    db.prepare("DELETE FROM corral WHERE userId = ?").run(userID);
+
+    db.prepare("UPDATE corralReset SET time = ? WHERE userId = ?").run(userID);
+
+    return true;
+}
+
 // Mandarle un id de slime para agregar
 function addSlimeToCorral(userID, slimeID) {
     let quantity = 0;
