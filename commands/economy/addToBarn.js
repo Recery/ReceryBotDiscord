@@ -18,12 +18,12 @@ module.exports = {
         // Vamos a construir el nombre del slime ingresado por el usuario
         // Para eso hay que agregar cada argumento del array a un string hasta encontrar el argumento de cantidad (si es que hay)
         let inputName = "";
-        let quantity = 1; // Por defecto la cantidad de slimes va a ser 1, por si no se ingresa un argumento de cantidad
+        let quantityToAdd = 1; // Por defecto la cantidad de slimes va a ser 1, por si no se ingresa un argumento de cantidad
         for (const arg of args) {
             // El argumento de cantidad empieza con una x
             if (arg.toLowerCase().startsWith("x")) {
                 const inputQuantity = Number(arg.toLowerCase().replace("x", ""));
-                if (!isNaN(inputQuantity)) quantity = inputQuantity;
+                if (!isNaN(inputQuantity)) quantityToAdd = inputQuantity;
                 break;
             }
 
@@ -53,7 +53,7 @@ module.exports = {
 
         for (const slime of slimesInCorral) {
             if (slimes.getSlime(slime.obj.id) === slimeObj) {
-                if (slime.quantity >= quantity) {
+                if (slime.quantity >= quantityToAdd) {
                     hasSlime = true
                     break;
                 }
@@ -66,10 +66,10 @@ module.exports = {
         }
 
 
-        for (let i = 0; i < quantity; i++) 
+        for (let i = 0; i < quantityToAdd; i++) 
             eco.addSlimeToBarn(userID, slimeObj.id);
 
-        msg.reply(messages[lang].added.replace("{{quantity}}", quantity.toString()).replace("{{slime}}", slimeObj.displayName[lang]));
+        msg.reply(messages[lang].added.replace("{{quantity}}", quantityToAdd.toString()).replace("{{slime}}", slimeObj.displayName[lang]));
     }
 }
 
