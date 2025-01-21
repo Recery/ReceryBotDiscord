@@ -52,9 +52,11 @@ module.exports = {
         const slimesInCorral = eco.getCorralSlimes(userID);
 
         for (const slime of slimesInCorral) {
-            if (slimes.getSlime(slime.obj.id) === slimeObj && !slime.quantity < quantity) {
-                hasSlime = true
-                break;
+            if (slimes.getSlime(slime.obj.id) === slimeObj) {
+                if (!slime.quantity < quantity) {
+                    hasSlime = true
+                    break;
+                }
             }
         }
 
