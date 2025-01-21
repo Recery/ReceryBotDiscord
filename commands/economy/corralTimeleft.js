@@ -15,15 +15,15 @@ module.exports = {
 
         // Por defecto expresar en minutos
         let time = minutes;
-        let unit = messages[lang].minutes;
+        let unit = "minutes";
 
         if (minutes > 60) { // Más de una hora, expresar en horas
             time = Math.floor(time / 60);
-            unit = messages[lang].hours;
+            unit = "hours";
         }
         else if (minutes <= 0) { // Menos de un minuto, expresar en segundos
             time = Math.floor(minutes * 60);
-            unit = messages[lang].seconds;
+            unit = "seconds";
         }
 
 
