@@ -43,7 +43,7 @@ module.exports = {
         else slimeObj = slimes.getSlime(Number(inputName))
 
         if (!slimeObj) {
-            msg.reply();
+            msg.reply(messages[lang].notFound);
             return;
         }
 
@@ -53,7 +53,7 @@ module.exports = {
 
         for (const slime of slimesInCorral) {
             if (slimes.getSlime(slime.obj.id) === slimeObj) {
-                if (!slime.quantity < quantity) {
+                if (slime.quantity >= quantity) {
                     hasSlime = true
                     break;
                 }
@@ -61,7 +61,7 @@ module.exports = {
         }
 
         if (!hasSlime) {
-            msg.reply(messages[lang].notFound);
+            msg.reply(messages[lang].notEnoughSlimes.replace("{{slime}}", slimeObj.displayName[lang]));
             return;
         }
 
