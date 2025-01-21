@@ -27,7 +27,7 @@ module.exports = {
         }
 
 
-        msg.reply(messages[lang].replace("{{time}}", time.toString()).replace("{{unit}}", messages[lang][unit]));
+        msg.reply(messages[lang].reply.replace("{{time}}", time.toString()).replace("{{unit}}", messages[lang][unit]));
     }
 }
 
