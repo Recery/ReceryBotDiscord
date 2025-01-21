@@ -11,7 +11,18 @@ module.exports = {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
 
-        const slimesToHatch = args[0] || 1;
+        let slimesToHatch = 1;
+
+        // Primer (y único argumento debería ser la cantidad de slimes a eclosionar
+        // El argumento es opcional, si no se lo incluye siempre va a ser 1 slime
+        // Verificamos si existe el argumento, si es un numero, y si es mayor a 0
+        if (args[0]) {
+            const quantity = Number(args[0].toLowerCase().replace("x", ""));
+            if (!isNaN(quantity)) {
+                if (quantity > 0) slimesToHatch = quantity;
+            }
+        }
+
         const applesToSpend = slimesToHatch * 10;
         const userApples = eco.getApples(userID);
         
@@ -19,7 +30,7 @@ module.exports = {
             msg.reply(messages[lang].needMoreApples.replace("{{apples}}", applesToSpend.toString()));
             return;
         }
-            
+        
         eco.setApples(userID, userApples - applesToSpend);
 
         let hatchedSlimes = [];

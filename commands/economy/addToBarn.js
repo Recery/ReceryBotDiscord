@@ -36,7 +36,7 @@ module.exports = {
             return;
         }
 
-        // Buscar si el nomnbre/ID del slime ingresado existe en los slimes existentes
+        // Buscar si el nombre/ID del slime ingresado existe en los slimes existentes
         let slimeObj;
 
         if (isNaN(Number(inputName))) slimeObj = slimes.getSlimeByName(inputName);
