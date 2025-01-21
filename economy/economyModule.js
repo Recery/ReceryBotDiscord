@@ -94,7 +94,12 @@ function getCorralResetTimeLeft(userID) {
 
     const row = db.prepare("SELECT time FROM corralReset WHERE userId = ?").get(userID);
 
-    if (row) return Date.now() - row.time;
+    const hour = 1 * 60 * 60 * 1000;
+    
+    if (row) {
+        const time = (row.time + hour) - Date.now();
+        return time;
+    }
 
     return 0;
 }
