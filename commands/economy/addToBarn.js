@@ -66,8 +66,10 @@ module.exports = {
         }
 
 
-        for (let i = 0; i < quantityToAdd; i++)
+        for (let i = 0; i < quantityToAdd; i++) {
             eco.addSlimeToBarn(userID, slimeObj.id);
+            eco.removeSlimeFromCorral(userID, slimeObj.id);
+        }
 
         msg.reply(messages[lang].added.replace("{{quantity}}", quantityToAdd.toString()).replace("{{slime}}", slimeObj.displayName[lang]));
     }

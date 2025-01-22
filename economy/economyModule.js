@@ -31,20 +31,24 @@ function getBarnSize(userID) {
 // Los dos siguientes metodos agregan o eliminan UN SOLO SLIME del granero
 // Usar multiples veces si se necesitan agregar o eliminar mas
 function addSlimeToBarn(userID, slimeID) {
-    let quantity = 0;
+    let newQuantity = 0;
 
     const row = db.prepare("SELECT quantity FROM barnContent WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
-    if (row) quantity = row.quantity;
+    if (row) newQuantity = row.quantity + 1;
 
-    db.prepare("INSERT OR REPLACE INTO barnContent (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity + 1);
+    db.prepare("INSERT OR REPLACE INTO barnContent (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, newQuantity);
 }
 
 function removeSlimeFromBarn(userID, slimeID) {
-    let quantity = 0;
+    let newQuantity = 0;
     
     const row = db.prepare("SELECT quantity FROM barnContent WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
-    if (row) quantity = row.quantity;
-    if (quantity <= 0) return; // No se pueden tener slimes negativos...
+    if (row) newQuantity = row.quantity - 1;
+    if (newQuantity <= 0) return; // No se pueden tener slimes negativos...
+    else if (newQuantity === 0) {
+        // Si hay cero slimes de este tipo, borrar el registro, y obviamente no insertar uno nuevo
+        db.prepare("DELETE FROM barnContent WHERE userId = ? AND slimeId = ?").run(userID, slimeID);
+    }
 
     db.prepare("INSERT OR REPLACE INTO barnContent (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity - 1);
 }
