@@ -18,8 +18,6 @@ module.exports = {
             content += slime.obj.displayName[lang] + " x" + slime.quantity.toString() + "\n";
         }
 
-            
-
         msg.reply(messages[lang] + content);
     }
 }

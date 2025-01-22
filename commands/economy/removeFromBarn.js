@@ -66,8 +66,10 @@ module.exports = {
             return;
         }
 
-        for (let i = 0; i < quantityToRemove; i++)
+        for (let i = 0; i < quantityToRemove; i++) {
             eco.removeSlimeFromBarn(userID, slimeObj.id);
+            eco.addSlimeToCorral(userID, slimeObj.id);
+        }
 
         msg.reply(messages[lang].removed.replace("{{slime}}", slimeObj.displayName[lang]).replace("{{quantity}}", quantityToRemove.toString()));
     }
