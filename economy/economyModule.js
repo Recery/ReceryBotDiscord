@@ -1,4 +1,4 @@
-const slimes = require("./slimesModule.js");
+const slimesModule = require("./slimesModule.js");
 const DB = require("better-sqlite3");
 
 const db =  new DB(process.env.ECONOMY_DB_PATH);
@@ -59,7 +59,7 @@ function getBarnSlimes(userID) {
     const slimesList = [];
 
     for (const row of rows)
-        slimesList.push({obj: slimes.getSlime(row.slimeId), quantity: row.quantity});
+        slimesList.push({obj: slimesModule.getSlime(row.slimeId), quantity: row.quantity});
 
     return slimesList;
 }
@@ -98,8 +98,19 @@ function verifyCorralReset(userID) {
         return false;
     }
     
+
     // Llegado a este punto, significa que el cooldown ya se completó
-    // Eliminar slimes del corral y reiniciar el cooldown
+    // Eliminar slimes del corral, sumar las manzanas correspondientes, y reiniciar el cooldown
+
+    let applesToAdd = 0;
+    const slimesData = db.prepare("SELECT slimeId, quantity FROM corral WHERE userId = ?").all(userID);
+    for (const data of slimesData) {
+        const slime = slimesModule.getSlime(data.id)
+        if (!slime) continue;
+        applesToAdd += slime.appleGeneration * data.quantity;
+    }
+    setApples(userID, getApples(userID) + applesToAdd);
+
     db.prepare("DELETE FROM corral WHERE userId = ?").run(userID);
 
     const completedCycles = Math.floor(elapsedTime / hour);
@@ -162,7 +173,7 @@ function getCorralSlimes(userID) {
     const slimesList = [];
 
     for (const row of rows)
-        slimesList.push({obj: slimes.getSlime(row.slimeId), quantity: row.quantity});
+        slimesList.push({obj: slimesModule.getSlime(row.slimeId), quantity: row.quantity});
 
     return slimesList;
 }
