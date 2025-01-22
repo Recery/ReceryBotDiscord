@@ -36,14 +36,14 @@ function set_lang(client, serverid, lang)
 const commandCategories = {
     es: {
         action: "Acción",
-        admin: "Administración",
+        administration: "Administración",
         economy: "Economía",
         fun: "Diversión",
         info: "Información"
     },
     en: {
         action: "Action",
-        admin: "Administration",
+        administration: "Administration",
         economy: "Economy",
         fun: "Fun",
         info: "Info"
