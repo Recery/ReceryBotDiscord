@@ -133,7 +133,7 @@ function addSlimeToCorral(userID, slimeID) {
     const row = db.prepare("SELECT quantity FROM corral WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
     if (row) newQuantity = row.quantity + 1;
 
-    db.prepare("INSERT OR REPLACE INTO corral (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, newQuantity + 1);
+    db.prepare("INSERT OR REPLACE INTO corral (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, newQuantity);
 }
 
 function removeSlimeFromCorral(userID, slimeID) {
