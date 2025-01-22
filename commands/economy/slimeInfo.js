@@ -39,7 +39,8 @@ module.exports = {
             .setTitle(messages[lang].embedTitle.replace("{{slime}}", slimeObj.displayName[lang]))
             .setColor("#12bcff")
             .setDescription(description)
-            .setThumbnail(slimeObj.image);
+            .setThumbnail(slimeObj.image)
+            .setFooter({text: "Recery Bot - Creado por Recery"});
 
         msg.reply({
             embeds: [embed],
