@@ -36,7 +36,6 @@ module.exports = {
 
         msg.reply({
             embeds: [embed],
-
         });
     }
 }
