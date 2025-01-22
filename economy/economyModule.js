@@ -62,7 +62,7 @@ function resetCycle(userID) {
 function getCycleTimeLeft(userID) {
     resetCycle(userID);
 
-    const row = db.prepare("SELECT time FROM slimeCyclesTimes WHERE userId = ?").get(userID);
+    const row = db.prepare("SELECT startTime FROM slimeCyclesTimes WHERE userId = ?").get(userID);
 
     const hour = 1 * 60 * 60 * 1000;
     
