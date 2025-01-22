@@ -40,7 +40,7 @@ module.exports = {
             .setColor("#12bcff")
             .setDescription(description)
             .setThumbnail(slimeObj.image)
-            .setFooter({text: "Recery Bot - Creado por Recery", iconURL: msg.author.avatarDecorationURL()});
+            .setFooter({text: msg.author.displayName, iconURL: msg.author.avatarDecorationURL()});
 
         msg.reply({
             embeds: [embed],
