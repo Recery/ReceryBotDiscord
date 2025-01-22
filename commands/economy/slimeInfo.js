@@ -33,7 +33,7 @@ module.exports = {
         for (let i = 0; i < slimeObj.rarity; i++)
             description += ":star:";
 
-        description += "\n" + messages[lang].appleGeneration.replace("{{aples}}", slimeObj.appleGeneration.toString()) + "**";
+        description += "\n" + messages[lang].appleGeneration.replace("{{apples}}", slimeObj.appleGeneration.toString()) + "**";
 
         const embed = new Discord.EmbedBuilder()
             .setTitle(messages[lang].embedTitle.replace("{{slime}}", slimeObj.displayName[lang]))
