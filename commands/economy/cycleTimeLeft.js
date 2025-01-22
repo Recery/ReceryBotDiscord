@@ -36,12 +36,12 @@ const messages = {
         seconds: "segundo(s)",
         minutes: "minuto(s)",
         hours: "hora(s)",
-        reply: "Tu corral se reiniciará en {{time}} {{unit}}.",
+        reply: "Tu ciclo se completará en {{time}} {{unit}}.",
     },
     en: {
         seconds: "second(s)",
         minutes: "minute(s)",
         hours: "hour(s)",
-        reply: "Your corral will reset in {{time}} {{unit}}."
+        reply: "Your cycle will be completed in {{time}} {{unit}}."
     }
 }
