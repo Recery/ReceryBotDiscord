@@ -10,10 +10,10 @@ function setApples(userID, apples) {
 
 function getApples(userID) {
     let applesToAdd = 0;
-    const cyclesCompleted = resetCycle(userID);
-    if (cyclesCompleted) {
+    const completedCycles = resetCycle(userID);
+    if (completedCycles) {
         applesToAdd += resetCorral(userID);
-        applesToAdd += barnApplesGeneration(userID, cyclesCompleted);
+        applesToAdd += barnApplesGeneration(userID, completedCycles);
     }
 
     const row = db.prepare("SELECT apples FROM greenApples WHERE userId = ?").get(userID);
