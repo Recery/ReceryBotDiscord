@@ -33,7 +33,25 @@ function set_lang(client, serverid, lang)
     client.langs.set(serverid, lang);
 }
 
+const commandCategories = {
+    es: {
+        action: "Acción",
+        admin: "Administración",
+        economy: "Economía",
+        fun: "Diversión",
+        info: "Información"
+    },
+    en: {
+        action: "Action",
+        admin: "Administration",
+        economy: "Economy",
+        fun: "Fun",
+        info: "Info"
+    }
+}
+
 module.exports = {
     load_langs,
-    set_lang
+    set_lang,
+    commandCategories
 }

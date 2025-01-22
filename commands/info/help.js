@@ -92,6 +92,7 @@ const messages = {
 }
 
 const prefix = require("../../prefix.js");
+const { commandCategories } = require("../../langsLoader.js");
 function sendCommandDescription(msg, lang, command) {
     if (!command) return false;
     if (!command.description) return false;
@@ -125,7 +126,7 @@ function sendCommandDescription(msg, lang, command) {
         )
     }
 
-    embed.setFooter({text: cmdDescriptionMsgs[lang].categoryField + command.category})
+    embed.setFooter({text: cmdDescriptionMsgs[lang].categoryField + commandCategories[lang][command.category]})
 
     msg.reply( { embeds: [embed]} );
 
