@@ -35,15 +35,15 @@ module.exports = {
 
 const messages = {
     es: {
-        seconds: "segundos",
-        minutes: "minutos",
-        hours: "horas",
+        seconds: "segundo(s)",
+        minutes: "minuto(s)",
+        hours: "hora(s)",
         reply: "Tu corral se reiniciará en {{time}} {{unit}}.",
     },
     en: {
-        seconds: "seconds",
-        minutes: "minutes",
-        hours: "hours",
+        seconds: "second(s)",
+        minutes: "minute(s)",
+        hours: "hour(s)",
         reply: "Your corral will reset in {{time}} {{unit}}."
     }
 }

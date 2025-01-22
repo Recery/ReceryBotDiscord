@@ -86,7 +86,7 @@ function verifyCorralReset(userID) {
         return false;
     }
 
-    // Tiempo transcurrido desde la finalizacion del ultimo cooldown hasta esta verificacion
+    // Tiempo transcurrido desde el inicio del ultimo cooldown hasta esta verificacion
     const elapsedTime = now - row.time;
 
     // Cooldown no completado
@@ -100,7 +100,7 @@ function verifyCorralReset(userID) {
 
     const completedCycles = Math.floor(elapsedTime / hour);
 
-    db.prepare("UPDATE corralReset SET time = ? WHERE userId = ?").run(row.time + (completedCycles * hour) + hour, userID);
+    db.prepare("UPDATE corralReset SET time = ? WHERE userId = ?").run(row.time + (completedCycles * hour), userID);
 
     return true;
 }
