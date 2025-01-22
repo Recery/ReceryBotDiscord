@@ -75,13 +75,13 @@ function chooseSlime() {
     for (const slime of slimesModule.slimes) {
         switch (slime.rarity) {
             case 1:
-                for (let i = 0; i < 30; i++) weightedList.push(slime);
+                for (let i = 0; i < 34; i++) weightedList.push(slime);
                 break;
             case 2:
-                for (let i = 0; i < 12; i++) weightedList.push(slime);
+                for (let i = 0; i < 17; i++) weightedList.push(slime);
                 break;
             case 3:
-                for (let i = 0; i < 5; i++) weightedList.push(slime);
+                for (let i = 0; i < 7; i++) weightedList.push(slime);
                 break;
             case 4:
                 for (let i = 0; i < 1; i++) weightedList.push(slime);
