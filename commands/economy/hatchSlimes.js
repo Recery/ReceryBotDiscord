@@ -7,6 +7,13 @@ module.exports = {
     name: "hatchslimes",
     alias: ["hs", "getslimes"],
     category: "economy",
+    description: {
+        es: `Eclosiona slimes aleatorios. Hay slimes de 3 rarezas: Comunes, Raros, y Épicos. Aunque dicen que hay una rareza superior.
+            \nx10:green_apple: = x1 slime.\nSe pueden eclosionar hasta 9 slimes a la vez.`,
+        en: `Hatches random slimes. There are 3 slimes rarities: Common, Rare, and Epic. But they say there is a superior rarity.
+            \nx10:green_apple: = x1 slime.\nUp to 9 slimes can be hatched at the same time.`,
+    },
+    examples: ["{{prefix}}hatchslimes", "{{prefix}}hs x4", "{{prefix}}getslimes x9"],
     async execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
@@ -64,8 +71,6 @@ module.exports = {
         });
 
         loadingReaction.remove();
-
-
     }
 }
 

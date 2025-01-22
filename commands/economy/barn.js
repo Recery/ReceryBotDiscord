@@ -1,8 +1,8 @@
 const eco = require("../../economy/economyModule.js");
 
 module.exports = {
-    name: "slimebarn",
-    alias: ["sb", "barn", "granero", "graneroslime"],
+    name: "barn",
+    alias: ["granero"],
     category: "economy",
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";

@@ -7,11 +7,15 @@ module.exports = {
     {
         const lang = client.langs.get(msg.guildId) || "es";
 
-        let embed = new Discord.EmbedBuilder()
+        // Si tiene más de un argumento, significa que el usuario ingresó (o eso debería) un comando para obtener info del mismo 
+        if (args.length > 0) {
+            const command = client.commands.get(args[0]) || client.commands.find(cmd => cmd.alias && cmd.alias.include(args[0]));
+            if (sendCommandDescription(msg, lang, command)) return;
+        }
+
+        const embed = new Discord.EmbedBuilder()
             .setColor("#65a7fc")
-            .setTitle(messages[lang].title)
-            .addFields(
-            )
+            .setTitle(messages[lang].title);
         
         const selection = new Discord.StringSelectMenuBuilder()
             .setCustomId("helpCategoriesSel")
@@ -84,5 +88,55 @@ const messages = {
 
         info_selection_label: "Info",
         info_selection_desc: "Commands about information of myself."
+    }
+}
+
+const prefix = require("../../prefix.js");
+function sendCommandDescription(msg, lang, command) {
+    if (!command) return false;
+    if (!command.includes("description")) return false;
+
+    const embed = new Discord.EmbedBuilder()
+        .setTitle(command.name)
+        .setDescription(command.description[lang])
+        .setColor("#65a7fc");
+
+    if (command.includes("alias")) {
+        let aliases = ""
+        for (const alias of command.alias) {
+            aliases += "`" + alias + "` ";
+        }
+        aliases.trim();
+
+        embed.addFields(
+            {name: cmdDescriptionMsgs[land].aliasField, value: aliases}
+        )
+    }
+
+    if (command.includes("examples")) {
+        let examples = "";
+        for (const example of command.examples) {
+            examples += example.replace("{{prefix}}", prefix.get_prefix(msg.guildId)) + "\n";
+        }
+        examples.trim();
+
+        embed.addFields(
+            {name: cmdDescriptionMsgs[lang].examplesField, value: examples}
+        )
+    }
+
+    msg.reply( { embeds: [embed]} );
+
+    return true;
+}
+
+const cmdDescriptionMsgs = {
+    es: {
+        aliasField: "**Alias**",
+        examplesField: "**Ejemplos de uso**"
+    },
+    en: {
+        aliasField: "**Aliases**",
+        examplesField: "**Use examples**"
     }
 }
