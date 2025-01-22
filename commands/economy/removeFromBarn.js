@@ -41,6 +41,8 @@ module.exports = {
         if (isNaN(Number(inputName))) slimeObj = slimesModule.getSlimeByName(inputName);
         else slimeObj = slimesModule.getSlime(inputName);
 
+        console.log(inputName);
+
         if (!slimeObj) {
             msg.reply(messages[lang].notFound);
             return;
