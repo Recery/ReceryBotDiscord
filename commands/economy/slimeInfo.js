@@ -29,7 +29,7 @@ module.exports = {
             return;
         }
 
-        let description = "**" + messages[lang].rarity;
+        let description = "**ID:" + slimeObj.id.toString() + "\n" + messages[lang].rarity;
         for (let i = 0; i < slimeObj.rarity; i++)
             description += ":star:";
 
