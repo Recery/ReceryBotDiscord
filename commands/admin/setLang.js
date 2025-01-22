@@ -5,8 +5,8 @@ module.exports = {
     name: "setlang",
     category: "administration",
     description: {
-        es: "Cambia el idioma del servidor. Idiomas disponibles: " + "`" + availableLangs.join("` ").trim(),
-        en: "Changes server language. Availables langs: " + "`" + availableLangs.join("` ").trim()
+        es: "Cambia el idioma del servidor. Idiomas disponibles: " + "`" + availableLangs.join("` ").trim() + "`",
+        en: "Changes server language. Availables langs: " + "`" + availableLangs.join("` ").trim() + "`"
     },
     examples: ["{{prefix}}setlang es", "{{prefix}}setlang en"],
     execute(client, msg, args)
