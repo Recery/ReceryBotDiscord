@@ -1,14 +1,14 @@
 const eco = require("../../economy/economyModule.js");
 
 module.exports = {
-    name: "corraltimeleft",
+    name: "cycletimeleft",
     alias: ["ctimeleft", "ctl"],
     category: "economy",
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
 
-        const timeleft = eco.getCorralResetTimeLeft(userID);
+        const timeleft = eco.getCycleTimeLeft(userID);
 
         // Obtener minutos, en base a los minutos ver si debe expresar el tiempo en horas, minutos o segundos 
         const minutes = Math.floor((timeleft / 1000) / 60);
