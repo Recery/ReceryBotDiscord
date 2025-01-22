@@ -9,12 +9,71 @@ function setApples(userID, apples) {
 }
 
 function getApples(userID) {
+    let applesToAdd = 0;
+    const cyclesCompleted = resetCycle(userID);
+    if (cyclesCompleted) {
+        applesToAdd += resetCorral(userID);
+        applesToAdd += barnApplesGeneration(userID, cyclesCompleted);
+    }
+
     const row = db.prepare("SELECT apples FROM greenApples WHERE userId = ?").get(userID);
 
-    if (row) return row.apples;
+    if (row) {
+        if (applesToAdd > 0) setApples(userID, row.apples + applesToAdd);
+        return row.apples + applesToAdd;
+    };
     
     return 0;
 }
+
+
+// Cada una hora, ocurre un ciclo en la economia de los slimes
+// En cada ciclo, se eliminan todos los slimes que habia en el corral y se suman manzanas verdes segun su capacidad de generacion
+// Tambien cada del granero genera una cantidad de manzanas verdes segun su generacion
+// Los slimes del granero no se pierden por ciclos
+function resetCycle(userID) {
+    const row = db.prepare("SELECT startTime FROM slimeCyclesTimes WHERE userId = ?").get(userID);
+
+    const now = Date.now();
+    const hour = 1 * 60 * 60 * 1000; // 1 hora en milisegundos
+
+    // No hay registro de cooldown de corral para este usuario, insertarlo
+    if (!row) {
+        db.prepare("INSERT INTO slimeCyclesTimes (userId, startTime) VALUES (?, ?)").run(userID, now);
+        return;
+    }
+
+    // Tiempo transcurrido desde el inicio del ultimo cooldown hasta esta verificacion
+    const elapsedTime = now - row.startTime;
+
+    // Cooldown no completado
+    if (elapsedTime < hour)
+        return;
+    
+    // Al llegar a este punto, significa que el cooldown ya se completó
+    // Reiniciar el cooldown y devolver true para avisar que se reinició el ciclo
+    const completedCycles = Math.floor(elapsedTime / hour);
+
+    db.prepare("UPDATE slimeCyclesTimes SET startTime = ? WHERE userId = ?").run(row.startTime + (completedCycles * hour), userID);
+
+    return completedCycles;
+}
+
+function getCycleTimeLeft(userID) {
+    resetCycle(userID);
+
+    const row = db.prepare("SELECT time FROM slimeCyclesTimes WHERE userId = ?").get(userID);
+
+    const hour = 1 * 60 * 60 * 1000;
+    
+    if (row) {
+        const time = (row.time + hour) - Date.now();
+        return time;
+    }
+
+    return 0;
+}
+
 
 function setBarnSize(userID, size) {
     db.prepare("INSERT OR REPLACE INTO barnSize (userId, size) VALUES (?, ?)").run(userID, size);
@@ -26,6 +85,19 @@ function getBarnSize(userID) {
     if (row) return row.size;
 
     return 3;
+}
+
+// Enviar la cantidad de ciclos completados, y sumar manzanas de cada slime por cada ciclo
+function barnApplesGeneration(userID, cyclesCompleted) {
+    let applesToAdd = 0;
+
+    for (const data of getBarnSlimes(userID)) {
+        const slime = data.obj;
+        if (!slime) continue;
+        applesToAdd += slime.appleGeneration * data.quantity * cyclesCompleted;
+    }
+
+    return applesToAdd;
 }
 
 // Los dos siguientes metodos agregan o eliminan UN SOLO SLIME del granero
@@ -75,69 +147,24 @@ function getBarnSlimesAmount(userID) {
     return slimesAmount;
 }
 
-// Cada vez que se desee acceder al contenido del corral de alguna manera, hay que verificar si el corral ya se reinició
-// Asegura que siempre el contenido del corral esté actualizado, y también da luz verde o roja para hacer ciertas acciones
-// Normalmente se reinicia cada 1 hora
-function verifyCorralReset(userID) {
-    const row = db.prepare("SELECT time FROM corralReset WHERE userId = ?").get(userID);
-
-    const now = Date.now();
-    const hour = 1 * 60 * 60 * 1000; // 1 hora en milisegundos
-
-    // No hay registro de cooldown de corral para este usuario, insertarlo
-    if (!row) {
-        db.prepare("INSERT INTO corralReset (userId, time) VALUES (?, ?)").run(userID, now);
-        return false;
-    }
-
-    // Tiempo transcurrido desde el inicio del ultimo cooldown hasta esta verificacion
-    const elapsedTime = now - row.time;
-
-    // Cooldown no completado
-    if (elapsedTime < hour) {
-        return false;
-    }
-    
-
-    // Llegado a este punto, significa que el cooldown ya se completó
-    // Eliminar slimes del corral, sumar las manzanas correspondientes, y reiniciar el cooldown
-
+// Reinicia el corral y devuelve las manzanas que hay que agregar 
+function resetCorral(userID) {
     let applesToAdd = 0;
-    const slimesData = db.prepare("SELECT slimeId, quantity FROM corral WHERE userId = ?").all(userID);
-    for (const data of slimesData) {
-        const slime = slimesModule.getSlime(data.slimeId)
+
+    for (const data of getCorralSlimes(userID)) {
+        const slime = data.obj;
         if (!slime) continue;
         applesToAdd += slime.appleGeneration * data.quantity;
     }
-    setApples(userID, getApples(userID) + applesToAdd);
 
     db.prepare("DELETE FROM corral WHERE userId = ?").run(userID);
 
-    const completedCycles = Math.floor(elapsedTime / hour);
-
-    db.prepare("UPDATE corralReset SET time = ? WHERE userId = ?").run(row.time + (completedCycles * hour), userID);
-
-    return true;
-}
-
-function getCorralResetTimeLeft(userID) {
-    verifyCorralReset(userID);
-
-    const row = db.prepare("SELECT time FROM corralReset WHERE userId = ?").get(userID);
-
-    const hour = 1 * 60 * 60 * 1000;
-    
-    if (row) {
-        const time = (row.time + hour) - Date.now();
-        return time;
-    }
-
-    return 0;
+    return applesToAdd;
 }
 
 // Mandarle un id de slime para agregar
 function addSlimeToCorral(userID, slimeID) {
-    verifyCorralReset(userID);
+    if (resetCycle(userID)) resetCorral(userID);
 
     let newQuantity = 1;
 
@@ -148,7 +175,7 @@ function addSlimeToCorral(userID, slimeID) {
 }
 
 function removeSlimeFromCorral(userID, slimeID) {
-    verifyCorralReset(userID);
+    if (resetCycle(userID)) resetCorral(userID);
 
     let newQuantity = 0;
 
@@ -166,9 +193,9 @@ function removeSlimeFromCorral(userID, slimeID) {
 }
 
 function getCorralSlimes(userID) {
-    verifyCorralReset(userID);
+    if (resetCycle(userID)) resetCorral(userID);
 
-    const rows = db.prepare("SELECT * FROM corral WHERE userId = ?").all(userID);
+    const rows = db.prepare("SELECT slimeId, quantity FROM corral WHERE userId = ?").all(userID);
 
     const slimesList = [];
 
@@ -179,7 +206,7 @@ function getCorralSlimes(userID) {
 }
 
 function getCorralSlimesAmount(userID) {
-    verifyCorralReset(userID);
+    if (resetCycle(userID)) resetCorral(userID);
 
     const rows = db.prepare("SELECT quantity FROM corral WHERE userId = ?").all(userID);
 
@@ -194,14 +221,15 @@ function getCorralSlimesAmount(userID) {
 module.exports = {
     setApples,
     getApples,
+    resetCycle,
+    getCycleTimeLeft,
     setBarnSize,
     getBarnSize,
     addSlimeToBarn,
     removeSlimeFromBarn,
     getBarnSlimes,
     getBarnSlimesAmount,
-    verifyCorralReset,
-    getCorralResetTimeLeft,
+    resetCorral,
     addSlimeToCorral,
     removeSlimeFromCorral,
     getCorralSlimes,
