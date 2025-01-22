@@ -33,7 +33,7 @@ module.exports = {
 
             inputName += arg + " ";
         }
-        inputName.trim();
+        inputName = inputName.trim();
 
         // Obtener el objeto del slime ingresado
         let slimeObj;
