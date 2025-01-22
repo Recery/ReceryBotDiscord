@@ -135,13 +135,13 @@ function sendCommandDescription(msg, lang, command) {
 const cmdDescriptionMsgs = {
     es: {
         commandTitle: "Comando: ",
-        categoryField: "**Categoría:** ",
+        categoryField: "Categoría: ",
         aliasField: "**Alias**",
         examplesField: "**Ejemplos de uso**"
     },
     en: {
         commandTitle: "Command: ",
-        categoryField: "**Category:** ",
+        categoryField: "Category: ",
         aliasField: "**Aliases**",
         examplesField: "**Use examples**"
     }
