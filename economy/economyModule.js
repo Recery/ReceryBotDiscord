@@ -124,24 +124,30 @@ function getCorralResetTimeLeft(userID) {
 function addSlimeToCorral(userID, slimeID) {
     verifyCorralReset(userID);
 
-    let quantity = 0;
+    let newQuantity = 0;
 
     const row = db.prepare("SELECT quantity FROM corral WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
-    if (row) quantity = row.quantity;
+    if (row) newQuantity = row.quantity + 1;
 
-    db.prepare("INSERT OR REPLACE INTO corral (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity + 1);
+    db.prepare("INSERT OR REPLACE INTO corral (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, newQuantity + 1);
 }
 
 function removeSlimeFromCorral(userID, slimeID) {
     verifyCorralReset(userID);
 
-    let quantity = 0;
+    let newQuantity = 0;
 
     const row = db.prepare("SELECT quantity FROM corral WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
-    if (row) quantity = row.quantity;
-    if (quantity - 1 < 0) return; // No se pueden tener slimes negativos 
+    if (row) newQuantity = row.quantity - 1;
 
-    db.prepare("INSERT OR REPLACE INTO corral (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity - 1);
+    if (newQuantity < 0) return; // No se pueden tener slimes negativos...
+    else if (newQuantity === 0) {
+        // Si hay cero slimes de este tipo, borrar el registro, y obviamente no insertar uno nuevo
+        db.prepare("DELETE FROM corral WHERE userId = ? AND slimeId = ?").run(userID, slimeID);
+        return;
+    }
+
+    db.prepare("INSERT OR REPLACE INTO corral (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, newQuantity);
 }
 
 function getCorralSlimes(userID) {
@@ -182,6 +188,7 @@ module.exports = {
     verifyCorralReset,
     getCorralResetTimeLeft,
     addSlimeToCorral,
+    removeSlimeFromCorral,
     getCorralSlimes,
     getCorralSlimesAmount
 };
