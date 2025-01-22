@@ -18,7 +18,7 @@ module.exports = {
         for(const arg of args)
             inputName += arg + " ";
 
-        inputName.trim();
+        inputName = inputName.trim();
 
         let slimeObj;
         if (isNaN(Number(inputName))) slimeObj = slimesModule.getSlimeByName(inputName);
