@@ -105,7 +105,7 @@ function verifyCorralReset(userID) {
     let applesToAdd = 0;
     const slimesData = db.prepare("SELECT slimeId, quantity FROM corral WHERE userId = ?").all(userID);
     for (const data of slimesData) {
-        const slime = slimesModule.getSlime(data.id)
+        const slime = slimesModule.getSlime(data.slimeId)
         if (!slime) continue;
         applesToAdd += slime.appleGeneration * data.quantity;
     }
