@@ -109,7 +109,7 @@ function sendCommandDescription(msg, lang, command) {
         aliases.trim();
 
         embed.addFields(
-            {name: cmdDescriptionMsgs[land].aliasField, value: aliases}
+            {name: cmdDescriptionMsgs[lang].aliasField, value: aliases}
         )
     }
 
