@@ -16,6 +16,11 @@ module.exports = {
         for (const slime of eco.getBarnSlimes(userID))
             content += slime.obj.displayName[lang] + " x" + slime.quantity.toString() + "\n";
 
-        msg.reply(`<@${userID}>, en tienes estos slimes en tu granero: ${content}`);
+        msg.reply(messages[lang] + content);
     }
+}
+
+const messages = {
+    es: "Tienes estos slimes en tu granero: ",
+    en: "You have these slimes in your barn: "
 }
