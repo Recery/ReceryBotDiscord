@@ -100,7 +100,7 @@ function verifyCorralReset(userID) {
 
     const completedCycles = Math.floor(elapsedTime / hour);
 
-    db.prepare("UPDATE corralReset SET time = ? WHERE userId = ?").run(row.time + (completedCycles * hour), userID);
+    db.prepare("UPDATE corralReset SET time = ? WHERE userId = ?").run(row.time + (completedCycles * hour) + hour, userID);
 
     return true;
 }
@@ -130,6 +130,18 @@ function addSlimeToCorral(userID, slimeID) {
     if (row) quantity = row.quantity;
 
     db.prepare("INSERT OR REPLACE INTO corral (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity + 1);
+}
+
+function removeSlimeFromCorral(userID, slimeID) {
+    verifyCorralReset(userID);
+
+    let quantity = 0;
+
+    const row = db.prepare("SELECT quantity FROM corral WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
+    if (row) quantity = row.quantity;
+    if (quantity - 1 < 0) return; // No se pueden tener slimes negativos 
+
+    db.prepare("INSERT OR REPLACE INTO corral (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity - 1);
 }
 
 function getCorralSlimes(userID) {
