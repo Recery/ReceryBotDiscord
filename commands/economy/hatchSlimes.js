@@ -32,6 +32,12 @@ module.exports = {
             msg.reply(messages[lang].needMoreApples.replace("{{apples}}", applesToSpend.toString()));
             return;
         }
+
+        // No se pueden eclosionar más de nueve slimes en un mismo comando
+        if (slimesToHatch > 9) {
+            msg.reply(messages[lang].tooMuchHatches);
+            return;
+        }
         
         eco.setApples(userID, userApples - applesToSpend);
 
@@ -131,10 +137,12 @@ async function getImageAttachment(slimes, lang) {
 const messages = {
     es: {
         needMoreApples: "¡No tienes suficientes :green_apple: para eclosionar esa cantidad de slimes!\nNecesitas {{apples}}:green_apple:.",
+        tooMuchHatches: "¡No puedes eclosionar más de 9 slimes a la vez!",
         slimeObtention: "¡Eclosionaste estos slimes!"
     },
     en: {
         needMoreApples: "You don't have enough :green_apple: to hatch that amount of slimes!\n You need {{apples}}:green_apple:.",
+        tooMuchHatches: "You can't hatch more than 9 slimes at the same time!",
         slimeObtention: "You hatched these slimes!"
     }
 }
