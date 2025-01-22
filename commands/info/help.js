@@ -127,7 +127,7 @@ function sendCommandDescription(client, msg, lang, command) {
     }
 
     embed.setFooter(
-        {text: cmdDescriptionMsgs[lang].categoryField + commandCategories[lang][command.category], iconURL: client.application.bot.avatarURL();}
+        {text: cmdDescriptionMsgs[lang].categoryField + commandCategories[lang][command.category], iconURL: client.application.bot.avatarURL()}
     );
 
     msg.reply( { embeds: [embed]} );
