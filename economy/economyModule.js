@@ -122,7 +122,7 @@ function removeSlimeFromBarn(userID, slimeID) {
         db.prepare("DELETE FROM barnContent WHERE userId = ? AND slimeId = ?").run(userID, slimeID);
     }
 
-    db.prepare("INSERT OR REPLACE INTO barnContent (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity - 1);
+    db.prepare("INSERT OR REPLACE INTO barnContent (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, newQuantity);
 }
 
 function getBarnSlimes(userID) {
