@@ -97,7 +97,7 @@ function sendCommandDescription(msg, lang, command) {
     if (!command.description) return false;
 
     const embed = new Discord.EmbedBuilder()
-        .setTitle(command.name)
+        .setTitle(cmdDescriptionMsgs[lang].commandTitle + command.name)
         .setDescription(command.description[lang])
         .setColor("#65a7fc");
 
@@ -125,6 +125,8 @@ function sendCommandDescription(msg, lang, command) {
         )
     }
 
+    embed.setFooter({text: cmdDescriptionMsgs[lang].categoryField + command.category})
+
     msg.reply( { embeds: [embed]} );
 
     return true;
@@ -132,10 +134,14 @@ function sendCommandDescription(msg, lang, command) {
 
 const cmdDescriptionMsgs = {
     es: {
+        commandTitle: "Comando: ",
+        categoryField: "**Categoría:** ",
         aliasField: "**Alias**",
         examplesField: "**Ejemplos de uso**"
     },
     en: {
+        commandTitle: "Command: ",
+        categoryField: "**Category:** ",
         aliasField: "**Aliases**",
         examplesField: "**Use examples**"
     }
