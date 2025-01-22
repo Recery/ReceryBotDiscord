@@ -1,20 +1,24 @@
 const Langs = require("../../langsLoader.js");
 
+const availableLangs = ["es", "en"];
 module.exports = {
     name: "setlang",
     category: "administration",
+    description: {
+        es: "Cambia el idioma del servidor. Idiomas disponibles: " + "`" + availableLangs.join("` ").trim(),
+        en: "Changes server language. Availables langs: " + "`" + availableLangs.join("` ").trim()
+    },
+    examples: ["{{prefix}}setlang es", "{{prefix}}setlang en"],
     execute(client, msg, args)
     {
         const lang = client.langs.get(msg.guildId) || "es";
 
-        if (!args.length > 0) 
-        {
-            msg.reply(messages[lang].invalid_lang);
+        if (!args.length > 0) {
+            msg.reply(messages[lang].invalidLang);
             return;
         }
-        else if (args[0] !== "es" && args[0] !== "en")
-        {
-            msg.reply(messages[lang].invalid_lang);
+        else if (!availableLangs.includes(args[0])) {
+            msg.reply(messages[lang].invalidLang);
             return;
         }
 
@@ -29,11 +33,11 @@ module.exports = {
 
 const messages = {
     es: {
-        invalid_lang: "Debes ingresar un idioma válido.",
+        invalidLang: "Debes ingresar un idioma válido.",
         success: "El idioma fue cambiado a `{{lang}}` con éxito."
     },
     en: {
-        invalid_lang: "You must enter a valid language.",
+        invalidLang: "You must enter a valid language.",
         success: "Language has been changed to `{{lang}}` succesfully."
     }
 }
