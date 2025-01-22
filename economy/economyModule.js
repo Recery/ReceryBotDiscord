@@ -67,7 +67,7 @@ function getCycleTimeLeft(userID) {
     const hour = 1 * 60 * 60 * 1000;
     
     if (row) {
-        const time = (row.time + hour) - Date.now();
+        const time = (row.startTime + hour) - Date.now();
         return time;
     }
 
