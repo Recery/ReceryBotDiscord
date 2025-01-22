@@ -17,6 +17,8 @@ module.exports = {
         let time = minutes;
         let unit = "minutes";
 
+        console.log(minutes);
+
         if (minutes > 60) { // Más de una hora, expresar en horas
             time = Math.floor(time / 60);
             unit = "hours";

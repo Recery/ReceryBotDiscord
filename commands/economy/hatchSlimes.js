@@ -13,13 +13,15 @@ module.exports = {
 
         let slimesToHatch = 1;
 
-        // Primer (y único argumento debería ser la cantidad de slimes a eclosionar
-        // El argumento es opcional, si no se lo incluye siempre va a ser 1 slime
+        // El único argumento que se tiene en cuenta debería ser la cantidad de slimes a eclosionar
+        // El argumento es opcional, si no se incluye siempre va a ser 1 slime
         // Verificamos si existe el argumento, si es un numero, y si es mayor a 0
-        if (args[0]) {
-            const quantity = Number(args[0].toLowerCase().replace("x", ""));
-            if (!isNaN(quantity)) {
-                if (quantity > 0) slimesToHatch = quantity;
+        for (const arg of args) {
+            if (arg.toLowerCase().startsWith("x")) {
+                const quantity = Number(arg.toLowerCase().replace("x", ""));
+                if (!isNaN(quantity))
+                    if (quantity > 0) slimesToHatch = quantity;
+                break;
             }
         }
 
