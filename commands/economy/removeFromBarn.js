@@ -56,7 +56,7 @@ module.exports = {
             if (slime.obj.id === slimeObj.id) {
                 if (slime.quantity >= quantityToRemove){
                     hasSlime = true;
-                    return;
+                    break;
                 }
             }
         }
