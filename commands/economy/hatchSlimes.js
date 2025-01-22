@@ -25,6 +25,8 @@ module.exports = {
             }
         }
 
+        console.log(slimesToHatch);
+
         const applesToSpend = slimesToHatch * 10;
         const userApples = eco.getApples(userID);
         
