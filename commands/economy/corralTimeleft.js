@@ -22,7 +22,7 @@ module.exports = {
             unit = "hours";
         }
         else if (minutes <= 0) { // Menos de un minuto, expresar en segundos
-            time = Math.floor(minutes * 60);
+            time = Math.floor(timeleft / 1000);
             unit = "seconds";
         }
 
