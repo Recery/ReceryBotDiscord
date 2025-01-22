@@ -94,14 +94,14 @@ const messages = {
 const prefix = require("../../prefix.js");
 function sendCommandDescription(msg, lang, command) {
     if (!command) return false;
-    if (!command.includes("description")) return false;
+    if (!command.description) return false;
 
     const embed = new Discord.EmbedBuilder()
         .setTitle(command.name)
         .setDescription(command.description[lang])
         .setColor("#65a7fc");
 
-    if (command.includes("alias")) {
+    if (command.alias) {
         let aliases = ""
         for (const alias of command.alias) {
             aliases += "`" + alias + "` ";
@@ -113,7 +113,7 @@ function sendCommandDescription(msg, lang, command) {
         )
     }
 
-    if (command.includes("examples")) {
+    if (command.examples) {
         let examples = "";
         for (const example of command.examples) {
             examples += example.replace("{{prefix}}", prefix.get_prefix(msg.guildId)) + "\n";
