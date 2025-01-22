@@ -162,8 +162,18 @@ function getSlimeByName(refName) {
     return null;
 }
 
+function getSlimesByRarity(rarity) {
+    const slimesList = [];
+
+    for (const slime of slimes)
+        if (slime.rarity === rarity) slimesList.push(slime);
+
+    return slimesList;
+}
+
 module.exports = {
     slimes,
     getSlime,
-    getSlimeByName
+    getSlimeByName,
+    getSlimesByRarity
 }

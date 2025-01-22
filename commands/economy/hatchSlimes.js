@@ -70,26 +70,28 @@ module.exports = {
 }
 
 function chooseSlime() {
-    const weightedList = [];
+    const commonChance = 90;
+    const rareChance = 25;
+    const epicChance = 5;
+    const ultraChance = 1;
 
-    for (const slime of slimesModule.slimes) {
-        switch (slime.rarity) {
-            case 1:
-                for (let i = 0; i < 36; i++) weightedList.push(slime);
-                break;
-            case 2:
-                for (let i = 0; i < 17; i++) weightedList.push(slime);
-                break;
-            case 3:
-                for (let i = 0; i < 7; i++) weightedList.push(slime);
-                break;
-            case 4:
-                for (let i = 0; i < 1; i++) weightedList.push(slime);
-                break;
-        }
-    }
+    const totalChance = commonChance + rareChance + epicChance + ultraChance;
 
-    return weightedList[Math.floor(Math.random() * weightedList.length)];
+    const rand = Math.floor(Math.random() * totalChance);
+
+    let rarity = 1;
+    if (rand < commonChance)
+        rarity = 1;
+    else if (rand < commonChance + rareChance)
+        rarity = 2;
+    else if (rand < commonChance + rareChance + epicChance)
+        rarity = 3
+    else
+        rarity = 4;
+
+    const possibleSlimes = slimesModule.getSlimesByRarity(rarity);
+
+    return possibleSlimes[Math.floor(Math.random() * possibleSlimes.length)];
 }
 
 Canvas.registerFont("fonts/slkscr.ttf", {family: "silkscreen"});
