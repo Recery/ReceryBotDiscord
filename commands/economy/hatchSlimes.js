@@ -9,9 +9,9 @@ module.exports = {
     category: "economy",
     description: {
         es: `Eclosiona slimes aleatorios. Hay slimes de 3 rarezas: Comunes, Raros, y Épicos. Aunque dicen que hay una rareza superior.
-            Se pueden eclosionar hasta 9 slimes a la vez.\n\` :green_apple: x10 = slime x1.\``,
+            Se pueden eclosionar hasta 9 slimes a la vez.\n:green_apple:\`x10 = slime x1.\``,
         en: `Hatches random slimes. There are 3 slimes rarities: Common, Rare, and Epic. But they say there is a superior rarity.
-            Up to 9 slimes can be hatched at the same time.\n\` :green_apple: x10 = slime x1.\``,
+            Up to 9 slimes can be hatched at the same time.\n:green_apple:\`x10 = slime x1.\``,
     },
     examples: ["{{prefix}}hatchslimes", "{{prefix}}hs x4", "{{prefix}}getslimes x9"],
     async execute(client, msg, args) {
