@@ -86,7 +86,62 @@ const slimes = [
         rarity: 3,
         appleGeneration: 8,
         image: "https://i.imgur.com/RLw5cmu.png"
-    }
+    },
+    {
+        name: "blueslime",
+        displayName: {
+            es: "Slime Azul",
+            en: "Blue Slime"
+        },
+        id: 9,
+        rarity: 1,
+        appleGeneration: 2,
+        image: "https://i.imgur.com/O4ff3Yh.png"
+    },
+    {
+        name: "copperslime",
+        displayName: {
+            es: "Slime De Cobre",
+            en: "Copper Slime"
+        },
+        id: 10,
+        rarity: 2,
+        appleGeneration: 5,
+        image: "https://i.imgur.com/kH4fzHe.png"
+    },
+    {
+        name: "pinkyslime",
+        displayName: {
+            es: "Slime Rosita",
+            en: "Pinky Slime"
+        },
+        id: 11,
+        rarity: 1,
+        appleGeneration: 3,
+        image: "https://i.imgur.com/2Hi1Jii.png"
+    },
+    {
+        name: "grayslime",
+        displayName: {
+            es: "Slime Gris",
+            en: "Gray Slime"
+        },
+        id: 12,
+        rarity: 1,
+        appleGeneration: 2,
+        image: "https://i.imgur.com/KygZLcb.png"
+    },
+    {
+        name: "redslime",
+        displayName: {
+            es: "Slime Rojo",
+            en: "Red Slime"
+        },
+        id: 13,
+        rarity: 4,
+        appleGeneration: 15,
+        image: "https://i.imgur.com/H02f69C.png"
+    },
 ];
 
 function getSlime(id) {
