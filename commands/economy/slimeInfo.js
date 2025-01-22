@@ -53,14 +53,14 @@ const messages = {
         notInput: "Debes ingresar el nombre/ID de un slime para eliminar de tu granero.",
         notFound: "No se ha encontrado un slime con ese nombre/ID.",
         rarity: "Rareza: ",
-        appleGeneration: "{{apples}}:green_apple: por hora",
+        appleGeneration: "Producción por hora: x{{apples}} :green_apple:",
         embedTitle: "Información sobre {{slime}}"
     },
     en: {
         notInput: "You must enter the name/ID of a slime to remove from your barn.",
         notFound: "Couldn't find an slime with that name/ID",
         rarity: "Rarity: ",
-        appleGeneration: "{{apples}}:green_apple: per hour",
+        appleGeneration: "Production per hour: x{{apples}} :green_apple:",
         embedTitle: "Information about {{slime}}"
     }
 }
