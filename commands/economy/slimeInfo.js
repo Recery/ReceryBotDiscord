@@ -38,7 +38,7 @@ module.exports = {
         const embed = new Discord.EmbedBuilder()
             .setTitle(messages[lang].embedTitle.replace("{{slime}}", slimeObj.displayName[lang]))
             .setColor("#12bcff")
-            .setDescription(messages[lang].rarity + )
+            .setDescription(description)
             .setThumbnail(slimeObj.image);
 
         msg.reply({
