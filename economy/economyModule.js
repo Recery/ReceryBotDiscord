@@ -31,7 +31,7 @@ function getBarnSize(userID) {
 // Los dos siguientes metodos agregan o eliminan UN SOLO SLIME del granero
 // Usar multiples veces si se necesitan agregar o eliminar mas
 function addSlimeToBarn(userID, slimeID) {
-    let newQuantity = 0;
+    let newQuantity = 1;
 
     const row = db.prepare("SELECT quantity FROM barnContent WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
     if (row) newQuantity = row.quantity + 1;
@@ -128,7 +128,7 @@ function getCorralResetTimeLeft(userID) {
 function addSlimeToCorral(userID, slimeID) {
     verifyCorralReset(userID);
 
-    let newQuantity = 0;
+    let newQuantity = 1;
 
     const row = db.prepare("SELECT quantity FROM corral WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
     if (row) newQuantity = row.quantity + 1;
