@@ -2,7 +2,15 @@ const Discord = require("discord.js");
 
 module.exports = {
     name: "help",
+    alias: ["ayuda"],
     category: "info",
+    description: {
+        es: `Muestra un menú para ver los comandos disponibles.
+        También se puede ingresar como argumento un comando para ver detalles del mismo.`,
+        en: `Shows a menu to see all available commands.
+        Also you can enter a command as an argument to see details of it.`,
+    },
+    examples: ["{{prefix}}help", "{{prefix}}help 8ball", "{{prefix}}help hs"],
     execute(client, msg, args) 
     {
         const lang = client.langs.get(msg.guildId) || "es";
@@ -93,6 +101,7 @@ const messages = {
 
 const prefix = require("../../prefix.js");
 const { commandCategories } = require("../../langsLoader.js");
+const { examples } = require("../economy/hatchSlimes.js");
 function sendCommandDescription(client, msg, lang, command) {
     if (!command) return false;
     if (!command.description) return false;
@@ -111,7 +120,7 @@ function sendCommandDescription(client, msg, lang, command) {
 
         embed.addFields(
             {name: cmdDescriptionMsgs[lang].aliasField, value: aliases}
-        )
+        );
     }
 
     if (command.examples) {
@@ -123,7 +132,7 @@ function sendCommandDescription(client, msg, lang, command) {
 
         embed.addFields(
             {name: cmdDescriptionMsgs[lang].examplesField, value: examples}
-        )
+        );
     }
 
     embed.setFooter(

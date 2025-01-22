@@ -5,6 +5,10 @@ const fs = require("fs");
 module.exports = {
     name: "tts",
     category: "fun",
+    description: {
+        es: "Ingresa un texto, y yo te envío un audio diciéndolo.",
+        en: "Enter a text, and I will send an audio saying it."
+    }
     async execute (client, msg, args) 
     {
         const lang = client.langs.get(msg.guildId) || "es";
