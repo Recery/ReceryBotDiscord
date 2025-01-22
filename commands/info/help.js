@@ -10,7 +10,7 @@ module.exports = {
         // Si tiene más de un argumento, significa que el usuario ingresó (o eso debería) un comando para obtener info del mismo 
         if (args.length > 0) {
             const command = client.commands.get(args[0]) || client.commands.find(cmd => cmd.alias && cmd.alias.includes(args[0]));
-            if (sendCommandDescription(msg, lang, command)) return;
+            if (sendCommandDescription(client, msg, lang, command)) return;
         }
 
         const embed = new Discord.EmbedBuilder()
@@ -93,7 +93,7 @@ const messages = {
 
 const prefix = require("../../prefix.js");
 const { commandCategories } = require("../../langsLoader.js");
-function sendCommandDescription(msg, lang, command) {
+function sendCommandDescription(client, msg, lang, command) {
     if (!command) return false;
     if (!command.description) return false;
 
@@ -126,7 +126,9 @@ function sendCommandDescription(msg, lang, command) {
         )
     }
 
-    embed.setFooter({text: cmdDescriptionMsgs[lang].categoryField + commandCategories[lang][command.category]})
+    embed.setFooter(
+        {text: cmdDescriptionMsgs[lang].categoryField + commandCategories[lang][command.category], iconURL: client.application.bot.avatarURL();}
+    );
 
     msg.reply( { embeds: [embed]} );
 
