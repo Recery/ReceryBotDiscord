@@ -32,7 +32,6 @@ module.exports = {
         let description = "**ID: `" + slimeObj.id.toString() + "`\n" + messages[lang].rarity;
         for (let i = 0; i < slimeObj.rarity; i++)
             description += ":star:";
-
         description += "\n" + messages[lang].appleGeneration.replace("{{apples}}", slimeObj.appleGeneration.toString()) + "**";
 
         const embed = new Discord.EmbedBuilder()
@@ -43,7 +42,7 @@ module.exports = {
             .setFooter({text: msg.author.displayName, iconURL: msg.author.avatarURL()});
 
         msg.reply({
-            embeds: [embed],
+            embeds: [embed]
         });
     }
 }

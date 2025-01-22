@@ -75,6 +75,17 @@ const slimes = [
         rarity: 4,
         appleGeneration: 15,
         image: "https://i.imgur.com/kJqeeNq.png"
+    },
+    {
+        name: "leadslime",
+        displayName: {
+            es: "Slime De Plomo",
+            en: "Lead Slime"
+        },
+        id: 8,
+        rarity: 3,
+        appleGeneration: 8,
+        image: "https://i.imgur.com/cAozOhd.png"
     }
 ];
 
