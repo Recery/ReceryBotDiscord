@@ -116,7 +116,6 @@ function removeSlimeFromBarn(userID, slimeID) {
     
     const row = db.prepare("SELECT quantity FROM barnContent WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
     if (row) newQuantity = row.quantity - 1;
-    console.log(newQuantity, " cantidad");
     if (newQuantity <= 0) return; // No se pueden tener slimes negativos...
     else if (newQuantity === 0) {
         // Si hay cero slimes de este tipo, borrar el registro, y obviamente no insertar uno nuevo
@@ -129,7 +128,7 @@ function removeSlimeFromBarn(userID, slimeID) {
 }
 
 function getBarnSlimes(userID) {
-    const rows = db.prepare("SELECT * FROM barnContent WHERE userId = ?").all(userID);
+    const rows = db.prepare("SELECT slimeId, quantity FROM barnContent WHERE userId = ?").all(userID);
 
     const slimesList = [];
 
