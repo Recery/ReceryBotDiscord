@@ -13,8 +13,12 @@ module.exports = {
         let content = "\n";
         if (!slimes.length > 0) content += "¡Ninguno!"
 
-        for (const slime of eco.getBarnSlimes(userID))
+        for (const slime of eco.getBarnSlimes(userID)) {
+            content += "`ID: " + slime.obj.id.toString() + "` " // Agregar el id primero
             content += slime.obj.displayName[lang] + " x" + slime.quantity.toString() + "\n";
+        }
+
+            
 
         msg.reply(messages[lang] + content);
     }
