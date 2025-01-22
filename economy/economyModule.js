@@ -1,4 +1,4 @@
-const slimes = require("./slimes.js");
+const slimes = require("./slimesModule.js");
 const DB = require("better-sqlite3");
 
 const db =  new DB(process.env.ECONOMY_DB_PATH);
@@ -28,7 +28,8 @@ function getBarnSize(userID) {
     return 3;
 }
 
-// Mandarle un id de slime para agregar
+// Los dos siguientes metodos agregan o eliminan UN SOLO SLIME del granero
+// Usar multiples veces si se necesitan agregar o eliminar mas
 function addSlimeToBarn(userID, slimeID) {
     let quantity = 0;
 
@@ -36,6 +37,16 @@ function addSlimeToBarn(userID, slimeID) {
     if (row) quantity = row.quantity;
 
     db.prepare("INSERT OR REPLACE INTO barnContent (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity + 1);
+}
+
+function removeSlimeFromBarn(userID, slimeID) {
+    let quantity = 0;
+    
+    const row = db.prepare("SELECT quantity FROM barnContent WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
+    if (row) quantity = row.quantity;
+    if (quantity <= 0) return; // No se pueden tener slimes negativos...
+
+    db.prepare("INSERT OR REPLACE INTO barnContent (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, quantity - 1);
 }
 
 function getBarnSlimes(userID) {
@@ -148,6 +159,7 @@ module.exports = {
     setBarnSize,
     getBarnSize,
     addSlimeToBarn,
+    removeSlimeFromBarn,
     getBarnSlimes,
     getBarnSlimesAmount,
     verifyCorralReset,

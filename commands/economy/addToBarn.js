@@ -1,5 +1,5 @@
 const eco = require("../../economy/economyModule.js");
-const slimes = require("../../economy/slimes.js");
+const slimesModule = require("../../economy/slimesModule.js");
 
 module.exports = {
     name: "addtobarn",
@@ -11,7 +11,7 @@ module.exports = {
         
         // Si no tiene un primer argumento, significa que no ingreso nada mas que solo el comando
         if (!args.length > 0) {
-            msg.reply("Debes ingresar el nombre/ID del slime que deseas agregar al granero.");
+            msg.reply(messages[lang].notInput);
             return;
         }
         
@@ -39,8 +39,8 @@ module.exports = {
         // Buscar si el nombre/ID del slime ingresado existe en los slimes existentes
         let slimeObj;
 
-        if (isNaN(Number(inputName))) slimeObj = slimes.getSlimeByName(inputName);
-        else slimeObj = slimes.getSlime(Number(inputName))
+        if (isNaN(Number(inputName))) slimeObj = slimesModule.getSlimeByName(inputName);
+        else slimeObj = slimesModule.getSlime(Number(inputName))
 
         if (!slimeObj) {
             msg.reply(messages[lang].notFound);
@@ -52,7 +52,7 @@ module.exports = {
         const slimesInCorral = eco.getCorralSlimes(userID);
 
         for (const slime of slimesInCorral) {
-            if (slimes.getSlime(slime.obj.id) === slimeObj) {
+            if (slime.obj.id === slimeObj.id) {
                 if (slime.quantity >= quantityToAdd) {
                     hasSlime = true
                     break;

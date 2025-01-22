@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const Canvas = require("canvas"); 
 const eco = require("../../economy/economyModule.js");
-const slimes = require("../../economy/slimes.js");
+const slimesModule = require("../../economy/slimesModule.js");
 
 module.exports = {
     name: "hatchslimes",
@@ -64,7 +64,7 @@ module.exports = {
 function chooseSlime() {
     const weightedList = [];
 
-    for (const slime of slimes.slimes) {
+    for (const slime of slimesModule.slimes) {
         switch (slime.rarity) {
             case 1:
                 for (let i = 0; i < 12; i++) weightedList.push(slime);
