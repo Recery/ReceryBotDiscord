@@ -86,8 +86,11 @@ function verifyCorralReset(userID) {
         return false;
     }
 
+    // Tiempo transcurrido desde la finalizacion del ultimo cooldown hasta esta verificacion
+    const elapsedTime = now - row.time;
+
     // Cooldown no completado
-    if (now - row.time < hour) {
+    if (elapsedTime < hour) {
         return false;
     }
     
@@ -95,7 +98,9 @@ function verifyCorralReset(userID) {
     // Eliminar slimes del corral y reiniciar el cooldown
     db.prepare("DELETE FROM corral WHERE userId = ?").run(userID);
 
-    db.prepare("UPDATE corralReset SET time = ? WHERE userId = ?").run(userID);
+    const completedCycles = Math.floor(elapsedTime / hour);
+
+    db.prepare("UPDATE corralReset SET time = ? WHERE userId = ?").run(row.time + (completedCycles * hour), userID);
 
     return true;
 }
