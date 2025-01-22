@@ -9,7 +9,7 @@ module.exports = {
 
         // Si tiene más de un argumento, significa que el usuario ingresó (o eso debería) un comando para obtener info del mismo 
         if (args.length > 0) {
-            const command = client.commands.get(args[0]) || client.commands.find(cmd => cmd.alias && cmd.alias.include(args[0]));
+            const command = client.commands.get(args[0]) || client.commands.find(cmd => cmd.alias && cmd.alias.includes(args[0]));
             if (sendCommandDescription(msg, lang, command)) return;
         }
 
