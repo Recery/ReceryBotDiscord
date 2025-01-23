@@ -4,7 +4,7 @@ const { Collection } = require("discord.js");
 // Solo una vez cuando se inicia el bot
 // Carga todos los idiomas de cada server registrados en la base de datos
 // Si un server no tiene idioma, se usa el por defecto (español)
-function load_langs(client)
+function loadLangs(client)
 {
     client.langs = new Collection();
 
@@ -17,7 +17,7 @@ function load_langs(client)
     db.close();
 }
 
-function set_lang(client, serverid, lang)
+function setLang(client, serverid, lang)
 {
     const db = new DB(process.env.ADMIN_DB_PATH);
 
@@ -51,7 +51,7 @@ const commandCategories = {
 }
 
 module.exports = {
-    load_langs,
-    set_lang,
+    loadLangs,
+    setLang,
     commandCategories
 }

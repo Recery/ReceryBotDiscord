@@ -1,6 +1,6 @@
 const DB = require("better-sqlite3");
 
-function get_prefix(serverid)
+function getPrefix(serverid)
 {
     let prefix = "!";
 
@@ -15,5 +15,5 @@ function get_prefix(serverid)
 }
 
 module.exports = {
-    get_prefix
+    getPrefix
 }

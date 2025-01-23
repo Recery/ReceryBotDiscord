@@ -25,7 +25,7 @@ module.exports = {
         const serverid = msg.guildId;
         const new_lang = args[0];
 
-        Langs.set_lang(client, serverid, new_lang);
+        Langs.setLang(client, serverid, new_lang);
 
         msg.reply(messages[new_lang].success.replace("{{lang}}", new_lang));
     }

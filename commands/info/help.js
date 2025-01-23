@@ -107,7 +107,7 @@ function sendCommandDescription(client, msg, lang, command) {
     if (command.examples) {
         let examples = "";
         for (const example of command.examples) {
-            examples += "`" + example.replace("{{prefix}}", prefix.get_prefix(msg.guildId)) + "`\n";
+            examples += "`" + example.replace("{{prefix}}", prefix.getPrefix(msg.guildId)) + "`\n";
         }
         examples.trim();
 

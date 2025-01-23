@@ -34,7 +34,7 @@ for (const file of GetJSFiles.getJSFiles("./interactions")) {
 const Prefix = require("./prefix.js");
 const Langs = require("./langsLoader.js");
 client.on(Discord.Events.MessageCreate, (msg) => {
-	const prefix = Prefix.get_prefix(msg.guildId);
+	const prefix = Prefix.getPrefix(msg.guildId);
 
 	if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 
@@ -77,5 +77,5 @@ client.login(token);
 
 client.once(Discord.Events.ClientReady, (readyClient) => {
 	console.log(`El bot inició correctamente como ${readyClient.user.tag}.`);
-	Langs.load_langs(client);
+	Langs.loadLangs(client);
 });
