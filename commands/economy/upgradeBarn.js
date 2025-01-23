@@ -1,9 +1,15 @@
 const eco = require("../../economy/economyModule.js");
+const { description } = require("./hatchSlimes.js");
 
 module.exports = {
     name: "upgradebarn",
     alias: ["mejorargranero", "barnupgrade", "mejoradegranero"],
     category: "economy",
+    description: {
+        es: "Mejora tu granero para tener +1 de capacidad de slimes.",
+        en: "Upgrades your barn to get +1 slime capacity."
+    },
+    examples: ["{{prefix}}upgradebarn"],
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
