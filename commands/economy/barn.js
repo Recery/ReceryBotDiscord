@@ -18,7 +18,7 @@ module.exports = {
             content += slime.obj.displayName[lang] + " x" + slime.quantity.toString() + "\n";
         }
 
-        msg.reply(messages[lang].slimesInBarn + content + messages[lang].appleGeneration.replace("{{aples}}", eco.getBarnApplesGeneration(userID)));
+        msg.reply(messages[lang].slimesInBarn + content + messages[lang].appleGeneration.replace("{{apples}}", eco.getBarnApplesGeneration(userID)));
     }
 }
 
