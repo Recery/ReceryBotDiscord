@@ -5,9 +5,9 @@ module.exports = {
     category: "economy",
     description: {
         es: "Muestra los slimes que tienes en tu corral.\n" +
-        "Cada una hora, todos los slimes se irán de tu corral y ganarás :green_apple: según el valor de cada slime.",
+        "Cada una hora, todos los slimes se irán de tu corral.\nGanarás :green_apple: según el valor de cada slime.",
         en: "Shows all slimes from your corral.\n" +
-        "Every hour, all slimes from your corral will leave and you will earn :green_apple: according to the value of each slime."
+        "Every hour, all slimes from your corral will leave.\nYou will earn :green_apple: according to the value of each slime."
     },
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
