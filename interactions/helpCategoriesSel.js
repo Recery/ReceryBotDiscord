@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const { commandCategories } = require("../../langsLoader.js");
 
 module.exports = {
     id: "helpCategoriesSel",
@@ -9,7 +10,7 @@ module.exports = {
 
         const newEmbed = new Discord.EmbedBuilder()
             .setColor("#65a7fc")
-            .setTitle(messages[lang].title + messages[lang][category])
+            .setTitle(messages[lang] + commandCategories[lang][category])
             .setDescription(getCommands(category, client).join(" "));
 
         interaction.update({
@@ -43,20 +44,6 @@ function getCommands(category, client) {
 }
 
 const messages = {
-    es: {
-        title: "Categoría: ",
-        action: "Acción",
-        administration: "Administración",
-        economy: "Economía",
-        fun: "Diversión",
-        info: "Información"
-    },
-    en: {
-        title: "Category: ",
-        action: "Action",
-        administration: "Administration",
-        economy: "Economy",
-        fun: "Fun",
-        info: "Info"
-    }
+    es: "Categoría: ",
+    en: "Category: "
 }
