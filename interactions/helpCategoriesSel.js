@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { commandCategories } = require("../../langsLoader.js");
+const { commandCategories } = require("../langsLoader.js");
 
 module.exports = {
     id: "helpCategoriesSel",
