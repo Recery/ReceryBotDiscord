@@ -85,7 +85,7 @@ function sendCommandDescription(client, msg, lang, command) {
     if (!command) return false;
     let description = cmdDescriptionMsgs[lang].noDescription;
     if (command.description) 
-        description = command.description;
+        description = command.description[lang];
 
     const embed = new Discord.EmbedBuilder()
         .setTitle(cmdDescriptionMsgs[lang].commandTitle + command.name)
