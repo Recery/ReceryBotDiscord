@@ -59,7 +59,7 @@ module.exports = {
         for (const slime of slimesInCorral) {
             if (slime.obj.id === slimeObj.id) {
                 if (slime.quantity >= quantityToAdd) {
-                    hasSlime = true
+                    hasSlime = true;
                     break;
                 }
             }
@@ -69,7 +69,6 @@ module.exports = {
             msg.reply(messages[lang].notEnoughSlimes.replace("{{slime}}", slimeObj.displayName[lang]));
             return;
         }
-
 
         for (let i = 0; i < quantityToAdd; i++) {
             eco.addSlimeToBarn(userID, slimeObj.id);
