@@ -2,9 +2,14 @@ const eco = require("../../economy/economyModule.js");
 const slimesModule = require("../../economy/slimesModule.js");
 
 module.exports = {
-    name: "addtobarn",
-    alias: ["addb"],
+    name: "barnadd",
+    alias: ["badd"],
     category: "economy",
+    description: {
+        es: "Añade un slime a tu granero.\nDebes tener el slime en el corral.",
+        en: "Adds a slime to your barn.\nYou must have the slime in your corral."
+    },
+    examples: ["{{prefix}}barnadd 1 x2", "{{prefix}}badd creamy slime x3", "{{prefix}}badd 2"],
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;

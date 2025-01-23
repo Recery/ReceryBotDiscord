@@ -4,9 +4,14 @@ const slimesModule = require("../../economy/slimesModule.js");
 // Para más detalles, ver addToBarn.js que se comporta de manera parecida
 
 module.exports = {
-    name: "removefrombarn",
-    alias: ["removeb"],
+    name: "barnremove", 
+    alias: ["bremove"],
     category: "economy",
+    description: {
+        es: "Elimina un slime de tu granero y lo devuelve al corral.",
+        en: "Removes an slime from your barn and returns it to your corral"
+    },
+    examples: ["{{prefix}}bremove 4 x5", "{{prefix}}barnremove green slime", "{{prefix}}bremove 2"],
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
