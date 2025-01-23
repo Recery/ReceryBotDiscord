@@ -18,11 +18,17 @@ module.exports = {
             content += slime.obj.displayName[lang] + " x" + slime.quantity.toString() + "\n";
         }
 
-        msg.reply(messages[lang] + content);
+        msg.reply(messages[lang].slimesInBarn + content + messages[lang].appleGeneration.replace("{{aples}}", eco.getBarnApplesGeneration(userID)));
     }
 }
 
 const messages = {
-    es: "Tienes estos slimes en tu granero: ",
-    en: "You have these slimes in your barn: "
+    es: {
+        slimesInBarn: "Tienes estos slimes en tu granero: ",
+        appleGeneration: "Tu generación de :green_apple: es de {{apples}} por hora."
+    },
+    en: {
+        slimesInBarn: "You have these slimes in your barn: ",
+        appleGeneration: "Your :green_apple: generation is of {{apples}} per hour."
+    }
 }

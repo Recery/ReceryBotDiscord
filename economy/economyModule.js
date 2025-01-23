@@ -94,15 +94,22 @@ function getBarnSize(userID) {
 
 // Enviar la cantidad de ciclos completados, y sumar manzanas de cada slime por cada ciclo
 function barnApplesGeneration(userID, cyclesCompleted) {
-    let applesToAdd = 0;
+    const applesToAdd = getBarnApplesGeneration(userID) * cyclesCompleted;
 
+    return applesToAdd;
+}
+
+// Devuelve la generacion por hora por ciclo
+function getBarnApplesGeneration(userID) {
+    let apples = 0;
+    
     for (const data of getBarnSlimes(userID)) {
         const slime = data.obj;
         if (!slime) continue;
-        applesToAdd += slime.appleGeneration * data.quantity * cyclesCompleted;
+        apples += slime.appleGeneration * data.quantity;
     }
 
-    return applesToAdd;
+    return apples;
 }
 
 // Los dos siguientes metodos agregan o eliminan UN SOLO SLIME del granero
@@ -240,6 +247,7 @@ module.exports = {
     getCycleTimeLeft,
     setBarnSize,
     getBarnSize,
+    getBarnApplesGeneration,
     addSlimeToBarn,
     removeSlimeFromBarn,
     getBarnSlimes,
