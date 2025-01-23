@@ -14,7 +14,7 @@ module.exports = {
         const lang = client.langs.get(msg.guildId) || "es";
 
         if (args.length < 1) {
-            msg.reply(messages[lang])
+            msg.reply(messages[lang]);
             return;
         }
 

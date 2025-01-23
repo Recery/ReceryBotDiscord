@@ -8,12 +8,12 @@ module.exports = {
     alias: ["hs", "getslimes"],
     category: "economy",
     description: {
-        es: `Eclosiona slimes aleatorios de distintas rarezas.
-            Se pueden eclosionar hasta 9 slimes a la vez.
-            **:green_apple:x10 = slime x1.**`,
-        en: `Hatches random slimes of different rarities.
-            Up to 9 slimes can be hatched at the same time.
-            **:green_apple:x10 = slime x1.**`,
+        es: "Eclosiona slimes aleatorios de distintas rarezas.\n" +
+            "Se pueden eclosionar hasta 9 slimes a la vez.\n" +
+            "**:green_apple: x10 = slime x1.**",
+        en: "Hatches random slimes of different rarities.\n" +
+            "Up to 9 slimes can be hatched at the same time.\n" +
+            "**:green_apple: x10 = slime x1.**",
     },
     examples: ["{{prefix}}hatchslimes", "{{prefix}}hs x4", "{{prefix}}getslimes x9"],
     async execute(client, msg, args) {

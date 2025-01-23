@@ -5,10 +5,10 @@ module.exports = {
     alias: ["ayuda"],
     category: "info",
     description: {
-        es: `Muestra un menú para ver los comandos disponibles.
-        También se puede ingresar como argumento un comando para ver detalles del mismo.`,
-        en: `Shows a menu to see all available commands.
-        Also you can enter a command as an argument to see details of it.`,
+        es: "Muestra un menú para ver los comandos disponibles.\n" +
+        "Ingresa un comando como argumento para ver sus detalles.",
+        en: "Shows a menu to see all available commands.\n" +
+        "Enter a command as an argument to see their details.",
     },
     examples: ["{{prefix}}help", "{{prefix}}help 8ball", "{{prefix}}help hs"],
     execute(client, msg, args) 
