@@ -101,18 +101,19 @@ const messages = {
 
 const prefix = require("../../prefix.js");
 const { commandCategories } = require("../../langsLoader.js");
-const { examples } = require("../economy/hatchSlimes.js");
 function sendCommandDescription(client, msg, lang, command) {
     if (!command) return false;
-    if (!command.description) return false;
+    let description = cmdDescriptionMsgs[lang].noDescription;
+    if (command.description) 
+        description = command.description;
 
     const embed = new Discord.EmbedBuilder()
         .setTitle(cmdDescriptionMsgs[lang].commandTitle + command.name)
-        .setDescription(command.description[lang])
+        .setDescription(description)
         .setColor("#65a7fc");
 
     if (command.alias) {
-        let aliases = ""
+        let aliases = "";
         for (const alias of command.alias) {
             aliases += "`" + alias + "` ";
         }
@@ -147,12 +148,14 @@ function sendCommandDescription(client, msg, lang, command) {
 const cmdDescriptionMsgs = {
     es: {
         commandTitle: "Comando: ",
+        noDescription: "Parece que este comando no tiene descripción...",
         categoryField: "Categoría: ",
         aliasField: "**Alias**",
         examplesField: "**Ejemplos de uso**"
     },
     en: {
         commandTitle: "Command: ",
+        noDescription: "It seems this command does not have a description...",
         categoryField: "Category: ",
         aliasField: "**Aliases**",
         examplesField: "**Use examples**"
