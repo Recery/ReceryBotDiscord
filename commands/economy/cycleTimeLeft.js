@@ -4,6 +4,12 @@ module.exports = {
     name: "cycletimeleft",
     alias: ["ctimeleft", "ctl"],
     category: "economy",
+    description: {
+        es: "Muestra el tiempo restante para completar un ciclo. Después de cada ciclo:\n" +
+        "Slimes de tu granero generarán :green_apple: y los de tu corral se irán.",
+        en: "Show the time left to complete a cycle. After each cycle:\n" +
+        "Slimes from your barn will generate :green_apple: y the ones from your corral will leave."
+    },
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
