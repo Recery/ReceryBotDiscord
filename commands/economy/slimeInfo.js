@@ -4,6 +4,13 @@ const slimesModule = require("../../economy/slimesModule.js");
 module.exports = {
     name: "slimeinfo",
     category: "economy",
+    description: {
+        es: "Muestra información sobre un slime.\n" +
+        "Puedes usar el nombre del slime o su ID.",
+        en: "Shows information about an slime.\n" + 
+        "You can use the slime name or the ID."
+    },
+    examples: ["{{prefix}}slimeinfo green slime", "{{prefix}}slimeinfo 5", "{{prefix}}slimeinfo creamy slime"],
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
 

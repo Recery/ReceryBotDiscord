@@ -4,6 +4,12 @@ module.exports = {
     name: "barn",
     alias: ["granero"],
     category: "economy",
+    description: {
+        es: "Muestra los slimes que tienes en tu granero.\n" +
+        "Puedes añadir o quitar slimes del granero con `addbarn` y `removeb` respectivamente.",
+        en: "Shows the slimes you have in your barn.\n" + 
+        "You can add or remove slimes from your barn with `addbarn` and `removeb` respectively."
+    },
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;

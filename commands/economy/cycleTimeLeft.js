@@ -32,7 +32,6 @@ module.exports = {
             unit = "seconds";
         }
 
-
         msg.reply(messages[lang].reply.replace("{{time}}", time.toString()).replace("{{unit}}", messages[lang][unit]));
     }
 }
