@@ -10,7 +10,7 @@ module.exports = {
     description: {
         es: "Reclama una recompensa de 50 :green_apple: cada una hora.",
         en: "Claims a reward of 50 :green_apple: with a cooldown of one hour."
-    }
+    },
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
