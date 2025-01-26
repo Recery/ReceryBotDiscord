@@ -21,11 +21,11 @@ function cleanPrefix(msg) {
     let cleanText = null;
 
     if (inputPrefix.startsWith("recery"))
-        cleanText = content.slice(6, content.length);
+        cleanText = content.slice(6, content.length).trim();
     else if (inputPrefix.startsWith(prefix))
-        cleanText = content.slice(prefix.length, content.length);
+        cleanText = content.slice(prefix.length, content.length).trim();
 
-    return cleanText.trim();
+    return cleanText;
 }
 
 module.exports = {
