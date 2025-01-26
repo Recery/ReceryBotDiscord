@@ -25,7 +25,7 @@ function cleanPrefix(msg) {
     else if (inputPrefix.startsWith(prefix))
         cleanText = content.slice(prefix.length, content.length);
 
-    return cleanText;
+    return cleanText.trim();
 }
 
 module.exports = {

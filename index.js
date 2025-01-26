@@ -39,7 +39,7 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 
 	if (!cleanText || msg.author.bot) return;
 
-	const args = cleanText.trim().split(' ');
+	const args = cleanText.split(' ');
 	const commandName = args.shift().toLowerCase();
 	
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.alias && cmd.alias.includes(commandName));
