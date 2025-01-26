@@ -17,7 +17,7 @@ module.exports = {
         const slimes = eco.getBarnSlimes(userID);
 
         let content = "\n";
-        if (!slimes.length > 0) content += "¡Ninguno!"
+        if (!slimes.length > 0) content += "¡Ninguno!";
 
         for (const slime of eco.getBarnSlimes(userID)) {
             content += "`ID: " + slime.obj.id.toString() + "` " // Agregar el id primero

@@ -34,11 +34,11 @@ for (const file of GetJSFiles.getJSFiles("./interactions")) {
 const Prefix = require("./prefix.js");
 const Langs = require("./langsLoader.js");
 client.on(Discord.Events.MessageCreate, (msg) => {
-	const prefix = Prefix.getPrefix(msg.guildId);
+	const cleanText = Prefix.cleanPrefix(msg);
 
-	if (!msg.content.startsWith(prefix) || msg.author.bot) return;
+	if (!cleanText || msg.author.bot) return;
 
-	const args = msg.content.slice(prefix.length).trim().split(' ');
+	const args = cleanText.trim().split(' ');
 	const commandName = args.shift().toLowerCase();
 	
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.alias && cmd.alias.includes(commandName));

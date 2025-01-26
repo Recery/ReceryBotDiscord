@@ -14,13 +14,11 @@ module.exports = {
         const serverid = msg.guildId;
         const lang = client.langs.get(serverid) || "es";
 
-        if (!args.length > 0) 
-        {
+        if (!args.length > 0) {
             msg.reply(messages[lang].noPrefix);
             return;
         }
-        else if (args[0].length > 5)
-        {
+        else if (args[0].length > 5) {
             msg.reply(messages[lang].longPrefix);
             return;
         }
@@ -31,7 +29,7 @@ module.exports = {
         const row = db.prepare("SELECT id FROM prefixes WHERE serverid = ?").get(serverid);
 
         if (row)
-            db.prepare("UPDATE prefixes SET prefix = ? WHERE id = ?").run(newPrefix, row.id)
+            db.prepare("UPDATE prefixes SET prefix = ? WHERE id = ?").run(newPrefix, row.id);
         else
             db.prepare("INSERT INTO prefixes (serverid, prefix) VALUES (?, ?)").run(serverid, newPrefix);
 
