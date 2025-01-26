@@ -35,7 +35,6 @@ const Prefix = require("./prefix.js");
 const Langs = require("./langsLoader.js");
 client.on(Discord.Events.MessageCreate, (msg) => {
 	const cleanText = Prefix.cleanPrefix(msg);
-	console.log(cleanText);
 
 	if (!cleanText || msg.author.bot) return;
 
