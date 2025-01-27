@@ -65,7 +65,7 @@ module.exports = {
             .setImage("attachment://hatching.png");
 
         const loadingReaction = await msg.react("<a:loading:1330598692008493076>");
-        const imageAttachment = await getImageAttachment(hatchedSlimes, lang);
+        const imageAttachment = getImageAttachment(hatchedSlimes, lang);
 
         msg.reply({
             embeds: [embed],
@@ -101,18 +101,19 @@ function chooseSlime() {
     return possibleSlimes[Math.floor(Math.random() * possibleSlimes.length)];
 }
 
-const slimesImages = new Map();
+const slimeImages = new Map();
 loadSlimesImages();
 async function loadSlimesImages() {
-    slimesImages.set(0, await Canvas.loadImage("https://i.imgur.com/kbetYsZ.png"));
+    slimeImages.set("background", await Canvas.loadImage("https://i.imgur.com/elinwYQ.png"));
+    slimeImages.set(0, await Canvas.loadImage("https://i.imgur.com/kbetYsZ.png"));
     for (const slime of slimesModule.slimes) {
         const image = await Canvas.loadImage(slime.image);
-        slimesImages.set(slime.id, image);
+        slimeImages.set(slime.id, image);
     }
 }
 
 Canvas.registerFont("fonts/slkscr.ttf", {family: "silkscreen"});
-async function getImageAttachment(slimes, lang) {
+function getImageAttachment(slimes, lang) {
     const canvas = Canvas.createCanvas(1600, 1600);
     const ctx = canvas.getContext("2d");
 
@@ -122,7 +123,7 @@ async function getImageAttachment(slimes, lang) {
     ctx.strokeStyle = "#000000"; // Color borde
     ctx.lineWidth = 6; // Grosor borde
 
-    const background = await Canvas.loadImage("https://i.imgur.com/elinwYQ.png");
+    const background = slimeImages.get("background");
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
     for (let i = 0; i < 3; i++) {
@@ -133,9 +134,9 @@ async function getImageAttachment(slimes, lang) {
             const y = 150 + i * 450;
 
             if (slime) 
-                ctx.drawImage(slimesImages.get(slime.id), x , y, 400, 400);
+                ctx.drawImage(slimeImages.get(slime.id), x , y, 400, 400);
             else
-                ctx.drawImage(slimesImages.get(0), x , y, 400, 400);
+                ctx.drawImage(slimeImages.get(0), x , y, 400, 400);
 
             if (slime) {
                 const textX = x + 200;
