@@ -104,7 +104,7 @@ function chooseSlime() {
 const slimesImages = new Map();
 loadSlimesImages();
 async function loadSlimesImages() {
-    slimesImages.set(0, Canvas.loadImage("https://i.imgur.com/kbetYsZ.png"));
+    slimesImages.set(0, await Canvas.loadImage("https://i.imgur.com/kbetYsZ.png"));
     for (const slime of slimesModule.slimes) {
         const image = await Canvas.loadImage(slime.image);
         slimesImages.set(slime.id, image);
