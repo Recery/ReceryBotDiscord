@@ -101,12 +101,14 @@ function chooseSlime() {
     return possibleSlimes[Math.floor(Math.random() * possibleSlimes.length)];
 }
 
-
 const slimesImages = new Map();
-slimesImages.set(0, Canvas.loadImage("https://i.imgur.com/kbetYsZ.png"));
-for (const slime of slimesModule.slimes) {
-    const image = await Canvas.loadImage(slime.image);
-    slimesImages.set(slime.id, image);
+loadSlimesImages();
+async function loadSlimesImages() {
+    slimesImages.set(0, Canvas.loadImage("https://i.imgur.com/kbetYsZ.png"));
+    for (const slime of slimesModule.slimes) {
+        const image = await Canvas.loadImage(slime.image);
+        slimesImages.set(slime.id, image);
+    }
 }
 
 Canvas.registerFont("fonts/slkscr.ttf", {family: "silkscreen"});
