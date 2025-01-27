@@ -11,8 +11,8 @@ module.exports = {
     examples: ["{{prefix}}setprefix r!", "{{prefix}}setprefix -", "{{prefix}}setprefix abc"],
     execute(client, msg, args)
     {
-        const serverid = msg.guildId;
-        const lang = client.langs.get(serverid) || "es";
+        const serverID = msg.guildId;
+        const lang = client.langs.get(serverID) || "es";
 
         if (!args.length > 0) {
             msg.reply(messages[lang].noPrefix);
@@ -26,14 +26,11 @@ module.exports = {
         const newPrefix = args[0];
 
         const db = new DB(process.env.ADMIN_DB_PATH);
-        const row = db.prepare("SELECT id FROM prefixes WHERE serverid = ?").get(serverid);
-
-        if (row)
-            db.prepare("UPDATE prefixes SET prefix = ? WHERE id = ?").run(newPrefix, row.id);
-        else
-            db.prepare("INSERT INTO prefixes (serverid, prefix) VALUES (?, ?)").run(serverid, newPrefix);
+        db.prepare("INSERT OR REPLACE INTO prefixes (serverId, prefix) VALUES (?, ?)").run(serverID, newPrefix);
 
         msg.reply(messages[lang].prefixUpdated.replace("{{prefix}}", newPrefix));
+
+        db.close();
     }
 }
 

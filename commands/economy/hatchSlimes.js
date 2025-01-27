@@ -56,6 +56,7 @@ module.exports = {
 
             hatchedSlimes.push(slime);
             eco.addSlimeToCorral(userID, slime.id);
+            eco.addSlimeToTotal(userID, slime.id);
         }
 
 

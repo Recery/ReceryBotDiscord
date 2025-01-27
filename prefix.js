@@ -1,11 +1,11 @@
 const DB = require("better-sqlite3");
 const db = new DB(process.env.ADMIN_DB_PATH);
 
-function getPrefix(serverid)
+function getPrefix(serverID)
 {
     let prefix = "r!";
 
-    const row = db.prepare("SELECT prefix FROM prefixes WHERE serverid = ?").get(serverid);
+    const row = db.prepare("SELECT prefix FROM prefixes WHERE serverId = ?").get(serverID);
     if (row) prefix = row.prefix;
 
     return prefix;

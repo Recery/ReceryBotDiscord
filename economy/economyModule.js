@@ -241,6 +241,16 @@ function getCorralSlimesAmount(userID) {
     return slimesAmount;
 }
 
+function addSlimeToTotal(userID, slimeID) {
+    let newQuantity = 1;
+    const row = db.prepare("SELECT quantity FROM totalSlimes WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
+
+    if (row)
+        newQuantity = row.quantity + 1;
+
+    db.prepare("INSERT OR REPLACE INTO totalSlimes (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, newQuantity);
+}
+
 module.exports = {
     setApples,
     getApples,
@@ -256,5 +266,6 @@ module.exports = {
     addSlimeToCorral,
     removeSlimeFromCorral,
     getCorralSlimes,
-    getCorralSlimesAmount
+    getCorralSlimesAmount,
+    addSlimeToTotal
 };
