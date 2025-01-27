@@ -42,7 +42,7 @@ module.exports = {
         description += "\n" + messages[lang].appleGeneration.replace("{{apples}}", slimeObj.appleGeneration.toString()) + "**";
 
         const embed = new Discord.EmbedBuilder()
-            .setTitle(messages[lang].embedTitle.replace("{{slime}}", slimeObj.displayName[lang]))
+            .setTitle(slimeObj.displayName[lang])
             .setColor("#12bcff")
             .setDescription(description)
             .setThumbnail(slimeObj.image)
@@ -60,13 +60,11 @@ const messages = {
         notFound: "No se ha encontrado un slime con ese nombre/ID.",
         rarity: "Rareza: ",
         appleGeneration: "Producción por hora: x{{apples}} :green_apple:",
-        embedTitle: "Información sobre {{slime}}"
     },
     en: {
         notInput: "You must enter the name/ID of a slime to remove from your barn.",
         notFound: "Couldn't find an slime with that name/ID",
         rarity: "Rarity: ",
         appleGeneration: "Production per hour: x{{apples}} :green_apple:",
-        embedTitle: "Information about {{slime}}"
     }
 }
