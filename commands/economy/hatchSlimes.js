@@ -101,6 +101,14 @@ function chooseSlime() {
     return possibleSlimes[Math.floor(Math.random() * possibleSlimes.length)];
 }
 
+
+const slimesImages = new Map();
+slimesImages.set(0, Canvas.loadImage("https://i.imgur.com/kbetYsZ.png"));
+for (const slime of slimesModule.slimes) {
+    const image = await Canvas.loadImage(slime.image);
+    slimesImages.set(slime.id, image);
+}
+
 Canvas.registerFont("fonts/slkscr.ttf", {family: "silkscreen"});
 async function getImageAttachment(slimes, lang) {
     const canvas = Canvas.createCanvas(1600, 1600);
@@ -118,17 +126,14 @@ async function getImageAttachment(slimes, lang) {
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             const slime = slimes.shift();
-
-            let link = ""; 
-            if (slime) link = slime.image;
-            else link = "https://i.imgur.com/kbetYsZ.png";
             
-
-            const slimeImg = await Canvas.loadImage(link);
             const x = 150 + j * 450;
             const y = 150 + i * 450;
 
-            ctx.drawImage(slimeImg, x , y, 400, 400);
+            if (slime) 
+                ctx.drawImage(slimesImages.get(slime.id), x , y, 400, 400);
+            else
+                ctx.drawImage(slimesImages.get(0), x , y, 400, 400);
 
             if (slime) {
                 const textX = x + 200;
