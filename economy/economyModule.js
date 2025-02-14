@@ -25,7 +25,7 @@ function cycleEffects(userID, completedCycles) {
     let applesToAdd = 0;
     if (completedCycles) {
         applesToAdd += resetCorral(userID);
-        applesToAdd += barnApplesGeneration(userID, completedCycles);
+        barnApplesGeneration(userID, completedCycles);
     }
     return applesToAdd;
 }
@@ -80,23 +80,45 @@ function getCycleTimeLeft(userID) {
 }
 
 
-function setBarnSize(userID, size) {
-    db.prepare("INSERT OR REPLACE INTO barnSize (userId, size) VALUES (?, ?)").run(userID, size);
+function setBarnSizeSlimes(userID, size) {
+    const applesSize = getBarnSizeApples(userID);
+    db.prepare("INSERT OR REPLACE INTO barnLevel (userId, slimesSize, applesSize) VALUES (?, ?, ?)").run(userID, size, applesSize);
 }
 
-function getBarnSize(userID) {
-    const row = db.prepare("SELECT size FROM barnSize WHERE userId = ?").get(userID);
+function getBarnSizeSlimes(userID) {
+    const row = db.prepare("SELECT slimesSize FROM barnLevel WHERE userId = ?").get(userID);
 
-    if (row) return row.size;
+    if (row) 
+        if (row.slimesSize !== null) return row.slimesSize;
 
     return 3;
+}
+
+function setBarnSizeApples(userID, size) {
+    const slimesSize = getBarnSizeSlimes(userID);
+    db.prepare("INSERT OR REPLACE INTO barnLevel (userId, slimesSize, applesSize) VALUES (?, ?, ?)").run(userID, slimesSize, size);
+}
+
+function getBarnSizeApples (userID) {
+    const row = db.prepare("SELECT applesSize FROM barnLevel WHERE userId = ?").get(userID);
+
+    if (row) 
+        if (row.applesSize !== null) return row.applesSize;
+
+    return 10;
 }
 
 // Enviar la cantidad de ciclos completados, y sumar manzanas de cada slime por cada ciclo
 function barnApplesGeneration(userID, cyclesCompleted) {
     const applesToAdd = getBarnApplesGeneration(userID) * cyclesCompleted;
 
-    return applesToAdd;
+    const applesInBarn = getBarnApples(userID);
+    const barnSizeApples = getBarnSizeApples(userID);
+
+    if (applesInBarn + applesToAdd <= barnSizeApples)
+        setBarnApples(userID, applesInBarn + applesToAdd);
+    else
+        setBarnApples(userID, barnSizeApples);
 }
 
 // Devuelve la generacion por hora por ciclo
@@ -117,31 +139,30 @@ function getBarnApplesGeneration(userID) {
 function addSlimeToBarn(userID, slimeID) {
     let newQuantity = 1;
 
-    const row = db.prepare("SELECT quantity FROM barnContent WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
+    const row = db.prepare("SELECT quantity FROM barnSlimes WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
     if (row) newQuantity = row.quantity + 1;
 
-    db.prepare("INSERT OR REPLACE INTO barnContent (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, newQuantity);
+    db.prepare("INSERT OR REPLACE INTO barnSlimes (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, newQuantity);
 }
 
 function removeSlimeFromBarn(userID, slimeID) {
     let newQuantity = 0;
     
-    const row = db.prepare("SELECT quantity FROM barnContent WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
+    const row = db.prepare("SELECT quantity FROM barnSlimes WHERE userId = ? AND slimeId = ?").get(userID, slimeID);
     if (row) newQuantity = row.quantity - 1;
     console.log(newQuantity, " Cantidad");
     if (newQuantity < 0) return; // No se pueden tener slimes negativos...
     else if (newQuantity === 0) {
         // Si hay cero slimes de este tipo, borrar el registro, y obviamente no insertar uno nuevo
-        db.prepare("DELETE FROM barnContent WHERE userId = ? AND slimeId = ?").run(userID, slimeID);
+        db.prepare("DELETE FROM barnSlimes WHERE userId = ? AND slimeId = ?").run(userID, slimeID);
         return;
     }
 
-
-    db.prepare("INSERT OR REPLACE INTO barnContent (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, newQuantity);
+    db.prepare("INSERT OR REPLACE INTO barnSlimes (userId, slimeId, quantity) VALUES (?, ?, ?)").run(userID, slimeID, newQuantity);
 }
 
 function getBarnSlimes(userID) {
-    const rows = db.prepare("SELECT slimeId, quantity FROM barnContent WHERE userId = ?").all(userID);
+    const rows = db.prepare("SELECT slimeId, quantity FROM barnSlimes WHERE userId = ?").all(userID);
 
     const slimesList = [];
 
@@ -152,7 +173,7 @@ function getBarnSlimes(userID) {
 }
 
 function getBarnSlimesAmount(userID) {
-    const rows = db.prepare("SELECT quantity FROM barnContent WHERE userId = ?").all(userID);
+    const rows = db.prepare("SELECT quantity FROM barnSlimes WHERE userId = ?").all(userID);
 
     let slimesAmount = 0;
 
@@ -160,6 +181,19 @@ function getBarnSlimesAmount(userID) {
         slimesAmount += row.quantity;
 
     return slimesAmount;
+}
+
+function setBarnApples(userID, quantity) {
+    db.prepare("INSERT OR REPLACE INTO barnApples (userId, quantity) VALUES (?, ?)").run(userID, quantity);
+}
+
+function getBarnApples(userID) {
+    const row = db.prepare("SELECT quantity FROM barnApples WHERE userId = ?").get(userID);
+
+    if (row) 
+        if (row.quantity !== null) return row.quantity;
+
+    return 0;
 }
 
 // Reinicia el corral y devuelve las manzanas que hay que agregar 
@@ -266,13 +300,17 @@ module.exports = {
     setApples,
     getApples,
     getCycleTimeLeft,
-    setBarnSize,
-    getBarnSize,
+    setBarnSizeSlimes,
+    getBarnSizeSlimes,
+    setBarnSizeApples,
+    getBarnSizeApples,
     getBarnApplesGeneration,
     addSlimeToBarn,
     removeSlimeFromBarn,
     getBarnSlimes,
     getBarnSlimesAmount,
+    getBarnApples,
+    setBarnApples,
     resetCorral,
     addSlimeToCorral,
     removeSlimeFromCorral,

@@ -14,56 +14,134 @@ module.exports = {
         "You can see the quantity of slimes obtained from each type.\n" + 
         "Also shows the locked slimes."
     },
-    execute(client, msg, args) {
+    async execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
 
-        const imageAttachments = getAlmanacImages(eco.getTotalSlimes(userID), lang);
-        Discord.butt
+        const imageAttachments = await getAlmanacImages(eco.getTotalSlimes(userID), lang);
+
+        const buttonsRow = new Discord.ActionRowBuilder()
+            .addComponents(
+                new Discord.ButtonBuilder()
+                    .setCustomId("slideLeft")
+                    .setEmoji("<:LeftArrow:1334663458687287296>")
+                    .setStyle("Primary")
+                    .setDisabled(true),
+                new Discord.ButtonBuilder()
+                    .setCustomId("slideRight")
+                    .setEmoji("<:RightArrow:1334663426043154472>")
+                    .setStyle("Primary")
+            );
+
+        let page = 0; // Página 0 = página 1 para el usuario
 
         const embed = new Discord.EmbedBuilder()
-            .setTitle("Almanac")
-            .setImage(`attachment://${imageAttachments[1].name}`);
+            .setAuthor({
+                name: messages[lang].authorHeader.replace("{{name}}", msg.author.displayName),
+                iconURL: msg.author.avatarURL()
+            })
+            .setFooter({
+                text: messages[lang].pageTitle.replace("{{page}}", (page + 1).toString()) + "/" + imageAttachments.length, 
+                iconURL: "https://i.imgur.com/igkTvXQ.png"
+            })
+            .setImage(`attachment://${imageAttachments[page].name}`);
 
-        msg.reply({
+        const sentMessage = await msg.reply({
             embeds: [embed],
-            files: imageAttachments,
+            files: [imageAttachments[page]],
+            components: [buttonsRow]
+        });
+
+        /// MENSAJE ENVIADO, AHORA ACTUALIZACION DEL MENSAJE
+
+        const collector = sentMessage.createMessageComponentCollector({time: 300000});
+        collector.on("collect", async (interaction) => {
+            if (interaction.customId === "slideLeft") page -= 1;
+            else if (interaction.customId === "slideRight") page += 1;
+            else return;
+
+            const newButtonsRow = new Discord.ActionRowBuilder()
+                .addComponents(
+                    new Discord.ButtonBuilder()
+                        .setCustomId("slideLeft")
+                        .setEmoji("<:LeftArrow:1334663458687287296>")
+                        .setStyle("Primary")
+                        .setDisabled(page <= 0),
+                    new Discord.ButtonBuilder()
+                        .setCustomId("slideRight")
+                        .setEmoji("<:RightArrow:1334663426043154472>")
+                        .setStyle("Primary")
+                        .setDisabled(page >= imageAttachments.length - 1)
+                );
+
+            const newEmbed = new Discord.EmbedBuilder()
+                .setAuthor({
+                    name: messages[lang].authorHeader.replace("{{name}}", msg.author.displayName),
+                    iconURL: msg.author.avatarURL()
+                })
+                .setFooter({
+                    text: messages[lang].pageTitle.replace("{{page}}", (page + 1).toString()) + "/" + imageAttachments.length,
+                    iconURL: "https://i.imgur.com/igkTvXQ.png"
+                })
+                .setImage(`attachment://${imageAttachments[page].name}`);
+
+            interaction.update({
+                embeds: [newEmbed],
+                files: [imageAttachments[page]],
+                components: [newButtonsRow]
+            })
+        });
+
+        collector.on("end", () => {
+            sentMessage.edit({components: []})
         });
     }
 }
 
+// PARTE DE GENERACION DE IMAGENES
+
+let imagesLoaded = false;
 const slimeImages = new Map();
 loadSlimesImages();
 async function loadSlimesImages() {
     slimeImages.set("background", await Canvas.loadImage("https://i.imgur.com/elinwYQ.png"));
-    slimeImages.set(0, await Canvas.loadImage("https://i.imgur.com/kbetYsZ.png"));
+    slimeImages.set(0, await Canvas.loadImage("https://i.imgur.com/1EYomm9.png"));
     for (const slime of slimesModule.slimes) {
         const image = await Canvas.loadImage(slime.image);
         slimeImages.set(slime.id, image);
     }
+
+    imagesLoaded = true;
 }
 
-function getAlmanacImages(slimes, lang) {
+async function waitImagesLoad() {
+    while (!imagesLoaded)
+        await new Promise((resolve) => setTimeout(resolve, 100));
+}
+
+async function getAlmanacImages(slimes, lang) {
+    await waitImagesLoad();
+
     const images = [];
 
     const canvas = Canvas.createCanvas(1600, 1600);
     const ctx = canvas.getContext("2d");
 
-    ctx.font = "50px silkscreen";
-    ctx.fillStyle = "#ffffff";
-    ctx.textAlign = "center";
     ctx.strokeStyle = "#000000"; // Color borde
-    ctx.lineWidth = 6; // Grosor borde
 
     const positions = [];
 
+    const starterPoint = 75;
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
             positions.push({
-                x: 150 + j * 450,
-                y: 150 + i * 450,
-                textX: 150 + j * 450 + 200,
-                textY: 150 + i * 450 + 390
+                x: starterPoint + j * (600 - starterPoint),
+                y: starterPoint + i * (600 - starterPoint),
+                textX: starterPoint + j * (600 - starterPoint) + 200,
+                textY: starterPoint + i * (600 - starterPoint) + 390,
+                quantityX: starterPoint + j * (600 - starterPoint),
+                quantityY: starterPoint + i * (600 - starterPoint) + 50,
+                quantity: 1
             })
         }
     }
@@ -85,9 +163,22 @@ function getAlmanacImages(slimes, lang) {
             found = true;
 
             ctx.drawImage(slimeImages.get(slime.id), positions[positionIndex].x , positions[positionIndex].y, 400, 400);
-    
-            ctx.strokeText(slime.displayName[lang] + "x" + pair.quantity, positions[positionIndex].textX, positions[positionIndex].textY); // Dibujar borde del texto
-            ctx.fillText(slime.displayName[lang] + "x" + pair.quantity, positions[positionIndex].textX, positions[positionIndex].textY);
+
+            // Escribir nombre del slime
+            ctx.font = "56px silkscreen";
+            ctx.fillStyle = "#ffffff";
+            ctx.lineWidth = 8;
+            ctx.textAlign = "center";
+            ctx.strokeText(slime.displayName[lang], positions[positionIndex].textX, positions[positionIndex].textY); // Dibujar borde del texto
+            ctx.fillText(slime.displayName[lang], positions[positionIndex].textX, positions[positionIndex].textY);
+
+            // Escribir cantidad de slimes
+            ctx.font = "100px silkscreen";
+            ctx.fillStyle = "#ff1100";
+            ctx.lineWidth = 12;
+            ctx.textAlign = "left";
+            ctx.strokeText("x" + pair.quantity.toString(), positions[positionIndex].quantityX, positions[positionIndex].quantityY);
+            ctx.fillText("x" + pair.quantity.toString(), positions[positionIndex].quantityX, positions[positionIndex].quantityY);
 
             break;
         }
@@ -99,4 +190,15 @@ function getAlmanacImages(slimes, lang) {
     images.push(new Discord.AttachmentBuilder(canvas.toBuffer(), {name: `almanac${images.length + 1}.png`}));
 
     return images;
+}
+
+const messages = {
+    es: {
+        authorHeader: "Almanaque de {{name}}",
+        pageTitle: "Página {{page}}"
+    },
+    en: {
+        authorHeader: "{{name}}'s almanac",
+        pageTitle: "Page {{page}}"
+    }
 }

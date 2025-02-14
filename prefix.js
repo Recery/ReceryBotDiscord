@@ -11,6 +11,10 @@ function getPrefix(serverID)
     return prefix;
 }
 
+function setPrefix(serverID, newPrefix) {
+    db.prepare("INSERT OR REPLACE INTO prefixes (serverId, prefix) VALUES (?, ?)").run(serverID, newPrefix);
+}
+
 function cleanPrefix(msg) {
     const prefix = getPrefix(msg.guildId);
 
@@ -30,5 +34,6 @@ function cleanPrefix(msg) {
 
 module.exports = {
     getPrefix,
+    setPrefix,
     cleanPrefix
 }

@@ -140,7 +140,18 @@ const slimes = [
         id: 13,
         rarity: 4,
         appleGeneration: 15,
-        image: "https://i.imgur.com/H02f69C.png"
+        image: "https://i.imgur.com/6M4ApPW.png"
+    },
+    {
+        name: "rgbslime",
+        displayName: {
+            es: "Slime RGB",
+            en: "RGB Slime"
+        },
+        id: 14,
+        rarity: 3,
+        appleGeneration: 8  ,
+        image: "https://i.imgur.com/scKycb9.png"
     },
 ];
 

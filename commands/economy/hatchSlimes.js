@@ -10,10 +10,10 @@ module.exports = {
     description: {
         es: "Eclosiona slimes aleatorios de distintas rarezas.\n" +
             "Se pueden eclosionar hasta 9 slimes a la vez.\n" +
-            "**:green_apple: x10 = slime x1.**",
+            "**<:GreenApple:1296171434246410380> x10 = slime x1.**",
         en: "Hatches random slimes of different rarities.\n" +
             "Up to 9 slimes can be hatched at the same time.\n" +
-            "**:green_apple: x10 = slime x1.**",
+            "**<:GreenApple:1296171434246410380> x10 = slime x1.**",
     },
     examples: ["{{prefix}}hatchslimes", "{{prefix}}hs x4", "{{prefix}}getslimes x9"],
     async execute(client, msg, args) {
@@ -65,7 +65,7 @@ module.exports = {
             .setColor("#12bcff")
             .setImage("attachment://hatching.png");
 
-        const loadingReaction = await msg.react("<a:loading:1330598692008493076>");
+        const loadingReaction = await msg.react("<a:Loading:1334664535914844253>");
         const imageAttachment = getImageAttachment(hatchedSlimes, lang);
 
         msg.reply({
@@ -118,11 +118,11 @@ function getImageAttachment(slimes, lang) {
     const canvas = Canvas.createCanvas(1600, 1600);
     const ctx = canvas.getContext("2d");
 
-    ctx.font = "50px silkscreen";
+    ctx.font = "56px silkscreen";
     ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
     ctx.strokeStyle = "#000000"; // Color borde
-    ctx.lineWidth = 6; // Grosor borde
+    ctx.lineWidth = 8; // Grosor borde
 
     const background = slimeImages.get("background");
     ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -131,8 +131,9 @@ function getImageAttachment(slimes, lang) {
         for (let j = 0; j < 3; j++) {
             const slime = slimes.shift();
             
-            const x = 150 + j * 450;
-            const y = 150 + i * 450;
+            const starterPoint = 75;
+            const x = starterPoint + j * (600 - starterPoint);
+            const y = starterPoint + i * (600 - starterPoint);
 
             if (slime) 
                 ctx.drawImage(slimeImages.get(slime.id), x , y, 400, 400);
@@ -154,12 +155,12 @@ function getImageAttachment(slimes, lang) {
 
 const messages = {
     es: {
-        needMoreApples: "¡No tienes suficientes :green_apple: para eclosionar esa cantidad de slimes!\nNecesitas {{apples}}:green_apple:.",
+        needMoreApples: "¡No tienes suficientes <:GreenApple:1296171434246410380> para eclosionar esa cantidad de slimes!\nNecesitas {{apples}}<:GreenApple:1296171434246410380>.",
         tooMuchHatches: "¡No puedes eclosionar más de 9 slimes a la vez!",
         slimeObtention: "¡Eclosionaste estos slimes!"
     },
     en: {
-        needMoreApples: "You don't have enough :green_apple: to hatch that amount of slimes!\n You need {{apples}}:green_apple:.",
+        needMoreApples: "You don't have enough <:GreenApple:1296171434246410380> to hatch that amount of slimes!\n You need {{apples}}<:GreenApple:1296171434246410380>.",
         tooMuchHatches: "You can't hatch more than 9 slimes at the same time!",
         slimeObtention: "You hatched these slimes!"
     }

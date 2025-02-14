@@ -5,8 +5,8 @@ module.exports = {
     alias: ["sw", "bal", "balance"],
     category: "economy",
     description: {
-        es: "Muestra la cantidad de :green_apple: que tienes.",
-        en: "Shows how many :green_apple: you have."
+        es: "Muestra la cantidad de <:GreenApple:1296171434246410380> que tienes.",
+        en: "Shows how many <:GreenApple:1296171434246410380> you have."
     },
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
@@ -19,6 +19,6 @@ module.exports = {
 }
 
 const messages = {
-    es: "{{user}}, en total tienes {{apples}}:green_apple: en tu silolletera.",
-    en: "{{user}}, you have {{apples}}:green_apple: in your silowallet."
+    es: "{{user}}, en total tienes {{apples}}<:GreenApple:1296171434246410380> en tu silolletera.",
+    en: "{{user}}, you have {{apples}}<:GreenApple:1296171434246410380> in your silowallet."
 }

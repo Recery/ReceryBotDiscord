@@ -13,7 +13,7 @@ const client = new Discord.Client({
 });
 
 
-// CARGAR COMANDOS E INTERACCIONES DESDE EL SISTEMA DE ARCHIVOS
+// CARGAR COMANDOS DESDE EL SISTEMA DE ARCHIVOS
 
 const GetJSFiles = require("./getJSFiles.js");
 
@@ -21,12 +21,7 @@ client.commands = new Discord.Collection();
 for (const file of GetJSFiles.getJSFiles("./commands")) {
 	const command = require("./" + file);
 	client.commands.set(command.name, command);
-}
-
-client.interactions = new Discord.Collection();
-for (const file of GetJSFiles.getJSFiles("./interactions")) {
-	const interaction = require("./" + file);
-	client.interactions.set(interaction.id, interaction);
+	if (command.init) command.init(client);
 }
 
 // -------------------------------------------------------------
@@ -34,6 +29,9 @@ for (const file of GetJSFiles.getJSFiles("./interactions")) {
 const Prefix = require("./prefix.js");
 const Langs = require("./langsLoader.js");
 client.on(Discord.Events.MessageCreate, (msg) => {
+	if (process.env.EXPERIMENTAL)
+		if (msg.author.id !== "1069155273182285834" && msg.author.id !== "1296846133489963049") return;
+	
 	const cleanText = Prefix.cleanPrefix(msg);
 
 	if (!cleanText || msg.author.bot) return;
@@ -53,29 +51,18 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 
 });
 
-client.on(Discord.Events.InteractionCreate, async (interaction) => {
-	console.log(interaction.customId);
-
-	const interactionData = client.interactions.get(interaction.customId);
-	if (!interactionData) return;
-
-	try {
-		(interactionData.execute(client, interaction));
-	}
-	catch (error) {
-		console.log(error);
-	}
-});
-
-
-let token = process.env.TOKEN;
-const args = process.argv.slice(2)
-for (const arg of args)
-	if (arg === "experimental") token = process.env.EXPERIMENTAL_TOKEN;
-
-client.login(token);
+client.login(process.env.TOKEN);
 
 client.once(Discord.Events.ClientReady, (readyClient) => {
 	console.log(`El bot inició correctamente como ${readyClient.user.tag}.`);
 	Langs.loadLangs(client);
+
+	client.user.setPresence({
+		status: "idle",
+		activities: [{
+			name: "Feeding the slimes",
+			type: Discord.ActivityType.Playing,
+			url: "https://recery.itch.io/slime-shoot"
+		}]
+	});
 });
