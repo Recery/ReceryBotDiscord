@@ -337,6 +337,7 @@ module.exports = {
         let page = 0; // Página 0 = página 1 para el usuario
 
         const images = await getImagesAttachment(eco.getBarnSlimes(userID), lang);
+        const userBarnApples = eco.getBarnApples(userID);
 
         const embed = new Discord.EmbedBuilder()
             .setAuthor({
@@ -345,28 +346,38 @@ module.exports = {
             })
             .addFields(
                 {name: "Slimes", value: `${eco.getBarnSlimesAmount(userID)}/${eco.getBarnSizeSlimes(userID)}`, inline: true},
-                {name: messages[lang].applesSizeTitle, value: `${eco.getBarnApples(userID)}/${eco.getBarnSizeApples(userID)} <:GreenApple:1296171434246410380>`, inline: true},
+                {name: messages[lang].applesSizeTitle, value: `${userBarnApples}/${eco.getBarnSizeApples(userID)} <:GreenApple:1296171434246410380>`, inline: true},
                 {name: messages[lang].appleGenerationTitle, value: `${eco.getBarnApplesGeneration(userID)}<:GreenApple:1296171434246410380> /h`, inline: true},
             )
             .setColor("Red")
             .setImage(`attachment://${images[page].name}`)
             .setFooter({
-                text: `${messages[lang].pageTitle} ${page+1}/${images.length}`,
-                iconURL: "https://i.imgur.com/igkTvXQ.png"
-            })
+                    text: `${messages[lang].pageTitle} ${page+1}/${images.length}`,
+                    iconURL: "https://i.imgur.com/igkTvXQ.png"
+            });
+
+        const leftButton = new Discord.ButtonBuilder()
+            .setCustomId("slideLeft")
+            .setEmoji("<:LeftArrow:1334663458687287296>")
+            .setStyle("Primary")
+            .setDisabled(true);
+        const collectButton = new Discord.ButtonBuilder()
+            .setCustomId("collect")
+            .setEmoji("<:GreenApple:1296171434246410380>")
+            .setLabel(messages[lang].collectButtonText)
+            .setStyle("Success")
+            .setDisabled(!userBarnApples > 0);
+        const rightButton = new Discord.ButtonBuilder()
+            .setCustomId("slideRight")
+            .setEmoji("<:RightArrow:1334663426043154472>")
+            .setStyle("Primary")
+            .setDisabled(page >= images.length - 1);
         
         const buttonsRow = new Discord.ActionRowBuilder()
             .addComponents(
-                new Discord.ButtonBuilder()
-                    .setCustomId("slideLeft")
-                    .setEmoji("<:LeftArrow:1334663458687287296>")
-                    .setStyle("Primary")
-                    .setDisabled(true),
-                new Discord.ButtonBuilder()
-                    .setCustomId("slideRight")
-                    .setEmoji("<:RightArrow:1334663426043154472>")
-                    .setStyle("Primary")
-                    .setDisabled(page >= images.length - 1)
+                leftButton,
+                collectButton,
+                rightButton
             );
 
         const sentMessage = await msg.reply({
@@ -375,61 +386,88 @@ module.exports = {
             components: [buttonsRow]
         });
 
-        const collector = sentMessage.createMessageComponentCollector({time: 300000});
-        collector.on("collect", async (interaction) => {
+        const collector = sentMessage.createMessageComponentCollector({time: 120000});
+        collector.on("collect", (interaction) => {
             if (interaction.customId === "slideLeft") page -= 1;
             else if (interaction.customId === "slideRight") page += 1;
+            else if (interaction.customId === "collect") {
+                const newUserBarnApples = eco.getBarnApples(userID);
+
+                const newButtonsRow = new Discord.ActionRowBuilder()
+                    .addComponents(
+                        leftButton,
+                        collectButton.setDisabled(true),
+                        rightButton
+                    );
+
+                eco.setBarnApples(userID, 0);
+                eco.setApples(eco.getApples(userID) + newUserBarnApples);
+
+                embed.spliceFields(
+                    1,
+                    1,
+                    {name: messages[lang].applesSizeTitle, value: `0/${eco.getBarnSizeApples(userID)} <:GreenApple:1296171434246410380>`, inline: true}
+                );
+
+                interaction.update({
+                    embeds: [embed],
+                    components: [newButtonsRow]
+                });
+                interaction.channel.send(messages[lang].applesCollected.replace("{{apples}}", newUserBarnApples));
+
+                collector.resetTimer();
+
+                return;
+            }
             else return;
+
+            leftButton.setDisabled(page <= 0);
+            rightButton.setDisabled(page >= images.length - 1);
 
             const newButtonsRow = new Discord.ActionRowBuilder()
                 .addComponents(
-                    new Discord.ButtonBuilder()
-                        .setCustomId("slideLeft")
-                        .setEmoji("<:LeftArrow:1334663458687287296>")
-                        .setStyle("Primary")
-                        .setDisabled(page <= 0),
-                    new Discord.ButtonBuilder()
-                        .setCustomId("slideRight")
-                        .setEmoji("<:RightArrow:1334663426043154472>")
-                        .setStyle("Primary")
-                        .setDisabled(page >= images.length - 1)
+                    leftButton,
+                    collectButton,
+                    rightButton
                 );
 
             embed.setFooter({
-                text: messages[lang].pageTitle.replace("{{page}}", (page + 1).toString()) + "/" + images.length,
-                iconURL: "https://i.imgur.com/igkTvXQ.png"
-            })
+                    text: `${messages[lang].pageTitle} ${page+1}/${images.length}`,
+                    iconURL: "https://i.imgur.com/igkTvXQ.png"
+                });
             embed.setImage(`attachment://${images[page].name}`);
-
+            
             interaction.update({
                 embeds: [embed],
                 files: [images[page]],
                 components: [newButtonsRow]
             })
+            
+            collector.resetTimer();
         });
         
         collector.on("end", () => {
-            sentMessage.edit({components: []})
+            sentMessage.edit({components: []});
         });
     }
 }
 
 const messages = {
     es: {
-        slimesInBarn: "Tienes estos slimes en tu granero: ",
-        appleGeneration: "Tu generación de <:GreenApple:1296171434246410380> es de {{apples}} por hora.",
         authorHeader: "Granero de {{name}}",
         applesSizeTitle: "Manzanas",
         appleGenerationTitle: "Producción",
-        pageTitle: "Página"
+        pageTitle: "Página",
+        collectButtonText: "Recolectar",
+        applesCollected: "Haz recolectado {{apples}} <:GreenApple:1296171434246410380> de tu granero."
     },
     en: {
-        slimesInBarn: "You have these slimes in your barn: ",
-        appleGeneration: "Your <:GreenApple:1296171434246410380> generation is of {{apples}} per hour.",
         authorHeader: "{{name}}'s barn",
         applesSizeTitle: "Apples",
         appleGenerationTitle: "Production",
-        pageTitle: "Page"
+        pageTitle: "Page",
+        collectButtonText: "Collect",
+        applesCollected: "You have collected {{apples}} <:GreenApple:1296171434246410380> from your barn."
     }
 }
 
@@ -477,7 +515,7 @@ async function getImagesAttachment(slimes, lang) {
             })
         }
     }
-
+    
     ctx.drawImage(slimeImages.get("background"), 0, 0, canvas.width, canvas.height);
 
     const images = [];

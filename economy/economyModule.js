@@ -9,7 +9,7 @@ function setApples(userID, apples) {
 }
 
 function getApples(userID) {
-    let applesToAdd = cycleEffects(userID, resetCycle(userID));
+    const applesToAdd = cycleEffects(userID, resetCycle(userID));
 
     const row = db.prepare("SELECT apples FROM greenApples WHERE userId = ?").get(userID);
 
@@ -51,7 +51,7 @@ function resetCycle(userID) {
 
     // Cooldown no completado
     if (elapsedTime < hour)
-        return;
+        return 0;
     
     // Al llegar a este punto, significa que el cooldown ya se completó
     // Reiniciar el cooldown y devolver true para avisar que se reinició el ciclo
@@ -63,7 +63,7 @@ function resetCycle(userID) {
 }
 
 function getCycleTimeLeft(userID) {
-    let applesToAdd = cycleEffects(userID, resetCycle(userID));
+    const applesToAdd = cycleEffects(userID, resetCycle(userID));
     if (applesToAdd > 0)
         setApples(userID, getApples(userID) +  applesToAdd);
 
@@ -188,6 +188,10 @@ function setBarnApples(userID, quantity) {
 }
 
 function getBarnApples(userID) {
+    const applesToAdd = cycleEffects(userID, resetCycle(userID));
+    if (applesToAdd > 0)
+        setApples(userID, getApples(userID) +  applesToAdd);
+
     const row = db.prepare("SELECT quantity FROM barnApples WHERE userId = ?").get(userID);
 
     if (row) 
@@ -213,7 +217,7 @@ function resetCorral(userID) {
 
 // Mandarle un id de slime para agregar
 function addSlimeToCorral(userID, slimeID) {
-    let applesToAdd = cycleEffects(userID, resetCycle(userID));
+    const applesToAdd = cycleEffects(userID, resetCycle(userID));
     if (applesToAdd > 0)
         setApples(userID, getApples(userID) +  applesToAdd);
 
@@ -226,7 +230,7 @@ function addSlimeToCorral(userID, slimeID) {
 }
 
 function removeSlimeFromCorral(userID, slimeID) {
-    let applesToAdd = cycleEffects(userID, resetCycle(userID));
+    const applesToAdd = cycleEffects(userID, resetCycle(userID));
     if (applesToAdd > 0)
         setApples(userID, getApples(userID) +  applesToAdd);
 
@@ -246,7 +250,7 @@ function removeSlimeFromCorral(userID, slimeID) {
 }
 
 function getCorralSlimes(userID) {
-    let applesToAdd = cycleEffects(userID, resetCycle(userID));
+    const applesToAdd = cycleEffects(userID, resetCycle(userID));
     if (applesToAdd > 0)
         setApples(userID, getApples(userID) +  applesToAdd);
 
@@ -261,7 +265,7 @@ function getCorralSlimes(userID) {
 }
 
 function getCorralSlimesAmount(userID) {
-    let applesToAdd = cycleEffects(userID, resetCycle(userID));
+    const applesToAdd = cycleEffects(userID, resetCycle(userID));
     if (applesToAdd > 0)
         setApples(userID, getApples(userID) +  applesToAdd);
 

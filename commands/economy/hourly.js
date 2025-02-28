@@ -4,8 +4,8 @@ const eco = require("../../economy/economyModule.js");
 const users = new Map();    
 
 module.exports = {
-    name: "periodicreward",
-    alias: ["pr"],
+    name: "hourly",
+    alias: ["h"],
     category: "economy",
     description: {
         es: "Reclama una recompensa de 50 :green_apple: cada una hora.",
