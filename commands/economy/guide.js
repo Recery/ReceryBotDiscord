@@ -86,7 +86,7 @@ module.exports = {
 
             interaction.update({
                 embeds: [embeds[interaction.values[0]]]
-            })
+            });
 
             collector.resetTimer();
         });
@@ -161,6 +161,7 @@ const messages = {
         "Usually, you'll lose apples when the slime disappears.\n\nYou can see the slimes of the corral (and other information) with `{{prefix}}corral`. " +
         "The corral has infinite size to store slimes, don't worry about that. " +
         "If you want to keep some of your slimes, you must send them to the barn; slimes are permanent there (until you decide to remove them from there). More information about the barn in this guide.",
+        barnTitle: "The barn",
         barnContent: "Slime barn is your main green apples source, and where you must store your slimes if you want to keep them. " +
         "Barn's main command is `{{prefix}}barn`; you can enter a handful of subcommands to interact with the barn, but if you don't enter any subcommand, information about the barn will be shown.\n\n" +
         "To summarize it, you can store a limited quantity of slimes in the barn, and for each slime inside, you'll get some green apples per hour. " +

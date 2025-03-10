@@ -6,6 +6,7 @@ const countingChannels = new Set();
 module.exports = {
     name: "count",
     alias: ["contar"],
+    category: "fun",
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
 

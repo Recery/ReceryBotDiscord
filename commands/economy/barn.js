@@ -273,15 +273,25 @@ module.exports = {
             name: "add",
             description: {
                 es: "Añade un slime a tu granero.",
-                en: "Adds a slime to your barn"
+                en: "Adds a slime to your barn."
             },
+            examples: [
+                "{{prefix}}barn add green slime",
+                "{{prefix}}barn add 3 x3",
+                "{{prefix}}barn add cosmic slime x2"
+            ],
             execute: barnAddExecution
         },
         {
             name: "remove",
+            examples: [
+                "{{prefix}}barn remove yellow slime",
+                "{{prefix}}barn remove 1 x2",
+                "{{prefix}}barn remove white slime x4"
+            ],
             description: {
                 es: "Elimina un slime de tu granero.",
-                en: "Removes a slime from your barn"
+                en: "Removes a slime from your barn."
             },
             execute: barnRemoveExecution
         },

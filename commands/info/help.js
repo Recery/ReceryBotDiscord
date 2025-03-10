@@ -16,9 +16,17 @@ module.exports = {
     {
         const lang = client.langs.get(msg.guildId) || "es";
 
-        // Si tiene más de un argumento, significa que el usuario ingresó (o eso debería) un comando para obtener info del mismo 
+        // Si tiene más de un argumento, significa que el usuario debería haber ingresado un comando para obtener info del mismo 
         if (args.length > 0) {
             const command = client.commands.get(args[0]) || client.commands.find(cmd => cmd.alias && cmd.alias.includes(args[0]));
+            
+            // Verificar si mandó también un segundo argumento por si quiere ver información de un subcomando
+            if (args[1] && command)
+                if (command.subcommands)
+                    for (const subcommand of command.subcommands)
+                        if (subcommand.name === args[1])
+                            if (sendCommandDescription(client, msg, lang, subcommand, true)) return;
+
             if (sendCommandDescription(client, msg, lang, command)) return;
         }
 
@@ -100,29 +108,12 @@ module.exports = {
                 .setTitle(commandCategories[lang][category])
                 .setFooter({text: "By: Recery", iconURL: "https://i.imgur.com/9T6Py5u.png"});
             
-            const [commands1, commands2, commands3] = divideArray(getCommandsByCategory(category, client));
+            const commands = getCommandsByCategory(category, client);
 
-            if (commands1.length > 0) {
-                newEmbed.addFields({
-                    name: messages[lang].categoryTitle,
-                    value: "```" + commands1.join("\n") + "```",
-                    inline: true
-                });
-            }
-            if (commands2.length > 0) {
-                newEmbed.addFields({
-                    name: '\u200B',
-                    value: "```" + commands2.join("\n") + "```",
-                    inline: true
-                });
-            }
-            if (commands3.length > 0) {
-                newEmbed.addFields({
-                    name: '\u200B',
-                    value: "```" + commands3.join("\n") + "```",
-                    inline: true
-                });
-            }
+            newEmbed.addFields({
+                name: messages[lang].categoryTitle,
+                value: "`" + commands.join("` `") + "`"
+            });
 
             interaction.update({
                 embeds: [newEmbed]
@@ -133,16 +124,6 @@ module.exports = {
             sentMessage.edit({components: []})
         });
     }
-}
-
-function divideArray(array) {
-    const partSize = Math.ceil(array.length / 3);
-
-    const part1 = array.slice(0, partSize);
-    const part2 = array.slice(partSize, partSize * 2);
-    const part3 = array.slice(partSize * 2);
-
-    return [part1, part2, part3];
 }
 
 function getCommandsByCategory(category, client) {
@@ -190,7 +171,7 @@ const messages = {
 
 
 const prefix = require("../../prefix.js");
-function sendCommandDescription(client, msg, lang, command) {
+function sendCommandDescription(client, msg, lang, command, subcommand = false) {
     if (!command) return false;
     let description = cmdDescriptionMsgs[lang].noDescription;
     if (command.description) 
@@ -221,7 +202,7 @@ function sendCommandDescription(client, msg, lang, command) {
         subcommands.trim();
 
         embed.addFields(
-            {name: cmdDescriptionMsgs[lang].subcommandsField, value: subcommands}
+            {name: "**" + cmdDescriptionMsgs[lang].subcommandsField + "**", value: subcommands}
         );
     }
 
@@ -238,9 +219,16 @@ function sendCommandDescription(client, msg, lang, command) {
         );
     }
 
-    embed.setFooter(
-        {text: cmdDescriptionMsgs[lang].categoryField + commandCategories[lang][command.category], iconURL: client.user.avatarURL()}
-    );
+    if (subcommand) {
+        embed.setFooter(
+            {text: cmdDescriptionMsgs[lang].categoryField + cmdDescriptionMsgs[lang].subcommands, iconURL: client.user.avatarURL()}
+        );
+    }
+    else {
+        embed.setFooter(
+            {text: cmdDescriptionMsgs[lang].categoryField + commandCategories[lang][command.category], iconURL: client.user.avatarURL()}
+        );
+    }
 
     msg.reply( { embeds: [embed]} );
 
@@ -253,15 +241,15 @@ const cmdDescriptionMsgs = {
         noDescription: "Parece que este comando no tiene descripción...",
         categoryField: "Categoría: ",
         aliasField: "**Alias**",
-        subcommandsField: "**Subcomandos**",
-        examplesField: "**Ejemplos de uso**"
+        examplesField: "**Ejemplos de uso**",
+        subcommands: "Subcomandos"
     },
     en: {
         commandTitle: "Command: ",
         noDescription: "It seems this command does not have a description...",
         categoryField: "Category: ",
         aliasField: "**Aliases**",
-        subcommandsField: "**Subcommands**",
-        examplesField: "**Use examples**"
+        examplesField: "**Use examples**",
+        subcommands: "Subcommands"
     }
 }
