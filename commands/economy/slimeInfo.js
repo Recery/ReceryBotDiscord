@@ -11,6 +11,10 @@ module.exports = {
         "You can use the slime name or the ID."
     },
     examples: ["{{prefix}}slimeinfo green slime", "{{prefix}}slimeinfo 5", "{{prefix}}slimeinfo creamy slime"],
+    syntax: {
+        es: "{{prefix}}slimeinfo <nombre o ID del slime>",
+        en: "{{prefix}}slimeinfo <name or ID of the slime>"
+    },
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
 

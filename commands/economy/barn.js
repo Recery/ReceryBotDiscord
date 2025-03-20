@@ -280,18 +280,26 @@ module.exports = {
                 "{{prefix}}barn add 3 x3",
                 "{{prefix}}barn add cosmic slime x2"
             ],
+            syntax: {
+                es: "{{prefix}}barn add <nombre/ID del slime> [cantidad]",
+                en: "{{prefix}}barn add <name/ID of the slime> [quantity]"
+            },
             execute: barnAddExecution
         },
         {
             name: "remove",
+            description: {
+                es: "Elimina un slime de tu granero.",
+                en: "Removes a slime from your barn."
+            },
             examples: [
                 "{{prefix}}barn remove yellow slime",
                 "{{prefix}}barn remove 1 x2",
                 "{{prefix}}barn remove white slime x4"
             ],
-            description: {
-                es: "Elimina un slime de tu granero.",
-                en: "Removes a slime from your barn."
+            syntax: {
+                es: "{{prefix}}barn remove <nombre/ID del slime> [cantidad]",
+                en: "{{prefix}}barn remove <name/ID of the slime> [quantity]"
             },
             execute: barnRemoveExecution
         },
@@ -301,6 +309,10 @@ module.exports = {
                 es: "Mejora el espacio de almacenamiento de slimes de tu granero.",
                 en: "Upgrades your storage size for slimes from your barn."
             },
+            syntax: {
+                es: "{{prefix}}barn upgradeslimes",
+                en: "{{prefix}}barn upgradeslimes"
+            },
             execute: upgradeBarnSlimesExecution
         },
         {
@@ -308,6 +320,10 @@ module.exports = {
             description: {
                 es: "Mejora la cantidad de <:GreenApple:1296171434246410380> que puede contener tu granero.",
                 en: "Upgrades the quantity of <:GreenApple:1296171434246410380> that your barn can hold."
+            },
+            syntax: {
+                es: "{{prefix}}barn upgradeapples",
+                en: "{{prefix}}barn upgradeapples"
             },
             execute: upgradeBarnApplesExecution
         },
@@ -317,9 +333,17 @@ module.exports = {
                 es: "Recolecta las <:GreenApple:1296171434246410380> de tu granero.",
                 en: "Collects the <:GreenApple:1296171434246410380> of your barn."
             },
+            syntax: {
+                es: "{{prefix}}barn collect",
+                en: "{{prefix}}barn collect"
+            },
             execute: collectExecution
         },
     ],
+    syntax: {
+        es: "{{prefix}}barn [subcomando]",
+        en: "{{prefix}}barn [subcommand]"
+    },
     async execute(client, msg, args) {
         let subcommandName = args.shift();
         if (subcommandName) subcommandName = subcommandName.toLowerCase().trim();
@@ -397,10 +421,24 @@ module.exports = {
         });
 
         const collector = sentMessage.createMessageComponentCollector({time: 120000});
+        const messageDeleteListener = (deletedMessage) => {
+            if (deletedMessage.id === sentMessage.id)
+                collector.stop();
+        }
+        client.on("messageDelete", messageDeleteListener);
+
         collector.on("collect", (interaction) => {
             if (interaction.customId === "slideLeft") page -= 1;
             else if (interaction.customId === "slideRight") page += 1;
             else if (interaction.customId === "collect") {
+                if (interaction.user.id !== userID) {
+                    interaction.reply({
+                        content: messages[lang].notYourBarn,
+                        ephemeral: true
+                    });
+                    return;
+                }
+                
                 const newUserBarnApples = eco.getBarnApples(userID);
 
                 const newButtonsRow = new Discord.ActionRowBuilder()
@@ -424,7 +462,7 @@ module.exports = {
                     components: [newButtonsRow]
                 });
                 interaction.channel.send(messages[lang].applesCollected.replace("{{apples}}", newUserBarnApples));
-
+                
                 collector.resetTimer();
 
                 return;
@@ -456,8 +494,14 @@ module.exports = {
             collector.resetTimer();
         });
         
-        collector.on("end", () => {
-            sentMessage.edit({components: []});
+        collector.on("end", async () => {
+            try {
+                await sentMessage.edit({components: []});
+            }
+            catch (err) {
+                console.log("Mensaje desconocido");
+            }
+            client.off("messageDelete", messageDeleteListener);
         });
     }
 }
@@ -469,7 +513,8 @@ const messages = {
         appleGenerationTitle: "Producción",
         pageTitle: "Página",
         collectButtonText: "Recolectar",
-        applesCollected: "Haz recolectado {{apples}} <:GreenApple:1296171434246410380> de tu granero."
+        applesCollected: "Haz recolectado {{apples}} <:GreenApple:1296171434246410380> de tu granero.",
+        notYourBarn: "No puedes recolectar manzanas que no son de tu granero."
     },
     en: {
         authorHeader: "{{name}}'s barn",
@@ -477,7 +522,8 @@ const messages = {
         appleGenerationTitle: "Production",
         pageTitle: "Page",
         collectButtonText: "Collect",
-        applesCollected: "You have collected {{apples}} <:GreenApple:1296171434246410380> from your barn."
+        applesCollected: "You have collected {{apples}} <:GreenApple:1296171434246410380> from your barn.",
+        notYourBarn: "You cannot collect apples that are not from your barn."
     }
 }
 

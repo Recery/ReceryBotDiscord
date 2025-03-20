@@ -16,6 +16,10 @@ module.exports = {
             "**<:GreenApple:1296171434246410380> x10 = slime x1.**",
     },
     examples: ["{{prefix}}hatchslimes", "{{prefix}}hs x4", "{{prefix}}getslimes x9"],
+    syntax: {
+        es: "{{prefix}}hatchslimes [cantidad]",
+        en: "{{prefix}}hatchslimes [quantity]"
+    },
     async execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
@@ -59,14 +63,13 @@ module.exports = {
             eco.addSlimeToTotal(userID, slime.id);
         }
 
-
         const embed = new Discord.EmbedBuilder()
             .setTitle(`**${messages[lang].slimeObtention}**`)
             .setColor("#12bcff")
             .setImage("attachment://hatching.png");
 
         const loadingReaction = await msg.react("<a:Loading:1334664535914844253>");
-        const imageAttachment = getImageAttachment(hatchedSlimes, lang);
+        const imageAttachment = await getImageAttachment(hatchedSlimes, lang);
 
         msg.reply({
             embeds: [embed],
@@ -96,12 +99,21 @@ function chooseSlime() {
         rarity = 3
     else
         rarity = 4;
-
+    
     const possibleSlimes = slimesModule.getSlimesByRarity(rarity);
+    const slimesToRemove = [];
+    for (const slime of possibleSlimes) {
+        if (slime.banner !== slimesModule.banners.REGULAR)
+            slimesToRemove.push(slime);
+    }
+
+    for (const slime of slimesToRemove)
+        possibleSlimes.splice(possibleSlimes.indexOf(slime), 1);
 
     return possibleSlimes[Math.floor(Math.random() * possibleSlimes.length)];
 }
 
+let imagesLoaded = false;
 const slimeImages = new Map();
 loadSlimesImages();
 async function loadSlimesImages() {
@@ -111,10 +123,19 @@ async function loadSlimesImages() {
         const image = await Canvas.loadImage(slime.image);
         slimeImages.set(slime.id, image);
     }
+
+    imagesLoaded = true;
+}
+
+async function waitImagesLoad() {
+    while (!imagesLoaded)
+        await new Promise((resolve) => setTimeout(resolve, 100));
 }
 
 Canvas.registerFont("fonts/slkscr.ttf", {family: "silkscreen"});
-function getImageAttachment(slimes, lang) {
+async function getImageAttachment(slimes, lang) {
+    await waitImagesLoad();
+
     const canvas = Canvas.createCanvas(1600, 1600);
     const ctx = canvas.getContext("2d");
 

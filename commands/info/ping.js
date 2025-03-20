@@ -12,6 +12,10 @@ module.exports = {
         "If I have too much ping, it's my creator's wifi fault.\n" +
         "Donate him some money in Ko-fi, so he buys a better wifi."
     },
+    syntax: {
+        es: "{{prefix}}ping",
+        en: "{{prefix}}ping"
+    },
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
 

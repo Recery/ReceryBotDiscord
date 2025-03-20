@@ -1,3 +1,8 @@
+const banners = Object.freeze({
+    REGULAR: Symbol("REGULAR"),
+    VOCALOID: Symbol("VOCALOID")
+});
+
 const slimes = [
     {
         name: "greenslime",
@@ -8,7 +13,8 @@ const slimes = [
         id: 1,
         rarity: 1,
         appleGeneration: 1,
-        image: "https://i.imgur.com/t46q0yd.png"
+        image: "https://i.imgur.com/t46q0yd.png",
+        banner: banners.REGULAR
     },
     {
         name: "yellowslime",
@@ -19,7 +25,8 @@ const slimes = [
         id: 2,
         rarity: 1,
         appleGeneration: 1,
-        image: "https://i.imgur.com/5YM3JOo.png"
+        image: "https://i.imgur.com/5YM3JOo.png",
+        banner: banners.REGULAR
     },
     {
         name: "whiteslime",
@@ -30,7 +37,8 @@ const slimes = [
         id: 3,
         rarity: 1,
         appleGeneration: 2,
-        image: "https://i.imgur.com/PMLd3Bn.png"
+        image: "https://i.imgur.com/PMLd3Bn.png",
+        banner: banners.REGULAR
     },
     {
         name: "creamyslime",
@@ -41,7 +49,8 @@ const slimes = [
         id: 4,
         rarity: 2,
         appleGeneration: 4,
-        image: "https://i.imgur.com/XTYTUfW.png"
+        image: "https://i.imgur.com/XTYTUfW.png",
+        banner: banners.REGULAR
     },
     {
         name: "pooslime",
@@ -52,7 +61,8 @@ const slimes = [
         id: 5,
         rarity: 2,
         appleGeneration: 6,
-        image: "https://i.imgur.com/hpnrHFS.png"
+        image: "https://i.imgur.com/hpnrHFS.png",
+        banner: banners.REGULAR
     },
     {
         name: "cosmicslime",
@@ -63,7 +73,8 @@ const slimes = [
         id: 6,
         rarity: 3,
         appleGeneration: 9,
-        image: "https://i.imgur.com/FpJ089n.png"
+        image: "https://i.imgur.com/FpJ089n.png",
+        banner: banners.REGULAR
     },
     {
         name: "goldfishslime",
@@ -74,7 +85,8 @@ const slimes = [
         id: 7,
         rarity: 4,
         appleGeneration: 15,
-        image: "https://i.imgur.com/kJqeeNq.png"
+        image: "https://i.imgur.com/kJqeeNq.png",
+        banner: banners.REGULAR
     },
     {
         name: "leadslime",
@@ -85,7 +97,8 @@ const slimes = [
         id: 8,
         rarity: 3,
         appleGeneration: 8,
-        image: "https://i.imgur.com/RLw5cmu.png"
+        image: "https://i.imgur.com/RLw5cmu.png",
+        banner: banners.REGULAR
     },
     {
         name: "blueslime",
@@ -96,7 +109,8 @@ const slimes = [
         id: 9,
         rarity: 1,
         appleGeneration: 2,
-        image: "https://i.imgur.com/O4ff3Yh.png"
+        image: "https://i.imgur.com/O4ff3Yh.png",
+        banner: banners.REGULAR
     },
     {
         name: "copperslime",
@@ -107,7 +121,8 @@ const slimes = [
         id: 10,
         rarity: 2,
         appleGeneration: 5,
-        image: "https://i.imgur.com/kH4fzHe.png"
+        image: "https://i.imgur.com/kH4fzHe.png",
+        banner: banners.REGULAR
     },
     {
         name: "pinkyslime",
@@ -118,7 +133,8 @@ const slimes = [
         id: 11,
         rarity: 1,
         appleGeneration: 3,
-        image: "https://i.imgur.com/2Hi1Jii.png"
+        image: "https://i.imgur.com/2Hi1Jii.png",
+        banner: banners.REGULAR
     },
     {
         name: "grayslime",
@@ -129,7 +145,8 @@ const slimes = [
         id: 12,
         rarity: 1,
         appleGeneration: 2,
-        image: "https://i.imgur.com/KygZLcb.png"
+        image: "https://i.imgur.com/KygZLcb.png",
+        banner: banners.REGULAR
     },
     {
         name: "redslime",
@@ -140,7 +157,8 @@ const slimes = [
         id: 13,
         rarity: 4,
         appleGeneration: 15,
-        image: "https://i.imgur.com/6M4ApPW.png"
+        image: "https://i.imgur.com/6M4ApPW.png",
+        banner: banners.REGULAR
     },
     {
         name: "rgbslime",
@@ -151,7 +169,8 @@ const slimes = [
         id: 14,
         rarity: 3,
         appleGeneration: 8,
-        image: "https://i.imgur.com/scKycb9.png"
+        image: "https://i.imgur.com/scKycb9.png",
+        banner: banners.REGULAR
     },
     {
         name: "tetoslime",
@@ -162,8 +181,21 @@ const slimes = [
         id: 15,
         rarity: 4,
         appleGeneration: 15,
-        image: "https://i.imgur.com/KG8NkZR.png"
+        image: "https://i.imgur.com/KG8NkZR.png",
+        banner: banners.VOCALOID
     },
+    {
+        name: "greenappleslime",
+        displayName: {
+            es: "Slime Manzana Verde",
+            en: "Green Apple Slime"
+        },
+        id: 16,
+        rarity: 4,
+        appleGeneration: 15,
+        image: "https://i.imgur.com/GxKJjvJ.png",
+        banner: banners.REGULAR
+    }
 ];
 
 function getSlime(id) {
@@ -194,6 +226,7 @@ function getSlimesByRarity(rarity) {
 }
 
 module.exports = {
+    banners,
     slimes,
     getSlime,
     getSlimeByName,

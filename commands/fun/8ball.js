@@ -5,6 +5,10 @@ module.exports = {
         es: "Ingresa una pregunta de si o no, y yo te la contesto.",
         en: "Enter a yes or no question, and I will answer it.",
     },
+    syntax: {
+        es: "{{prefix}}8ball <pregunta>",
+        en: "{{prefix}}8ball <question>"
+    },
     execute (client, msg, args) 
     {
         const lang = client.langs.get(msg.guildId) || "es";

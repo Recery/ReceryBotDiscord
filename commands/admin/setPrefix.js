@@ -8,6 +8,10 @@ module.exports = {
         en: "Changes the prefix used for my commands in this server."
     },
     examples: ["{{prefix}}setprefix r!", "{{prefix}}setprefix -", "{{prefix}}setprefix abc"],
+    syntax: {
+        es: "{{prefix}}setprefix <prefijo>",
+        en: "{{prefix}}setprefix <prefix>"
+    },
     execute(client, msg, args)
     {
         if (!msg.member.permissions.has("Administrator")) {

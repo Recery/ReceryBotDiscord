@@ -7,6 +7,16 @@ module.exports = {
     name: "count",
     alias: ["contar"],
     category: "fun",
+    description: {
+        es: "Inicia (o termina) un juego de contar en un canal en específico.\n" +
+        "Es necesario permiso de administrador para usar este comando.",
+        en: "Starts (or ends) a counting game in a specific channel.\n" +
+        "It's needed administrator permissions to use this command."
+    },
+    syntax: {
+        es: "{{prefix}}count",
+        en: "{{prefix}}count"
+    },
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
 
@@ -46,10 +56,12 @@ module.exports = {
             const lang = client.langs.get(serverId) || "es";
             if (!countingChannels.has(serverId + "-" + channelId))
                 return;
-        
+            
+            if (msg.content === "") return;
             const currentNumber = getChannelCurrentCounting(serverId, channelId);
             const newNumber = Number(msg.content);
             if (isNaN(newNumber)) return;
+            console.log(newNumber);
         
             if (newNumber === currentNumber + 1) {
                 msg.react("✅");

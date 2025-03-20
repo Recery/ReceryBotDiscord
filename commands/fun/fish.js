@@ -8,6 +8,10 @@ module.exports = {
         es: "¡Muestra imágenes y datos de un pez aleatorio!",
         en:  "Shows images and information about a random fish!"
     },
+    syntax: {
+        es: "{{prefix}}fish",
+        en: "{{prefix}}fish"
+    },
     async execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
 
@@ -47,6 +51,11 @@ module.exports = {
         /// MENSAJE ENVIADO, MANEJAR INTERACCIONES AHORA
 
         const collector = sentMessage.createMessageComponentCollector({time: 300000});
+        const messageDeleteListener = (deletedMessage) => {
+            if (deletedMessage.id === sentMessage.id)
+                collector.stop();
+        }
+        client.on("messageDelete", messageDeleteListener);
 
         collector.on("collect", (interaction) => {
             if (interaction.customId === "showDescription") {
@@ -89,10 +98,14 @@ module.exports = {
             interaction.deferUpdate();
         });
 
-        collector.on("end", () => {
-            sentMessage.edit({
-                components: []
-            });
+        collector.on("end", async () => {
+            try {
+                await sentMessage.edit({components: []});
+            }
+            catch (err) {
+                console.log("Mensaje desconocido");
+            }
+            client.off("messageDelete", messageDeleteListener);
         });
     }
 }

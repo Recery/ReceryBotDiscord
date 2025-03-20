@@ -7,6 +7,10 @@ module.exports = {
         es: "Enviás un mensaje, y después yo lo digo.",
         en: "You send a message, and then I say it."
     },
+    syntax: {
+        es: "{{prefix}}say <mensaje>",
+        en: "{{prefix}}say <message>"
+    },
     examples: ["{{prefix}}say hello world", "{{prefix}}say hola mundo"],
     async execute(client, msg, args) {
         const text = args.join(" ");

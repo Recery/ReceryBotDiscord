@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
-const { commandCategories } = require("../../langsLoader.js");
+const categoriesModule = require("../../commandCategories.js");
+const prefix = require("../../prefix.js");
 
 module.exports = {
     name: "help",
@@ -12,9 +13,14 @@ module.exports = {
         "Enter a command as an argument to see their details.",
     },
     examples: ["{{prefix}}help", "{{prefix}}help 8ball", "{{prefix}}help hs"],
+    syntax: {
+        es: "{{prefix}}help [comando para ver]",
+        en: "{{prefix}}help [command to see]"
+    },
     async execute(client, msg, args)
     {
         const lang = client.langs.get(msg.guildId) || "es";
+        const serverPrefix = prefix.getPrefix(msg.guildId);
 
         // Si tiene más de un argumento, significa que el usuario debería haber ingresado un comando para obtener info del mismo 
         if (args.length > 0) {
@@ -25,55 +31,42 @@ module.exports = {
                 if (command.subcommands)
                     for (const subcommand of command.subcommands)
                         if (subcommand.name === args[1])
-                            if (sendCommandDescription(client, msg, lang, subcommand, true)) return;
+                            if (sendCommandDescription(client, msg, lang, serverPrefix, subcommand, true)) return;
 
-            if (sendCommandDescription(client, msg, lang, command)) return;
+            if (sendCommandDescription(client, msg, lang, serverPrefix, command, false)) return;
         }
 
         const embed = new Discord.EmbedBuilder()
-            .setColor("Blue")
-            .setTitle(messages[lang].title)
+            .setAuthor({name: "Recery Bot", iconURL: client.user.avatarURL()})
+            .setColor('Random')
             .setDescription(messages[lang].description.replace("{{commands}}", client.commands.size.toString()))
             .setFooter({text: "By: Recery", iconURL: "https://i.imgur.com/9T6Py5u.png"});
         
-        const keys = Object.keys(commandCategories[lang]);
-        for (const key of keys) {
-            embed.addFields({
-                name: "`" + commandCategories[lang][key] + "`",
-                value: messages[lang][key]
-            });
-        }
-        
         const selection = new Discord.StringSelectMenuBuilder()
             .setCustomId("Selection")
-            .setPlaceholder(messages[lang].selectionPlaceholder)
-            .addOptions(
+            .setPlaceholder(messages[lang].selectionPlaceholder);
+
+        const keys = Object.keys(categoriesModule.categories[lang]);
+        for (const key of keys) {
+            embed.addFields({
+                name: categoriesModule.categoriesEmojis[key] + " `" + categoriesModule.categories[lang][key] + "`",
+                value: categoriesModule.categoriesDescriptions[lang][key]
+            });
+
+            selection.addOptions(
                 new Discord.StringSelectMenuOptionBuilder()
-                    .setLabel(commandCategories[lang]["action"])
-                    .setEmoji("<:MiniKnife:1335024821876035604>")
-                    .setDescription(messages[lang].action)
-                    .setValue("action"),
-                new Discord.StringSelectMenuOptionBuilder()
-                    .setLabel(commandCategories[lang]["administration"])
-                    .setEmoji("<:CogWheel:1334956292124577926>")
-                    .setDescription(messages[lang].administration)
-                    .setValue("administration"),
-                new Discord.StringSelectMenuOptionBuilder()
-                    .setLabel(commandCategories[lang]["economy"])
-                    .setEmoji("<:GreenApple:1296171434246410380>")
-                    .setDescription(messages[lang].economy)
-                    .setValue("economy"),
-                new Discord.StringSelectMenuOptionBuilder()
-                    .setLabel(commandCategories[lang]["fun"])
-                    .setEmoji("<:ReceryHappy:1334956657041608755>")
-                    .setDescription(messages[lang].fun)
-                    .setValue("fun"),
-                new Discord.StringSelectMenuOptionBuilder()
-                    .setLabel(commandCategories[lang]["info"])
-                    .setEmoji("<:Info:1334967699322962051>")
-                    .setDescription(messages[lang].info)
-                    .setValue("info")
+                    .setLabel(categoriesModule.categories[lang][key])
+                    .setEmoji(categoriesModule.categoriesEmojis[key])
+                    .setDescription(categoriesModule.categoriesDescriptions[lang][key])
+                    .setValue(key)
             );
+        }
+
+        embed.addFields({
+            name: " ",
+            value: "**" + messages[lang].changeLanguage.replace("{{prefix}}", serverPrefix) + "**\n" +
+            "**" + messages[lang].prefixHere.replaceAll("{{prefix}}", serverPrefix) + "**"
+        });
 
         const row1 = new Discord.ActionRowBuilder()
             .addComponents(selection);
@@ -94,25 +87,33 @@ module.exports = {
         /// MENSAJE ENVIADO, AHORA MANEJAR INTERACCIONES
 
         const collector = sentMessage.createMessageComponentCollector({time:300000});
-
+        const messageDeleteListener = (deletedMessage) => {
+            if (deletedMessage.id === sentMessage.id)
+                collector.stop();
+        }
+        client.on("messageDelete", messageDeleteListener);
+        
         collector.on("collect", async (interaction) => {
             if (interaction.customId === "Delete") {
-                interaction.message.delete();
+                collector.stop();
+                await interaction.deferUpdate();
+                await interaction.message.delete();
                 return;
             }
             else if (interaction.customId !== "Selection") return;
 
             const category = interaction.values[0] || "economy";
             const newEmbed = new Discord.EmbedBuilder()
+                .setAuthor({name: "Recery Bot", iconURL: client.user.avatarURL()})
                 .setColor("Blue")
-                .setTitle(commandCategories[lang][category])
+                .setTitle(categoriesModule.categoriesEmojis[category] + " " + categoriesModule.categories[lang][category])
                 .setFooter({text: "By: Recery", iconURL: "https://i.imgur.com/9T6Py5u.png"});
             
             const commands = getCommandsByCategory(category, client);
 
             newEmbed.addFields({
                 name: messages[lang].categoryTitle,
-                value: "`" + commands.join("` `") + "`"
+                value: "`" + commands.join("` ✦ `") + "`"
             });
 
             interaction.update({
@@ -120,8 +121,14 @@ module.exports = {
             });
         });
 
-        collector.on("end", () => {
-            sentMessage.edit({components: []})
+        collector.on("end", async () => {
+            try {
+                await sentMessage.edit({components: []});
+            }
+            catch (err) {
+                console.log("Mensaje desconocido");
+            }
+            client.off("messageDelete", messageDeleteListener);
         });
     }
 }
@@ -140,28 +147,20 @@ function getCommandsByCategory(category, client) {
 
 const messages = {
     es: {
-        title: "Comandos de Recery Bot",
         description: "Selecciona una categoría de abajo para ver sus comandos.\n" +
         "Puedes elegir entre `{{commands}}` comandos en total.",
+        changeLanguage: "¿Intentas cambiar mi idioma? Usa `{{prefix}}setlang`.",
+        prefixHere: "Mi prefijo aquí es `{{prefix}}`. Puedes cambiarlo con `{{prefix}}setprefix`.",
         categoryTitle: ":white_medium_small_square: Comandos de esta categoría",
         selectionPlaceholder: "Elige una categoría",
-        action: "Acciones hacia otros miembros o hacia ti mismo.",
-        administration: "Administración del servidor y configurarme.",
-        economy: "Interactuar con mi sistema de economía.",
-        fun: "Para divertirte.",
-        info: "Información sobre mí."
     },
     en: {
-        title: "Recery Bot commands",
         description: "Select a category from below to see their commands.\n"+
         "You can choose between `{{commands}}` commands in total.",
+        changeLanguage: "Trying to change my language? Use `{{prefix}}setlang`.",
+        prefixHere: "My prefix here is `{{prefix}}`. You can change it with `{{prefix}}setprefix`.",
         categoryTitle: ":white_medium_small_square: Commands of this category",
         selectionPlaceholder: "Choose a category",
-        action: "Perform actions on other members or yourself.",
-        administration: "Manage the server and configure myself.",
-        economy: "Interact with my economy system.",
-        fun: "To have fun.",
-        info: "Information of myself."
     }
 }
 
@@ -170,8 +169,7 @@ const messages = {
 /// VIENE PARTE DE MOSTRAR INFORMACION DETALLADA DE UN COMANDO SI EL USUARIO INGRESÓ UN COMANDO COMO ARGUMENTO
 
 
-const prefix = require("../../prefix.js");
-function sendCommandDescription(client, msg, lang, command, subcommand = false) {
+function sendCommandDescription(client, msg, lang, serverPrefix, command, subcommand = false) {
     if (!command) return false;
     let description = cmdDescriptionMsgs[lang].noDescription;
     if (command.description) 
@@ -181,7 +179,7 @@ function sendCommandDescription(client, msg, lang, command, subcommand = false) 
         .setTitle(cmdDescriptionMsgs[lang].commandTitle + command.name)
         .setDescription(description)
         .setColor("#65a7fc");
-
+    
     if (command.alias) {
         let aliases = "";
         for (const alias of command.alias) {
@@ -206,9 +204,17 @@ function sendCommandDescription(client, msg, lang, command, subcommand = false) 
         );
     }
 
+    if (command.syntax) {
+        const field = {
+            name: cmdDescriptionMsgs[lang].syntaxField,
+            value: "`" + command.syntax[lang].replace("{{prefix}}", serverPrefix) + "`\n"
+        };
+        field.value += "__" + cmdDescriptionMsgs[lang].syntaxFieldReference + "__";
+        embed.addFields(field);
+    }
+
     if (command.examples) {
         let examples = "";
-        const serverPrefix = prefix.getPrefix(msg.guildId);
         for (const example of command.examples) {
             examples += "`" + example.replace("{{prefix}}", serverPrefix) + "`\n";
         }
@@ -226,7 +232,7 @@ function sendCommandDescription(client, msg, lang, command, subcommand = false) 
     }
     else {
         embed.setFooter(
-            {text: cmdDescriptionMsgs[lang].categoryField + commandCategories[lang][command.category], iconURL: client.user.avatarURL()}
+            {text: cmdDescriptionMsgs[lang].categoryField + categoriesModule.categories[lang][command.category], iconURL: client.user.avatarURL()}
         );
     }
 
@@ -242,6 +248,8 @@ const cmdDescriptionMsgs = {
         categoryField: "Categoría: ",
         aliasField: "**Alias**",
         examplesField: "**Ejemplos de uso**",
+        syntaxField: "**Sintaxis**",
+        syntaxFieldReference: "<requerido> [opcional]",
         subcommands: "Subcomandos"
     },
     en: {
@@ -250,6 +258,8 @@ const cmdDescriptionMsgs = {
         categoryField: "Category: ",
         aliasField: "**Aliases**",
         examplesField: "**Use examples**",
+        syntaxField: "**Syntax**",
+        syntaxFieldReference: "<required> [optional]",
         subcommands: "Subcommands"
     }
 }

@@ -14,6 +14,10 @@ module.exports = {
         "You can see the quantity of slimes obtained from each type.\n" + 
         "Also shows the locked slimes."
     },
+    syntax: {
+        es: "{{prefix}}almanac",
+        en: "{{prefix}}almanac"
+    },
     async execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
@@ -55,6 +59,11 @@ module.exports = {
         /// MENSAJE ENVIADO, AHORA ACTUALIZACION DEL MENSAJE
 
         const collector = sentMessage.createMessageComponentCollector({time: 300000});
+        const messageDeleteListener = (deletedMessage) => {
+            if (deletedMessage.id === sentMessage.id)
+                collector.stop();
+        }
+        client.on("messageDelete", messageDeleteListener);
         collector.on("collect", async (interaction) => {
             if (interaction.customId === "slideLeft") page -= 1;
             else if (interaction.customId === "slideRight") page += 1;
@@ -89,11 +98,17 @@ module.exports = {
                 embeds: [newEmbed],
                 files: [imageAttachments[page]],
                 components: [newButtonsRow]
-            })
+            });
         });
 
-        collector.on("end", () => {
-            sentMessage.edit({components: []})
+        collector.on("end", async () => {
+            try {
+                await sentMessage.edit({components: []});
+            }
+            catch (err) {
+                console.log("Mensaje desconocido");
+            }
+            client.off("messageDelete", messageDeleteListener);
         });
     }
 }

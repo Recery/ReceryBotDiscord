@@ -15,18 +15,20 @@ function setPrefix(serverID, newPrefix) {
     db.prepare("INSERT OR REPLACE INTO prefixes (serverId, prefix) VALUES (?, ?)").run(serverID, newPrefix);
 }
 
-function cleanPrefix(msg) {
+function cleanPrefix(msg, clientId) {
     const prefix = getPrefix(msg.guildId);
 
     const content = msg.content.trim();
 
-    const inputPrefix = content.slice(0, 6).toLowerCase();
+    const inputPrefix = content.slice(0, `<@${clientId}>`.length).toLowerCase();
 
     let cleanText = null;
 
     if (inputPrefix.startsWith("recery"))
         cleanText = content.slice(6, content.length).trim();
-    else if (inputPrefix.startsWith(prefix))
+    else if (inputPrefix.startsWith(`<@${clientId}>`))
+        cleanText = content.slice(`<@${clientId}>`.length, content.length).trim();
+    else if (inputPrefix.startsWith(prefix.toLowerCase()))
         cleanText = content.slice(prefix.length, content.length).trim();
 
     return cleanText;

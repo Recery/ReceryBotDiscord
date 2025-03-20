@@ -1,12 +1,16 @@
 const eco = require("../../economy/economyModule.js");
 
 module.exports = {
-    name: "silowallet",
-    alias: ["sw", "bal", "balance"],
+    name: "silo",
+    alias: ["bal", "balance"],
     category: "economy",
     description: {
         es: "Muestra la cantidad de <:GreenApple:1296171434246410380> que tienes.",
         en: "Shows how many <:GreenApple:1296171434246410380> you have."
+    },
+    syntax: {
+        es: "{{prefix}}silo",
+        en: "{{prefix}}silo"
     },
     execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
@@ -14,11 +18,11 @@ module.exports = {
 
         const userApples = eco.getApples(userID);
 
-        msg.reply(messages[lang].replace("{{user}}", `<@${userID}>`).replace("{{apples}}", userApples.toString()));
+        msg.reply(messages[lang].replace("{{apples}}", userApples.toString()));
     }
 }
 
 const messages = {
-    es: "{{user}}, en total tienes {{apples}}<:GreenApple:1296171434246410380> en tu silolletera.",
-    en: "{{user}}, you have {{apples}}<:GreenApple:1296171434246410380> in your silowallet."
+    es: "En total tienes {{apples}}<:GreenApple:1296171434246410380> en tu silo.",
+    en: "You have {{apples}}<:GreenApple:1296171434246410380> in your silo."
 }

@@ -3,15 +3,18 @@ const Canvas = require("canvas");
 const slimesModule = require("../../economy/slimesModule.js");
 const eco = require("../../economy/economyModule.js");
 const timeModule = require("../../economy/timeModule.js");
+const { syntax } = require("../fun/replace.js");
 
 module.exports = {
     name: "corral",
     category: "economy",
     description: {
-        es: "Muestra los slimes que tienes en tu corral.\n" +
-        "Cada una hora, todos los slimes se irán de tu corral.\nGanarás :green_apple: según el valor de cada slime.",
-        en: "Shows all slimes from your corral.\n" +
-        "Every hour, all slimes from your corral will leave.\nYou will earn :green_apple: according to the value of each slime."
+        es: "Muestra los slimes que tienes en tu corral.",
+        en: "Shows all slimes from your corral."
+    },
+    syntax: {
+        es: "{{prefix}}corral",
+        en: "{{prefix}}corral"
     },
     async execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
@@ -69,7 +72,11 @@ module.exports = {
         });
 
         const collector = sentMessage.createMessageComponentCollector({time: 120000});
-
+        const messageDeleteListener = (deletedMessage) => {
+            if (deletedMessage.id === sentMessage.id)
+                collector.stop();
+        }
+        client.on("messageDelete", messageDeleteListener);
         collector.on("collect", (interaction) => {
             if (interaction.customId === "slideLeft") page -= 1;
             else if (interaction.customId === "slideRight") page += 1;
@@ -99,8 +106,14 @@ module.exports = {
             collector.resetTimer();
         });
 
-        collector.on("end", () => {
-            sentMessage.edit({components: []});
+        collector.on("end", async () => {
+            try {
+                await sentMessage.edit({components: []});
+            }
+            catch (err) {
+                console.log("Mensaje desconocido");
+            }
+            client.off("messageDelete", messageDeleteListener);
         });
     }
 }

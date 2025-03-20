@@ -8,6 +8,10 @@ module.exports = {
         es: "Muestra la guía e historia del sistema de economía de Recery Bot.",
         en: "Show the guide and lore of the Recery Bot's economy system."
     },
+    syntax: {
+        es: "{{prefix}}guide",
+        en: "{{prefix}}guide"
+    },
     async execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
         const prefix = getPrefix(msg.guildId);
