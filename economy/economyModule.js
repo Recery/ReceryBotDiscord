@@ -1,7 +1,7 @@
 const slimesModule = require("./slimesModule.js");
 const DB = require("better-sqlite3");
 
-const db =  new DB(process.env.ECONOMY_DB_PATH);
+const db =  new DB(process.env.DB_DIR + "economy.db");
 
 // Se manda un valor nuevo para las manzanas y lo reemplaza completamente al valor anterior
 function setApples(userID, apples) {

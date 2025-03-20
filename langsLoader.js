@@ -8,7 +8,7 @@ function loadLangs(client)
 {
     client.langs = new Collection();
 
-    const db = new DB(process.env.ADMIN_DB_PATH);
+    const db = new DB(process.env.DB_DIR + "admin.db");
     const rows = db.prepare("SELECT serverId, lang FROM langs").all();
 
     for (const row of rows)
@@ -19,7 +19,7 @@ function loadLangs(client)
 
 function setLang(client, serverID, lang)
 {
-    const db = new DB(process.env.ADMIN_DB_PATH);
+    const db = new DB(process.env.DB_DIR + "admin.db");
     db.prepare("INSERT OR REPLACE INTO langs (serverId, lang) VALUES (?, ?)").run(serverID, lang);
     db.close();
 

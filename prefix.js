@@ -1,5 +1,5 @@
 const DB = require("better-sqlite3");
-const db = new DB(process.env.ADMIN_DB_PATH);
+const db = new DB(process.env.DB_DIR + "admin.db");
 
 function getPrefix(serverID)
 {

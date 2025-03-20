@@ -48,7 +48,7 @@ module.exports = {
             embed.setDescription(messages[lang].selfBonk.replace("{{senderName}}", senderMember.displayName));
         }
         else {
-            const db = new DB(process.env.ACTION_DB_PATH);
+            const db = new DB(process.env.DB_DIR + "action.db");
 
             const row = db.prepare("SELECT quantity FROM bonks WHERE userId = ?").get(targetId);
     
