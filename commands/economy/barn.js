@@ -449,7 +449,7 @@ module.exports = {
                     );
 
                 eco.setBarnApples(userID, 0);
-                eco.setApples(eco.getApples(userID) + newUserBarnApples);
+                eco.setApples(userID, eco.getApples(userID) + newUserBarnApples);
 
                 embed.spliceFields(
                     1,
