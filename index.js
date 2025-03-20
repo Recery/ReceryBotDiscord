@@ -22,7 +22,7 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 	const cleanText = Prefix.cleanPrefix(msg, client.user.id);
 
 	if (!cleanText || msg.author.bot) return;
-
+  
 	const args = cleanText.split(/\s+/);
 	const commandName = args.shift().toLowerCase();
 	
