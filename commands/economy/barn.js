@@ -188,11 +188,11 @@ const upgradeBarnSlimesExecution = (client, msg, args) => {
 }
 const msgsUpgradeSlimes = {
     es: {
-        needMoreApples: "¡No tienes suficientes :green_apple: para mejorar tu granero de slimes!\nNecesitas {{apples}}<:GreenApple:1296171434246410380>.",
+        needMoreApples: "¡No tienes suficientes <:GreenApple:1296171434246410380> para mejorar tu granero de slimes!\nNecesitas {{apples}}<:GreenApple:1296171434246410380>.",
         upgraded: "¡Haz mejorado tu granero de slimes!\nAhora tiene capacidad para {{size}} slimes."
     },
     en: {
-        needMoreApples: "You don't have enough :green_apple: to upgrade your slime barn!\nYou need {{apples}}<:GreenApple:1296171434246410380>.",
+        needMoreApples: "You don't have enough <:GreenApple:1296171434246410380> to upgrade your slime barn!\nYou need {{apples}}<:GreenApple:1296171434246410380>.",
         upgraded: "Your slime barn has been upgraded!\nIt now has size for {{size}} slimes."
     }
 }

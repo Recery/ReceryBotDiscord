@@ -200,7 +200,7 @@ function sendCommandDescription(client, msg, lang, serverPrefix, command, subcom
         subcommands.trim();
 
         embed.addFields(
-            {name: "**" + cmdDescriptionMsgs[lang].subcommandsField + "**", value: subcommands}
+            {name: "**" + cmdDescriptionMsgs[lang].subcommands + "**", value: subcommands}
         );
     }
 
