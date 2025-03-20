@@ -12,7 +12,7 @@ function loadLangs(client)
     const rows = db.prepare("SELECT serverId, lang FROM langs").all();
 
     for (const row of rows)
-        client.langs.set(row.serverid, row.lang);
+        client.langs.set(row.serverId, row.lang);
     
     db.close();
 }
