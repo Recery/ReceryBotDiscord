@@ -4,6 +4,7 @@ const { getPrefix } = require("../../prefix.js");
 module.exports = {
     name: "guide",
     alias: ["tutorial", "guia"],
+    category: "economy",
     description: {
         es: "Muestra la guía e historia del sistema de economía de Recery Bot.",
         en: "Show the guide and lore of the Recery Bot's economy system."
