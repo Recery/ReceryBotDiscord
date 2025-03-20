@@ -84,6 +84,11 @@ module.exports = {
         });
 
         const collector = sentMessage.createMessageComponentCollector({time:300000});
+        const messageDeleteListener = (deletedMessage) => {
+            if (deletedMessage.id === sentMessage.id)
+                collector.stop();
+        }
+        client.on("messageDelete", messageDeleteListener);
 
         collector.on("collect", (interaction) => {
             if (interaction.customId !== "selection") return;
@@ -95,10 +100,14 @@ module.exports = {
             collector.resetTimer();
         });
 
-        collector.on("end", () => {
-            sentMessage.edit({
-                components: []
-            });
+        collector.on("end", async () => {
+            try {
+                await sentMessage.edit({components: []});
+            }
+            catch (err) {
+                console.log("Mensaje desconocido");
+            }
+            client.off("messageDelete", messageDeleteListener);
         });
     }
 }
