@@ -76,7 +76,7 @@ module.exports = {
             files: [imageAttachment]
         });
 
-        loadingReaction.remove();
+        loadingReaction.users.remove(client.user.id);
     }
 }
 

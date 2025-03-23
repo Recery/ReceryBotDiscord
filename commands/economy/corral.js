@@ -22,6 +22,8 @@ module.exports = {
 
         const slimesInCorral = eco.getCorralSlimes(userID);
 
+        const loadingReaction = await msg.react("<a:Loading:1334664535914844253>");
+
         let page = 0; // Página 0 = página 1 para el usuario
         const images = await getImagesAttachment(slimesInCorral, lang);
 
@@ -70,6 +72,8 @@ module.exports = {
             files: [images[page]],
             components: [buttonsRow]
         });
+
+        loadingReaction.users.remove(client.user.id);
 
         const collector = sentMessage.createMessageComponentCollector({time: 120000});
         const messageDeleteListener = (deletedMessage) => {

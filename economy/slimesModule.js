@@ -185,10 +185,10 @@ const slimes = [
         banner: banners.VOCALOID
     },
     {
-        name: "greenappleslime",
+        name: "appleslime",
         displayName: {
-            es: "Slime Manzana Verde",
-            en: "Green Apple Slime"
+            es: "Slime Manzana",
+            en: "Apple Slime"
         },
         id: 16,
         rarity: 4,

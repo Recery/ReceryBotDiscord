@@ -348,7 +348,6 @@ module.exports = {
         let subcommandName = args.shift();
         if (subcommandName) subcommandName = subcommandName.toLowerCase().trim();
         for (const subcommand of this.subcommands) {
-            //console.log(subcommand.name, subcommandName);
             if (subcommand.name === subcommandName) {
                 subcommand.execute(client, msg, args);
                 return;
@@ -367,6 +366,8 @@ module.exports = {
             content += "`ID: " + slime.obj.id.toString() + "` "; // Agregar el id primero
             content += slime.obj.displayName[lang] + " x" + slime.quantity.toString() + "\n";
         }
+
+        const loadingReaction = await msg.react("<a:Loading:1334664535914844253>");
 
         let page = 0; // Página 0 = página 1 para el usuario
 
@@ -419,6 +420,8 @@ module.exports = {
             files: [images[page]],
             components: [buttonsRow]
         });
+
+        loadingReaction.users.remove(client.user.id);
 
         const collector = sentMessage.createMessageComponentCollector({time: 120000});
         const messageDeleteListener = (deletedMessage) => {

@@ -22,6 +22,7 @@ module.exports = {
         const lang = client.langs.get(msg.guildId) || "es";
         const userID = msg.author.id;
 
+        const loadingReaction = await msg.react("<a:Loading:1334664535914844253>");
         const imageAttachments = await getAlmanacImages(eco.getTotalSlimes(userID), lang);
 
         const buttonsRow = new Discord.ActionRowBuilder()
@@ -55,6 +56,8 @@ module.exports = {
             files: [imageAttachments[page]],
             components: [buttonsRow]
         });
+
+        loadingReaction.users.remove(client.user.id);
 
         /// MENSAJE ENVIADO, AHORA ACTUALIZACION DEL MENSAJE
 
