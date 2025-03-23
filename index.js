@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 const Discord = require("discord.js");
 
 const client = new Discord.Client({
@@ -19,6 +19,9 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 	if (process.env.EXPERIMENTAL)
 		if (msg.author.id !== "1069155273182285834" && msg.author.id !== "1296846133489963049") return;
 	
+	const channel = msg.guild.channels.cache.get(msg.channelId);
+	if (!(channel && msg.guild.members.me.permissionsIn(channel).has('SendMessages'))) return;
+
 	const cleanText = Prefix.cleanPrefix(msg, client.user.id);
 
 	if (!cleanText || msg.author.bot) return;
