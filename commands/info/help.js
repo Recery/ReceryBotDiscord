@@ -63,8 +63,9 @@ module.exports = {
         }
 
         embed.addFields({
-            name: " ",
-            value: "**" + messages[lang].changeLanguage.replace("{{prefix}}", serverPrefix) + "**\n" +
+            name: messages[lang].importantTitle,
+            value: "**" + messages[lang].helpWithCommand.replace("{{prefix}}", serverPrefix) + "**\n" +
+            "**" + messages[lang].changeLanguage.replace("{{prefix}}", serverPrefix) + "**\n" +
             "**" + messages[lang].prefixHere.replaceAll("{{prefix}}", serverPrefix) + "**"
         });
 
@@ -149,6 +150,8 @@ const messages = {
     es: {
         description: "Selecciona una categoría de abajo para ver sus comandos.\n" +
         "Puedes elegir entre `{{commands}}` comandos en total.",
+        importantTitle: ":warning: IMPORTANTE :warning:",
+        helpWithCommand: "Usa `{{prefix}}help <nombre del comando>` para ver información de un comando específico.",
         changeLanguage: "¿Intentas cambiar mi idioma? Usa `{{prefix}}setlang`.",
         prefixHere: "Mi prefijo aquí es `{{prefix}}`. Puedes cambiarlo con `{{prefix}}setprefix`.",
         categoryTitle: ":white_medium_small_square: Comandos de esta categoría",
@@ -157,6 +160,8 @@ const messages = {
     en: {
         description: "Select a category from below to see their commands.\n"+
         "You can choose between `{{commands}}` commands in total.",
+        importantTitle: ":warning: IMPORTANT :warning:",
+        helpWithCommand: "Use `{{prefix}}help <command name>` for information on a specific command.",
         changeLanguage: "Trying to change my language? Use `{{prefix}}setlang`.",
         prefixHere: "My prefix here is `{{prefix}}`. You can change it with `{{prefix}}setprefix`.",
         categoryTitle: ":white_medium_small_square: Commands of this category",
