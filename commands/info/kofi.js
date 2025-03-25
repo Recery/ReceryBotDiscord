@@ -19,7 +19,7 @@ module.exports = {
             .setURL("https://ko-fi.com/recery")
             .setTitle("<:GreenApple:1296171434246410380> " + messages[lang].embedTitle + " <:GreenApple:1296171434246410380>")
             .setImage("attachment://kofi.png")
-            .setFooter({text: "By: Recery", iconURL: "https://i.imgur.com/9T6Py5u.png"})
+            .setFooter({text: "By: Recery", iconURL: process.env.FILES_BASE_URL + "info/recery.png"})
         
         const row = new Discord.ActionRowBuilder()
             .addComponents(
@@ -31,7 +31,7 @@ module.exports = {
         
         msg.reply({
             embeds: [embed],
-            files: [new Discord.AttachmentBuilder("https://i.imgur.com/9T6Py5u.png", {name: "kofi.png"})],
+            files: [new Discord.AttachmentBuilder(process.env.FILES_BASE_URL + "info/recery.png", {name: "kofi.png"})],
             components: [row]
         });
     }

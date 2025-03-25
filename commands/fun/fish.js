@@ -113,7 +113,7 @@ module.exports = {
 const fishes = {
     corydora: {
         name: "Corydora paleatus",
-        image: "https://i.imgur.com/DjOfQIc.jpg",
+        image: process.env.FILES_BASE_URL + "fun/coryPaleatus.jpeg",
         es: "La corydora paleatus es un pequeño pez sudamericano. Se la pasa la mayor parte del tiempo en el fondo del acuario. " +
         "Prefiere vivir en cardúmenes de su misma especie, así que es recomendable que haya al menos 6 de ellas en el acuario. " +
         "Es un pez muy pacífico. Si bien la temperatura óptima para ellas es de unos 24C°, se adaptan fácilmente a temperaturas más bajas.",
@@ -123,7 +123,7 @@ const fishes = {
     },
     betta: {
         name: "Betta",
-        image: "https://i.imgur.com/0EuMnHF.jpg",
+        image: process.env.FILES_BASE_URL + "fun/betta.jpeg",
         es: "El pez betta se caracteriza por la agresividad que hay entre los machos de la especie. No es recomendable tener más de dos machos en el mismo acuario. " +
         "Si bien entre hembras son menos agresivas, también puede haber conflictos entre ellas. Un solo ejemplar puede vivir en un acuario pequeño. " +
         "Poseen un nado lento por el gran tamaño de sus colas. Al ser microdepredadores, prefieren una dieta mayormente carnívora.",
@@ -133,7 +133,7 @@ const fishes = {
     },
     goldfish: {
         name: "Goldfish",
-        image: "https://i.imgur.com/WYjI3y4.jpg",
+        image: process.env.FILES_BASE_URL + "fun/goldfish.jpeg",
         es: "El pez Goldfish, ¡La especie de Recery! ¿Y quizás la mía? Si tan solo no fuera una máquina... " +
         "Son los peces más populares para tener en acuarios. Junto a los peces koi, son los únicos peces que realmente se les puede llamar de agua fría. " +
         "Que sean de agua fría no significa que solo puedan vivir en agua fría; este término es usado para referirse a que pueden vivir en un amplio rango de temperaturas. " +

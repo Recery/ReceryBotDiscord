@@ -47,7 +47,7 @@ module.exports = {
             })
             .setFooter({
                 text: messages[lang].pageTitle.replace("{{page}}", (page + 1).toString()) + "/" + imageAttachments.length, 
-                iconURL: "https://i.imgur.com/igkTvXQ.png"
+                iconURL: process.env.FILES_BASE_URL + "slimeImages/almanac.png"
             })
             .setImage(`attachment://${imageAttachments[page].name}`);
 
@@ -93,7 +93,7 @@ module.exports = {
                 })
                 .setFooter({
                     text: messages[lang].pageTitle.replace("{{page}}", (page + 1).toString()) + "/" + imageAttachments.length,
-                    iconURL: "https://i.imgur.com/igkTvXQ.png"
+                    iconURL: process.env.FILES_BASE_URL + "slimeImages/almanac.png"
                 })
                 .setImage(`attachment://${imageAttachments[page].name}`);
 
@@ -122,8 +122,8 @@ let imagesLoaded = false;
 const slimeImages = new Map();
 loadSlimesImages();
 async function loadSlimesImages() {
-    slimeImages.set("background", await Canvas.loadImage("https://i.imgur.com/elinwYQ.png"));
-    slimeImages.set(0, await Canvas.loadImage("https://i.imgur.com/1EYomm9.png"));
+    slimeImages.set("background", await Canvas.loadImage(process.env.FILES_BASE_URL + "slimeImages/background.png"));
+    slimeImages.set(0, await Canvas.loadImage(process.env.FILES_BASE_URL + "slimeImages/lockedSlime.png"));
     for (const slime of slimesModule.slimes) {
         const image = await Canvas.loadImage(slime.image);
         slimeImages.set(slime.id, image);
