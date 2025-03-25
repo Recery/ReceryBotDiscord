@@ -13,7 +13,7 @@ module.exports = {
     },
     examples: ["{{prefix}}say hello world", "{{prefix}}say hola mundo"],
     async execute(client, msg, args) {
-        const lang = client.langs.get(msg.guild) || "es";
+        const lang = client.langs.get(msg.guildId) || "es";
         for (const arg of args) {
             if (arg.includes("@everyone") || arg.includes("@here") || arg.match(/<@&\d+>/)) {
                 msg.reply(messages[lang].notMention);
