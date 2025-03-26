@@ -117,8 +117,8 @@ let imagesLoaded = false;
 const slimeImages = new Map();
 loadSlimesImages();
 async function loadSlimesImages() {
-    slimeImages.set("background", await Canvas.loadImage("https://i.imgur.com/elinwYQ.png"));
-    slimeImages.set(0, await Canvas.loadImage("https://i.imgur.com/kbetYsZ.png"));
+    slimeImages.set("background", await Canvas.loadImage(process.env.FILES_BASE_URL + "slimeImages/background.png"));
+    slimeImages.set(0, await Canvas.loadImage(process.env.FILES_BASE_URL + "slimeImages/noSlime.png"));
     for (const slime of slimesModule.slimes) {
         const image = await Canvas.loadImage(slime.image);
         slimeImages.set(slime.id, image);

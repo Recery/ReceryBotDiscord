@@ -20,7 +20,7 @@ module.exports = {
             .setURL("https://discord.com/oauth2/authorize?client_id=1295826584153882744&permissions=1689934340028480&integration_type=0&scope=bot+applications.commands")
             .setTitle("<:GreenApple:1296171434246410380> " + messages[lang].embedTitle + " <:GreenApple:1296171434246410380>")
             .setImage("attachment://recerybot.png")
-            .setFooter({text: "By: Recery", iconURL: "https://i.imgur.com/9T6Py5u.png"})
+            .setFooter({text: "By: Recery", iconURL: "attachment://recery.png"});
         
         const row = new Discord.ActionRowBuilder()
             .addComponents(
@@ -32,7 +32,10 @@ module.exports = {
         
         msg.reply({
             embeds: [embed],
-            files: [new Discord.AttachmentBuilder(client.user.avatarURL(), {name: "recerybot.png"})],
+            files: [
+                new Discord.AttachmentBuilder(client.user.avatarURL(), {name: "recerybot.png"}),
+                new Discord.AttachmentBuilder(process.env.FILES_BASE_URL + "info/recery.png", {name: "recery.png"})
+            ],
             components: [row]
         })
     }

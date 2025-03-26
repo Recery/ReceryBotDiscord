@@ -38,9 +38,9 @@ module.exports = {
         }
 
         const gifLinks = [
-            "https://i.imgur.com/6HDUPsf.gif",
-            "https://i.imgur.com/SJQ4JET.gif",
-            "https://i.imgur.com/035XpNT.gif"
+            process.env.FILES_BASE_URL + "action/hug1.gif",
+            process.env.FILES_BASE_URL + "action/hug2.gif",
+            process.env.FILES_BASE_URL + "action/hug3.gif"
         ];
         const link = gifLinks[Math.floor(Math.random() * gifLinks.length)];
 

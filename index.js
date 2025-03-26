@@ -19,7 +19,7 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 	if (process.env.EXPERIMENTAL)
 		if (msg.author.id !== "1069155273182285834" && msg.author.id !== "1296846133489963049") return;
 
-	
+
 	const channel = msg.guild.channels.cache.get(msg.channelId);
 	if (!(channel && msg.guild.members.me.permissionsIn(channel).has('SendMessages'))) return;
 
@@ -43,7 +43,7 @@ client.on(Discord.Events.MessageCreate, (msg) => {
 
 client.login(process.env.TOKEN);
 
-client.once(Discord.Events.ClientReady, async (readyClient) => {
+client.once(Discord.Events.ClientReady, (readyClient) => {
 	require('./databases.js').initDbs();
 	Langs.loadLangs(client);
 

@@ -19,7 +19,7 @@ module.exports = {
             .setURL("https://recery.itch.io/slime-shoot")
             .setTitle("<:GreenApple:1296171434246410380> " + messages[lang].embedTitle + " <:GreenApple:1296171434246410380>")
             .setImage("attachment://slimeshoot.png")
-            .setFooter({text: "By: Recery", iconURL: "https://i.imgur.com/9T6Py5u.png"})
+            .setFooter({text: "By: Recery", iconURL: "attachment://recery.png"});
         
         const row = new Discord.ActionRowBuilder()
             .addComponents(
@@ -31,7 +31,10 @@ module.exports = {
         
         msg.reply({
             embeds: [embed],
-            files: [new Discord.AttachmentBuilder("https://i.imgur.com/11fJFMM.png", {name: "slimeshoot.png"})],
+            files: [
+                new Discord.AttachmentBuilder(process.env.FILES_BASE_URL + "info/slimeshoot.png", {name: "slimeshoot.png"}),
+                new Discord.AttachmentBuilder(process.env.FILES_BASE_URL + "info/recery.png", {name: "recery.png"})
+            ],
             components: [row]
         });
     }
@@ -44,6 +47,6 @@ const messages = {
     },
     en: {
         embedTitle: "Click here to download Slime Shoot!",
-        buttonLabel: "Click to descargar!"
+        buttonLabel: "Click to download!"
     }
 }

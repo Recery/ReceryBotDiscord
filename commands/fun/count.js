@@ -76,7 +76,7 @@ module.exports = {
     }
 }
 
-const db = new DB(process.env.FUN_DB_PATH);
+const db = new DB(process.env.DB_DIR + "fun.db");
 
 function getChannelCurrentCounting(serverId, channelId) {
     const row = db.prepare("SELECT number FROM count WHERE serverId = ? AND channelId = ?").get(serverId, channelId);

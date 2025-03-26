@@ -37,7 +37,10 @@ module.exports = {
             return;
         }
 
-        const gifLinks = ["https://i.imgur.com/j3tuVex.gif", "https://i.imgur.com/nYveugE.gif"];
+        const gifLinks = [
+            process.env.FILES_BASE_URL + "action/bonk1.gif",
+            process.env.FILES_BASE_URL + "action/bonk2.gif"
+        ];
         const link = gifLinks[Math.floor(Math.random() * gifLinks.length)];
 
         const embed = new Discord.EmbedBuilder()

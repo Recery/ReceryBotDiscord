@@ -13,7 +13,7 @@ const slimes = [
         id: 1,
         rarity: 1,
         appleGeneration: 1,
-        image: "https://i.imgur.com/t46q0yd.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/greenSlime.png",
         banner: banners.REGULAR
     },
     {
@@ -25,7 +25,7 @@ const slimes = [
         id: 2,
         rarity: 1,
         appleGeneration: 1,
-        image: "https://i.imgur.com/5YM3JOo.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/yellowSlime.png",
         banner: banners.REGULAR
     },
     {
@@ -37,7 +37,7 @@ const slimes = [
         id: 3,
         rarity: 1,
         appleGeneration: 2,
-        image: "https://i.imgur.com/PMLd3Bn.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/whiteSlime.png",
         banner: banners.REGULAR
     },
     {
@@ -49,7 +49,7 @@ const slimes = [
         id: 4,
         rarity: 2,
         appleGeneration: 4,
-        image: "https://i.imgur.com/XTYTUfW.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/creamySlime.png",
         banner: banners.REGULAR
     },
     {
@@ -61,7 +61,7 @@ const slimes = [
         id: 5,
         rarity: 2,
         appleGeneration: 6,
-        image: "https://i.imgur.com/hpnrHFS.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/pooSlime.png",
         banner: banners.REGULAR
     },
     {
@@ -73,7 +73,7 @@ const slimes = [
         id: 6,
         rarity: 3,
         appleGeneration: 9,
-        image: "https://i.imgur.com/FpJ089n.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/cosmicSlime.png",
         banner: banners.REGULAR
     },
     {
@@ -85,7 +85,7 @@ const slimes = [
         id: 7,
         rarity: 4,
         appleGeneration: 15,
-        image: "https://i.imgur.com/kJqeeNq.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/goldfishSlime.png",
         banner: banners.REGULAR
     },
     {
@@ -97,7 +97,7 @@ const slimes = [
         id: 8,
         rarity: 3,
         appleGeneration: 8,
-        image: "https://i.imgur.com/RLw5cmu.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/leadSlime.png",
         banner: banners.REGULAR
     },
     {
@@ -109,7 +109,7 @@ const slimes = [
         id: 9,
         rarity: 1,
         appleGeneration: 2,
-        image: "https://i.imgur.com/O4ff3Yh.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/blueSlime.png",
         banner: banners.REGULAR
     },
     {
@@ -121,7 +121,7 @@ const slimes = [
         id: 10,
         rarity: 2,
         appleGeneration: 5,
-        image: "https://i.imgur.com/kH4fzHe.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/copperSlime.png",
         banner: banners.REGULAR
     },
     {
@@ -133,7 +133,7 @@ const slimes = [
         id: 11,
         rarity: 1,
         appleGeneration: 3,
-        image: "https://i.imgur.com/2Hi1Jii.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/pinkySlime.png",
         banner: banners.REGULAR
     },
     {
@@ -145,7 +145,7 @@ const slimes = [
         id: 12,
         rarity: 1,
         appleGeneration: 2,
-        image: "https://i.imgur.com/KygZLcb.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/graySlime.png",
         banner: banners.REGULAR
     },
     {
@@ -157,7 +157,7 @@ const slimes = [
         id: 13,
         rarity: 4,
         appleGeneration: 15,
-        image: "https://i.imgur.com/6M4ApPW.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/redSlime.png",
         banner: banners.REGULAR
     },
     {
@@ -169,7 +169,7 @@ const slimes = [
         id: 14,
         rarity: 3,
         appleGeneration: 8,
-        image: "https://i.imgur.com/scKycb9.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/rgbSlime.png",
         banner: banners.REGULAR
     },
     {
@@ -181,7 +181,7 @@ const slimes = [
         id: 15,
         rarity: 4,
         appleGeneration: 15,
-        image: "https://i.imgur.com/KG8NkZR.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/tetoSlime.png",
         banner: banners.VOCALOID
     },
     {
@@ -193,7 +193,7 @@ const slimes = [
         id: 16,
         rarity: 4,
         appleGeneration: 15,
-        image: "https://i.imgur.com/GxKJjvJ.png",
+        image: process.env.FILES_BASE_URL + "slimeImages/appleSlime.png",
         banner: banners.REGULAR
     }
 ];

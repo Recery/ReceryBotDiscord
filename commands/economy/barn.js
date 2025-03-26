@@ -372,6 +372,7 @@ module.exports = {
         let page = 0; // Página 0 = página 1 para el usuario
 
         const images = await getImagesAttachment(eco.getBarnSlimes(userID), lang);
+        const almanacAttachment = new Discord.AttachmentBuilder(process.env.FILES_BASE_URL + "slimeImages/almanac.png", {name: "almanac.png"});
         const userBarnApples = eco.getBarnApples(userID);
 
         const embed = new Discord.EmbedBuilder()
@@ -388,7 +389,7 @@ module.exports = {
             .setImage(`attachment://${images[page].name}`)
             .setFooter({
                     text: `${messages[lang].pageTitle} ${page+1}/${images.length}`,
-                    iconURL: "https://i.imgur.com/igkTvXQ.png"
+                    iconURL: "attachment://almanac.png"
             });
 
         const leftButton = new Discord.ButtonBuilder()
@@ -417,7 +418,10 @@ module.exports = {
 
         const sentMessage = await msg.reply({
             embeds: [embed],
-            files: [images[page]],
+            files: [
+                images[page],
+                almanacAttachment
+            ],
             components: [buttonsRow]
         });
 
@@ -484,13 +488,16 @@ module.exports = {
 
             embed.setFooter({
                     text: `${messages[lang].pageTitle} ${page+1}/${images.length}`,
-                    iconURL: "https://i.imgur.com/igkTvXQ.png"
+                    iconURL: "attachment://almanac.png"
                 });
             embed.setImage(`attachment://${images[page].name}`);
             
             interaction.update({
                 embeds: [embed],
-                files: [images[page]],
+                files: [
+                    images[page],
+                    almanacAttachment
+                ],
                 components: [newButtonsRow]
             })
             
@@ -537,7 +544,7 @@ let imagesLoaded = false;
 const slimeImages = new Map();
 loadSlimesImages();
 async function loadSlimesImages() {
-    slimeImages.set("background", await Canvas.loadImage("https://i.imgur.com/elinwYQ.png"));
+    slimeImages.set("background", await Canvas.loadImage(process.env.FILES_BASE_URL + "slimeImages/background.png"));
     for (const slime of slimesModule.slimes) {
         const image = await Canvas.loadImage(slime.image);
         slimeImages.set(slime.id, image);
