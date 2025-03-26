@@ -149,7 +149,7 @@ function getCommandsByCategory(category, client) {
 
 const messages = {
     es: {
-        description: "Selecciona una categoría de abajo para ver sus comandos.\n" +
+        description: "Elige una categoría de abajo para ver sus comandos.\n" +
         "Puedes elegir entre `{{commands}}` comandos en total.",
         importantTitle: ":warning: IMPORTANTE :warning:",
         helpWithCommand: "Usa `{{prefix}}help <nombre del comando>` para ver información de un comando específico.",
@@ -159,7 +159,7 @@ const messages = {
         selectionPlaceholder: "Elige una categoría",
     },
     en: {
-        description: "Select a category from below to see their commands.\n"+
+        description: "Choose a category from below to see their commands.\n"+
         "You can choose between `{{commands}}` commands in total.",
         importantTitle: ":warning: IMPORTANT :warning:",
         helpWithCommand: "Use `{{prefix}}help <command name>` for information on a specific command.",

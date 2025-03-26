@@ -38,3 +38,4 @@ node_modules/
 # Archivos y directorios varios 
 ServerModule/
 commands/action/stare.js
+commands/action/eat.js

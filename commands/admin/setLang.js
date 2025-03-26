@@ -1,20 +1,41 @@
 const Langs = require("../../langsLoader.js");
 
-const availableLangs = ["es", "en"];
+// La key es como se llama "oficialmente" al idioma
+// El array dentro de la propiedad son los posibles alias para referirse al idioma
+const availableLangs = {
+    es: ["es", "español", "spanish"],
+    en: ["en", "ingles", "inglés", "english"]
+}
+const keys = Object.keys(availableLangs);
+
+const messages = {
+    es: {
+        noPermissions: "No tienes los permisos necesarios para cambiarme el idioma en este servidor.",
+        invalidLang: "Debes ingresar un idioma válido.",
+        success: "El idioma fue cambiado a `{{lang}}` con éxito.",
+        langs: "Idiomas disponibles: " + "`" + keys.join("` `").trim() + "`"
+    },
+    en: {
+        noPermissions: "You don't have enough permissions to change my language in this server.",
+        invalidLang: "You must enter a valid language.",
+        success: "Language has been changed to `{{lang}}` succesfully.",
+        langs: "Available langs: " + "`" + keys.join("` `").trim() + "`"
+    }
+}
+
 module.exports = {
     name: "setlang",
     category: "administration",
     description: {
-        es: "Cambia el idioma del servidor.\nIdiomas disponibles: " + "`" + availableLangs.join("` `").trim() + "`",
-        en: "Changes server language.\nAvailables langs: " + "`" + availableLangs.join("` `").trim() + "`"
+        es: "Cambia el idioma del servidor.\n" + messages["es"].langs,
+        en: "Changes server language.\n" + messages["en"].langs
     },
     examples: ["{{prefix}}setlang es", "{{prefix}}setlang en"],
     syntax: {
         es: "{{prefix}}setlang <idioma>",
         en: "{{prefix}}setlang <language>"
     },
-    execute(client, msg, args)
-    {
+    execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
 
         if (!msg.member.permissions.has("Administrator")) {
@@ -23,32 +44,27 @@ module.exports = {
         }
 
         if (!args.length > 0) {
-            msg.reply(messages[lang].invalidLang);
-            return;
-        }
-        else if (!availableLangs.includes(args[0])) {
-            msg.reply(messages[lang].invalidLang);
+            msg.reply(`${messages[lang].invalidLang}\n${messages[lang].langs}`);
             return;
         }
 
-        const serverid = msg.guildId;
-        const new_lang = args[0];
+        let newLang;
+        for (const key of keys) {
+            if (availableLangs[key].includes(args[0])) {
+                newLang = key;
+                break;
+            }
+        }
 
-        Langs.setLang(client, serverid, new_lang);
+        if (!newLang) {
+            msg.reply(`${messages[lang].invalidLang}\n${messages[lang].langs}`);
+            return;
+        }
 
-        msg.reply(messages[new_lang].success.replace("{{lang}}", new_lang));
-    }
-}
+        const serverId = msg.guildId;
 
-const messages = {
-    es: {
-        noPermissions: "No tienes los permisos necesarios para cambiarme el idioma en este servidor.",
-        invalidLang: "Debes ingresar un idioma válido.",
-        success: "El idioma fue cambiado a `{{lang}}` con éxito."
-    },
-    en: {
-        noPermissions: "You don't have enough permissions to change my language in this server.",
-        invalidLang: "You must enter a valid language.",
-        success: "Language has been changed to `{{lang}}` succesfully."
+        Langs.setLang(client, serverId, newLang);
+
+        msg.reply(messages[newLang].success.replace("{{lang}}", newLang));
     }
 }
