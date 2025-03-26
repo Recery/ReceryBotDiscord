@@ -18,8 +18,8 @@ module.exports = {
             .setColor('Random')
             .setURL("https://x.com/Recery_")
             .setTitle("<:GreenApple:1296171434246410380> " + messages[lang].embedTitle + " <:GreenApple:1296171434246410380>")
-            .setImage("attachment://twitter.png")
-            .setFooter({text: "By: Recery", iconURL: process.env.FILES_BASE_URL + "info/recery.png"})
+            .setImage("attachment://recery.png")
+            .setFooter({text: "By: Recery", iconURL: "attachment://recery.png"});
         
         const row = new Discord.ActionRowBuilder()
             .addComponents(
@@ -31,7 +31,9 @@ module.exports = {
         
         msg.reply({
             embeds: [embed],
-            files: [new Discord.AttachmentBuilder(process.env.FILES_BASE_URL + "info/recery.png", {name: "twitter.png"})],
+            files: [
+                new Discord.AttachmentBuilder(process.env.FILES_BASE_URL + "info/recery.png", {name: "recery.png"}),
+            ],
             components: [row]
         });
     }

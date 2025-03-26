@@ -40,7 +40,7 @@ module.exports = {
             .setAuthor({name: "Recery Bot", iconURL: client.user.avatarURL()})
             .setColor('Random')
             .setDescription(messages[lang].description.replace("{{commands}}", client.commands.size.toString()))
-            .setFooter({text: "By: Recery", iconURL: process.env.FILES_BASE_URL + "info/recery.png"});
+            .setFooter({text: "By: Recery", iconURL: "attachment://recery.png"});
         
         const selection = new Discord.StringSelectMenuBuilder()
             .setCustomId("Selection")
@@ -82,6 +82,7 @@ module.exports = {
             
         const sentMessage = await msg.reply({
             embeds: [embed],
+            files: [new Discord.AttachmentBuilder(process.env.FILES_BASE_URL + "info/recery.png", {name: "recery.png"})],
             components: [row1, row2]
         });
 
@@ -108,7 +109,7 @@ module.exports = {
                 .setAuthor({name: "Recery Bot", iconURL: client.user.avatarURL()})
                 .setColor("Blue")
                 .setTitle(categoriesModule.categoriesEmojis[category] + " " + categoriesModule.categories[lang][category])
-                .setFooter({text: "By: Recery", iconURL: process.env.FILES_BASE_URL + "info/recery.png"});
+                .setFooter({text: "By: Recery", iconURL: "attachment://recery.png"});
             
             const commands = getCommandsByCategory(category, client);
 

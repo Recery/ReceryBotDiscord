@@ -26,6 +26,7 @@ module.exports = {
 
         let page = 0; // Página 0 = página 1 para el usuario
         const images = await getImagesAttachment(slimesInCorral, lang);
+        const almanacAttachment = new Discord.AttachmentBuilder(process.env.FILES_BASE_URL + "slimeImages/almanac.png", {name: "almanac.png"});
 
         let accumulatedApples = 0;
         for (const pair of slimesInCorral)
@@ -47,7 +48,7 @@ module.exports = {
             .setImage(`attachment://${images[page].name}`)
             .setFooter({
                 text: `${messages[lang].pageTitle} ${page+1}/${images.length}`,
-                iconURL: process.env.FILES_BASE_URL + "slimeImages/almanac.png"
+                iconURL: "attachment://almanac.png"
             });
 
         const leftButton = new Discord.ButtonBuilder() 
@@ -69,7 +70,10 @@ module.exports = {
         
         const sentMessage = await msg.reply({
             embeds: [embed],
-            files: [images[page]],
+            files: [
+                images[page],
+                almanacAttachment
+            ],
             components: [buttonsRow]
         });
 
@@ -88,10 +92,10 @@ module.exports = {
 
             leftButton.setDisabled(page <= 0);
             rightButton.setDisabled(page >= images.length - 1);
-
+            
             embed.setFooter({
                 text: `${messages[lang].pageTitle} ${page+1}/${images.length}`,
-                iconURL: process.env.FILES_BASE_URL + "slimeImages/almanac.png"
+                iconURL: "attachment://almanac.png"
             });
             embed.setImage(`attachment://${images[page].name}`);
 
@@ -103,7 +107,10 @@ module.exports = {
             
             interaction.update({
                 embeds: [embed],
-                files: [images[page]],
+                files: [
+                    images[page],
+                    almanacAttachment
+                ],
                 components: [newButtonsRow]
             });
 

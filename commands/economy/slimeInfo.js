@@ -49,11 +49,12 @@ module.exports = {
             .setTitle(slimeObj.displayName[lang])
             .setColor("#12bcff")
             .setDescription(description)
-            .setThumbnail(slimeObj.image)
+            .setThumbnail("attachment://slime.png")
             .setFooter({text: msg.author.displayName, iconURL: msg.author.avatarURL()});
 
         msg.reply({
-            embeds: [embed]
+            embeds: [embed],
+            files: [new Discord.AttachmentBuilder(slimeObj.image, {name: "slime.png"})]
         });
     }
 }
