@@ -23,6 +23,15 @@ function initActionDb() {
             PRIMARY KEY("userId")
         )
     `).run();
+
+    actionDb.prepare(`
+        CREATE TABLE IF NOT EXISTS eat (
+            firstUserId TEXT,
+            secondUserId TEXT,
+            quantity INTEGER,
+            PRIMARY KEY("firstUserId", "secondUserId")
+        )
+    `).run();
 }
 
 function initAdminDb() {

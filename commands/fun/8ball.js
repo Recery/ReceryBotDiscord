@@ -9,8 +9,7 @@ module.exports = {
         es: "{{prefix}}8ball <pregunta>",
         en: "{{prefix}}8ball <question>"
     },
-    execute (client, msg, args) 
-    {
+    execute (client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
 
         if (!args.length > 0) {
@@ -35,13 +34,15 @@ const possibleReplies = {
         reply2: "Eso jamás.",
         reply3: "A ver, decímelo de nuevo.",
         reply4: "Mmm... Creo que no.",
-        reply5: "Preguntale a mi creador, no me molestes."
+        reply5: "Preguntale a mi creador, no me molestes.",
+        reply6: "Es posible, no lo descarto."
     },
     en: {
         reply1: "Yes, obviously.",
         reply2: "Never.",
         reply3: "Can you repeat please?",
         reply4: "Hmm... I think no.",
-        reply5: "Ask my creator, don't annoy me."
+        reply5: "Ask my creator, don't annoy me.",
+        reply6: "It can be possible."
     }
 }

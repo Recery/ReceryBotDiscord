@@ -12,8 +12,7 @@ module.exports = {
         es: "{{prefix}}setprefix <prefijo>",
         en: "{{prefix}}setprefix <prefix>"
     },
-    execute(client, msg, args)
-    {
+    execute(client, msg, args) {
         if (!msg.member.permissions.has("Administrator")) {
             msg.reply(messages[lang].noPermissions);
             return;
