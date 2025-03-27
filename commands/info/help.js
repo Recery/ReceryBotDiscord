@@ -210,14 +210,15 @@ function sendCommandDescription(client, msg, lang, serverPrefix, command, subcom
         );
     }
 
-    if (command.syntax) {
-        const field = {
-            name: cmdDescriptionMsgs[lang].syntaxField,
-            value: "`" + command.syntax[lang].replace("{{prefix}}", serverPrefix) + "`\n"
-        };
-        field.value += "__" + cmdDescriptionMsgs[lang].syntaxFieldReference + "__";
-        embed.addFields(field);
-    }
+    // PARTE DE SINTAXIS
+    // No hay ninguna verificacion ya que esta parte debe ir SIEMPRE
+    const field = {
+        name: cmdDescriptionMsgs[lang].syntaxField,
+        value: "`" + command.syntax[lang].replace("{{prefix}}", serverPrefix) + "`\n"
+    };
+    field.value += "__" + cmdDescriptionMsgs[lang].syntaxFieldReference + "__";
+    embed.addFields(field);
+    // --------
 
     if (command.examples) {
         let examples = "";
