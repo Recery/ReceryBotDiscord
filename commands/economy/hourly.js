@@ -1,10 +1,8 @@
 const DB = require("better-sqlite3");
-const Topgg = require("@top-gg/sdk")
-const topgg = new Topgg.Api(process.env.TOP_GG_TOKEN);
+//const Topgg = require("@top-gg/sdk")
+//const topgg = new Topgg.Api(process.env.TOP_GG_TOKEN);
 const eco = require("../../economy/economyModule.js");
-const timeModule = require("../../economy/timeModule.js");
-
-const users = new Map();    
+const timeModule = require("../../economy/timeModule.js"); 
 
 module.exports = {
     name: "hourly",
@@ -32,8 +30,8 @@ module.exports = {
             
             msg.reply(
                 messages[lang].notClaimable
-                .replace("{{time}}", timeLeft.time.toString())
-                .replace("{{unit}}", timeModule.units[lang][timeLeft.unit])
+                    .replace("{{time}}", timeLeft.time.toString())
+                    .replace("{{unit}}", timeModule.units[lang][timeLeft.unit])
             );
         }
         else {
@@ -41,6 +39,7 @@ module.exports = {
 
             let text = "";
             let newApples = eco.getApples(userId);
+            /*
             try {
                 if (await topgg.hasVoted(userId)) {
                     newApples += 60;
@@ -59,6 +58,11 @@ module.exports = {
                 text = messages[lang].claimable + "\n" +
                     messages[lang].haveNow.replace("{{apples}}", newApples.toString());
             }
+            */
+
+            newApples += 50;
+            text = messages[lang].claimable + "\n" +
+                messages[lang].haveNow.replace("{{apples}}", newApples.toString());
 
             eco.setApples(userId, newApples);
 
