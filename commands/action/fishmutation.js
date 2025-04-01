@@ -87,7 +87,7 @@ const messages = {
         selfFish: "**{{senderName}}** se convirtió a si mismo en un pez.\n" +
         "No te juzgo, yo también quisiera ser uno.",
         fishTurned: "¡**{{senderName}}** convirtió a **{{targetName}}** en un pez!\n" +
-        "**{{targetName}}** fue convertido a un pez **{{quantity}}** veces."
+        "**{{targetName}}** fue convertid@ a un pez **{{quantity}}** veces."
     },
     en: {
         notMention: "You must mention someone to turn into a fish.",

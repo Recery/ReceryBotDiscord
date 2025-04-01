@@ -149,6 +149,15 @@ function initEconomyDb() {
             PRIMARY KEY("userId")
         )
     `).run();
+
+    // Tabla leaderboards
+    economyDb.prepare(`
+        CREATE TABLE IF NOT EXISTS leaderboardsAllows (
+	        userId TEXT,
+	        allowed INTEGER,
+	        PRIMARY KEY("userId")
+        )
+    `).run();
 }
 
 function initFunDb() {
