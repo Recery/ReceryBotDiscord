@@ -45,7 +45,7 @@ client.login(process.env.TOKEN);
 client.once(Discord.Events.ClientReady, (readyClient) => {
 	require('./databases.js').initDbs();
 	Langs.loadLangs(client);
-
+	
 	client.user.setPresence({
 		status: "idle",
 		activities: [{

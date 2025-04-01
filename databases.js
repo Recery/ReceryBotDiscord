@@ -24,12 +24,31 @@ function initActionDb() {
         )
     `).run();
 
+    // Tabla eat
     actionDb.prepare(`
         CREATE TABLE IF NOT EXISTS eat (
             firstUserId TEXT,
             secondUserId TEXT,
             quantity INTEGER,
             PRIMARY KEY("firstUserId", "secondUserId")
+        )
+    `).run();
+
+    // Tabla fishmutations
+    actionDb.prepare(`
+        CREATE TABLE IF NOT EXISTS fishmutations (
+            userId TEXT,
+            quantity INTEGER,
+            PRIMARY KEY("userId")
+        )
+    `).run();
+
+    // Tabla hydrate
+    actionDb.prepare(`
+        CREATE TABLE IF NOT EXISTS hydrate (
+            userId TEXT,
+            quantity INTEGER,
+            PRIMARY KEY("userId")
         )
     `).run();
 }
@@ -128,6 +147,15 @@ function initEconomyDb() {
             userId TEXT,
             date INTEGER,
             PRIMARY KEY("userId")
+        )
+    `).run();
+
+    // Tabla leaderboards
+    economyDb.prepare(`
+        CREATE TABLE IF NOT EXISTS leaderboardsAllows (
+	        userId TEXT,
+	        allowed INTEGER,
+	        PRIMARY KEY("userId")
         )
     `).run();
 }
