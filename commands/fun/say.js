@@ -14,6 +14,12 @@ module.exports = {
     examples: ["{{prefix}}say hello world", "{{prefix}}say hola mundo"],
     async execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
+
+        if (args.length < 1) {
+            msg.reply(messages[lang].emptyMessage)
+            return;
+        }
+
         for (const arg of args) {
             if (arg.includes("@everyone") || arg.includes("@here") || arg.match(/<@&\d+>/)) {
                 msg.reply(messages[lang].notMention);
@@ -44,9 +50,11 @@ module.exports = {
 
 const messages = {
     es: {
-        notMention: "No puedo mencionar roles. Tampoco everyone ni here."  
+        emptyMessage: "No puedo decir un mensaje vacío.",
+        notMention: "No puedo mencionar roles. Tampoco everyone ni here."
     },
     en: {
+        emptyMessage: "I can't send an empty message.",
         notMention: "I'm not allowed to mention roles. Neither can everyone or here."
     }
 }

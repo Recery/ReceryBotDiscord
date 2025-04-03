@@ -66,7 +66,8 @@ module.exports = {
             name: messages[lang].importantTitle,
             value: "**" + messages[lang].helpWithCommand.replace("{{prefix}}", serverPrefix) + "**\n" +
             "**" + messages[lang].changeLanguage.replace("{{prefix}}", serverPrefix) + "**\n" +
-            "**" + messages[lang].prefixHere.replaceAll("{{prefix}}", serverPrefix) + "**"
+            "**" + messages[lang].prefixHere.replaceAll("{{prefix}}", serverPrefix) + "**\n" +
+            "**" + messages[lang].joinServer + "**"
         });
 
         const row1 = new Discord.ActionRowBuilder()
@@ -155,6 +156,7 @@ const messages = {
         helpWithCommand: "Usa `{{prefix}}help <nombre del comando>` para ver información de un comando específico.",
         changeLanguage: "¿Intentas cambiar mi idioma? Usa `{{prefix}}setlang`.",
         prefixHere: "Mi prefijo aquí es `{{prefix}}`. Puedes cambiarlo con `{{prefix}}setprefix`.",
+        joinServer: "¡Unete a mi [servidor de soporte](https://discord.gg/npqD8GGW)!",
         categoryTitle: ":white_medium_small_square: Comandos de esta categoría",
         selectionPlaceholder: "Elige una categoría",
     },
@@ -165,6 +167,7 @@ const messages = {
         helpWithCommand: "Use `{{prefix}}help <command name>` for information on a specific command.",
         changeLanguage: "Trying to change my language? Use `{{prefix}}setlang`.",
         prefixHere: "My prefix here is `{{prefix}}`. You can change it with `{{prefix}}setprefix`.",
+        joinServer: "Join my [support server](https://discord.gg/npqD8GGW)!",
         categoryTitle: ":white_medium_small_square: Commands of this category",
         selectionPlaceholder: "Choose a category",
     }
