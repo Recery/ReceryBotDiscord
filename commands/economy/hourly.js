@@ -26,7 +26,7 @@ module.exports = {
         const lastClaim = getDate(userId);
 
         if (now - lastClaim < timeToClaim) {
-            const timeLeft = timeModule.getTimeMinimumExpressedUnit(eco.getCycleTimeLeft(userId));
+            const timeLeft = timeModule.getTimeMinimumExpressedUnit(lastClaim + timeToClaim - now);
             
             msg.reply(
                 messages[lang].notClaimable
