@@ -17,7 +17,7 @@ module.exports = {
 
         const embed = new Discord.EmbedBuilder()
             .setColor('Random')
-            .setURL("https://discord.gg/npqD8GGW")
+            .setURL("https://discord.gg/8QFAAHVYGk")
             .setTitle("<:GreenApple:1296171434246410380> " + messages[lang].title +" <:GreenApple:1296171434246410380>")
             .setImage("attachment://recerypond.png")
             .setFooter({text: "By: Recery", iconURL: "attachment://recery.png"});
@@ -27,7 +27,7 @@ module.exports = {
                 new Discord.ButtonBuilder()
                     .setLabel(messages[lang].buttonLabel)
                     .setStyle('Link')
-                    .setURL("https://discord.gg/npqD8GGW")
+                    .setURL("https://discord.gg/8QFAAHVYGk")
             );
 
         msg.reply({
@@ -37,7 +37,7 @@ module.exports = {
                 new Discord.AttachmentBuilder(process.env.FILES_BASE_URL + "info/recery.png", {name: "recery.png"})
             ],
             components: [row]
-        })
+        });
     }
 }
 
