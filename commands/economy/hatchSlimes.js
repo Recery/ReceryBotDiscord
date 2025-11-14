@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const Canvas = require("canvas"); 
 const eco = require("../../economy/economyModule.js");
 const slimesModule = require("../../economy/slimesModule.js");
+const bannersModule = require("../../economy/bannersModule.js");
 
 module.exports = {
     name: "hatchslimes",
@@ -22,7 +23,7 @@ module.exports = {
     },
     async execute(client, msg, args) {
         const lang = client.langs.get(msg.guildId) || "es";
-        const userID = msg.author.id;
+        const userId = msg.author.id;
 
         let slimesToHatch = 1;
 
@@ -38,9 +39,13 @@ module.exports = {
             }
         }
 
-        const applesToSpend = slimesToHatch * 10;
-        const userApples = eco.getApples(userID);
-        
+        const banner = bannersModule.getPlayerBanner(userId);
+
+        const applesToSpend = banner.name === "Regular" 
+        ? slimesToHatch * 10
+        : slimesToHatch * 15; // si no es el banner regular, eclosionar un slime sale 15 manzanas en lugar de 10
+
+        const userApples = eco.getApples(userId);
         if (userApples < applesToSpend) {
             msg.reply(messages[lang].needMoreApples.replace("{{apples}}", applesToSpend.toString()));
             return;
@@ -51,22 +56,23 @@ module.exports = {
             msg.reply(messages[lang].tooMuchHatches);
             return;
         }
-        
-        eco.setApples(userID, userApples - applesToSpend);
+
+        eco.setApples(userId, userApples - applesToSpend);
 
         let hatchedSlimes = [];
         for (let i = 0; i < slimesToHatch; i++) {
-            const slime = chooseSlime();
+            const slime = chooseSlime(banner);
 
             hatchedSlimes.push(slime);
-            eco.addSlimeToCorral(userID, slime.id);
-            eco.addSlimeToTotal(userID, slime.id);
+            eco.addSlimeToCorral(userId, slime.id);
+            eco.addSlimeToTotal(userId, slime.id);
         }
 
         const embed = new Discord.EmbedBuilder()
             .setTitle(`**${messages[lang].slimeObtention}**`)
             .setColor("#12bcff")
-            .setImage("attachment://hatching.png");
+            .setImage("attachment://hatching.png")
+            .setFooter({ text: "Banner: " + banner.name})
 
         const loadingReaction = await msg.react("<a:Loading:1334664535914844253>");
         const imageAttachment = await getImageAttachment(hatchedSlimes, lang);
@@ -80,7 +86,7 @@ module.exports = {
     }
 }
 
-function chooseSlime() {
+function chooseSlime(banner /* objeto del banner, no el nombre en string */) {
     const commonChance = 90;
     const rareChance = 25;
     const epicChance = 5;
@@ -100,15 +106,29 @@ function chooseSlime() {
     else
         rarity = 4;
     
-    const possibleSlimes = slimesModule.getSlimesByRarity(rarity);
-    const slimesToRemove = [];
-    for (const slime of possibleSlimes) {
-        if (slime.banner !== slimesModule.banners.REGULAR)
-            slimesToRemove.push(slime);
+    let possibleSlimes = [];
+    const raritySlimes = slimesModule.getSlimesByRarity(rarity);
+    for (const id of banner.slimesIds) {
+        const slime = slimesModule.getSlime(id);
+        if (raritySlimes.includes(slime))
+            possibleSlimes.push(slime);
     }
 
-    for (const slime of slimesToRemove)
-        possibleSlimes.splice(possibleSlimes.indexOf(slime), 1);
+    // si el banner no es el regular, hay que hacer un 50/50
+    // es decir 50% de que salga un slime del banner regular, y 50% de que salga uno del banner seleccionado
+    if (banner.name !== "Regular") {
+        const chance = Math.random() < 0.5;
+
+        const temp = [];
+        for (const slime of possibleSlimes)
+            if (slime.regularBanner === chance)
+                temp.push(slime);
+        
+        possibleSlimes = temp.slice();
+    }
+
+    if (possibleSlimes.length === 0)
+        return slimesModule.getSlime(1);
 
     return possibleSlimes[Math.floor(Math.random() * possibleSlimes.length)];
 }

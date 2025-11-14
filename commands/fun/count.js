@@ -61,7 +61,6 @@ module.exports = {
             const currentNumber = getChannelCurrentCounting(serverId, channelId);
             const newNumber = Number(msg.content);
             if (isNaN(newNumber)) return;
-            console.log(newNumber);
         
             if (newNumber === currentNumber + 1) {
                 msg.react("✅");

@@ -30,10 +30,17 @@
 *.exe
 *.out
 *.app
-.env
 
+.env
 node_modules/
 
-
-# Archivos y directorios varios 
+# El modulo del servidor tiene repo separado
+# Pero se usa adentro del Recery Bot 
 server-module-recery-bot/
+
+# En tmp se guardan archivos que se crean y se borran al momento
+# No interesa hacer commits con esos archivos, pero si mantener tmp
+# Dejamos un archivo vacío para poder mantener la carpeta en el repo
+tmp/*
+!tmp/.keep
+

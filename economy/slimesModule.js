@@ -1,8 +1,3 @@
-const banners = Object.freeze({
-    REGULAR: Symbol("REGULAR"),
-    VOCALOID: Symbol("VOCALOID")
-});
-
 const slimes = [
     {
         name: "greenslime",
@@ -14,7 +9,7 @@ const slimes = [
         rarity: 1,
         appleGeneration: 1,
         image: process.env.FILES_BASE_URL + "slimeImages/greenSlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "yellowslime",
@@ -26,7 +21,7 @@ const slimes = [
         rarity: 1,
         appleGeneration: 1,
         image: process.env.FILES_BASE_URL + "slimeImages/yellowSlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "whiteslime",
@@ -38,7 +33,7 @@ const slimes = [
         rarity: 1,
         appleGeneration: 2,
         image: process.env.FILES_BASE_URL + "slimeImages/whiteSlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "creamyslime",
@@ -50,7 +45,7 @@ const slimes = [
         rarity: 2,
         appleGeneration: 4,
         image: process.env.FILES_BASE_URL + "slimeImages/creamySlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "pooslime",
@@ -62,7 +57,7 @@ const slimes = [
         rarity: 2,
         appleGeneration: 6,
         image: process.env.FILES_BASE_URL + "slimeImages/pooSlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "cosmicslime",
@@ -74,7 +69,7 @@ const slimes = [
         rarity: 3,
         appleGeneration: 9,
         image: process.env.FILES_BASE_URL + "slimeImages/cosmicSlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "goldfishslime",
@@ -86,7 +81,7 @@ const slimes = [
         rarity: 4,
         appleGeneration: 15,
         image: process.env.FILES_BASE_URL + "slimeImages/goldfishSlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "leadslime",
@@ -98,7 +93,7 @@ const slimes = [
         rarity: 3,
         appleGeneration: 8,
         image: process.env.FILES_BASE_URL + "slimeImages/leadSlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "blueslime",
@@ -110,7 +105,7 @@ const slimes = [
         rarity: 1,
         appleGeneration: 2,
         image: process.env.FILES_BASE_URL + "slimeImages/blueSlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "copperslime",
@@ -122,7 +117,7 @@ const slimes = [
         rarity: 2,
         appleGeneration: 5,
         image: process.env.FILES_BASE_URL + "slimeImages/copperSlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "pinkyslime",
@@ -134,7 +129,7 @@ const slimes = [
         rarity: 1,
         appleGeneration: 3,
         image: process.env.FILES_BASE_URL + "slimeImages/pinkySlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "grayslime",
@@ -146,7 +141,7 @@ const slimes = [
         rarity: 1,
         appleGeneration: 2,
         image: process.env.FILES_BASE_URL + "slimeImages/graySlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "redslime",
@@ -158,7 +153,7 @@ const slimes = [
         rarity: 4,
         appleGeneration: 15,
         image: process.env.FILES_BASE_URL + "slimeImages/redSlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "rgbslime",
@@ -170,7 +165,7 @@ const slimes = [
         rarity: 3,
         appleGeneration: 8,
         image: process.env.FILES_BASE_URL + "slimeImages/rgbSlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     },
     {
         name: "tetoslime",
@@ -182,7 +177,7 @@ const slimes = [
         rarity: 4,
         appleGeneration: 15,
         image: process.env.FILES_BASE_URL + "slimeImages/tetoSlime.png",
-        banner: banners.VOCALOID
+        regularBanner: false
     },
     {
         name: "appleslime",
@@ -194,7 +189,7 @@ const slimes = [
         rarity: 4,
         appleGeneration: 15,
         image: process.env.FILES_BASE_URL + "slimeImages/appleSlime.png",
-        banner: banners.REGULAR
+        regularBanner: true
     }
 ];
 
@@ -226,7 +221,6 @@ function getSlimesByRarity(rarity) {
 }
 
 module.exports = {
-    banners,
     slimes,
     getSlime,
     getSlimeByName,

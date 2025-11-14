@@ -1,18 +1,17 @@
 const DB = require("better-sqlite3");
 const db = new DB(process.env.DB_DIR + "admin.db");
 
-function getPrefix(serverID)
-{
+function getPrefix(serverId) {
     let prefix = "r!";
 
-    const row = db.prepare("SELECT prefix FROM prefixes WHERE serverId = ?").get(serverID);
+    const row = db.prepare("SELECT prefix FROM prefixes WHERE serverId = ?").get(serverId);
     if (row) prefix = row.prefix;
 
     return prefix;
 }
 
-function setPrefix(serverID, newPrefix) {
-    db.prepare("INSERT OR REPLACE INTO prefixes (serverId, prefix) VALUES (?, ?)").run(serverID, newPrefix);
+function setPrefix(serverId, newPrefix) {
+    db.prepare("INSERT OR REPLACE INTO prefixes (serverId, prefix) VALUES (?, ?)").run(serverId, newPrefix);
 }
 
 function cleanPrefix(msg, clientId) {

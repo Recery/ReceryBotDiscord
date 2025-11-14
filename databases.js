@@ -1,11 +1,8 @@
 const DB = require("better-sqlite3");
 
-const actionDb = new DB(process.env.DB_DIR + "action.db");
-const adminDb = new DB(process.env.DB_DIR + "admin.db");
-const economyDb = new DB(process.env.DB_DIR + "economy.db");
-const funDb = new DB(process.env.DB_DIR + "fun.db");
-
 function initActionDb() {
+    const actionDb = new DB(process.env.DB_DIR + "action.db");
+
     // Tabla bonks
     actionDb.prepare(`
         CREATE TABLE IF NOT EXISTS bonks (
@@ -51,9 +48,13 @@ function initActionDb() {
             PRIMARY KEY("userId")
         )
     `).run();
+
+    actionDb.close();
 }
 
 function initAdminDb() {
+    const adminDb = new DB(process.env.DB_DIR + "admin.db");
+
     // Tabla langs
     adminDb.prepare(`
         CREATE TABLE IF NOT EXISTS langs (
@@ -71,9 +72,13 @@ function initAdminDb() {
             PRIMARY KEY("serverId")
         )
     `).run();
+
+    adminDb.close();
 }
 
 function initEconomyDb() {
+    const economyDb = new DB(process.env.DB_DIR + "economy.db");
+
     // Tabla barnApples
     economyDb.prepare(`
         CREATE TABLE IF NOT EXISTS barnApples (
@@ -158,9 +163,32 @@ function initEconomyDb() {
 	        PRIMARY KEY("userId")
         )
     `).run();
+
+    // Tabla banners
+    economyDb.prepare(`
+        CREATE TABLE IF NOT EXISTS banners (
+            name TEXT,
+            endDate INTEGER,
+            slimesIds TEXT,
+            PRIMARY KEY("name")
+        )
+    `).run();
+
+    // Tabla chosenBanners
+    economyDb.prepare(`
+        CREATE TABLE IF NOT EXISTS chosenBanners (
+            userId TEXT,
+            bannerName TEXT,
+            PRIMARY KEY("userId")
+        )
+    `).run();
+
+    economyDb.close();
 }
 
 function initFunDb() {
+    const funDb = new DB(process.env.DB_DIR + "fun.db");
+
     // Tabla count
     funDb.prepare(`
         CREATE TABLE IF NOT EXISTS count (
@@ -170,6 +198,22 @@ function initFunDb() {
             PRIMARY KEY("channelId","serverId")
         )
     `).run();
+
+    funDb.close();
+}
+
+function initSuperAdminDb() {
+    const superAdminDb = new DB(process.env.DB_DIR + "superAdmin.db");
+
+    // Tabla superadmins
+    superAdminDb.prepare(`
+        CREATE TABLE IF NOT EXISTS superAdmins (
+            userId TEXT,
+            PRIMARY KEY("userId")
+        )
+    `).run();
+
+    superAdminDb.close();
 }
 
 function initDbs() {
@@ -177,6 +221,7 @@ function initDbs() {
     initAdminDb();
     initEconomyDb();
     initFunDb();
+    initSuperAdminDb();
 }
 
 module.exports = {
